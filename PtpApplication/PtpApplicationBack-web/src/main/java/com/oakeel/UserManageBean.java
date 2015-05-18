@@ -50,26 +50,26 @@ public class UserManageBean {
     @PostConstruct
     public void init()
     {
-        orglist=orginazationEaoLocal.getAllOrganization();
+        orglist=orginazationEaoLocal.getAllEntitys();
         OrganizationEntity rootOrg=orginazationEaoLocal.getRoot();
         if(rootOrg!=null)
         {
             rootNode=new DefaultTreeNode("department",rootOrg , null);
             getAllNode(rootOrg,rootNode);
         }
-        userEntitys=userEaoLocal.getAllUser();
+        userEntitys=userEaoLocal.getAllEntitys();
         int i=0;
     }
      public void updateUser(RowEditEvent event) {
          UserEntity temp=(UserEntity) event.getObject();
-         userEaoLocal.updateUser(temp);
+         userEaoLocal.updateEntity(temp);
     }
      public void deleteUser()
      {
          if(deleteUserEntity!=null)
          {
-            userEaoLocal.deleteUser(deleteUserEntity);
-            userEntitys=userEaoLocal.getAllUser();
+            userEaoLocal.removeEntity(deleteUserEntity);
+            userEntitys=userEaoLocal.getAllEntitys();
          }
      }
      public void addNewUser()
@@ -77,9 +77,9 @@ public class UserManageBean {
 
          if(!"".equals(newUser.getName()))
          {
-            userEaoLocal.addUser(newUser);
+            userEaoLocal.addEntity(newUser);
             newUser=new UserEntity();
-            userEntitys=userEaoLocal.getAllUser();
+            userEntitys=userEaoLocal.getAllEntitys();
          }
      }
     public void getAllNode(OrganizationEntity org,TreeNode node)
@@ -103,12 +103,12 @@ public class UserManageBean {
     }
     public void allUser()
     {
-        setUserFilter(userEaoLocal.getAllUser());
-        setUserEntitys(userEaoLocal.getAllUser());
+        setUserFilter(userEaoLocal.getAllEntitys());
+        setUserEntitys(userEaoLocal.getAllEntitys());
     }
     public List<OrganizationEntity> getAllOrganization()
     {
-        return orginazationEaoLocal.getAllOrganization();
+        return orginazationEaoLocal.getAllEntitys();
     }
     public void listOrganizationUsers_sub(OrganizationEntity org)
     {

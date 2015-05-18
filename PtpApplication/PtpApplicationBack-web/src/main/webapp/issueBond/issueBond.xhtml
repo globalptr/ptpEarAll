@@ -1,0 +1,135 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="main.xhtml" >
+        <ui:define name="center">
+
+            <style type="text/css">
+                .ui-state-disabled, .ui-widget-content .ui-state-disabled, .ui-widget-header .ui-state-disabled {
+                    opacity: 0.6;
+                }
+                .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
+                    color: #333;
+                }
+                .ui-steps.vertical .ui-steps-item {
+                    width: 15px;
+                    height: 200px;
+                    float: none;
+                }
+
+                .ui-state-highlight {
+                    text-shadow: none !important;
+                }
+
+/*                .ui-steps.vertical {
+                    margin-bottom: 30%;
+                }*/
+
+                .ui-steps.vertical .ui-steps-item .ui-menuitem-link {
+/*                    height: 200px;*/
+                    padding: 0 1em;
+                    margin-left: -55px;
+                    margin-top: 80px;
+                }
+
+                .ui-steps.vertical .ui-steps-item .ui-steps-number {
+                    background-color: #0081c2;
+                    color: #FFFFFF;
+                    display: inline-block;
+                    width: 30px;
+                    border-radius: 10px;
+                    margin-top: -10px;
+                    margin-bottom: 10px;
+                }
+
+                .ui-steps.vertical .ui-steps-item .ui-menuitem-link {
+                    /*height: 200px;*/
+                    width: 100px;
+                }
+                .ui-steps.vertical .ui-steps-item .ui-steps-number {
+
+                    width: 50px;
+                    height: 50px;
+                    line-height: 50px;
+                    border-radius: 50%;
+
+                }
+                .ui-steps.horizontal {
+                    margin-bottom: 30px;
+                }
+
+                .ui-steps.horizontal .ui-steps-item .ui-menuitem-link {
+                    height: 10px;
+                    padding: 0 1em;
+                }
+
+                .ui-steps.horizontal .ui-steps-item .ui-steps-number {
+                    background-color: #0081c2;
+                    color: #FFFFFF;
+                    display: inline-block;
+                    width: 40px;
+                    height:40px;
+                    line-height:40px;
+                    border-radius: 10px;
+                    margin-top: -15px;
+                    margin-bottom: 10px;
+                }
+                .ui-steps.horizontal .ui-steps-item {
+                    width: 24%;
+                    float: left;
+                }
+            </style>
+            <h:form style="">
+
+                <table style="width:100%;margin-top: 50px">
+                    <tr>
+<!--                        <td rowspan="2"  style="height: 100%">
+                            <p:steps id="step_id" styleClass="vertical" activeIndex="#{issueBond.bondIndex}" style="margin-left: 50px;width:100px;height: 100%">
+                                <p:menuitem value="填写投标信息" actionListener="#{issueBond.stepFront()}"/>
+                                <p:menuitem value="上传认证资料" actionListener="#{issueBond.stepFront()}"/>
+                                <p:menuitem value="填写投标金额" actionListener="#{issueBond.stepFront()}"/>
+                                <p:menuitem value="选择还款模型" />
+                            </p:steps>
+                        </td>-->
+                        <td colspan="2">
+                            <p:steps id="step_idx" styleClass="horizontal" activeIndex="#{issueBond.bondIndex}" style=" margin-left: 60px; width:95%;height: 30px">
+                                <p:menuitem value="填写投标信息" />
+                                <p:menuitem value="上传认证资料" />
+                                <p:menuitem value="填写投标金额" />
+                                <p:menuitem value="选择还款模型" />
+                            </p:steps>
+                        </td>
+                    </tr>
+                    <tr style="width:100%">
+                        <td colspan="2">
+                            <p:separator style="height:3px;"/>
+                        </td>
+                    </tr>
+                    <tr style="height:600px;width:100%">
+                        <td colspan="2">
+                            <ui:insert name="bondContent" >
+                                <h:form>
+                                         <p:fileUpload  mode="advanced" label="选择文件" uploadLabel="点此上传" cancelLabel="取消" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />    
+                                </h:form>
+                            </ui:insert>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:50%">
+                            <p:commandButton id="front" value="#{(issueBond.bondIndex==0)?'首页':'上一步'}"  style="width:100%;height: 40px">
+                                <p:ajax update="step_idx next front" listener="#{issueBond.stepBack()}" event="click"/>
+                            </p:commandButton>
+                        </td>
+                        <td style="width:50%">
+                            <p:commandButton id="next" value="#{(issueBond.bondIndex==3)?'发布':'下一步'}" style="width:100%;height: 40px">
+                                <p:ajax update="step_idx next front" listener="#{issueBond.stepFront()}" event="click"/>
+                            </p:commandButton>
+                        </td>
+                    </tr>
+                </table>
+            </h:form> 
+        </ui:define>
+    </ui:composition>
+</html>

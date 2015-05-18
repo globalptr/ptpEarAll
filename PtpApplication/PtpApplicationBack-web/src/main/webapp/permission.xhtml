@@ -14,7 +14,7 @@
                 </p:dialog>
                 <!--弹出实时消息-->
                 <p:dialog header="添加操作" widgetVar="addOperationDlg" resizable="false" draggable="false">
-                    <p:dataTable id="addOperation_id" selection="#{permission.selectOperations}" value="#{permission.opereations}" var="permission_var" rowKey="#{permission_var.operationUuid}" style="width:600px;">   
+                    <p:dataTable id="addOperation_id" selection="#{permission.selectOperations}" value="#{permission.opereations}" var="permission_var" rowKey="#{permission_var.uuid}" style="width:600px;">   
                         <f:facet name="header">
                             <table>
                                 <tr>
@@ -22,9 +22,8 @@
                                         <p:outputLabel value="'#{permission.selectRole.name}'角色的'#{permission.selectPermission.resourceEntity.name}'权限"/>
                                     </td>
                                     <td style="width:10px;border: none">
-                                        <p:commandLink immediate="true" id="listAllRole_id" update=":form:permission_id" onclick="PF('addOperationDlg').hide()" action="#{permission.addPermissionOperation()}">
+                                        <p:commandLink styleClass="ui-icon ui-icon-arrowreturnthick-1-e" immediate="true" id="listAllRole_id" update=":form:permission_id" onclick="PF('addOperationDlg').hide()" action="#{permission.addPermissionOperation()}">
                                             <f:ajax event="click" execute="addOperation_id"/>
-                                            <h:outputText styleClass="ui-icon ui-icon-arrowreturnthick-1-e" />
                                         </p:commandLink>
                                         <p:tooltip for="listAllRole_id" value="将操作赋予资源"   />
                                     </td>
@@ -194,16 +193,13 @@
                                                 角色表
                                             </td>
                                             <td style="width:10px;border:none">      
-                                                <p:commandLink update=":form:permission_id" immediate="true" id="addRole_id" onclick="PF('addRoleDlg').show()">
-                                                    <h:outputText styleClass="ui-icon ui-icon-plus" style="margin:0 auto;" />
+                                                <p:commandLink styleClass="ui-icon ui-icon-plus" update=":form:permission_id" immediate="true" id="addRole_id" onclick="PF('addRoleDlg').show()">
                                                     <f:setPropertyActionListener value="#{roles_var}" target="#{permission.selectRole}"  />
                                                     <p:tooltip for="addRole_id" value="添加新角色"   />
                                                 </p:commandLink>
                                             </td>
                                             <td style="width:10px; border: none">      
-                                                <p:commandLink update=":form:roles_id" immediate="true" id="listAllRole_id" action="#{permission.viewAllRole()}">
-                                                    <h:outputText styleClass="ui-icon ui-icon-search" />
-                                                </p:commandLink>
+                                                <p:commandLink styleClass="ui-icon ui-icon-search" update=":form:roles_id" immediate="true" id="listAllRole_id" action="#{permission.viewAllRole()}"/>
                                                 <p:tooltip for="listAllRole_id" value="列出所有角色"   />
                                             </td>
                                         </tr>
@@ -257,15 +253,13 @@
                                     <p:tooltip for="editRole_id" value="编辑"   />
                                 </p:column>
                                 <p:column style="width:30px">
-                                    <p:commandLink id="deleteRole_id" onclick="PF('deleteRoleDlg').show()">
-                                        <h:outputText styleClass="ui-icon ui-icon-trash" style="margin:0 auto;" />
+                                    <p:commandLink styleClass="ui-icon ui-icon-trash" id="deleteRole_id" onclick="PF('deleteRoleDlg').show()">
                                         <f:setPropertyActionListener value="#{roles_var}" target="#{permission.deleteRole}" />
                                     </p:commandLink>
                                     <p:tooltip for="deleteRole_id" value="删除"  />
                                 </p:column>
                                 <p:column style="width:30px">   
-                                    <p:commandLink id="viewRole_id" update=":form:permission_id" immediate="true" action="#{permission.viewRoleResource()}">
-                                        <h:outputText styleClass="ui-icon ui-icon-key" style="margin:0 auto;" />
+                                    <p:commandLink styleClass="ui-icon ui-icon-key" id="viewRole_id" update=":form:permission_id" immediate="true" action="#{permission.viewRoleResource()}">
                                         <f:setPropertyActionListener value="#{roles_var}" target="#{permission.selectRole}"  />
                                     </p:commandLink>
                                     <p:tooltip for="viewRole_id" value="浏览此角色权限"   />
@@ -281,22 +275,18 @@
                                                 资源列表
                                             </td>
                                             <td style="width:10px;border:none">
-                                                <p:commandLink immediate="true" id="addResource_id" onclick="PF('addResourceDlg').show()">
-                                                    <h:outputText styleClass="ui-icon ui-icon-plus" style="margin:0 auto;" />
+                                                <p:commandLink styleClass="ui-icon ui-icon-plus" immediate="true" id="addResource_id" onclick="PF('addResourceDlg').show()">
                                                     <p:tooltip for="addResource_id" value="添加新资源"   />
                                                 </p:commandLink>
                                             </td>
                                             <td style="width:10px; border: none">      
-                                                <p:commandLink update=":form:availableResource" immediate="true" id="listAllResource_id" action="#{permission.viewAllResource()}">
-                                                    <h:outputText styleClass="ui-icon ui-icon-search" />
+                                                <p:commandLink styleClass="ui-icon ui-icon-search"  update=":form:availableResource" immediate="true" id="listAllResource_id" action="#{permission.viewAllResource()}">
                                                     <f:setPropertyActionListener value="#{roles_var}" target="#{permission.selectRole}"  />
                                                 </p:commandLink>
                                                 <p:tooltip for="listAllResource_id" value="列出所有资源"   />
                                             </td>
                                             <td style="width:10px;border:none">      
-                                                <p:commandLink update=":form:permission_id" immediate="true" id="allEva_id" action="#{permission.oneClickEva()}">
-                                                    <h:outputText styleClass="ui-icon ui-icon-arrowreturnthick-1-s" style="margin:0 auto;" />
-                                                </p:commandLink>
+                                                <p:commandLink styleClass="ui-icon ui-icon-arrowreturnthick-1-s" update=":form:permission_id" immediate="true" id="allEva_id" action="#{permission.oneClickEva()}"/>
                                                 <p:tooltip for="allEva_id" value="一键赋值"   />
                                             </td>
                                             <td style="width:30px;border:none">
@@ -384,8 +374,7 @@
                                     <p:tooltip for="editResource_id" value="编辑"   />
                                 </p:column>
                                 <p:column style="width:30px">
-                                    <p:commandLink id="deleteResource_id" onclick="PF('deleteResourceDlg').show()">
-                                        <h:outputText styleClass="ui-icon ui-icon-trash" style="margin:0 auto;" />
+                                    <p:commandLink id="deleteResource_id" styleClass="ui-icon ui-icon-trash" onclick="PF('deleteResourceDlg').show()">
                                         <f:setPropertyActionListener value="#{resource_var}" target="#{permission.delResource}" />
                                     </p:commandLink>
                                     <p:tooltip for="deleteResource_id" value="删除"   />
@@ -408,8 +397,7 @@
                                         <p:outputLabel value="#{permission_var.resourceEntity.name}"/>
                                     </p:column>
                                     <p:column style="width:30px">
-                                        <p:commandLink id="deletePermission_id"  onclick="PF('deletePermissionDlg').show()" immediate="true">
-                                            <h:outputText styleClass="ui-icon ui-icon-trash" style="margin:0 auto;" />
+                                        <p:commandLink id="deletePermission_id"  styleClass="ui-icon ui-icon-trash" onclick="PF('deletePermissionDlg').show()" immediate="true">
                                             <p:tooltip for="deletePermission_id" value="删除"   />
                                             <f:setPropertyActionListener value="#{permission_var}" target="#{permission.targetPermission}" />
                                         </p:commandLink>

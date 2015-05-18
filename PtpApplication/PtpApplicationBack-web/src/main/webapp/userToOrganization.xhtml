@@ -64,7 +64,7 @@
                             </td>
                             <td>
                                 <h:selectOneMenu style="width:100%" converter="OrganizationConverter" value="#{userManageBean.newUser.organizationEntity}">
-                                    <f:selectItems value="#{userManageBean.allOrganization}" var="org_var" itemLabel="#{org_var.name}" itemValue="#{org_var.organizationUuid}"/>
+                                    <f:selectItems value="#{userManageBean.allOrganization}" var="org_var" itemLabel="#{org_var.name}" itemValue="#{org_var.uuid}"/>
                                 </h:selectOneMenu>
                             </td>
                         </tr>
@@ -107,22 +107,19 @@
                                                 <p:outputLabel value="用户信息表"/>
                                             </td>
                                             <td style=" width: 20px;border: none">
-                                                <p:commandLink onclick="PF('adduserdlg').show()"  immediate="true" id="addNewUser_id">
-                                                    <h:outputText styleClass="ui-icon ui-icon-plus" />
+                                                <p:commandLink styleClass="ui-icon ui-icon-plus"  onclick="PF('adduserdlg').show()"  immediate="true" id="addNewUser_id">
                                                     <f:ajax event="click" render=":formx:pass_id :formx:user_id :formx:repass_id :formx:tel_id :formx:email_id"/>
                                                 </p:commandLink>
                                                 <p:tooltip for="addNewUser_id" value="添加新用户"   />
                                             </td>           
                                             <td style=" width: 20px;border: none">
-                                                <p:commandLink  immediate="true" id="findUnclassUser_id" update=":form:users_id">
-                                                    <h:outputText styleClass="ui-icon ui-icon-search" />
+                                                <p:commandLink  styleClass="ui-icon ui-icon-search" immediate="true" id="findUnclassUser_id" update=":form:users_id">
                                                     <p:ajax event="click"  listener="#{userManageBean.unclassedUser()}" />
                                                 </p:commandLink>
                                                 <p:tooltip for="findUnclassUser_id" value="查找未分类用户"   />
                                             </td>
                                             <td style=" width: 20px;border: none">
-                                                <p:commandLink immediate="true" id="findallUser_id" update=":form:users_id">
-                                                    <h:outputText styleClass="ui-icon ui-icon-search" />
+                                                <p:commandLink immediate="true" styleClass="ui-icon ui-icon-search" id="findallUser_id" update=":form:users_id">
                                                     <p:ajax event="click" listener="#{userManageBean.allUser()}" />
                                                 </p:commandLink>
                                                 <p:tooltip for="findallUser_id" value="查找所有用户"   />
@@ -193,7 +190,7 @@
                                         </f:facet>
                                         <f:facet name="input">
                                             <h:selectOneMenu converter="OrganizationConverter" value="#{users_var.organizationEntity}" style="width:100%">
-                                                <f:selectItems value="#{userManageBean.allOrganization}" var="orgitem_var" itemLabel="#{orgitem_var.name}" itemValue="#{orgitem_var.organizationUuid}"/>
+                                                <f:selectItems value="#{userManageBean.allOrganization}" var="orgitem_var" itemLabel="#{orgitem_var.name}" itemValue="#{orgitem_var.uuid}"/>
                                             </h:selectOneMenu>
                                         </f:facet>
                                     </p:cellEditor>
@@ -212,8 +209,7 @@
                                     <p:rowEditor />
                                 </p:column>
                                 <p:column style="width:30px" headerText="删除">
-                                    <p:commandLink  onclick="PF('deleteuserdlg').show()" update="users_id">
-                                        <h:outputText styleClass="ui-icon ui-icon-trash" style="margin:0 auto;" />
+                                    <p:commandLink  styleClass="ui-icon ui-icon-trash" onclick="PF('deleteuserdlg').show()" update="users_id">
                                         <f:setPropertyActionListener value="#{users_var}" target="#{userManageBean.deleteUserEntity}" />
                                     </p:commandLink>
                                 </p:column>

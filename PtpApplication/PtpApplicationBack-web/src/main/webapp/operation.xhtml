@@ -7,7 +7,7 @@
 
         <ui:define name="center">
             <h:form id="form">
-                <p:dialog id="addNewOperatin_id"  widgetVar="addNewOperation">
+                <p:dialog id="addNewOperatinDlg_id"  widgetVar="addNewOperation_wid">
                     <table>
                         <tr>
                             <td>
@@ -49,6 +49,9 @@
                         </tr>
                     </table>
                 </p:dialog>
+                <p:dialog widgetVar="ssss">
+                    
+                </p:dialog>
                 <p:dataTable rowIndexVar="row" value="#{operation.allOperations}" var="operation_var" id="operation_id">
                     <f:facet name="header">
                         <table>
@@ -57,11 +60,10 @@
                                     <p:outputLabel value="操作表"/>
                                 </td>
                                 <td style=" width: 20px;border: none">
-                                    <p:commandLink onclick="PF('addNewOperatin_id').show()"  immediate="true" id="addNewOperation_id">
-                                        <h:outputText styleClass="ui-icon ui-icon-plus" />
+                                    <p:commandLink styleClass="ui-icon ui-icon-plus" onclick="PF('addNewOperation_wid').show()"  immediate="true" id="addNewOperationBtn_id">
                                         <f:ajax event="click" render=":form:newOperationword :form:newOperationDesc "/>
                                     </p:commandLink>
-                                    <p:tooltip for="addNewOperation_id" value="添加新操作"/>
+                                    <p:tooltip for="addNewOperationBtn_id" value="添加新操作"/>
                                 </td>
                             </tr>
                         </table>
@@ -91,8 +93,7 @@
                         </p:cellEditor>
                     </p:column>
                     <p:column style="width:30px" headerText="删除">
-                        <p:commandLink  onclick="PF('deleteOperationDlg').show()">
-                            <h:outputText styleClass="ui-icon ui-icon-trash" style="margin:0 auto;" />
+                        <p:commandLink  styleClass="ui-icon ui-icon-trash" onclick="PF('deleteOperationDlg').show()">
                             <f:setPropertyActionListener value="#{operation_var}" target="#{operation.delOperation}" />
                         </p:commandLink>
                     </p:column>

@@ -47,9 +47,9 @@ public class RoleManage {
     @PostConstruct
     public void init()
     {
-        userEntitys=userEaoLocal.getAllUser();
-        roleEntitys=roleEaoLocal.getAllRole();
-        resourceEntitys=ResourceEaoLocal.getAllResource();
+        userEntitys=userEaoLocal.getAllEntitys();
+        roleEntitys=roleEaoLocal.getAllEntitys();
+        resourceEntitys=ResourceEaoLocal.getAllEntitys();
     }
     /**
      * @return the userEntitys

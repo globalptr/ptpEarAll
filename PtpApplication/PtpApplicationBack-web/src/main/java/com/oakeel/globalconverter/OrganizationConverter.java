@@ -24,7 +24,7 @@ public class OrganizationConverter implements Converter{
     OrganizationEaoLocal organizationDaoLocal;
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        return organizationDaoLocal.getOrganizationByUuid(value);
+        return organizationDaoLocal.findEntityById(value);
     }
 
     @Override

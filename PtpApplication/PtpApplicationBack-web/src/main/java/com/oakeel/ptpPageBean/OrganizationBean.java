@@ -85,7 +85,7 @@ public class OrganizationBean implements Serializable{
     //保存修改的节点
     public void saveOrganization()
     {
-        organizationEaoLocal.updateOrganizationEntity(selectOrganizationEntity);
+        organizationEaoLocal.updateEntity(selectOrganizationEntity);
         updateNode(selectOrganizationEntity,rootNode);
     }
     //更新指定的节点的数据
@@ -95,7 +95,7 @@ public class OrganizationBean implements Serializable{
         for(TreeNode item:nodelist)
         {
             OrganizationEntity temp=(OrganizationEntity)item.getData();
-            if(temp.getOrganizationUuid().equals(org.getOrganizationUuid()))
+            if(temp.equals(org))
             {
                 node.getChildren().remove(item);
                 DefaultTreeNode defaultTreeNode = new DefaultTreeNode("department", org, node);
@@ -129,7 +129,7 @@ public class OrganizationBean implements Serializable{
       if(selectNode!=null)
       {
           OrganizationEntity deleteOrg=(OrganizationEntity) selectNode.getData();
-          organizationEaoLocal.deleteOrganization(deleteOrg);
+          organizationEaoLocal.removeEntity(deleteOrg);
           //遍历所有节点删除指定节点
           try
           {
@@ -147,7 +147,7 @@ public class OrganizationBean implements Serializable{
         for(TreeNode item:nodelist)
         {
             OrganizationEntity temp=(OrganizationEntity)item.getData();
-            if(temp.getOrganizationUuid().equals(org.getOrganizationUuid()))
+            if(temp.equals(org))
             {
                 node.getChildren().remove(item);
                 throw new RuntimeException();

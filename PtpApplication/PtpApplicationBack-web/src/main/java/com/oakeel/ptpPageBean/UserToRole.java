@@ -49,21 +49,21 @@ public class UserToRole {
     @PostConstruct
     public void init()
     {
-        setUserEntitys(getUserEaoLocal().getAllUser());
-        setRoleEntitys(getRoleEaoLocal().getAllRole());
+        setUserEntitys(getUserEaoLocal().getAllEntitys());
+        setRoleEntitys(getRoleEaoLocal().getAllEntitys());
     }
     //列出所有的用户
     public void viewAllUser()
     {
-        userEntitys=userEaoLocal.getAllUser();
-        userFilter=userEaoLocal.getAllUser();
+        userEntitys=userEaoLocal.getAllEntitys();
+        userFilter=userEaoLocal.getAllEntitys();
         
     }
     //列出所有的角色
     public void viewAllRole()
     {
-        roleEntitys=roleEaoLocal.getAllRole();
-        roleFilter=roleEaoLocal.getAllRole();
+        roleEntitys=roleEaoLocal.getAllEntitys();
+        roleFilter=roleEaoLocal.getAllEntitys();
     }
     //列出用户角色
     public void viewUserRole()

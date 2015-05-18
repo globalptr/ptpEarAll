@@ -70,9 +70,9 @@ public class Permission {
     @PostConstruct
     public void init() {
         setResourceTypeEnums(ResourceTypeEnum.values());
-        roleEntitys = roleEaoLocal.getAllRole();
-        resourceEntitys = resourceEaoLocal.getAllResource();
-        setOpereations(operationEaoLocal.getAllOperation());
+        roleEntitys = roleEaoLocal.getAllEntitys();
+        resourceEntitys = resourceEaoLocal.getAllEntitys();
+        setOpereations(operationEaoLocal.getAllEntitys());
         
     }
     //为角色的权限添加操作
@@ -82,20 +82,20 @@ public class Permission {
         {
             selectPermission.getOperationEntitys().add(item);
         }
-        permissionEaoLocal.updatePermission(selectPermission);
+        permissionEaoLocal.updateEntity(selectPermission);
     }
     //增加角色
     public void addRole()
     {
-        roleEaoLocal.addNewRole(newRole);
+        roleEaoLocal.addEntity(newRole);
         roleEntitys.add(newRole);
         newRole=new RoleEntity();
     }
     //列出所有角色
     public void viewAllRole()
     {
-        roleEntitys=roleEaoLocal.getAllRole();
-        roleFilter=roleEaoLocal.getAllRole();
+        roleEntitys=roleEaoLocal.getAllEntitys();
+        roleFilter=roleEaoLocal.getAllEntitys();
     }
     //浏览角色资源
     public String viewRoleResource() {
@@ -108,15 +108,15 @@ public class Permission {
     }
     //添加资源
     public void addResource() {
-        resourceEaoLocal.addNewResource(newResource);
+        resourceEaoLocal.addEntity(newResource);
         resourceEntitys.add(newResource);
         newResource = new ResourceEntity();
     }
     //查看所有的资源
     public void viewAllResource()
     {
-        resourceFilter=resourceEaoLocal.getAllResource();
-        resourceEntitys=resourceEaoLocal.getAllResource();
+        resourceFilter=resourceEaoLocal.getAllEntitys();
+        resourceEntitys=resourceEaoLocal.getAllEntitys();
     }
     
     //一键赋值
@@ -130,7 +130,7 @@ public class Permission {
                 for(ResourceEntity item:resourceFilter)
                 {
                     PermissionEntity permission=new PermissionEntity(selectRole,item);
-                    permissionEaoLocal.addPermission(permission);
+                    permissionEaoLocal.addEntity(permission);
                 }
             }
             else
@@ -138,7 +138,7 @@ public class Permission {
                 for(ResourceEntity item:resourceEntitys)
                 {
                     PermissionEntity permission=new PermissionEntity(selectRole,item);
-                    permissionEaoLocal.addPermission(permission);
+                    permissionEaoLocal.addEntity(permission);
                 }
             }
         }
@@ -147,14 +147,14 @@ public class Permission {
     public String deleteResource() {
         if(getDelResource()!=null)
         {
-            resourceEaoLocal.deleteReource(getDelResource());
+            resourceEaoLocal.removeEntity(getDelResource());
             resourceEntitys.remove(getDelResource());
         }
         return null;
     }
     //删除角色资源
     public String deletePermission() {
-        permissionEaoLocal.deletePermission(targetPermission);//权限与角色的关系中，权限是关系的维护者，删除权限即可
+        permissionEaoLocal.removeEntity(targetPermission);//权限与角色的关系中，权限是关系的维护者，删除权限即可
         permissions.remove(targetPermission);
         return null;
     }
@@ -163,7 +163,7 @@ public class Permission {
         ResourceEntity role = ((ResourceEntity) event.getData());
         if (selectRole != null) {
             PermissionEntity permission=new PermissionEntity(selectRole,role);
-            permissionEaoLocal.addPermission(permission);
+            permissionEaoLocal.addEntity(permission);
             permissions.add(permission);
         } else {
             FacesContext context = FacesContext.getCurrentInstance();
@@ -175,12 +175,12 @@ public class Permission {
         
         //如果delete和select相同，则清空
         if (deleteRole != null) {
-            roleEaoLocal.deleteRole(deleteRole);
+            roleEaoLocal.removeEntity(deleteRole);
             roleEntitys.remove(deleteRole);
             //如果删除的和选择的不同，这个时候清空roleResources,会导致选择的角色的角色资源不出现，具体原因未知
             if(selectRole!=null)
             {
-                if(selectRole.getRoleUuid().equals(deleteRole.getRoleUuid()))
+                if(selectRole.equals(deleteRole))
                 {
                     permissions.clear();
                 }
@@ -195,12 +195,12 @@ public class Permission {
     //更新角色
     public void updateRole(RowEditEvent event) {
         RoleEntity temp = (RoleEntity) event.getObject();
-        roleEaoLocal.updateRole(temp);
+        roleEaoLocal.updateEntity(temp);
     }
     //更新资源
     public void updateResource(RowEditEvent event) {
         ResourceEntity temp = (ResourceEntity) event.getObject();
-        resourceEaoLocal.updateResource(temp);
+        resourceEaoLocal.updateEntity(temp);
     }
 
     /**

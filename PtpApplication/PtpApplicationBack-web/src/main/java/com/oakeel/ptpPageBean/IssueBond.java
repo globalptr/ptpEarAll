@@ -4,24 +4,33 @@
  * and open the template in the editor.
  */
 
-package com.oakeel;
+package com.oakeel.ptpPageBean;
 
+import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.flow.FlowScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author root
  */
-@ManagedBean
-@ViewScoped
-public class IssueBond {
 
-    private int bondIndex=0;
+@Named
+@FlowScoped("issueBondCtrl")
+public class IssueBond  implements Serializable {
+
+    private int bondIndex=1;
+    public String backToIssueOverPage()
+    {
+        return "/index";
+    }
     /**
      * Creates a new instance of IssueBond
      */
     public IssueBond() {
+        System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx...");
     }
     public void stepBack()
     {

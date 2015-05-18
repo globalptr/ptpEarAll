@@ -35,9 +35,7 @@
                                                 用户表
                                             </td>
                                             <td style="width:10px; border: none">
-                                                <p:commandLink update=":form:users_id" immediate="true" id="listAllUser_id" action="#{userToRole.viewAllUser()}">
-                                                    <h:outputText styleClass="ui-icon ui-icon-search" />
-                                                </p:commandLink>
+                                                <p:commandLink update=":form:users_id" styleClass="ui-icon ui-icon-search"  immediate="true" id="listAllUser_id" action="#{userToRole.viewAllUser()}"/>
                                                 <p:tooltip for="listAllUser_id" value="列出所有用户" trackMouse="true" />
                                             </td>
                                         </tr>
@@ -59,8 +57,7 @@
                                     <h:outputText value="#{users_var.organizationEntity}" />
                                 </p:column>
                                 <p:column headerText="角色" style="width:30px">   
-                                    <p:commandLink update=":form:userRole_id" immediate="true" action="#{userToRole.viewUserRole()}">
-                                        <h:outputText styleClass="ui-icon ui-icon-key" style="margin:0 auto;" />
+                                    <p:commandLink update=":form:userRole_id" styleClass="ui-icon ui-icon-key" immediate="true" action="#{userToRole.viewUserRole()}">
                                         <f:setPropertyActionListener value="#{users_var}" target="#{userToRole.selectUser}"  />
                                     </p:commandLink>
                                 </p:column>
@@ -75,15 +72,11 @@
                                                 角色表
                                             </td>
                                             <td style="width:10px; border: none">      
-                                                <p:commandLink update=":form:roles_id" immediate="true" id="listAllRole_id" action="#{userToRole.viewAllRole()}">
-                                                    <h:outputText styleClass="ui-icon ui-icon-search" />
-                                                </p:commandLink>
+                                                <p:commandLink update=":form:roles_id" styleClass="ui-icon ui-icon-search" immediate="true" id="listAllRole_id" action="#{userToRole.viewAllRole()}"/>
                                                 <p:tooltip for="listAllRole_id" value="列出所有角色" trackMouse="true" />
                                             </td>
                                             <td style="width:10px;border:none">      
-                                                <p:commandLink update=":form:userRole_id" immediate="true" id="allEva_id" action="#{userToRole.oneClickEva()}">
-                                                    <h:outputText styleClass="ui-icon ui-icon-arrowreturnthick-1-s" style="margin:0 auto;" />
-                                                </p:commandLink>
+                                                <p:commandLink update=":form:userRole_id" styleClass="ui-icon ui-icon-arrowreturnthick-1-s" immediate="true" id="allEva_id" action="#{userToRole.oneClickEva()}"/>
                                                 <p:tooltip for="allEva_id" value="一键赋值" trackMouse="true" />
                                             </td>
                                             <td style="width:30px;border:none">

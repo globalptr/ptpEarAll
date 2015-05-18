@@ -30,18 +30,19 @@ public class Operation {
     private List<OperationEntity> allOperations;//所有操作列表
     private List<OperationEntity> operationFilter;//filter
     private OperationEntity delOperation;//准备删除的操作
-    private OperationEntity newOperation=new OperationEntity();//新建的操作
+    private OperationEntity newOperation;//新建的操作
     private OperationEntity selectOperation;
     public Operation() {
     }
     @PostConstruct
     public void init()
     {
-        allOperations=operationEaoLocal.getAllOperation();
+        allOperations=operationEaoLocal.getAllEntitys();
+        newOperation=new OperationEntity();
     }
     public void addNewOperation()
     {
-        operationEaoLocal.addNewOperation(newOperation);
+        operationEaoLocal.addEntity(newOperation);
         allOperations.add(newOperation);
         if(operationFilter!=null)
             operationFilter.add(newOperation);
@@ -60,7 +61,7 @@ public class Operation {
     public void updateOperation()
     {
         if(selectOperation!=null)
-            operationEaoLocal.updateOperation(selectOperation);
+            operationEaoLocal.updateEntity(selectOperation);
     }
     /**
      * @return the allOperations
