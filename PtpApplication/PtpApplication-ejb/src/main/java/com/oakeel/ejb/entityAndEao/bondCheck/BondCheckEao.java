@@ -4,17 +4,16 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.userSet;
+package com.oakeel.ejb.entityAndEao.bondCheck;
 
 import javax.ejb.Stateless;
-import javax.jws.WebService;
 
 /**
  *
  * @author root
  */
 @Stateless
-public class UserSetEao implements UserSetEaoLocal {
+public class BondCheckEao implements BondCheckEaoLocal {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

@@ -4,13 +4,15 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.user;
+package com.oakeel.ejb.entityAndEao.bondInformation;
 
+import javax.ejb.Local;
 
 /**
  *
  * @author root
  */
-public enum UserEnum {
-    用户名,电话,邮箱;
+@Local
+public interface BondInformationEaoLocal {
+    
 }

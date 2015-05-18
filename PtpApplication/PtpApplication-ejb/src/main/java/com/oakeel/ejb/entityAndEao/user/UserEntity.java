@@ -6,8 +6,12 @@
 
 package com.oakeel.ejb.entityAndEao.user;
 
+import com.oakeel.ejb.ptpEnum.CreateAccountModeEnum;
+import com.oakeel.ejb.entityAndEao.customerFundFlow.CustomerFundFlowEntity;
 import com.oakeel.ejb.entityAndEao.organization.OrganizationEntity;
 import com.oakeel.ejb.entityAndEao.role.RoleEntity;
+import com.oakeel.ejb.entityAndEao.customerAccount.CustomerAccountEntity;
+import com.oakeel.ejb.entityAndEao.customerBankCard.CustomerBankCardEntity;
 import com.oakeel.ejb.entityAndEao.userSet.UserSetEntity;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -16,9 +20,11 @@ import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -31,14 +37,14 @@ public class UserEntity implements Serializable {
     {
         userUuid=UUID.randomUUID().toString();
     }
-    public UserEntity(String param,String password,UserEnum userEnum)
+    public UserEntity(String param,String password,CreateAccountModeEnum userEnum)
     {
         userUuid=UUID.randomUUID().toString();
-        if(userEnum==UserEnum.用户名)
+        if(userEnum==CreateAccountModeEnum.用户名)
             this.name=param;
-        if(userEnum==UserEnum.电话)
+        if(userEnum==CreateAccountModeEnum.电话)
             this.telephone=param;
-        if(userEnum==UserEnum.邮箱)
+        if(userEnum==CreateAccountModeEnum.邮箱)
             this.email=param;
         this.password=password;
     }
@@ -70,9 +76,8 @@ public class UserEntity implements Serializable {
     //用户与角色是多对多的关系，主控在用户
     @ManyToMany(cascade={CascadeType.MERGE})//级联修改user=>role
     private Set<RoleEntity> roleEntitys=new HashSet<>();
-    @OneToOne(mappedBy="userEntity")
+    @OneToOne//用户与用户设置是一对一的关系
     UserSetEntity userSetEntity;
-
     @Override
     public int hashCode() {
         int hash = 0;
