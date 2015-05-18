@@ -33,4 +33,5 @@ public class DebitCreditEntity extends EntityRoot{
     @Temporal(TemporalType.TIMESTAMP)
     Date occurDate;//发生时间
     FundOperationEnum fundOperationEnum;//借还是贷
+    Boolean isOccur;//是否发生
 }
