@@ -6,32 +6,27 @@
 
 package com.oakeel.ejb.entityAndEao.resource;
 
+import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import com.oakeel.ejb.entityAndEao.permission.PermissionEntity;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 /**
  *
  * @author root
  */
 @Entity
-public class ResourceEntity implements Serializable {
+public class ResourceEntity extends EntityRoot {
     public ResourceEntity()
     {
-        ResourceUuid=UUID.randomUUID().toString();
     }
     public ResourceEntity(String name,String permission,ResourceTypeEnum type,Boolean available,int priority)
     {
-        ResourceUuid=UUID.randomUUID().toString();
         this.name=name;
         this.resourceDesc=permission;
         this.type=type;
@@ -40,15 +35,11 @@ public class ResourceEntity implements Serializable {
     }
     public ResourceEntity(String name,String permission)
     {
-        ResourceUuid=UUID.randomUUID().toString();
         this.name=name;
         this.resourceDesc=permission;
         
     }
     private static final long serialVersionUID = 1L;
-    @Id
-    @Column(length=36)
-    private String ResourceUuid;
     @Column(nullable=false,length=50)
     private String name;//资源名
     @Enumerated(EnumType.STRING)
@@ -60,44 +51,6 @@ public class ResourceEntity implements Serializable {
     private Boolean available=true;//是否可用
     @OneToMany(mappedBy="resourceEntity")//资源与权限的关系是一对多的关系，主控必须在权限
     private Set<PermissionEntity> permissionEntitys=new HashSet<>();
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (getUuid() != null ? getUuid().hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ResourceEntity)) {
-            return false;
-        }
-        ResourceEntity other = (ResourceEntity) object;
-        if ((this.getUuid() == null && other.getUuid() != null) || (this.getUuid() != null && !this.ResourceUuid.equals(other.ResourceUuid))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.oakeel.EntityAndDao.Permission.PermissionEntity[ id=" + getUuid() + " ]";
-    }
-
-    /**
-     * @return the ResourceUuid
-     */
-    public String getUuid() {
-        return ResourceUuid;
-    }
-
-    /**
-     * @param ResourceUuid
-     */
-    public void setUuid(String ResourceUuid) {
-        this.ResourceUuid = ResourceUuid;
-    }
 
     /**
      * @return the name
@@ -187,11 +140,5 @@ public class ResourceEntity implements Serializable {
     public void setPermissionEntitys(Set<PermissionEntity> permissionEntitys) {
         this.permissionEntitys = permissionEntitys;
     }
-
-
-
-
-   
-
     
 }

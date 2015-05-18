@@ -6,16 +6,14 @@
 
 package com.oakeel.ejb.entityAndEao.role;
 
+import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import com.oakeel.ejb.entityAndEao.permission.PermissionEntity;
 import com.oakeel.ejb.entityAndEao.user.UserEntity;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -24,27 +22,21 @@ import javax.persistence.OneToMany;
  * @author root
  */
 @Entity
-public class RoleEntity implements Serializable {
+public class RoleEntity extends EntityRoot{
     private static final long serialVersionUID = 1L;
     public RoleEntity(){
-        roleUuid=UUID.randomUUID().toString();
     }
     public RoleEntity(String name)
     {
-        roleUuid=UUID.randomUUID().toString();
         this.name=name;
     }
     public RoleEntity(String name,String description,Boolean available,int priority)
     {
-        roleUuid=UUID.randomUUID().toString();
         this.name=name;
         this.description=description;
         this.available=available;
         this.priority=priority;
     }
-    @Id
-    @Column(length=36)
-    private String roleUuid;
     @Column(nullable=false,length=50)
     private String name;//名字
     private int priority=0;//显示顺序
@@ -58,30 +50,7 @@ public class RoleEntity implements Serializable {
     @OneToMany(cascade={CascadeType.REMOVE,CascadeType.MERGE},mappedBy="roleEntity")//如果删除了角色，那么角色的权限一并删除;角色与权限是一对多的关系，双向关联主控在权限
     private Set<PermissionEntity> permissions=new HashSet<>();
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (getRoleUuid() != null ? getRoleUuid().hashCode() : 0);
-        return hash;
-    }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof RoleEntity)) {
-            return false;
-        }
-        RoleEntity other = (RoleEntity) object;
-        if ((this.getRoleUuid() == null && other.getRoleUuid() != null) || (this.getRoleUuid() != null && !this.roleUuid.equals(other.roleUuid))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.oakeel.EntityAndDao.Role.RoleEntity[ id=" + getRoleUuid() + " ]";
-    }
 
     /**
      * @return the description
@@ -139,19 +108,7 @@ public class RoleEntity implements Serializable {
         this.userEntitys = userEntitys;
     }
 
-    /**
-     * @return the roleUuid
-     */
-    public String getRoleUuid() {
-        return roleUuid;
-    }
 
-    /**
-     * @param roleUuid the roleUuid to set
-     */
-    public void setRoleUuid(String roleUuid) {
-        this.roleUuid = roleUuid;
-    }
 
     /**
      * @return the priority

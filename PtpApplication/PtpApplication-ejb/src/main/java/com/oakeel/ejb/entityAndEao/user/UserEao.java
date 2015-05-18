@@ -7,14 +7,12 @@
 package com.oakeel.ejb.entityAndEao.user;
 
 
+import com.oakeel.ejb.entityAndEao.eeroot.EaoRoot;
 import com.oakeel.ejb.entityAndEao.organization.OrganizationEntity;
 import com.oakeel.ejb.entityAndEao.role.RoleEntity;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -25,28 +23,14 @@ import javax.persistence.criteria.Root;
  * @author root
  */
 @Stateless
-public class UserEao implements UserEaoLocal {
-    @PersistenceContext(unitName="ptpEjbPu")
-    EntityManager em;
-    @Override
-    public void addUser(UserEntity user)
-    {
-        user.setUserUuid(UUID.randomUUID().toString());
-        em.persist(user);
-    }
+public class UserEao extends EaoRoot<UserEntity> implements UserEaoLocal {
+
+
     
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 
-    @Override
-    public List<UserEntity> getAllUser() {
-        CriteriaBuilder builder=em.getCriteriaBuilder();
-        CriteriaQuery<UserEntity> query=builder.createQuery(UserEntity.class);
-        Root<UserEntity> s=query.from(UserEntity.class);
-        query.select(s);        
-        TypedQuery<UserEntity> q=em.createQuery(query);
-        return q.getResultList();
-    }
+
 
     @Override
     public List<UserEntity> getUsersByOrganization(OrganizationEntity org) {
@@ -71,22 +55,16 @@ public class UserEao implements UserEaoLocal {
         return q.getResultList();
     }
 
-    @Override
-    public void updateUser(UserEntity user) {
-        em.merge(user);
-    }
 
-    @Override
-    public void deleteUser(UserEntity user) {
-        em.remove(em.merge(user));
-    }
+
+  
 
     @Override
     public void deleteRole(UserEntity user, RoleEntity role) {
         Set<RoleEntity> roles=user.getRoleEntitys();
         for(RoleEntity item:roles)
         {
-            if(item.getRoleUuid().equals(role.getRoleUuid()))
+            if(item.getUuid().equals(role.getUuid()))
             {
                 roles.remove(item);
                 break;

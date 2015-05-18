@@ -6,7 +6,7 @@
 
 package com.oakeel.ejb.entityAndEao.resource;
 
-import java.util.List;
+import com.oakeel.ejb.entityAndEao.eeroot.EaoRootLocal;
 import javax.ejb.Local;
 
 /**
@@ -14,9 +14,6 @@ import javax.ejb.Local;
  * @author root
  */
 @Local
-public interface ResourceEaoLocal {
-    public List<ResourceEntity> getAllResource();
-    public void addNewResource(ResourceEntity resource);
-    public void updateResource(ResourceEntity resource);
-    public void deleteReource(ResourceEntity resource);
+public interface ResourceEaoLocal extends EaoRootLocal<ResourceEntity> {
+
 }

@@ -6,7 +6,7 @@
 
 package com.oakeel.ejb.entityAndEao.organization;
 
-import com.oakeel.ejb.entityAndEao.resource.ResourceEntity;
+import com.oakeel.ejb.entityAndEao.eeroot.EaoRootLocal;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -15,12 +15,8 @@ import javax.ejb.Local;
  * @author root
  */
 @Local
-public interface OrganizationEaoLocal {
+public interface OrganizationEaoLocal  extends EaoRootLocal<OrganizationEntity>{
     public OrganizationEntity AddNewOrganization(OrganizationEntity organization,OrganizationEntity parent);
-    public List<OrganizationEntity> getAllOrganization();
     public OrganizationEntity getRoot();
     public List<OrganizationEntity> getOrganizationEntityByName(String name);
-    public void deleteOrganization(OrganizationEntity org);
-    public OrganizationEntity getOrganizationByUuid(String uuid);
-    public void updateOrganizationEntity(OrganizationEntity org);
 }

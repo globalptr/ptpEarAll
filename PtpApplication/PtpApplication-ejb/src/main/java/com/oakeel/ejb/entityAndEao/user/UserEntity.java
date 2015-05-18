@@ -6,22 +6,19 @@
 
 package com.oakeel.ejb.entityAndEao.user;
 
-import com.oakeel.ejb.ptpEnum.CreateAccountModeEnum;
-import com.oakeel.ejb.entityAndEao.customerFundFlow.CustomerFundFlowEntity;
+import com.oakeel.ejb.entityAndEao.debitCredit.DebitCreditEntity;
+import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import com.oakeel.ejb.entityAndEao.organization.OrganizationEntity;
 import com.oakeel.ejb.entityAndEao.role.RoleEntity;
-import com.oakeel.ejb.entityAndEao.customerAccount.CustomerAccountEntity;
-import com.oakeel.ejb.entityAndEao.customerBankCard.CustomerBankCardEntity;
 import com.oakeel.ejb.entityAndEao.userSet.UserSetEntity;
-import java.io.Serializable;
+import com.oakeel.ejb.ptpEnum.CreateAccountModeEnum;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -32,14 +29,14 @@ import javax.persistence.OneToOne;
  * @author root
  */
 @Entity
-public class UserEntity implements Serializable {
-    public UserEntity()
-    {
-        userUuid=UUID.randomUUID().toString();
+@Inheritance(strategy = InheritanceType.JOINED)  
+public class UserEntity extends EntityRoot{
+
+    public UserEntity() {
     }
+ 
     public UserEntity(String param,String password,CreateAccountModeEnum userEnum)
     {
-        userUuid=UUID.randomUUID().toString();
         if(userEnum==CreateAccountModeEnum.用户名)
             this.name=param;
         if(userEnum==CreateAccountModeEnum.电话)
@@ -50,24 +47,31 @@ public class UserEntity implements Serializable {
     }
     public UserEntity(String name,String telephone,String email,String password,int priority)
     {
-        userUuid=UUID.randomUUID().toString();
         this.name=name;
         this.telephone=telephone;
         this.email=email;
         this.password=password;
         this.priority=priority;
     }
+    public UserEntity(String name,String telephone,String email,String password,int priority,String qq)
+    {
+        this.name=name;
+        this.telephone=telephone;
+        this.email=email;
+        this.password=password;
+        this.priority=priority;
+        this.qq=qq;
+    }
     static long serialVersionUID = 1L;
-    @Id
-    @Column(length=36)
-    private String userUuid;
     @Column(nullable=false)
     private String name;
     private int priority=0;
     @Column(nullable=false)
     private String password;
+    
     private String telephone="";
     private String email="";
+    private String qq="";
     private String salt="";
     private Boolean locked=false;
     //用户与机构是多对一关系，主控在用户
@@ -78,32 +82,6 @@ public class UserEntity implements Serializable {
     private Set<RoleEntity> roleEntitys=new HashSet<>();
     @OneToOne//用户与用户设置是一对一的关系
     UserSetEntity userSetEntity;
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (userUuid != null ? userUuid.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UserEntity)) {
-            return false;
-        }
-        UserEntity other = (UserEntity) object;
-        if ((this.userUuid == null && other.userUuid != null) || (this.userUuid != null && !this.userUuid.equals(other.userUuid))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.oakeel.EntityAndDao.User.UserEntity[ id=" + userUuid + " ]";
-    }
-
-
 
 
     /**
@@ -204,19 +182,7 @@ public class UserEntity implements Serializable {
         this.roleEntitys = roleEntitys;
     }
 
-    /**
-     * @return the userUuid
-     */
-    public String getUserUuid() {
-        return userUuid;
-    }
 
-    /**
-     * @param userUuid the userUuid to set
-     */
-    public void setUserUuid(String userUuid) {
-        this.userUuid = userUuid;
-    }
 
     /**
      * @return the organizationEntity
@@ -244,6 +210,20 @@ public class UserEntity implements Serializable {
      */
     public void setPriority(int priority) {
         this.priority = priority;
+    }
+
+    /**
+     * @return the qq
+     */
+    public String getQq() {
+        return qq;
+    }
+
+    /**
+     * @param qq the qq to set
+     */
+    public void setQq(String qq) {
+        this.qq = qq;
     }
 
  

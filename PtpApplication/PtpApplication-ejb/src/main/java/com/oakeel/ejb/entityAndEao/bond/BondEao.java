@@ -6,6 +6,7 @@
 
 package com.oakeel.ejb.entityAndEao.bond;
 
+import com.oakeel.ejb.entityAndEao.eeroot.EaoRoot;
 import javax.ejb.Stateless;
 
 /**
@@ -13,7 +14,7 @@ import javax.ejb.Stateless;
  * @author root
  */
 @Stateless
-public class BondEao implements BondEaoLocal {
+public class BondEao extends EaoRoot<BondEntity> implements BondEaoLocal {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

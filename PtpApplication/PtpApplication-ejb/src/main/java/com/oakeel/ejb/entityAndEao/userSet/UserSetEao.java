@@ -6,15 +6,15 @@
 
 package com.oakeel.ejb.entityAndEao.userSet;
 
+import com.oakeel.ejb.entityAndEao.eeroot.EaoRoot;
 import javax.ejb.Stateless;
-import javax.jws.WebService;
 
 /**
  *
  * @author root
  */
 @Stateless
-public class UserSetEao implements UserSetEaoLocal {
+public class UserSetEao extends EaoRoot<UserSetEntity> implements UserSetEaoLocal {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

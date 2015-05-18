@@ -6,6 +6,7 @@
 
 package com.oakeel.ejb.entityAndEao.bond;
 
+import com.oakeel.ejb.entityAndEao.eeroot.EaoRootLocal;
 import javax.ejb.Local;
 
 /**
@@ -13,6 +14,6 @@ import javax.ejb.Local;
  * @author root
  */
 @Local
-public interface BondEaoLocal {
+public interface BondEaoLocal  extends EaoRootLocal<BondEntity>{
     
 }

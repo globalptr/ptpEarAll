@@ -6,6 +6,7 @@
 
 package com.oakeel.ejb.entityAndEao.operation;
 
+import com.oakeel.ejb.entityAndEao.eeroot.EaoRootLocal;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -14,9 +15,6 @@ import javax.ejb.Local;
  * @author root
  */
 @Local
-public interface OperationEaoLocal {
-    public void addNewOperation(OperationEntity operation);
+public interface OperationEaoLocal  extends EaoRootLocal<OperationEntity>{
     public void deleteOperation(OperationEntity operation);
-    public void updateOperation(OperationEntity operation);
-    public List<OperationEntity> getAllOperation();
 }

@@ -6,15 +6,13 @@
 
 package com.oakeel.ejb.entityAndEao.organization;
 
+import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import com.oakeel.ejb.entityAndEao.user.UserEntity;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 /**
@@ -22,29 +20,23 @@ import javax.persistence.OneToMany;
  * @author root
  */
 @Entity
-public class OrganizationEntity implements Serializable {
+public class OrganizationEntity extends EntityRoot{
     //整个机构是个树形必须从根开始顺序初始化，不能反向，即先初始化根，再初始化子
     public OrganizationEntity(){
-        this.organizationUuid=UUID.randomUUID().toString();
     }
     public OrganizationEntity(String name,int priority,int organizationLevel)
     {
-        this.organizationUuid=UUID.randomUUID().toString();
         this.name=name;
         this.priority=priority;
         this.organizationLevel=organizationLevel;
     }
     public OrganizationEntity(String name)
     {
-        this.organizationUuid=UUID.randomUUID().toString();
         this.name=name;
         this.priority=999;
         this.organizationLevel=-1;
     }
     private static final long serialVersionUID = 1L;
-    @Id
-    @Column(length=36)
-    private String organizationUuid;
     @Column(nullable=false,length=50)
     private String name;//名字
     private int priority;//显示顺序
@@ -60,18 +52,6 @@ public class OrganizationEntity implements Serializable {
     private Boolean available;
 
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof OrganizationEntity)) {
-            return false;
-        }
-        OrganizationEntity other = (OrganizationEntity) object;
-        if ((this.getOrganizationUuid() == null && other.getOrganizationUuid() != null) || (this.getOrganizationUuid() != null && !this.organizationUuid.equals(other.organizationUuid))) {
-            return false;
-        }
-        return true;
-    }
 
     @Override
     public String toString() {
@@ -120,23 +100,6 @@ public class OrganizationEntity implements Serializable {
     public void setAvailable(Boolean available) {
         this.available = available;
     }
-
-    /**
-     * @return the organizationUuid
-     */
-    public String getOrganizationUuid() {
-        return organizationUuid;
-    }
-
-    /**
-     * @param organizationUuid the organizationUuid to set
-     */
-    public void setOrganizationUuid(String organizationUuid) {
-        this.organizationUuid = organizationUuid;
-    }
-
-
-
     /**
      * @return the organizationLevel
      */
