@@ -6,15 +6,13 @@
 
 package com.oakeel.ejb.entityAndEao.bond;
 
-import com.oakeel.ejb.entityAndEao.bondRepayPlan.BondRepayPlanEntity;
 import com.oakeel.ejb.entityAndEao.bondInformation.BondInformationEntity;
 import com.oakeel.ejb.entityAndEao.bondState.BondStateEntity;
 import com.oakeel.ejb.entityAndEao.financialProduct.FinancialProductEntity;
-import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
-import com.oakeel.ejb.ptpEnum.CreditLevelEnum;
+import com.oakeel.ejb.ptpEnum.BondStage;
+import com.oakeel.ejb.ptpEnum.BondType;
 import com.oakeel.ejb.ptpEnum.RepayModel;
 import com.oakeel.ejb.ptpEnum.SplitUnit;
-import java.math.BigDecimal;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -28,21 +26,22 @@ import javax.persistence.OneToOne;
 @Entity
 public class BondEntity extends FinancialProductEntity {
     private static final long serialVersionUID = 1L;
+    private String bondNumber;
+    //担保公司实体
+    private String riskControlDetails;//风险担保详情
+    private String guaranteeCase;//担保情况
+    private String reverseGuaranteeCase;//反担保情况
     private BondStage bondStage;//标的阶段
     private RepayModel repayModel;//还款模型
-    private BigDecimal yearRate;//年利率
-    private BigDecimal allAmount;//借款总额
-    private int amoutTerm;//借款期限
     private SplitUnit repayCycle;//还款周期
+    private int repayCycleNumber;//期数
     private BondType bondType;//标类型
-    private CreditLevelEnum creditLevel;//信用等级
-    @OneToMany(cascade = {CascadeType.ALL})//每期还款明细
-    private Set<BondRepayPlanEntity> bondCheckEntitys;
     @OneToMany(cascade = {CascadeType.ALL})//标的资料，一对多
     private Set<BondInformationEntity> bondInformationEntiys;
-    @OneToOne(cascade = {CascadeType.ALL})
-    private BondStateEntity bondStateEntity;//标的状态
+    @OneToOne(cascade = {CascadeType.ALL})//标的状态
+    private BondStateEntity bondStateEntity;
 
+    
     /**
      * @return the bondStateEntity
      */
@@ -85,47 +84,7 @@ public class BondEntity extends FinancialProductEntity {
         this.repayModel = repayModel;
     }
 
-    /**
-     * @return the yearRate
-     */
-    public BigDecimal getYearRate() {
-        return yearRate;
-    }
 
-    /**
-     * @param yearRate the yearRate to set
-     */
-    public void setYearRate(BigDecimal yearRate) {
-        this.yearRate = yearRate;
-    }
-
-    /**
-     * @return the allAmount
-     */
-    public BigDecimal getAllAmount() {
-        return allAmount;
-    }
-
-    /**
-     * @param allAmount the allAmount to set
-     */
-    public void setAllAmount(BigDecimal allAmount) {
-        this.allAmount = allAmount;
-    }
-
-    /**
-     * @return the amoutTerm
-     */
-    public int getAmoutTerm() {
-        return amoutTerm;
-    }
-
-    /**
-     * @param amoutTerm the amoutTerm to set
-     */
-    public void setAmoutTerm(int amoutTerm) {
-        this.amoutTerm = amoutTerm;
-    }
 
     /**
      * @return the repayCycle
@@ -155,33 +114,6 @@ public class BondEntity extends FinancialProductEntity {
         this.bondType = bondType;
     }
 
-    /**
-     * @return the creditLevel
-     */
-    public CreditLevelEnum getCreditLevel() {
-        return creditLevel;
-    }
-
-    /**
-     * @param creditLevel the creditLevel to set
-     */
-    public void setCreditLevel(CreditLevelEnum creditLevel) {
-        this.creditLevel = creditLevel;
-    }
-
-    /**
-     * @return the bondCheckEntitys
-     */
-    public Set<BondRepayPlanEntity> getBondCheckEntitys() {
-        return bondCheckEntitys;
-    }
-
-    /**
-     * @param bondCheckEntitys the bondCheckEntitys to set
-     */
-    public void setBondCheckEntitys(Set<BondRepayPlanEntity> bondCheckEntitys) {
-        this.bondCheckEntitys = bondCheckEntitys;
-    }
 
     /**
      * @return the bondInformationEntiys
@@ -195,6 +127,76 @@ public class BondEntity extends FinancialProductEntity {
      */
     public void setBondInformationEntiys(Set<BondInformationEntity> bondInformationEntiys) {
         this.bondInformationEntiys = bondInformationEntiys;
+    }
+
+    /**
+     * @return the repayCycleNumber
+     */
+    public int getRepayCycleNumber() {
+        return repayCycleNumber;
+    }
+
+    /**
+     * @param repayCycleNumber the repayCycleNumber to set
+     */
+    public void setRepayCycleNumber(int repayCycleNumber) {
+        this.repayCycleNumber = repayCycleNumber;
+    }
+
+    /**
+     * @return the bondNumber
+     */
+    public String getBondNumber() {
+        return bondNumber;
+    }
+
+    /**
+     * @param bondNumber the bondNumber to set
+     */
+    public void setBondNumber(String bondNumber) {
+        this.bondNumber = bondNumber;
+    }
+
+    /**
+     * @return the guaranteeCase
+     */
+    public String getGuaranteeCase() {
+        return guaranteeCase;
+    }
+
+    /**
+     * @param guaranteeCase the guaranteeCase to set
+     */
+    public void setGuaranteeCase(String guaranteeCase) {
+        this.guaranteeCase = guaranteeCase;
+    }
+
+    /**
+     * @return the reverseGuaranteeCase
+     */
+    public String getReverseGuaranteeCase() {
+        return reverseGuaranteeCase;
+    }
+
+    /**
+     * @param reverseGuaranteeCase the reverseGuaranteeCase to set
+     */
+    public void setReverseGuaranteeCase(String reverseGuaranteeCase) {
+        this.reverseGuaranteeCase = reverseGuaranteeCase;
+    }
+
+    /**
+     * @return the riskControlDetails
+     */
+    public String getRiskControlDetails() {
+        return riskControlDetails;
+    }
+
+    /**
+     * @param riskControlDetails the riskControlDetails to set
+     */
+    public void setRiskControlDetails(String riskControlDetails) {
+        this.riskControlDetails = riskControlDetails;
     }
 
     

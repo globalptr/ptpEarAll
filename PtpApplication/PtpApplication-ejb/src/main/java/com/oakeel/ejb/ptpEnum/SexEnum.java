@@ -4,19 +4,12 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.transaction;
-
-import javax.ejb.Local;
-import javax.ejb.Remote;
+package com.oakeel.ejb.ptpEnum;
 
 /**
  *
  * @author root
  */
-@Local
-@Remote
-public interface InitEjbLocal{
-    public void InitDB();
-    public void InitDepartment();
-    public void test();
+public enum SexEnum {
+    男,女;
 }

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.bond;
+package com.oakeel.ejb.ptpEnum;
 
 /**
  *

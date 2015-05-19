@@ -4,19 +4,13 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.transaction;
+package com.oakeel.ejb.ptpEnum;
 
-import javax.ejb.Local;
-import javax.ejb.Remote;
 
 /**
  *
  * @author root
  */
-@Local
-@Remote
-public interface InitEjbLocal{
-    public void InitDB();
-    public void InitDepartment();
-    public void test();
+public enum ResourceTypeEnum {
+    页面,按钮,菜单,未定义;
 }

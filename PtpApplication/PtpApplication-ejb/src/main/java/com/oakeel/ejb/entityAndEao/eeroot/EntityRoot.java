@@ -9,18 +9,14 @@ package com.oakeel.ejb.entityAndEao.eeroot;
 import java.io.Serializable;
 import java.util.UUID;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
 
 /**
  *
  * @author root
  */
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)  
+@MappedSuperclass  
 public class EntityRoot  implements Serializable {
     public EntityRoot()
     {

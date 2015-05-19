@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.bondRepayPlan;
+package com.oakeel.ejb.entityAndEao.bankCard;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EaoRootLocal;
 import javax.ejb.Local;
@@ -14,6 +14,6 @@ import javax.ejb.Local;
  * @author root
  */
 @Local
-public interface BondRepayPlanEaoLocal  extends EaoRootLocal<BondRepayPlanEntity>{
+public interface BankCardEaoLocal  extends EaoRootLocal<BankCardEntity>{
     
 }

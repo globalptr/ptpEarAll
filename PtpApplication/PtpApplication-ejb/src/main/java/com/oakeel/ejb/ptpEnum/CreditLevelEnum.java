@@ -12,5 +12,10 @@ package com.oakeel.ejb.ptpEnum;
  */
 public enum CreditLevelEnum {
     //信用等级
-    AA,A,B,C,D,E,HR;
+    AA(1000),A(700),B(100),C(50),D(30),E(10),HR(1);
+    int fundingLine;//资金额度
+    private CreditLevelEnum(int line)
+    {
+        this.fundingLine=line;
+    }
 }

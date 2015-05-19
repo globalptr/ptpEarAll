@@ -5,6 +5,8 @@
  */
 package com.oakeel.ejb.transaction;
 
+import com.oakeel.ejb.entityAndEao.bond.BondEntity;
+import com.oakeel.ejb.entityAndEao.financingBusinessBorrower.FinancingBusinessBorrowerEntity;
 import com.oakeel.ejb.entityAndEao.operation.OperationEntity;
 import com.oakeel.ejb.entityAndEao.organization.OrganizationEntity;
 import com.oakeel.ejb.entityAndEao.resource.ResourceEntity;
@@ -185,4 +187,14 @@ public class InitEjb implements InitEjbLocal , Serializable{
     }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
+
+    @Override
+    public void test() {
+        BondEntity bond=new BondEntity();
+        bond.setName("123");
+        FinancingBusinessBorrowerEntity financingBusinessBorrowerEntity=new FinancingBusinessBorrowerEntity();
+        financingBusinessBorrowerEntity.setFinancialProductEntity(bond);
+        em.persist(bond);
+        em.persist(financingBusinessBorrowerEntity);
+    }
 }

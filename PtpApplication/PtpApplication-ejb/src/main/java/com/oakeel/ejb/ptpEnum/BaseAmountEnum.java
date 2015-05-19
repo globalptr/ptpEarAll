@@ -6,11 +6,16 @@
 
 package com.oakeel.ejb.ptpEnum;
 
+
 /**
  *
  * @author root
  */
-//支出类型
-public enum PayEnum {
-    
+public enum BaseAmountEnum {
+    标准一(1),标准二(50),标准三(100),标准四(500),标准五(1000);
+    int baseValue;
+    private BaseAmountEnum(int value)
+    {
+        this.baseValue=value;
+    }
 }

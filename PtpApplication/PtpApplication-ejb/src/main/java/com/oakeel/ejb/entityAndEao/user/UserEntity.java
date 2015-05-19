@@ -6,22 +6,23 @@
 
 package com.oakeel.ejb.entityAndEao.user;
 
-import com.oakeel.ejb.entityAndEao.debitCredit.DebitCreditEntity;
 import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import com.oakeel.ejb.entityAndEao.organization.OrganizationEntity;
 import com.oakeel.ejb.entityAndEao.role.RoleEntity;
 import com.oakeel.ejb.entityAndEao.userSet.UserSetEntity;
 import com.oakeel.ejb.ptpEnum.CreateAccountModeEnum;
+import com.oakeel.ejb.ptpEnum.SexEnum;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -74,6 +75,9 @@ public class UserEntity extends EntityRoot{
     private String qq="";
     private String salt="";
     private Boolean locked=false;
+    private int age;//年龄
+    @Enumerated(EnumType.STRING)
+    private SexEnum sexEnum;
     //用户与机构是多对一关系，主控在用户
     @ManyToOne(cascade={CascadeType.MERGE})//级联修改user=>org
     private OrganizationEntity organizationEntity;
@@ -224,6 +228,34 @@ public class UserEntity extends EntityRoot{
      */
     public void setQq(String qq) {
         this.qq = qq;
+    }
+
+    /**
+     * @return the age
+     */
+    public int getAge() {
+        return age;
+    }
+
+    /**
+     * @param age the age to set
+     */
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    /**
+     * @return the sexEnum
+     */
+    public SexEnum getSexEnum() {
+        return sexEnum;
+    }
+
+    /**
+     * @param sexEnum the sexEnum to set
+     */
+    public void setSexEnum(SexEnum sexEnum) {
+        this.sexEnum = sexEnum;
     }
 
  

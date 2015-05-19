@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.debitCredit;
+package com.oakeel.ejb.entityAndEao.income;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EaoRootLocal;
 import javax.ejb.Local;
@@ -14,6 +14,6 @@ import javax.ejb.Local;
  * @author root
  */
 @Local
-public interface DebitCreditEaoLocal  extends EaoRootLocal<DebitCreditEntity>{
+public interface IncomeEaoLocal extends EaoRootLocal<IncomeEntity> {
     
 }

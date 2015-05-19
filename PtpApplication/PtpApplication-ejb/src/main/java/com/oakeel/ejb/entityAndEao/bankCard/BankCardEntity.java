@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.BankCard;
+package com.oakeel.ejb.entityAndEao.bankCard;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import javax.persistence.Entity;

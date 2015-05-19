@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.UserAccount;
+package com.oakeel.ejb.entityAndEao.userAccount;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import java.io.Serializable;

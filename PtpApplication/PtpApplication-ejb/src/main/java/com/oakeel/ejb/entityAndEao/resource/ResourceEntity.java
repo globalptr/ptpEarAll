@@ -6,6 +6,7 @@
 
 package com.oakeel.ejb.entityAndEao.resource;
 
+import com.oakeel.ejb.ptpEnum.ResourceTypeEnum;
 import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import com.oakeel.ejb.entityAndEao.permission.PermissionEntity;
 import java.util.HashSet;

@@ -4,13 +4,12 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.resource;
-
+package com.oakeel.ejb.ptpEnum;
 
 /**
  *
  * @author root
  */
-public enum ResourceTypeEnum {
-    页面,按钮,菜单,未定义;
+public enum LiveCaseEnum {
+    普通租赁,公廉租房,普通商品房,精品小区房,花园洋房,联排别墅,独栋别墅,海外高端住宅;
 }
