@@ -11,7 +11,7 @@ import com.oakeel.ejb.entityAndEao.permission.PermissionEaoLocal;
 import com.oakeel.ejb.entityAndEao.permission.PermissionEntity;
 import com.oakeel.ejb.entityAndEao.resource.ResourceEaoLocal;
 import com.oakeel.ejb.entityAndEao.resource.ResourceEntity;
-import com.oakeel.ejb.entityAndEao.resource.ResourceTypeEnum;
+import com.oakeel.ejb.ptpEnum.ResourceTypeEnum;
 import com.oakeel.ejb.entityAndEao.role.RoleEaoLocal;
 import com.oakeel.ejb.entityAndEao.role.RoleEntity;
 import com.oakeel.ejb.entityAndEao.user.UserEaoLocal;

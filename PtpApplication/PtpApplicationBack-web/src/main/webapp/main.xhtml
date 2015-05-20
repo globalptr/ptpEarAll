@@ -100,12 +100,10 @@
                 
                 <p:layoutUnit position="west" gutter="0"  size="230" header="工具栏" collapsible="true">
                     <h:form id="mainform">
-                        <p:outputLabel value="fsdffsdfs#{newClass.str}"/>
-                        <p:commandButton value="1111" action="order"/>
                         <p:growl id="maingrowl" autoUpdate="true" showDetail="true" />  
                         <p:panelMenu style="width:210px">
                             <p:submenu label="管理中心" >
-                                <p:menuitem value="个人信息" icon="ui-icon-star" outcome="operation"/>
+                                <p:menuitem value="个人信息" icon="ui-icon-star" />
                                 <p:submenu label="控制面板" >
                                     <p:menuitem value="个人信息" icon="ui-icon-star" />
                                     <p:menuitem value="密码修改"   icon="ui-icon-star" />
@@ -116,7 +114,7 @@
                                 </p:submenu>
                             </p:submenu>
                             <p:submenu label="借款中心">
-                                <p:menuitem value="发布借款" icon="ui-icon-star" action="order"/>
+                                <p:menuitem value="发布借款" icon="ui-icon-star" action="/issueBond/issueBond1"/>
                                 <p:menuitem value="借款初审" icon="ui-icon-star" />
                                 <p:menuitem value="借款管理" icon="ui-icon-star" />
                                 <p:submenu label="借款管理" >
@@ -303,10 +301,10 @@
                             <p:submenu label="系统设置">
                                 <p:submenu label="权限管理" >
                                     <p:menuitem value="组织机构管理" icon="ui-icon-key" action="organization"/>
-                                    <p:menuitem value="用户组织管理" icon="ui-icon-key" outcome="userToOrganization"/>
-                                    <p:menuitem value="用户角色管理" icon="ui-icon-key"  outcome="userToRole"/>
-                                    <p:menuitem value="角色资源管理" icon="ui-icon-key"  outcome="permission"/>
-                                    <p:menuitem value="操作管理" icon="ui-icon-key"  outcome="operation"/>
+                                    <p:menuitem value="用户组织管理" icon="ui-icon-key" action="userToOrganization"/>
+                                    <p:menuitem value="用户角色管理" icon="ui-icon-key"  action="userToRole"/>
+                                    <p:menuitem value="角色资源管理" icon="ui-icon-key"  action="permission"/>
+                                    <p:menuitem value="操作管理" icon="ui-icon-key"  action="operation"/>
                                 </p:submenu>
                                 <p:submenu label="手机短信管理" >
                                     <p:menuitem value="发送记录" icon="ui-icon-star" />

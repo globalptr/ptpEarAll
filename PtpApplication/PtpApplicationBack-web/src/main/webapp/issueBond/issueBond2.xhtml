@@ -3,7 +3,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    <ui:composition template="main.xhtml" >
+    <ui:composition template="../main.xhtml" >
         <ui:define name="center">
 
             <style type="text/css">
@@ -23,12 +23,12 @@
                     text-shadow: none !important;
                 }
 
-/*                .ui-steps.vertical {
-                    margin-bottom: 30%;
-                }*/
+                /*                .ui-steps.vertical {
+                                    margin-bottom: 30%;
+                                }*/
 
                 .ui-steps.vertical .ui-steps-item .ui-menuitem-link {
-/*                    height: 200px;*/
+                    /*                    height: 200px;*/
                     padding: 0 1em;
                     margin-left: -55px;
                     margin-top: 80px;
@@ -77,53 +77,66 @@
                     margin-bottom: 10px;
                 }
                 .ui-steps.horizontal .ui-steps-item {
-                    width: 24%;
+                    width: 48%;
                     float: left;
                 }
             </style>
             <h:form style="">
-
-                <table style="width:100%;margin-top: 50px">
+                <p:dialog widgetVar="uploadImageDlg_wid">
+                    <p:fileUpload multiple="true" />
+                </p:dialog>
+                <table style=" margin-left: 50px;width:95% ;margin-top: 50px">
                     <tr>
-<!--                        <td rowspan="2"  style="height: 100%">
-                            <p:steps id="step_id" styleClass="vertical" activeIndex="#{issueBond.bondIndex}" style="margin-left: 50px;width:100px;height: 100%">
-                                <p:menuitem value="填写投标信息" actionListener="#{issueBond.stepFront()}"/>
-                                <p:menuitem value="上传认证资料" actionListener="#{issueBond.stepFront()}"/>
-                                <p:menuitem value="填写投标金额" actionListener="#{issueBond.stepFront()}"/>
-                                <p:menuitem value="选择还款模型" />
-                            </p:steps>
-                        </td>-->
+                        <!--                        <td rowspan="2"  style="height: 100%">
+                                                    <p:steps id="step_id" styleClass="vertical" activeIndex="#{issueBond.bondIndex}" style="margin-left: 50px;width:100px;height: 100%">
+                                                        <p:menuitem value="填写投标信息" actionListener="#{issueBond.stepFront()}"/>
+                                                        <p:menuitem value="上传认证资料" actionListener="#{issueBond.stepFront()}"/>
+                                                        <p:menuitem value="填写投标金额" actionListener="#{issueBond.stepFront()}"/>
+                                                        <p:menuitem value="选择还款模型" />
+                                                    </p:steps>
+                                                </td>-->
                         <td colspan="2">
-                            <p:steps id="step_idx" styleClass="horizontal" activeIndex="#{issueBond.bondIndex}" style=" margin-left: 60px; width:95%;height: 30px">
+                            <p:steps id="step_idx" styleClass="horizontal" activeIndex="1" style=" margin-left: 60px; width:95%;height: 30px">
                                 <p:menuitem value="填写投标信息" />
                                 <p:menuitem value="上传认证资料" />
-                                <p:menuitem value="填写投标金额" />
-                                <p:menuitem value="选择还款模型" />
                             </p:steps>
                         </td>
                     </tr>
                     <tr style="width:100%">
                         <td colspan="2">
-                            <p:separator style="height:3px;"/>
+                            <p:dataGrid rows="8" columns="8" value="#{issueBond.imagetest}"  var="imageGrid" >
+                                <f:facet name="header">
+                                    <table>
+                                        <tr>
+                                            <td style="text-align: center; width: 100%;border: none" rowspan="2">
+                                                <p:outputLabel value="相关合同"/>
+                                            </td>
+                                            <td style=" width: 20px;border: none">
+                                                <p:commandLink styleClass="ui-icon ui-icon-arrowthickstop-1-n"  onclick="PF('uploadImageDlg_wid').show()"  immediate="true" id="uploadImage_id"/>
+                                                <p:tooltip for="uploadImage_id" value="上传资料图片"   />
+                                            </td>          
+                                        </tr>
+                                    </table>
+                                </f:facet>   
+                                <p:panel header="121212" style="text-align:center">
+                                    <h:panelGrid columns="1" style="width:100%">
+                                        <p:graphicImage library="images/sysico" name="#{imageGrid}" style=" margin: 0 auto"  alt="Image Description for #{imageGrid}" width="64" height="64" title="#{imageGrid}"/>
+                                        <p:commandLink styleClass="ui-icon ui-icon-search"    immediate="true" style=" margin: 0 auto" id="lookImage_id"/>
+                                    </h:panelGrid>
+                                </p:panel>
+
+                            </p:dataGrid>
                         </td>
                     </tr>
-                    <tr style="height:600px;width:100%">
-                        <td colspan="2">
-                            <ui:insert name="bondContent" >
-                                <h:form>
-                                         <p:fileUpload  mode="advanced" label="选择文件" uploadLabel="点此上传" cancelLabel="取消" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />    
-                                </h:form>
-                            </ui:insert>
-                        </td>
-                    </tr>
+
                     <tr>
-                        <td style="width:50%">
-                            <p:commandButton id="front" value="#{(issueBond.bondIndex==0)?'首页':'上一步'}"  style="width:100%;height: 40px">
+                        <td style="padding-top:10px;padding-bottom:10px">
+                            <p:commandButton id="front" value="上一步"  style="width:100%;height: 40px">
                                 <p:ajax update="step_idx next front" listener="#{issueBond.stepBack()}" event="click"/>
                             </p:commandButton>
                         </td>
-                        <td style="width:50%">
-                            <p:commandButton id="next" value="#{(issueBond.bondIndex==3)?'发布':'下一步'}" style="width:100%;height: 40px">
+                        <td style="padding-top:10px;padding-bottom:10px">
+                            <p:commandButton id="next" value="发布" style="width:100%;height: 40px">
                                 <p:ajax update="step_idx next front" listener="#{issueBond.stepFront()}" event="click"/>
                             </p:commandButton>
                         </td>

@@ -6,7 +6,7 @@
 
 package com.oakeel.globalconverter;
 
-import com.oakeel.ejb.entityAndEao.resource.ResourceTypeEnum;
+import com.oakeel.ejb.ptpEnum.ResourceTypeEnum;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
