@@ -8,6 +8,7 @@ package com.oakeel.ejb.entityAndEao.bond;
 
 import com.oakeel.ejb.entityAndEao.bondInformation.BondInformationEntity;
 import com.oakeel.ejb.entityAndEao.bondState.BondStateEntity;
+import com.oakeel.ejb.entityAndEao.companyUser.CompanyUserEntity;
 import com.oakeel.ejb.entityAndEao.financialProduct.FinancialProductEntity;
 import com.oakeel.ejb.ptpEnum.BondStage;
 import com.oakeel.ejb.ptpEnum.BondType;
@@ -28,6 +29,8 @@ public class BondEntity extends FinancialProductEntity {
     private static final long serialVersionUID = 1L;
     private String bondNumber;
     //担保公司实体
+    @OneToOne
+    CompanyUserEntity companyUserEntity;
     private String riskControlDetails;//风险担保详情
     private String guaranteeCase;//担保情况
     private String reverseGuaranteeCase;//反担保情况

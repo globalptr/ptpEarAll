@@ -30,7 +30,7 @@ import javax.persistence.OneToOne;
  * @author root
  */
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)  
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)  
 public class UserEntity extends EntityRoot{
 
     public UserEntity() {

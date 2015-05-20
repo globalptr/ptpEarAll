@@ -13,9 +13,18 @@ package com.oakeel.ejb.ptpEnum;
  */
 public enum BaseAmountEnum {
     标准一(1),标准二(50),标准三(100),标准四(500),标准五(1000);
-    int baseValue;
+    private final int baseValue;
     private BaseAmountEnum(int value)
     {
         this.baseValue=value;
     }
+
+    /**
+     * @return the baseValue
+     */
+    public int getBaseValue() {
+        return baseValue;
+    }
+
+   
 }

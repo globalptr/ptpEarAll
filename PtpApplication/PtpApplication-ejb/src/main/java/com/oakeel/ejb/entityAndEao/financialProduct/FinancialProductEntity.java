@@ -28,7 +28,7 @@ public class FinancialProductEntity extends EntityRoot {
     private static final long serialVersionUID = 1L;
     private String name;//名字
     private String Details;//详情  
-    private BigDecimal yearRate;//年利率
+    private BigDecimal yearRate=new BigDecimal("0");//年利率
     private BaseAmountEnum baseAmountEnum;//基准金额
     private int copiesNum;//份数
     @OneToMany(mappedBy="financialProductEntity")//与金融业务借方是一对多的关系，主控在业务方
