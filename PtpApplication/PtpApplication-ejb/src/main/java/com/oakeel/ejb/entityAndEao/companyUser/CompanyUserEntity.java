@@ -6,10 +6,13 @@
 
 package com.oakeel.ejb.entityAndEao.companyUser;
 
+import com.oakeel.ejb.entityAndEao.bond.BondEntity;
 import com.oakeel.ejb.entityAndEao.imageInfo.ImageInfoEntity;
 import com.oakeel.ejb.entityAndEao.user.UserEntity;
 import com.oakeel.ejb.ptpEnum.CompanyType;
+import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -21,6 +24,8 @@ public class CompanyUserEntity extends UserEntity {
     private static final long serialVersionUID = 1L;
     @OneToOne
     private ImageInfoEntity logImage;//logo
+    @OneToMany(mappedBy="companyUserEntity")
+    Set<BondEntity> bondEntitys; 
     private String mainBusiness;//主营业务
     private CompanyType companyType;//公司类型
     /**

@@ -191,13 +191,14 @@ public class InitEjb implements InitEjbLocal, Serializable {
 
     @Override
     public void test() {
-        
-        CompanyUserEntity com = new CompanyUserEntity();
-        com.setName("登科担保");
-        com.setPassword("dkdb");
-        com.setMainBusiness("NO1:中小企业融资担保：为提供企业流动资金借款担保、固定资产担保，根据客户的融资需求，提供以信用增级为主的担保服务。\n"
-                + "\n"
-                + "NO2:个人融资担保：为个人提供流动资金借款担保、固定资产担保（汽车抵押、房产抵押担保等）。");
-        em.persist(com);
+        BondEntity bond=new BondEntity();
+        em.persist(bond);
+//        CompanyUserEntity com = new CompanyUserEntity();
+//        com.setName("登科担保");
+//        com.setPassword("dkdb");
+//        com.setMainBusiness("NO1:中小企业融资担保：为提供企业流动资金借款担保、固定资产担保，根据客户的融资需求，提供以信用增级为主的担保服务。\n"
+//                + "\n"
+//                + "NO2:个人融资担保：为个人提供流动资金借款担保、固定资产担保（汽车抵押、房产抵押担保等）。");
+//        em.persist(com);
     }
 }

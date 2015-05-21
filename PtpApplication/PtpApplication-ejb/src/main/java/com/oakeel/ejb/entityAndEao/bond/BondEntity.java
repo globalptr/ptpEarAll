@@ -14,9 +14,11 @@ import com.oakeel.ejb.ptpEnum.BondStage;
 import com.oakeel.ejb.ptpEnum.BondType;
 import com.oakeel.ejb.ptpEnum.RepayModel;
 import com.oakeel.ejb.ptpEnum.SplitUnit;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -27,10 +29,11 @@ import javax.persistence.OneToOne;
 @Entity
 public class BondEntity extends FinancialProductEntity {
     private static final long serialVersionUID = 1L;
+    
     private String bondNumber;
     //担保公司实体
-    @OneToOne
-    CompanyUserEntity companyUserEntity;
+    @ManyToOne
+    private CompanyUserEntity companyUserEntity;
     private String riskControlDetails;//风险担保详情
     private String guaranteeCase;//担保情况
     private String reverseGuaranteeCase;//反担保情况
@@ -40,9 +43,9 @@ public class BondEntity extends FinancialProductEntity {
     private int repayCycleNumber;//期数
     private BondType bondType;//标类型
     @OneToMany(cascade = {CascadeType.ALL})//标的资料，一对多
-    private Set<BondInformationEntity> bondInformationEntiys;
+    private Set<BondInformationEntity> bondInformationEntiys=new HashSet<>();
     @OneToOne(cascade = {CascadeType.ALL})//标的状态
-    private BondStateEntity bondStateEntity;
+    private BondStateEntity bondStateEntity=new BondStateEntity();
 
     
     /**
@@ -200,6 +203,20 @@ public class BondEntity extends FinancialProductEntity {
      */
     public void setRiskControlDetails(String riskControlDetails) {
         this.riskControlDetails = riskControlDetails;
+    }
+
+    /**
+     * @return the companyUserEntity
+     */
+    public CompanyUserEntity getCompanyUserEntity() {
+        return companyUserEntity;
+    }
+
+    /**
+     * @param companyUserEntity the companyUserEntity to set
+     */
+    public void setCompanyUserEntity(CompanyUserEntity companyUserEntity) {
+        this.companyUserEntity = companyUserEntity;
     }
 
     

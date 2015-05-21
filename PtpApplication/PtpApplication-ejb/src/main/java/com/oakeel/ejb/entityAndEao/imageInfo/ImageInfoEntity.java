@@ -17,7 +17,7 @@ import javax.persistence.Entity;
 public class ImageInfoEntity extends EntityRoot {
 
     private String imagePath;
-    private String imageTitle;
+    private String imageName;
     private int imageWidth;
     private int imageHeight;
     private float imageSize;
@@ -36,19 +36,7 @@ public class ImageInfoEntity extends EntityRoot {
         this.imagePath = imagePath;
     }
 
-    /**
-     * @return the imageTitle
-     */
-    public String getImageTitle() {
-        return imageTitle;
-    }
 
-    /**
-     * @param imageTitle the imageTitle to set
-     */
-    public void setImageTitle(String imageTitle) {
-        this.imageTitle = imageTitle;
-    }
 
     /**
      * @return the imageWidth
@@ -91,4 +79,19 @@ public class ImageInfoEntity extends EntityRoot {
     public void setImageSize(float imageSize) {
         this.imageSize = imageSize;
     }
+
+    /**
+     * @return the imageName
+     */
+    public String getImageName() {
+        return imageName;
+    }
+
+    /**
+     * @param imageName the imageName to set
+     */
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
 }

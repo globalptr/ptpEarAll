@@ -11,8 +11,13 @@ import com.oakeel.ejb.entityAndEao.financingBusinessBorrower.FinancingBusinessBo
 import com.oakeel.ejb.entityAndEao.financingBusinessLender.FinancingBusinessLenderEntity;
 import com.oakeel.ejb.ptpEnum.BaseAmountEnum;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
 import java.util.Set;
+import java.util.UUID;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
@@ -26,6 +31,23 @@ import javax.persistence.OneToMany;
 public class FinancialProductEntity extends EntityRoot {
     //金融产品的父类，包括融资标和聚财宝
     private static final long serialVersionUID = 1L;
+    public FinancialProductEntity()
+    {
+        Random rd = new Random();
+        String n="";
+        int getNum;
+        do {
+            
+            //getNum = Math.abs(rd.nextInt())%10;//产生数字0-9的随机数
+            getNum = Math.abs(rd.nextInt())%26 + 97;//产生字母a-z的随机数
+            char num1 = (char)getNum;
+            String dn = Character.toString(num1);
+            n += dn;
+        } while (n.length()<6);
+        Date ddate=new Date();  
+        productId=(new SimpleDateFormat("yyyyMMddHHmmss")).format(ddate)+n;
+    }
+    private String productId;
     private String name;//名字
     private String Details;//详情  
     private BigDecimal yearRate=new BigDecimal("0");//年利率
@@ -133,6 +155,20 @@ public class FinancialProductEntity extends EntityRoot {
      */
     public void setFinancingBusinessBorrowerEntitys(Set<FinancingBusinessBorrowerEntity> financingBusinessBorrowerEntitys) {
         this.financingBusinessBorrowerEntitys = financingBusinessBorrowerEntitys;
+    }
+
+    /**
+     * @return the productId
+     */
+    public String getProductId() {
+        return productId;
+    }
+
+    /**
+     * @param productId the productId to set
+     */
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
 }

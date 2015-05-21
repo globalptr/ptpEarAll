@@ -8,7 +8,9 @@ package com.oakeel.ejb.entityAndEao.bondInformation;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import com.oakeel.ejb.entityAndEao.imageInfo.ImageInfoEntity;
-import java.util.Set;
+import com.oakeel.ejb.ptpEnum.ImageUsedEnum;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -19,7 +21,38 @@ import javax.persistence.OneToMany;
 @Entity
 public class BondInformationEntity extends EntityRoot{
     private static final long serialVersionUID = 1L;
-    String title;
+    private ImageUsedEnum title;
     @OneToMany
-    Set<ImageInfoEntity> imageInfoEntitys;
+    private List<ImageInfoEntity> imageInfoEntitys=new ArrayList<>();
+
+
+
+    /**
+     * @return the title
+     */
+    public ImageUsedEnum getTitle() {
+        return title;
+    }
+
+    /**
+     * @param title the title to set
+     */
+    public void setTitle(ImageUsedEnum title) {
+        this.title = title;
+    }
+
+    /**
+     * @return the imageInfoEntitys
+     */
+    public List<ImageInfoEntity> getImageInfoEntitys() {
+        return imageInfoEntitys;
+    }
+
+    /**
+     * @param imageInfoEntitys the imageInfoEntitys to set
+     */
+    public void setImageInfoEntitys(List<ImageInfoEntity> imageInfoEntitys) {
+        this.imageInfoEntitys = imageInfoEntitys;
+    }
+
 }
