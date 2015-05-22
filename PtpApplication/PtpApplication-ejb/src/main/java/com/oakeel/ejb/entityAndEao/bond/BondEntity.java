@@ -12,7 +12,7 @@ import com.oakeel.ejb.entityAndEao.companyUser.CompanyUserEntity;
 import com.oakeel.ejb.entityAndEao.financialProduct.FinancialProductEntity;
 import com.oakeel.ejb.ptpEnum.BondStage;
 import com.oakeel.ejb.ptpEnum.BondType;
-import com.oakeel.ejb.ptpEnum.RepayModel;
+import com.oakeel.ejb.ptpEnum.RepayModelEnum;
 import com.oakeel.ejb.ptpEnum.SplitUnit;
 import java.util.HashSet;
 import java.util.Set;
@@ -34,11 +34,12 @@ public class BondEntity extends FinancialProductEntity {
     //担保公司实体
     @ManyToOne
     private CompanyUserEntity companyUserEntity;
+    
     private String riskControlDetails;//风险担保详情
     private String guaranteeCase;//担保情况
     private String reverseGuaranteeCase;//反担保情况
     private BondStage bondStage;//标的阶段
-    private RepayModel repayModel;//还款模型
+    private RepayModelEnum repayModelEnum;//还款模型
     private SplitUnit repayCycle;//还款周期
     private int repayCycleNumber;//期数
     private BondType bondType;//标类型
@@ -75,22 +76,6 @@ public class BondEntity extends FinancialProductEntity {
     public void setBondStage(BondStage bondStage) {
         this.bondStage = bondStage;
     }
-
-    /**
-     * @return the repayModel
-     */
-    public RepayModel getRepayModel() {
-        return repayModel;
-    }
-
-    /**
-     * @param repayModel the repayModel to set
-     */
-    public void setRepayModel(RepayModel repayModel) {
-        this.repayModel = repayModel;
-    }
-
-
 
     /**
      * @return the repayCycle
@@ -217,6 +202,20 @@ public class BondEntity extends FinancialProductEntity {
      */
     public void setCompanyUserEntity(CompanyUserEntity companyUserEntity) {
         this.companyUserEntity = companyUserEntity;
+    }
+
+    /**
+     * @return the repayModelEnum
+     */
+    public RepayModelEnum getRepayModelEnum() {
+        return repayModelEnum;
+    }
+
+    /**
+     * @param repayModelEnum the repayModelEnum to set
+     */
+    public void setRepayModelEnum(RepayModelEnum repayModelEnum) {
+        this.repayModelEnum = repayModelEnum;
     }
 
     

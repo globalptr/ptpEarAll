@@ -6,8 +6,7 @@
 package com.oakeel.ejb.transaction;
 
 import com.oakeel.ejb.entityAndEao.bond.BondEntity;
-import com.oakeel.ejb.entityAndEao.companyUser.CompanyUserEntity;
-import com.oakeel.ejb.entityAndEao.financingBusinessBorrower.FinancingBusinessBorrowerEntity;
+import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import com.oakeel.ejb.entityAndEao.operation.OperationEntity;
 import com.oakeel.ejb.entityAndEao.organization.OrganizationEntity;
 import com.oakeel.ejb.entityAndEao.permission.PermissionEntity;
@@ -200,5 +199,23 @@ public class InitEjb implements InitEjbLocal, Serializable {
 //                + "\n"
 //                + "NO2:个人融资担保：为个人提供流动资金借款担保、固定资产担保（汽车抵押、房产抵押担保等）。");
 //        em.persist(com);
+    }
+    @Override
+    public void addUsers()
+    {
+        FrontUserEntity user1=new FrontUserEntity();
+        user1.setName("网络新人1");
+        user1.setPassword("123");
+        em.persist(user1);
+        FrontUserEntity user2=new FrontUserEntity();
+        user2.setName("网络新人2");
+        user2.setPassword("234");
+        user2.setTelephone("11111111");
+        em.persist(user2);
+        FrontUserEntity user3=new FrontUserEntity();
+        user3.setName("网络新人4");
+        user3.setPassword("345");
+        user3.setEmail("sunbirdhan@163.com");
+        em.persist(user3);
     }
 }

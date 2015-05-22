@@ -7,6 +7,7 @@
 package com.oakeel.ejb.transaction.bond;
 
 import com.oakeel.ejb.entityAndEao.bond.BondEntity;
+import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import javax.ejb.Local;
 import javax.ejb.Remove;
 
@@ -16,8 +17,9 @@ import javax.ejb.Remove;
  */
 @Local
 public interface IssueBondLocal {
-    public void step1(BondEntity bond);
-    public void step2(BondEntity bond);
+    public void setUser(FrontUserEntity bondUser);
+    public void setStep1Bond(BondEntity bond);
+    public void setStep2Bond(BondEntity bond);
     @Remove
     public void issue();
     public BondEntity getCurrBond();

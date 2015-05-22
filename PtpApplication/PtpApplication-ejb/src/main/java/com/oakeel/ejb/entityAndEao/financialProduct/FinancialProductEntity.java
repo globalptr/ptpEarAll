@@ -17,7 +17,8 @@ import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
@@ -51,6 +52,7 @@ public class FinancialProductEntity extends EntityRoot {
     private String name;//名字
     private String Details;//详情  
     private BigDecimal yearRate=new BigDecimal("0");//年利率
+    @Enumerated(EnumType.STRING)
     private BaseAmountEnum baseAmountEnum;//基准金额
     private int copiesNum;//份数
     @OneToMany(mappedBy="financialProductEntity")//与金融业务借方是一对多的关系，主控在业务方

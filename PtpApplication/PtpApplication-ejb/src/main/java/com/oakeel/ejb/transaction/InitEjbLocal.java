@@ -19,4 +19,5 @@ public interface InitEjbLocal{
     public void InitDB();
     public void InitDepartment();
     public void test();
+    public void addUsers();
 }

@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -27,7 +28,7 @@ public class FinancingBusinessLenderEntity extends EntityRoot {
     private static final long serialVersionUID = 1L;
     //融资
     private BigDecimal amount;//金额
-    @OneToOne
+    @ManyToOne
     private FrontUserEntity lenderUser;//借方
     @OneToOne
     private FinancialProductEntity financialProductEntity;//金融产品

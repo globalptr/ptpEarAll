@@ -11,7 +11,10 @@ import com.oakeel.ejb.entityAndEao.imageInfo.ImageInfoEntity;
 import com.oakeel.ejb.ptpEnum.ImageUsedEnum;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
 
 /**
@@ -21,8 +24,9 @@ import javax.persistence.OneToMany;
 @Entity
 public class BondInformationEntity extends EntityRoot{
     private static final long serialVersionUID = 1L;
+    @Enumerated(EnumType.STRING)
     private ImageUsedEnum title;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<ImageInfoEntity> imageInfoEntitys=new ArrayList<>();
 
 

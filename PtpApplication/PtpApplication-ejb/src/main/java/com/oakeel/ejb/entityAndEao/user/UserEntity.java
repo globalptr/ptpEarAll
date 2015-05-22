@@ -87,7 +87,10 @@ public class UserEntity extends EntityRoot{
     @OneToOne//用户与用户设置是一对一的关系
     UserSetEntity userSetEntity;
 
-
+   @Override
+    public String toString() {
+        return name;
+    }
     /**
      * @return the password
      */

@@ -7,6 +7,7 @@
 package com.oakeel.ejb.entityAndEao.frontUser;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EaoRootLocal;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -15,5 +16,7 @@ import javax.ejb.Local;
  */
 @Local
 public interface FrontUserEaoLocal extends EaoRootLocal<FrontUserEntity> {
-    
+    public List<FrontUserEntity> getUserByName(String name);
+    public List<FrontUserEntity> getUserByTelephone(String telephone);
+    public List<FrontUserEntity> getUserByEmail(String email);
 }

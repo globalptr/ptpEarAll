@@ -7,6 +7,8 @@
 package com.oakeel.ejb.transaction.bond;
 
 import com.oakeel.ejb.entityAndEao.bond.BondEntity;
+import com.oakeel.ejb.entityAndEao.financingBusinessLender.FinancingBusinessLenderEntity;
+import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,24 +22,28 @@ public class IssueBond implements IssueBondLocal {
     @PersistenceContext(unitName = "ptpEjbPu")
     EntityManager em;
     BondEntity newBond;
+    FrontUserEntity issueBondUser;
+    FinancingBusinessLenderEntity financingBusinessLenderEntity;
+    
+    
     @Override
-    public void step1(BondEntity bond) {
+    public void setStep1Bond(BondEntity bond) {
         if(newBond==null)
         {
             newBond=new BondEntity();
         }
         newBond.setName(bond.getName());
         newBond.setBaseAmountEnum(bond.getBaseAmountEnum());
-        newBond.setBondNumber(bond.getBondNumber());
+        newBond.setCopiesNum(bond.getCopiesNum());
         newBond.setCompanyUserEntity(bond.getCompanyUserEntity());
-        newBond.setRepayModel(bond.getRepayModel());
+        newBond.setRepayModelEnum(bond.getRepayModelEnum());
         newBond.setRiskControlDetails(bond.getRiskControlDetails());
         newBond.setGuaranteeCase(bond.getGuaranteeCase());
         newBond.setReverseGuaranteeCase(bond.getReverseGuaranteeCase());
     }
 
     @Override
-    public void step2(BondEntity bond) {
+    public void setStep2Bond(BondEntity bond) {
         if(newBond==null)
         {
             newBond=new BondEntity();
@@ -64,4 +70,14 @@ public class IssueBond implements IssueBondLocal {
     public void createNewBond() {
         newBond=new BondEntity();
     }
+
+    @Override
+    public void setUser(FrontUserEntity bondUser) {
+        if(issueBondUser!=null)
+        {
+            issueBondUser=bondUser;
+        }
+    }
+
+  
 }
