@@ -6,7 +6,7 @@
 
 package com.oakeel;
 
-import com.oakeel.ejb.ptpEnum.RepayModel;
+import com.oakeel.ejb.ptpEnum.RepayModelEnum;
 import com.oakeel.ejb.ptpEnum.SplitUnit;
 import com.oakeel.globaltool.RepayModelCaculate;
 import java.math.BigDecimal;
@@ -32,8 +32,8 @@ import org.primefaces.event.FlowEvent;
 @ManagedBean
 @SessionScoped
 public class RepayModelBean {
-    private List<RepayModel> repayModelList;//还款模型枚举列表
-    private RepayModel selectRepayModel;//选择的还款模型
+    private List<RepayModelEnum> repayModelList;//还款模型枚举列表
+    private RepayModelEnum selectRepayModel;//选择的还款模型
     private List<SplitUnit> splitUnit;//还款单元（年月日）
     private SplitUnit selectSplitUnit;//选择的还款单元
     private List<RepayItem> repayItemList;//计算得出还款的清单
@@ -52,7 +52,7 @@ public class RepayModelBean {
         String rootPath = request.getRequestURI();
         repayItemList=new ArrayList<>();
         setSplitUnit(Arrays.asList(SplitUnit.values()));
-        setRepayModelList(Arrays.asList(RepayModel.values()));
+        setRepayModelList(Arrays.asList(RepayModelEnum.values()));
     }
     /**
      * @return the splitUnit
@@ -128,14 +128,14 @@ public class RepayModelBean {
     /**
      * @return the selectRepayModel
      */
-    public RepayModel getSelectRepayModel() {
+    public RepayModelEnum getSelectRepayModel() {
         return selectRepayModel;
     }
 
     /**
      * @param selectRepayModel the selectRepayModel to set
      */
-    public void setSelectRepayModel(RepayModel selectRepayModel) {
+    public void setSelectRepayModel(RepayModelEnum selectRepayModel) {
         this.selectRepayModel = selectRepayModel;
     }
 
@@ -213,14 +213,14 @@ public class RepayModelBean {
     /**
      * @return the repayModelList
      */
-    public List<RepayModel> getRepayModelList() {
+    public List<RepayModelEnum> getRepayModelList() {
         return repayModelList;
     }
 
     /**
      * @param repayModelList the repayModelList to set
      */
-    public void setRepayModelList(List<RepayModel> repayModelList) {
+    public void setRepayModelList(List<RepayModelEnum> repayModelList) {
         this.repayModelList = repayModelList;
     }
 }

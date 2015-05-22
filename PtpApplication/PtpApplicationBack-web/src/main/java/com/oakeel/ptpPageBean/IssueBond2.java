@@ -5,6 +5,7 @@
  */
 package com.oakeel.ptpPageBean;
 
+import com.oakeel.PtpSessionBean;
 import com.oakeel.ejb.entityAndEao.bond.BondEntity;
 import com.oakeel.ejb.entityAndEao.bondInformation.BondInformationEntity;
 import com.oakeel.ejb.entityAndEao.imageInfo.ImageInfoEntity;
@@ -28,6 +29,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.TabChangeEvent;
 import org.primefaces.model.UploadedFile;
@@ -43,13 +45,13 @@ public class IssueBond2 {
     /**
      * Creates a new instance of IssueBond2
      */
-    @EJB
-    IssueBondLocal issueBondLocal;
+    
+    @Inject private PtpSessionBean ptpSessionBean;
     BondEntity bond2;
     private ImageUsedEnum selectImageUsedEnum = ImageUsedEnum.合同资料;
-    private BondInformationEntity contractInfo = new BondInformationEntity();
-    private BondInformationEntity companyInfo = new BondInformationEntity();
-    private BondInformationEntity visitInfo = new BondInformationEntity();
+    private BondInformationEntity contractInfo ;
+    private BondInformationEntity companyInfo;
+    private BondInformationEntity visitInfo;
     private ImageInfoEntity targetImageInfo;
 
     public IssueBond2() {
@@ -58,14 +60,21 @@ public class IssueBond2 {
     @PostConstruct
     public void init() {
         bond2 = new BondEntity();
+        contractInfo = new BondInformationEntity();
+        contractInfo.setTitle(ImageUsedEnum.合同资料);
+        companyInfo = new BondInformationEntity();
+        companyInfo.setTitle(ImageUsedEnum.公司资料);
+        visitInfo = new BondInformationEntity();
+        visitInfo.setTitle(ImageUsedEnum.考察资料);
     }
 
     public String issueBond() {
         bond2.getBondInformationEntiys().add(contractInfo);
         bond2.getBondInformationEntiys().add(companyInfo);
         bond2.getBondInformationEntiys().add(visitInfo);
-        issueBondLocal.step2(bond2);
-        issueBondLocal.issue();
+        ptpSessionBean.getIssueBondLocal().setStep2Bond(bond2);
+        ptpSessionBean.getIssueBondLocal().issue();
+        BondEntity temp=ptpSessionBean.getIssueBondLocal().getCurrBond();
         return "issueBond3";
     }
 
@@ -192,12 +201,12 @@ public class IssueBond2 {
     }
 
     public void handleFileUpload(FileUploadEvent event) throws IOException {
-        if (issueBondLocal.getCurrBond() == null) {
-            issueBondLocal.createNewBond();
+        if (ptpSessionBean.getIssueBondLocal().getCurrBond() == null) {
+            ptpSessionBean.getIssueBondLocal().createNewBond();
         }
         UploadedFile file = event.getFile();
         InputStream stream = file.getInputstream();
-        String folder = "/bondImages/" + issueBondLocal.getCurrBond().getProductId();
+        String folder = "/bondImages/" + ptpSessionBean.getIssueBondLocal().getCurrBond().getProductId();
         String imagerelPath = folder + "/" + file.getFileName();
         String imagePath = "/ptpImageFolder" + imagerelPath;
         System.out.println(file.getFileName());
@@ -309,6 +318,20 @@ public class IssueBond2 {
      */
     public void setTargetImageInfo(ImageInfoEntity targetImageInfo) {
         this.targetImageInfo = targetImageInfo;
+    }
+
+    /**
+     * @return the ptpSessionBean
+     */
+    public PtpSessionBean getPtpSessionBean() {
+        return ptpSessionBean;
+    }
+
+    /**
+     * @param ptpSessionBean the ptpSessionBean to set
+     */
+    public void setPtpSessionBean(PtpSessionBean ptpSessionBean) {
+        this.ptpSessionBean = ptpSessionBean;
     }
 
 }

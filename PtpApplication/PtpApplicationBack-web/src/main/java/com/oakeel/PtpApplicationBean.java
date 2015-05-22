@@ -56,7 +56,7 @@ public class PtpApplicationBean {
     public void initDB()
     {
         //initEjbLocal.InitDB();
-        initEjbLocal.test();
+        initEjbLocal.addUsers();
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(SysInfo.提示.toString(),  "数据库初始化完毕!") );
     }

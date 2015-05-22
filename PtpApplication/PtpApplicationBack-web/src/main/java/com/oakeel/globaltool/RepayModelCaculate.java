@@ -6,7 +6,7 @@
 package com.oakeel.globaltool;
 
 import com.oakeel.RepayItem;
-import com.oakeel.ejb.ptpEnum.RepayModel;
+import com.oakeel.ejb.ptpEnum.RepayModelEnum;
 import com.oakeel.ejb.ptpEnum.SplitUnit;
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -23,12 +23,12 @@ public class RepayModelCaculate {
 
 
     //计算还款模型输入还款模型、还款单元、贷款总额、年利率、还款周期、开始时间
-    public static void caculateRepayModel(RepayModel repayModel, SplitUnit splitUnit, BigDecimal totalLoan, BigDecimal yearRate, int repayPeriod, Date startDate, List<RepayItem> repayItemList) {
-        if (repayModel == RepayModel.定额本息) {
+    public static void caculateRepayModel(RepayModelEnum repayModel, SplitUnit splitUnit, BigDecimal totalLoan, BigDecimal yearRate, int repayPeriod, Date startDate, List<RepayItem> repayItemList) {
+        if (repayModel == RepayModelEnum.定额本息) {
             caculateRepayModel_a(splitUnit, totalLoan, yearRate, repayPeriod, startDate, repayItemList);
-        } else if (repayModel == RepayModel.定额本金) {
+        } else if (repayModel == RepayModelEnum.定额本金) {
             caculateRepayModel_b(splitUnit, totalLoan, yearRate, repayPeriod, startDate, repayItemList);
-        } else if (repayModel == RepayModel.到期支付) {
+        } else if (repayModel == RepayModelEnum.到期支付) {
             caculateRepayModel_c(splitUnit, totalLoan, yearRate, repayPeriod, startDate, repayItemList);
         }
 

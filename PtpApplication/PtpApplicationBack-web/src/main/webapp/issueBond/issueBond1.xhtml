@@ -97,11 +97,16 @@
                             <td style="width:80px">
                                 <p:outputLabel value="项目名称:"/>
                             </td>
-                            <td rowspan="8">
-                                <p:separator style="width:3px;height:600px;"/>
-                            </td>
                             <td style="width:auto">
                                 <p:inputText placeholder="输入项目名称" value="#{issueBond1.bond1.name}" style=" width: 200px"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:80px">
+                                <p:outputLabel value="发标人:"/>
+                            </td>
+                            <td style="width:auto">
+                                <p:autoComplete  value="#{issueBond1.selectUser}"  forceSelection="true"  var="selectUser_var" itemLabel="#{selectUser_var.name}" converter="userConverter" itemValue="#{selectUser_var}" completeMethod="#{issueBond1.findUser}"/>
                             </td>
                         </tr>
                         <tr>
@@ -120,6 +125,16 @@
                             </td>
                             <td>
                                 <p:inputText id="amount_id" placeholder="输入份数" style=" width: 200px"  value="#{issueBond1.bond1.copiesNum}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:80px">
+                                <p:outputLabel value="还款模型:"/>
+                            </td>
+                            <td>
+                                <p:selectOneMenu value="#{issueBond1.bond1.repayModelEnum}">
+                                    <f:selectItems value="#{issueBond1.repayModelArray}" var="baseAmount_var" itemLabel="#{baseAmount_var}" itemValue="#{baseAmount_var}"/>
+                                </p:selectOneMenu>
                             </td>
                         </tr>
                         <tr>
