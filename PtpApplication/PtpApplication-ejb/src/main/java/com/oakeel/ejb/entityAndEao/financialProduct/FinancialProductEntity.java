@@ -22,6 +22,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -48,6 +50,8 @@ public class FinancialProductEntity extends EntityRoot {
         Date ddate=new Date();  
         productId=(new SimpleDateFormat("yyyyMMddHHmmss")).format(ddate)+n;
     }
+    @Temporal(TemporalType.DATE)
+    private Date startDate;//开始时间
     private String productId;
     private String name;//名字
     private String Details;//详情  
@@ -171,6 +175,20 @@ public class FinancialProductEntity extends EntityRoot {
      */
     public void setProductId(String productId) {
         this.productId = productId;
+    }
+
+    /**
+     * @return the startDate
+     */
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    /**
+     * @param startDate the startDate to set
+     */
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
 }

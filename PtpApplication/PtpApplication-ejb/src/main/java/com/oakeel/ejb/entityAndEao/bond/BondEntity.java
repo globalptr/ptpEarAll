@@ -14,10 +14,13 @@ import com.oakeel.ejb.ptpEnum.BondStage;
 import com.oakeel.ejb.ptpEnum.BondType;
 import com.oakeel.ejb.ptpEnum.RepayModelEnum;
 import com.oakeel.ejb.ptpEnum.SplitUnit;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -34,11 +37,11 @@ public class BondEntity extends FinancialProductEntity {
     //担保公司实体
     @ManyToOne
     private CompanyUserEntity companyUserEntity;
-    
     private String riskControlDetails;//风险担保详情
     private String guaranteeCase;//担保情况
     private String reverseGuaranteeCase;//反担保情况
     private BondStage bondStage;//标的阶段
+    @Enumerated(EnumType.STRING)
     private RepayModelEnum repayModelEnum;//还款模型
     private SplitUnit repayCycle;//还款周期
     private int repayCycleNumber;//期数
@@ -217,6 +220,5 @@ public class BondEntity extends FinancialProductEntity {
     public void setRepayModelEnum(RepayModelEnum repayModelEnum) {
         this.repayModelEnum = repayModelEnum;
     }
-
     
 }

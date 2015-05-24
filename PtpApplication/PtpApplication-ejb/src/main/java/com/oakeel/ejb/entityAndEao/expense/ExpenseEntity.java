@@ -28,6 +28,9 @@ public class ExpenseEntity extends EntityRoot {
     private BigDecimal actualPayable;//实付
     @Temporal(TemporalType.TIMESTAMP)
     private Date settlementTime;//结算时间
+    private BigDecimal beforeBalance;//期初余额
+    private BigDecimal afterBalance;//期末余额
+    private int periodNum;//还款期数
 
     /**
      * @return the principal
@@ -97,5 +100,47 @@ public class ExpenseEntity extends EntityRoot {
      */
     public void setSettlementTime(Date settlementTime) {
         this.settlementTime = settlementTime;
+    }
+
+    /**
+     * @return the beforeBalance
+     */
+    public BigDecimal getBeforeBalance() {
+        return beforeBalance;
+    }
+
+    /**
+     * @param beforeBalance the beforeBalance to set
+     */
+    public void setBeforeBalance(BigDecimal beforeBalance) {
+        this.beforeBalance = beforeBalance;
+    }
+
+    /**
+     * @return the afterBalance
+     */
+    public BigDecimal getAfterBalance() {
+        return afterBalance;
+    }
+
+    /**
+     * @param afterBalance the afterBalance to set
+     */
+    public void setAfterBalance(BigDecimal afterBalance) {
+        this.afterBalance = afterBalance;
+    }
+
+    /**
+     * @return the periodNum
+     */
+    public int getPeriodNum() {
+        return periodNum;
+    }
+
+    /**
+     * @param periodNum the periodNum to set
+     */
+    public void setPeriodNum(int periodNum) {
+        this.periodNum = periodNum;
     }
 }

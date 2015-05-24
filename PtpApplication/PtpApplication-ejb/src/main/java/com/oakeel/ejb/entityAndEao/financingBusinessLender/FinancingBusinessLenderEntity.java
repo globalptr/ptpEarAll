@@ -9,11 +9,9 @@ import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import com.oakeel.ejb.entityAndEao.expense.ExpenseEntity;
 import com.oakeel.ejb.entityAndEao.financialProduct.FinancialProductEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
-import com.oakeel.ejb.entityAndEao.income.IncomeEntity;
-import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -26,28 +24,12 @@ import javax.persistence.OneToOne;
 public class FinancingBusinessLenderEntity extends EntityRoot {
 
     private static final long serialVersionUID = 1L;
-    //融资
-    private BigDecimal amount;//金额
     @ManyToOne
     private FrontUserEntity lenderUser;//借方
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST})
     private FinancialProductEntity financialProductEntity;//金融产品
-    @OneToMany//与支出明细是一对多的关系
-    private Set<ExpenseEntity> expenseEntitys;
-
-    /**
-     * @return the amount
-     */
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    /**
-     * @param amount the amount to set
-     */
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
+    @OneToMany(cascade = {CascadeType.PERSIST})//与支出明细是一对多的关系
+    private List<ExpenseEntity> expenseEntitys;
 
     /**
      * @return the financialProductEntity
@@ -66,14 +48,14 @@ public class FinancingBusinessLenderEntity extends EntityRoot {
     /**
      * @return the expenseEntitys
      */
-    public Set<ExpenseEntity> getExpenseEntitys() {
+    public List<ExpenseEntity> getExpenseEntitys() {
         return expenseEntitys;
     }
 
     /**
      * @param expenseEntitys the expenseEntitys to set
      */
-    public void setExpenseEntitys(Set<ExpenseEntity> expenseEntitys) {
+    public void setExpenseEntitys(List<ExpenseEntity> expenseEntitys) {
         this.expenseEntitys = expenseEntitys;
     }
 
