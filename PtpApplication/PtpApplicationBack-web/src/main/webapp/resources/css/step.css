@@ -1,0 +1,91 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2015-5-24, 21:18:34
+    Author     : root
+*/
+
+.ui-state-disabled, .ui-widget-content .ui-state-disabled, .ui-widget-header .ui-state-disabled {
+    opacity: 0.6;
+}
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
+    color: #333;
+}
+.ui-steps.vertical .ui-steps-item {
+    width: 15px;
+    height: 200px;
+    float: none;
+}
+
+.ui-state-highlight {
+    text-shadow: none !important;
+}
+
+/*                .ui-steps.vertical {
+                    margin-bottom: 30%;
+                }*/
+
+.ui-steps.vertical .ui-steps-item .ui-menuitem-link {
+    /*                    height: 200px;*/
+    padding: 0 1em;
+    margin-left: -55px;
+    margin-top: 80px;
+}
+
+.ui-steps.vertical .ui-steps-item .ui-steps-number {
+    background-color: #0081c2;
+    color: #FFFFFF;
+    display: inline-block;
+    width: 30px;
+    border-radius: 10px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
+.ui-steps.vertical .ui-steps-item .ui-menuitem-link {
+    /*height: 200px;*/
+    width: 100px;
+}
+.ui-steps.vertical .ui-steps-item .ui-steps-number {
+
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+
+}
+.ui-steps.horizontal {
+    margin-bottom: 30px;
+}
+
+.ui-steps.horizontal .ui-steps-item .ui-menuitem-link {
+    height: 10px;
+    padding: 0 1em;
+}
+
+.ui-steps.horizontal .ui-steps-item .ui-steps-number {
+    background-color: #0081c2;
+    color: #FFFFFF;
+    display: inline-block;
+    width: 40px;
+    height:40px;
+    line-height:40px;
+    border-radius: 10px;
+    margin-top: -15px;
+    margin-bottom: 10px;
+}
+.ui-steps.horizontal .ui-steps-item {
+    width: 19.8%;
+    float: left;
+}
+.ui-panel .ui-panel-title
+{
+    margin: 0px;
+}
+.ui-panel .ui-panel-titlebar
+{
+    padding: 0.1em 1em 0.1em;
+}

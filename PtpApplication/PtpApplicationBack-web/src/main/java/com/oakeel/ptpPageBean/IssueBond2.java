@@ -11,20 +11,15 @@ import com.oakeel.ejb.entityAndEao.bondInformation.BondInformationEntity;
 import com.oakeel.ejb.entityAndEao.imageInfo.ImageInfoEntity;
 import com.oakeel.ejb.ptpEnum.ImageUsedEnum;
 import com.oakeel.ejb.ptpEnum.SysInfo;
-import com.oakeel.ejb.transaction.bond.IssueBondLocal;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Set;
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
+import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -67,15 +62,18 @@ public class IssueBond2 {
         visitInfo = new BondInformationEntity();
         visitInfo.setTitle(ImageUsedEnum.考察资料);
     }
-
-    public String issueBond() {
-        bond2.getBondInformationEntiys().add(contractInfo);
-        bond2.getBondInformationEntiys().add(companyInfo);
-        bond2.getBondInformationEntiys().add(visitInfo);
-        ptpSessionBean.getIssueBondLocal().setStep2Bond(bond2);
-        ptpSessionBean.getIssueBondLocal().issue();
-        BondEntity temp=ptpSessionBean.getIssueBondLocal().getCurrBond();
-        return "issueBond3";
+    public String toNextStep()
+    {
+        
+        if(ptpSessionBean.getIssueBondLocal().getCurrBond()==null)
+        {
+            FacesContext context=FacesContext.getCurrentInstance();
+            ConfigurableNavigationHandler handler=(ConfigurableNavigationHandler)context.getApplication().getNavigationHandler();
+            handler.performNavigation("issueBond1");
+            return null;
+        }
+        else
+            return "issueBond3";
     }
 
     public void onTabChange(TabChangeEvent event) {
