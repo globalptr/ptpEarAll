@@ -11,7 +11,7 @@ import com.oakeel.ejb.entityAndEao.financialProduct.FinancialProductEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import com.oakeel.ejb.entityAndEao.income.IncomeEntity;
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -25,28 +25,15 @@ import javax.persistence.OneToOne;
 public class FinancingBusinessBorrowerEntity extends EntityRoot {
     private static final long serialVersionUID = 1L;
     //融资
-    private BigDecimal amount;//金额
+    private BigDecimal borrowAmount;//投资金额
+    private BigDecimal allInterest;//获得的利息
     @ManyToOne
     private FrontUserEntity borrowUser;//贷方
     @OneToOne
     private FinancialProductEntity financialProductEntity;//金融产品
 
     @OneToMany//与收入明细是一对多的关系
-    private Set<IncomeEntity> incomeEntitys;
-
-    /**
-     * @return the amount
-     */
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    /**
-     * @param amount the amount to set
-     */
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
+    private List<IncomeEntity> incomeEntitys;
 
 
     /**
@@ -68,14 +55,14 @@ public class FinancingBusinessBorrowerEntity extends EntityRoot {
     /**
      * @return the incomeEntitys
      */
-    public Set<IncomeEntity> getIncomeEntitys() {
+    public List<IncomeEntity> getIncomeEntitys() {
         return incomeEntitys;
     }
 
     /**
      * @param incomeEntitys the incomeEntitys to set
      */
-    public void setIncomeEntitys(Set<IncomeEntity> incomeEntitys) {
+    public void setIncomeEntitys(List<IncomeEntity> incomeEntitys) {
         this.incomeEntitys = incomeEntitys;
     }
 
@@ -91,6 +78,34 @@ public class FinancingBusinessBorrowerEntity extends EntityRoot {
      */
     public void setBorrowUser(FrontUserEntity borrowUser) {
         this.borrowUser = borrowUser;
+    }
+
+    /**
+     * @return the borrowAmount
+     */
+    public BigDecimal getBorrowAmount() {
+        return borrowAmount;
+    }
+
+    /**
+     * @param borrowAmount the borrowAmount to set
+     */
+    public void setBorrowAmount(BigDecimal borrowAmount) {
+        this.borrowAmount = borrowAmount;
+    }
+
+    /**
+     * @return the allInterest
+     */
+    public BigDecimal getAllInterest() {
+        return allInterest;
+    }
+
+    /**
+     * @param allInterest the allInterest to set
+     */
+    public void setAllInterest(BigDecimal allInterest) {
+        this.allInterest = allInterest;
     }
 
 }

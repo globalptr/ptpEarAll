@@ -9,16 +9,12 @@ package com.oakeel.ejb.entityAndEao.financialProduct;
 import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import com.oakeel.ejb.entityAndEao.financingBusinessBorrower.FinancingBusinessBorrowerEntity;
 import com.oakeel.ejb.entityAndEao.financingBusinessLender.FinancingBusinessLenderEntity;
-import com.oakeel.ejb.ptpEnum.BaseAmountEnum;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 import java.util.Set;
-import java.util.UUID;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
@@ -56,8 +52,7 @@ public class FinancialProductEntity extends EntityRoot {
     private String name;//名字
     private String Details;//详情  
     private BigDecimal yearRate=new BigDecimal("0");//年利率
-    @Enumerated(EnumType.STRING)
-    private BaseAmountEnum baseAmountEnum;//基准金额
+    private int baseAmount;//基准金额
     private int copiesNum;//份数
     @OneToMany(mappedBy="financialProductEntity")//与金融业务借方是一对多的关系，主控在业务方
     private Set<FinancingBusinessLenderEntity> financingBusinessLenderEntitys;
@@ -91,20 +86,6 @@ public class FinancialProductEntity extends EntityRoot {
      */
     public void setYearRate(BigDecimal yearRate) {
         this.yearRate = yearRate;
-    }
-
-    /**
-     * @return the baseAmountEnum
-     */
-    public BaseAmountEnum getBaseAmountEnum() {
-        return baseAmountEnum;
-    }
-
-    /**
-     * @param baseAmountEnum the baseAmountEnum to set
-     */
-    public void setBaseAmountEnum(BaseAmountEnum baseAmountEnum) {
-        this.baseAmountEnum = baseAmountEnum;
     }
 
     /**
@@ -189,6 +170,20 @@ public class FinancialProductEntity extends EntityRoot {
      */
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
+    }
+
+    /**
+     * @return the baseAmount
+     */
+    public int getBaseAmount() {
+        return baseAmount;
+    }
+
+    /**
+     * @param baseAmount the baseAmount to set
+     */
+    public void setBaseAmount(int baseAmount) {
+        this.baseAmount = baseAmount;
     }
 
 }

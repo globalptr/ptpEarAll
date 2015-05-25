@@ -34,7 +34,7 @@ public class FrontUserEntity extends UserEntity {
     @OneToMany//用户与银行卡之间是一对多的关系
     Set<BankCardEntity> bankCardEntitys;
     @Enumerated(EnumType.STRING)
-    CreditLevelEnum creditLevelEnum;//信用等级
+    private CreditLevelEnum creditLevelEnum;//信用等级
     private int income_start;//收入范围起
     private int income_end;//收入范围止
     private int successBorrowNumber;//成功借款次数
@@ -140,5 +140,19 @@ public class FrontUserEntity extends UserEntity {
      */
     public void setLiveCaseEnum(LiveCaseEnum liveCaseEnum) {
         this.liveCaseEnum = liveCaseEnum;
+    }
+
+    /**
+     * @return the creditLevelEnum
+     */
+    public CreditLevelEnum getCreditLevelEnum() {
+        return creditLevelEnum;
+    }
+
+    /**
+     * @param creditLevelEnum the creditLevelEnum to set
+     */
+    public void setCreditLevelEnum(CreditLevelEnum creditLevelEnum) {
+        this.creditLevelEnum = creditLevelEnum;
     }
 }

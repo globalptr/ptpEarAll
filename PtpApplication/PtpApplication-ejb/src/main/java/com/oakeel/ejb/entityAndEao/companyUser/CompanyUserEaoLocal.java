@@ -15,5 +15,6 @@ import javax.ejb.Local;
  */
 @Local
 public interface CompanyUserEaoLocal extends EaoRootLocal<CompanyUserEntity> {
+
     
 }

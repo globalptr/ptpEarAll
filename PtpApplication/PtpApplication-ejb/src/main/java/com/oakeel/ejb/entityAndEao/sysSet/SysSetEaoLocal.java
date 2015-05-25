@@ -4,21 +4,16 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.transaction;
+package com.oakeel.ejb.entityAndEao.sysSet;
 
+import com.oakeel.ejb.entityAndEao.eeroot.EaoRootLocal;
 import javax.ejb.Local;
-import javax.ejb.Remote;
 
 /**
  *
  * @author root
  */
 @Local
-@Remote
-public interface InitEjbLocal{
-    public void InitDB();
-    public void InitDepartment();
-    public void test();
-    public void addUsers();
-    public void initSet();
+public interface SysSetEaoLocal  extends EaoRootLocal<SysSetEntity>{
+    
 }

@@ -6,15 +6,20 @@
 package com.oakeel.ejb.transaction;
 
 import com.oakeel.ejb.entityAndEao.bond.BondEntity;
+import com.oakeel.ejb.entityAndEao.companyUser.CompanyUserEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import com.oakeel.ejb.entityAndEao.operation.OperationEntity;
 import com.oakeel.ejb.entityAndEao.organization.OrganizationEntity;
 import com.oakeel.ejb.entityAndEao.permission.PermissionEntity;
 import com.oakeel.ejb.entityAndEao.resource.ResourceEntity;
 import com.oakeel.ejb.entityAndEao.role.RoleEntity;
+import com.oakeel.ejb.entityAndEao.sysSet.SysSetEaoLocal;
+import com.oakeel.ejb.entityAndEao.sysSet.SysSetEntity;
 import com.oakeel.ejb.entityAndEao.user.UserEntity;
 import com.oakeel.ejb.ptpEnum.CreateAccountModeEnum;
 import java.io.Serializable;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,7 +33,8 @@ public class InitEjb implements InitEjbLocal, Serializable {
     
     @PersistenceContext(unitName = "ptpEjbPu")
     EntityManager em;
-    
+    @EJB
+    SysSetEaoLocal sysSetEaoLocal;
     @Override
     public void InitDB() {
         
@@ -217,5 +223,23 @@ public class InitEjb implements InitEjbLocal, Serializable {
         user3.setPassword("345");
         user3.setEmail("sunbirdhan@163.com");
         em.persist(user3);
+        
+        CompanyUserEntity com = new CompanyUserEntity();
+        com.setName("登科担保");
+        com.setPassword("dkdb");
+        com.setMainBusiness("NO1:中小企业融资担保：为提供企业流动资金借款担保、固定资产担保，根据客户的融资需求，提供以信用增级为主的担保服务。\n"
+                + "\n"
+                + "NO2:个人融资担保：为个人提供流动资金借款担保、固定资产担保（汽车抵押、房产抵押担保等）。");
+        em.persist(com);
+    }
+
+    @Override
+    public void initSet() {
+        List<SysSetEntity> syss=sysSetEaoLocal.getAllEntitys();
+        if(syss.isEmpty())
+        {
+            SysSetEntity sysSetEntity=new SysSetEntity();
+            em.persist(sysSetEntity);
+        }
     }
 }

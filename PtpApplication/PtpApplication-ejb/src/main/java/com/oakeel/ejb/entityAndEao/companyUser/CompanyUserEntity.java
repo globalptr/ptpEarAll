@@ -31,6 +31,7 @@ public class CompanyUserEntity extends UserEntity {
     /**
      * @return the mainBusiness
      */
+
     public String getMainBusiness() {
         return mainBusiness;
     }

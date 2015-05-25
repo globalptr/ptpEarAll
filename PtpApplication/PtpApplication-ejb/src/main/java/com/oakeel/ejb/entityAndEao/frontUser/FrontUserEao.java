@@ -7,8 +7,6 @@
 package com.oakeel.ejb.entityAndEao.frontUser;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EaoRoot;
-import com.oakeel.ejb.entityAndEao.user.UserEntity;
-import com.oakeel.ejb.entityAndEao.user.UserEntity_;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;

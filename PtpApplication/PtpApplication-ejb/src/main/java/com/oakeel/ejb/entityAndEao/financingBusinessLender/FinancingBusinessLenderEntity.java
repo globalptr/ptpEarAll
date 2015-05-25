@@ -9,6 +9,7 @@ import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import com.oakeel.ejb.entityAndEao.expense.ExpenseEntity;
 import com.oakeel.ejb.entityAndEao.financialProduct.FinancialProductEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -24,6 +25,8 @@ import javax.persistence.OneToOne;
 public class FinancingBusinessLenderEntity extends EntityRoot {
 
     private static final long serialVersionUID = 1L;
+    private BigDecimal lenderAmount;//借款总额
+    private BigDecimal allInterest;//支付利息总和
     @ManyToOne
     private FrontUserEntity lenderUser;//借方
     @OneToOne(cascade = {CascadeType.PERSIST})
@@ -73,5 +76,33 @@ public class FinancingBusinessLenderEntity extends EntityRoot {
         this.lenderUser = lenderUser;
     }
 
+    /**
+     * @return the lenderAmount
+     */
+    public BigDecimal getLenderAmount() {
+        return lenderAmount;
+    }
+
+    /**
+     * @param lenderAmount the lenderAmount to set
+     */
+    public void setLenderAmount(BigDecimal lenderAmount) {
+        this.lenderAmount = lenderAmount;
+    }
+
+
+    /**
+     * @return the allInterest
+     */
+    public BigDecimal getAllInterest() {
+        return allInterest;
+    }
+
+    /**
+     * @param allInterest the allInterest to set
+     */
+    public void setAllInterest(BigDecimal allInterest) {
+        this.allInterest = allInterest;
+    }
 
 }

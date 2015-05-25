@@ -13,9 +13,23 @@ package com.oakeel.ejb.ptpEnum;
 public enum CreditLevelEnum {
     //信用等级
     AA(1000),A(700),B(100),C(50),D(30),E(10),HR(1);
-    int fundingLine;//资金额度
+    private int fundingLine;//资金额度
     private CreditLevelEnum(int line)
     {
         this.fundingLine=line;
+    }
+
+    /**
+     * @return the fundingLine
+     */
+    public int getFundingLine() {
+        return fundingLine;
+    }
+
+    /**
+     * @param fundingLine the fundingLine to set
+     */
+    public void setFundingLine(int fundingLine) {
+        this.fundingLine = fundingLine;
     }
 }
