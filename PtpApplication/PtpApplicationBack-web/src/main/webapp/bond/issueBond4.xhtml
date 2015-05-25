@@ -20,6 +20,336 @@
                     </td>
                 </tr>
                 <tr>
+                    <td class="ui-steps-item ui-state-default ui-state-disabled" colspan="2" style="height:40px;font-size: 18px;padding-left: 12px">
+                        标的基本信息
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p:fieldset legend="项目详情">
+                            <table>
+                                <tr>
+                                    <td>
+                                        名称
+                                    </td>
+                                    <td>
+                                        <p:outputLabel value="#{issueBond4.bond4.name}"/>
+                                    </td>
+                                    <td>
+                                        金额
+                                    </td>
+                                    <td>
+                                        <p:outputLabel value="#{issueBond4.allAmount}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        借款方
+                                    </td>
+                                    <td>
+                                        <p:outputLabel value="#{issueBond4.frontUserEntity.name}"/>
+                                    </td>
+                                    <td>
+                                        额度
+                                    </td>
+                                    <td>
+                                        <p:outputLabel value="#{issueBond4.frontUserEntity.creditLevelEnum.fundingLine}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        项目情况
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p:outputLabel value="#{issueBond4.bond4.details}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </p:fieldset>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p:fieldset legend="用户信息">
+                            <table>
+                                <tr>
+                                    <td>
+                                        用户名
+                                    </td>
+                                    <td>
+                                        #{issueBond4.frontUserEntity.name}
+                                    </td>
+                                    <td>
+                                        信用等级
+                                    </td>
+                                    <td>
+                                        #{issueBond4.frontUserEntity.creditLevelEnum}
+                                    </td>
+                                    <td>
+                                        收入范围
+                                    </td>
+                                    <td>
+                                        #{issueBond4.frontUserEntity.income_start}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        年龄
+                                    </td>
+                                    <td>
+                                        #{issueBond4.frontUserEntity.age}
+                                    </td>
+                                    <td>
+                                        性别
+                                    </td>
+                                    <td>
+                                        #{issueBond4.frontUserEntity.sexEnum}
+                                    </td>
+                                    <td>
+                                        住房条件
+                                    </td>
+                                    <td>
+                                        #{issueBond4.frontUserEntity.liveCaseEnum}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        成功借款
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        实名认证
+                                    </td>
+                                    <td>
+                                        <p:outputLabel/>
+                                    </td>
+                                    <td>
+                                        逾期记录
+                                    </td>
+                                    <td>
+                                        <p:outputLabel/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </p:fieldset>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p:fieldset legend="风控详情">
+                            <table>
+                                <tr>
+                                    <td>
+                                        担保公司
+                                    </td>
+                                    <td>
+                                        #{issueBond4.bond4.companyUserEntity}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        担保情况
+                                    </td>
+                                    <td>
+                                        #{issueBond4.bond4.guaranteeCase}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        反担保情况
+                                    </td>
+                                    <td>
+                                        #{issueBond4.bond4.reverseGuaranteeCase}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        风控详情
+                                    </td>
+                                    <td>
+                                        #{issueBond4.bond4.riskControlDetails}
+                                    </td>
+                                </tr>
+                            </table>
+                        </p:fieldset>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ui-steps-item ui-state-default ui-state-disabled" colspan="2" style="height:40px;font-size: 18px;padding-left: 12px">
+                        真实性核验资料
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p:fieldset legend="合同资料">
+                            <p:dataGrid paginator="true" paginatorPosition="bottom" rows="32" columns="8" emptyMessage="合同资料图片为空" value="#{issueBond4.contractInfo.imageInfoEntitys}" var="contractInfoImages_var" id="contractInfoImages_id" >
+                                <p:panel style="text-align:center">
+                                    <f:facet name="header">
+                                        <table>
+                                            <tr>
+                                                <td style="text-align: center; width: 100%;border: none" rowspan="2">
+                                                    <p:outputLabel value="#{contractImages_var.imageName}"/>
+                                                </td>
+                                                <td style=" width: 20px;border: none">
+                                                    <p:commandLink styleClass="ui-icon ui-icon-trash"  onclick="PF('deleteImageDlg_wid').show()"  immediate="true" id="uploadImageItem_id"/>
+                                                    <p:tooltip for="uploadImageItem_id" value="删除资料图片"   />
+                                                </td>          
+                                            </tr>
+                                        </table>
+                                    </f:facet>   
+                                    <h:panelGrid columns="1" style="width:100%">
+                                        <p:graphicImage  value="#{contractInfoImages_var.imagePath}" style=" margin: 0 auto"  alt="Image Description for #{contractInfoImages_var.imagePath}" width="64" height="64" title="#{contractInfoImages_var.imagePath}"/>
+                                        <p:commandLink styleClass="ui-icon ui-icon-search"    immediate="true" style=" margin: 0 auto" id="lookImage_id"/>
+                                    </h:panelGrid>
+                                </p:panel>
+                            </p:dataGrid>
+                        </p:fieldset>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p:fieldset legend="公司资料">
+                            <p:dataGrid paginator="true" paginatorPosition="bottom" rows="32" columns="8" emptyMessage="公司资料图片为空" value="#{issueBond4.companyInfo.imageInfoEntitys}" var="companyInfoImages_var" id="companyInfoImages_id" >
+                                <p:panel style="text-align:center">
+                                    <f:facet name="header">
+                                        <table>
+                                            <tr>
+                                                <td style="text-align: center; width: 100%;border: none" rowspan="2">
+                                                    <p:outputLabel value="#{contractImages_var.imageName}"/>
+                                                </td>
+                                                <td style=" width: 20px;border: none">
+                                                    <p:commandLink styleClass="ui-icon ui-icon-trash"  onclick="PF('deleteImageDlg_wid').show()"  immediate="true" id="uploadImageItem_id"/>
+                                                    <p:tooltip for="uploadImageItem_id" value="删除资料图片"   />
+                                                </td>          
+                                            </tr>
+                                        </table>
+                                    </f:facet>   
+                                    <h:panelGrid columns="1" style="width:100%">
+                                        <p:graphicImage  value="#{companyInfoImages_var.imagePath}" style=" margin: 0 auto"  alt="Image Description for #{companyInfoImages_var.imagePath}" width="64" height="64" title="#{companyInfoImages_var.imagePath}"/>
+                                        <p:commandLink styleClass="ui-icon ui-icon-search"    immediate="true" style=" margin: 0 auto" id="lookImage_id"/>
+                                    </h:panelGrid>
+                                </p:panel>
+                            </p:dataGrid>
+                        </p:fieldset>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p:fieldset legend="实地考察">
+                            <p:dataGrid paginator="true" paginatorPosition="bottom" rows="32" columns="8" emptyMessage="考察资料图片为空" value="#{issueBond4.visitInfo.imageInfoEntitys}" var="visitInfoImages_var" id="visitInfoImages_id" >
+
+                                <p:panel style="text-align:center">
+                                    <f:facet name="header">
+                                        <table>
+                                            <tr>
+                                                <td style="text-align: center; width: 100%;border: none" rowspan="2">
+                                                    <p:outputLabel value="#{contractImages_var.imageName}"/>
+                                                </td>
+                                                <td style=" width: 20px;border: none">
+                                                    <p:commandLink styleClass="ui-icon ui-icon-trash"  onclick="PF('deleteImageDlg_wid').show()"  immediate="true" id="uploadImageItem_id"/>
+                                                    <p:tooltip for="uploadImageItem_id" value="删除资料图片"   />
+                                                </td>          
+                                            </tr>
+                                        </table>
+                                    </f:facet>   
+                                    <h:panelGrid columns="1" style="width:100%">
+                                        <p:graphicImage  value="#{visitInfoImages_var.imagePath}" style=" margin: 0 auto"  alt="Image Description for #{visitInfoImages_var.imagePath}" width="64" height="64" title="#{visitInfoImages_var.imagePath}"/>
+                                        <p:commandLink styleClass="ui-icon ui-icon-search"    immediate="true" style=" margin: 0 auto" id="lookImage_id"/>
+                                    </h:panelGrid>
+                                </p:panel>
+                            </p:dataGrid>
+                        </p:fieldset>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ui-steps-item ui-state-default ui-state-disabled" colspan="2" style="height:40px;font-size: 18px;padding-left: 12px">
+                        还款模型
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p:fieldset legend="基本信息">
+                            <table>
+                                <tr>
+                                    <td>
+                                        还款模型
+                                    </td>
+                                    <td>
+                                        #{issueBond4.bond4.repayModelEnum}
+                                    </td>
+                                    <td>
+                                        借款总额
+                                    </td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+                                        开始时间
+                                    </td>
+                                    <td>
+                                        #{issueBond4.bond4.startDate}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        年利率
+                                    </td>
+                                    <td>
+                                        #{issueBond4.bond4.yearRate}
+                                    </td>
+                                    <td>
+                                        还款周期
+                                    </td>
+                                    <td>
+                                        #{issueBond4.bond4.repayCycle}
+                                    </td>
+                                    <td>
+                                        还款期数
+                                    </td>
+                                    <td>
+                                        #{issueBond4.bond4.repayCycleNumber}
+                                    </td>
+                                </tr>
+                            </table>
+                        </p:fieldset>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p:fieldset legend="账单信息">
+                            <p:dataTable rowIndexVar="row" style="width:100%" id="repayListTable" value="#{issueBond4.expenseEntitys}" var="repayListVar" paginatorPosition="bottom"  paginator="true" rows="12">
+                                <p:column  headerText="序号" style="width:30px">
+                                    <h:outputText value="#{row + 1}"/> 
+                                </p:column>
+                                <p:column  headerText="期数" style="width:100px">
+                                    <h:outputText value="第#{repayListVar.periodNum}期"/> 
+                                </p:column>
+                                <p:column headerText="还款日期">
+                                    <h:outputText value="#{repayListVar.settlementTime}" converter="DateConverter"/>
+                                </p:column>
+                                <p:column headerText="期初余额">
+                                    <h:outputText value="#{repayListVar.beforeBalance}"/>
+                                </p:column>
+                                <p:column headerText="本期还款总额">
+                                    <h:outputText  value="#{repayListVar.payable}"/>
+                                </p:column>
+                                <p:column headerText="本金">
+                                    <h:outputText value="#{repayListVar.principal}"/>
+                                </p:column>
+                                <p:column headerText="利息">
+                                    <h:outputText value="#{repayListVar.interest}" />
+                                </p:column>
+                                <p:column headerText="期末余额">
+                                    <h:outputText value="#{repayListVar.afterBalance}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:fieldset>
+                    </td>
+                </tr>
+                <tr>
                     <td style="padding-top:10px;padding-bottom:10px;width: 50%">
                         <p:commandButton id="front" value="上一步"  style="width:100%;height: 40px" action="issueBond3"/>
                     </td>

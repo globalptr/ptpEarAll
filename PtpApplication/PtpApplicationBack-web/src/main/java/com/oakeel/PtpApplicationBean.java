@@ -60,4 +60,11 @@ public class PtpApplicationBean {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(SysInfo.提示.toString(),  "数据库初始化完毕!") );
     }
+    public void initSysSet()
+    {
+        //initEjbLocal.InitDB();
+        initEjbLocal.initSet();
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(SysInfo.提示.toString(),  "系统参数初始化完毕!") );
+    }
 }

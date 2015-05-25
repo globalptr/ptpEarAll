@@ -6,22 +6,15 @@
 
 package com.oakeel;
 
-import com.oakeel.globaltool.RandomValidateCode;
 import com.oakeel.globaltool.ValidateCode;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 import javax.imageio.ImageIO;
-import javax.imageio.stream.FileCacheImageOutputStream;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
@@ -30,23 +23,15 @@ import org.primefaces.model.StreamedContent;
  * @author root
  */
 @ManagedBean
-@ViewScoped
-public class NewJSFManagedBean {
-    
-    private ValidateCode randomCode;
-    private StreamedContent image;    
-    private StreamedContent graphicText;
-    /**
-     * Creates a new instance of NewJSFManagedBean
-     */
-    public NewJSFManagedBean(){
+@RequestScoped
+public class RandomImage {
 
-    }
-    public StreamedContent getImage() {
-    return this.image;
-    }
+    private StreamedContent graphicText;
+    private ValidateCode validateCode;
    @PostConstruct
     public void init() {
+        validateCode=new ValidateCode(200,50,4,10);
+        validateCode.createCode();
         try {
             //Graphic Text
             BufferedImage bufferedImg = new BufferedImage(100, 25, BufferedImage.TYPE_INT_RGB);
@@ -62,24 +47,9 @@ public class NewJSFManagedBean {
         }
     }
     /**
-     * @return the randomCode
+     * Creates a new instance of Random
      */
-    public ValidateCode getRandomCode() {
-        return randomCode;
-    }
-
-    /**
-     * @param randomCode the randomCode to set
-     */
-    public void setRandomCode(ValidateCode randomCode) {
-        this.randomCode = randomCode;
-    }
-
-    /**
-     * @param image the image to set
-     */
-    public void setImage(StreamedContent image) {
-        this.image = image;
+    public RandomImage() {
     }
 
     /**
@@ -96,4 +66,18 @@ public class NewJSFManagedBean {
         this.graphicText = graphicText;
     }
 
+    /**
+     * @return the validateCode
+     */
+    public ValidateCode getValidateCode() {
+        return validateCode;
+    }
+
+    /**
+     * @param validateCode the validateCode to set
+     */
+    public void setValidateCode(ValidateCode validateCode) {
+        this.validateCode = validateCode;
+    }
+    
 }

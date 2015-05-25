@@ -27,6 +27,9 @@ public class Car {
         this.soldState = soldState;
     }
 
+    public Car() {
+    }
+
     /**
      * @return the uuid
      */

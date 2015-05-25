@@ -9,7 +9,7 @@
         <h:form>
             <table  style="width: 100%;height: 100%;padding-left: 30px;border-collapse:collapse;border:none;margin-top: 30px">
                 <tr>
-                    <td colspan="11">
+                    <td colspan="15">
                         <p:steps styleClass="horizontal" activeIndex="2" style=" width:100%;height: 30px">
                             <p:menuitem value="填写投标信息" />
                             <p:menuitem value="上传认证资料" />
@@ -23,7 +23,7 @@
                     <td class="bordertd">
                         <p:outputLabel value="还款模型:"/>
                     </td>
-                    <td  class="bordertd" colspan="10">
+                    <td  class="bordertd" colspan="14">
                         <p:selectOneMenu id="repayModel_id" value="#{issueBond3.bond3.repayModelEnum}" >
                             <f:ajax event="change" execute="repayModel_id" render="des good bad suitable"/>
                             <f:selectItem itemLabel="选择还款模型" itemValue="-1"/>
@@ -35,7 +35,7 @@
                     <td  class="bordertd">
                         <p:outputLabel value="优点:"/>
                     </td>
-                    <td colspan="13"  class="bordertd">
+                    <td  class="bordertd" colspan="14">
                         <p:outputLabel id="good" value="#{issueBond3.bond3.repayModelEnum.good}"/>
                     </td>
                 </tr>
@@ -43,7 +43,7 @@
                     <td  class="bordertd">
                         <p:outputLabel value="缺点:"/>
                     </td>
-                    <td class="bordertd" colspan="10">
+                    <td class="bordertd" colspan="14">
                         <p:outputLabel id="bad" value="#{issueBond3.bond3.repayModelEnum.bad}"/>
                     </td>
                 </tr>
@@ -51,7 +51,7 @@
                     <td class="bordertd">
                         <p:outputLabel value="适用人群:"/>
                     </td>
-                    <td class="bordertd" colspan="10">
+                    <td class="bordertd" colspan="14">
                         <p:outputLabel id="suitable" value="#{issueBond3.bond3.repayModelEnum.suitable}"/>
                     </td>
                 </tr>
@@ -59,7 +59,7 @@
                     <td class="bordertd" style="height: 30px">
                         <p:outputLabel value="算法介绍:"/>
                     </td>
-                    <td class="bordertd" colspan="10">
+                    <td class="bordertd" colspan="14">
                         <p:outputLabel id="des" value="#{issueBond3.bond3.repayModelEnum.description}"/>
                     </td>
                 </tr>
@@ -67,16 +67,32 @@
                     <td class="bordertd" style="height: 50px">
                         <p:outputLabel value="算法公式:"/>
                     </td>
-                    <td class="bordertd" colspan="10">
+                    <td class="bordertd" colspan="14">
                         <h:graphicImage library="images/repayModel" name="dqbx.png"/>
                     </td>
                 </tr>
                 <tr>
                     <td class="bordertd"  style="width:60px;height: 30px">
-                        <p:outputLabel value="贷款总额:"/>
+                        <p:outputLabel value="基准金:"/>
                     </td>
                     <td class="bordertd" style="width:30px">
-                        <p:inputText id="allAmount_id" value="#{issueBond3.allAmount}" disabled="true" converter="moneyFormater"/>
+                        <p:inputText id="baseAmount_id" value="#{issueBond3.bond3.baseAmount}" >
+                            <f:ajax execute="baseAmount_id copiesNum_id" event="blur" render="allAmount_id"/>
+                        </p:inputText>
+                    </td>
+                    <td class="bordertd"  style="width:30px;height: 30px">
+                        <p:outputLabel value="份数:"/>
+                    </td>
+                    <td class="bordertd" style="width:30px">
+                        <p:inputText id="copiesNum_id" value="#{issueBond3.bond3.copiesNum}"  >
+                            <f:ajax execute="baseAmount_id copiesNum_id" event="blur" render="allAmount_id"/>
+                        </p:inputText>
+                    </td>
+                    <td class="bordertd"  style="width:60px;height: 30px">
+                        <p:outputLabel value="借款总额:"/>
+                    </td>
+                    <td class="bordertd" style="width:30px">
+                        <p:inputText id="allAmount_id" value="#{issueBond3.bond3.copiesNum*issueBond3.bond3.baseAmount}" disabled="true" converter="moneyFormater"/>
                     </td>
                     <td class="bordertd">
                         <p:outputLabel value="年利率:"/>
@@ -114,7 +130,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="bordertd" colspan="11">
+                    <td class="bordertd" colspan="15">
                         <p:dataTable selectionMode="single" rowKey="#{repayListVar.periodNum}" rowIndexVar="row" style="width:100%" id="repayListTable" value="#{issueBond3.expenseEntitys}" var="repayListVar" paginatorPosition="bottom"  paginator="true" rows="12">
                             <p:column  headerText="序号" style="width:30px">
                                 <h:outputText value="#{row + 1}"/> 

@@ -69,7 +69,9 @@ public class IssueBond2 {
         {
             FacesContext context=FacesContext.getCurrentInstance();
             ConfigurableNavigationHandler handler=(ConfigurableNavigationHandler)context.getApplication().getNavigationHandler();
+            context.addMessage(null, new FacesMessage(SysInfo.提示.toString(),  "融资标实体未初始化!") );
             handler.performNavigation("issueBond1");
+            
             return null;
         }
         else
@@ -221,12 +223,12 @@ public class IssueBond2 {
         if (!diskfile.getParentFile().exists()) {
             System.out.println("目标文件所在路径不存在，准备创建。。。");
             if (!diskfile.getParentFile().mkdirs()) {
-                System.out.println("创建目录文件所在的目录失败！");
+                System.out.println("创建"+diskfile.getParentFile()+"目录失败！");
                 return;
             }
         }
 
-        FileOutputStream fos = new FileOutputStream(new File(imagePath));
+        FileOutputStream fos = new FileOutputStream(diskfile);
 
         int read = 0;
         byte[] bytes = new byte[1024];

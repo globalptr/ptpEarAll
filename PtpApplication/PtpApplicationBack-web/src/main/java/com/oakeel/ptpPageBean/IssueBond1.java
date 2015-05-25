@@ -12,16 +12,14 @@ import com.oakeel.ejb.entityAndEao.companyUser.CompanyUserEaoLocal;
 import com.oakeel.ejb.entityAndEao.companyUser.CompanyUserEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEaoLocal;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
-import com.oakeel.ejb.ptpEnum.BaseAmountEnum;
 import com.oakeel.ejb.ptpEnum.RepayModelEnum;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 /**
  *
@@ -29,18 +27,18 @@ import javax.inject.Named;
  */
 @ManagedBean
 @ViewScoped
-public class IssueBond1 {
+public class IssueBond1 implements Serializable{
     @Inject private PtpSessionBean ptpSessionBean;
     @EJB
     CompanyUserEaoLocal companyUserEaoLocal;
     @EJB
     FrontUserEaoLocal frontUserEaoLocal;
     private BondEntity bond1;
-    private BaseAmountEnum[] baseAmountEnums;
     private List<CompanyUserEntity> companyUserEntitys;
     private RepayModelEnum[] repayModelArray;//还款模型枚举列表
     private String selectUserName;
     private FrontUserEntity selectUser;
+    private CompanyUserEntity selectCompany;
     
     /**
      * Creates a new instance of IssueBond1
@@ -51,8 +49,11 @@ public class IssueBond1 {
     public void init()
     {
         setBond1(new BondEntity());
-        baseAmountEnums=BaseAmountEnum.values();
         companyUserEntitys=companyUserEaoLocal.getAllEntitys();
+        for(CompanyUserEntity item:companyUserEntitys)
+        {
+            System.out.println(item.getUuid());
+        }
         repayModelArray=RepayModelEnum.values();
     }
     public String nextStep()
@@ -93,20 +94,6 @@ public class IssueBond1 {
      */
     public void setBond1(BondEntity bond1) {
         this.bond1 = bond1;
-    }
-
-    /**
-     * @return the baseAmountEnums
-     */
-    public BaseAmountEnum[] getBaseAmountEnums() {
-        return baseAmountEnums;
-    }
-
-    /**
-     * @param baseAmountEnums the baseAmountEnums to set
-     */
-    public void setBaseAmountEnums(BaseAmountEnum[] baseAmountEnums) {
-        this.baseAmountEnums = baseAmountEnums;
     }
 
     /**
@@ -178,6 +165,21 @@ public class IssueBond1 {
      */
     public void setSelectUser(FrontUserEntity selectUser) {
         this.selectUser = selectUser;
+    }
+
+    /**
+     * @return the selectCompany
+     */
+    public CompanyUserEntity getSelectCompany() {
+        return selectCompany;
+    }
+
+    /**
+     * @param selectCompany the selectCompany to set
+     */
+    public void setSelectCompany(CompanyUserEntity selectCompany) {
+        System.out.println("1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\");
+        this.selectCompany = selectCompany;
     }
 
 }

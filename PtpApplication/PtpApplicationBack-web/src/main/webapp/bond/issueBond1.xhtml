@@ -37,24 +37,6 @@
                         </tr>
                         <tr>
                             <td style="width:80px">
-                                <p:outputLabel value="基准金额:"/>
-                            </td>
-                            <td>
-                                <p:selectOneMenu value="#{issueBond1.bond1.baseAmountEnum}">
-                                    <f:selectItems value="#{issueBond1.baseAmountEnums}" var="baseAmount_var" itemLabel="#{baseAmount_var.baseValue}" itemValue="#{baseAmount_var}"/>
-                                </p:selectOneMenu>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width:80px">
-                                <p:outputLabel value="份数:"/>
-                            </td>
-                            <td>
-                                <p:inputText id="amount_id" placeholder="输入份数" style=" width: 200px"  value="#{issueBond1.bond1.copiesNum}" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width:80px">
                                 <p:outputLabel value="项目情况:"/>
                             </td>
                             <td>   
@@ -68,8 +50,8 @@
                                 <p:outputLabel value="担保公司:"/>
                             </td>
                             <td>   
-                                <p:selectOneMenu value="#{issueBond1.bond1.companyUserEntity}">
-                                    <f:selectItems value="#{issueBond1.companyUserEntitys}" var="companyUser_var" itemLabel="#{companyUser_var.name}" itemValue="#{companyUser_var}"/>
+                                <p:selectOneMenu value="#{issueBond1.bond1.companyUserEntity}" converter="companyUserConverter">
+                                    <f:selectItems value="#{issueBond1.companyUserEntitys}" var="companyUser_var" itemLabel="#{companyUser_var.name}" itemValue="#{companyUser_var.uuid}" />
                                 </p:selectOneMenu>
                             </td>
                         </tr>

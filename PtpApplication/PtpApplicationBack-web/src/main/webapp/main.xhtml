@@ -114,7 +114,7 @@
                                 </p:submenu>
                             </p:submenu>
                             <p:submenu label="借款中心">
-                                <p:menuitem value="发布借款" icon="ui-icon-star" action="/issueBond/issueBond1"/>
+                                <p:menuitem value="发布借款" icon="ui-icon-star" action="/bond/issueBond1"/>
                                 <p:menuitem value="借款初审" icon="ui-icon-star" />
                                 <p:menuitem value="借款管理" icon="ui-icon-star" />
                                 <p:submenu label="借款管理" >
@@ -317,6 +317,7 @@
                                     <p:menuitem value="接口设置" icon="ui-icon-star" />
                                 </p:submenu>
                                 <p:menuitem value="初始化数据库" actionListener="#{ptpApplicationBean.initDB()}" icon="ui-icon-notice"/>
+                                <p:menuitem value="初始化系统配置" actionListener="#{ptpApplicationBean.initSysSet()}" icon="ui-icon-notice"/>
                             </p:submenu>
                         </p:panelMenu>
                     </h:form>

@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 
 .ui-state-disabled, .ui-widget-content .ui-state-disabled, .ui-widget-header .ui-state-disabled {
-    opacity: 0.6;
+    opacity: 1;
 }
 .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
     color: #333;
