@@ -48,29 +48,28 @@ public class IssueBond1 implements Serializable{
     @PostConstruct
     public void init()
     {
-        setBond1(new BondEntity());
-        companyUserEntitys=companyUserEaoLocal.getAllEntitys();
-        for(CompanyUserEntity item:companyUserEntitys)
+        if(ptpSessionBean.getIssueBondLocal().getBond1()!=null)
         {
-            System.out.println(item.getUuid());
+            bond1=ptpSessionBean.getIssueBondLocal().getBond1();
         }
+        else
+        {
+            bond1=new BondEntity();
+        }
+        if(ptpSessionBean.getIssueBondLocal().getIssueUser()!=null)
+        {
+            selectUser=ptpSessionBean.getIssueBondLocal().getIssueUser();
+        }
+        companyUserEntitys=companyUserEaoLocal.getAllEntitys();
         repayModelArray=RepayModelEnum.values();
     }
     public String nextStep()
     {
-        if(ptpSessionBean.getIssueBondLocal().getCurrBond()==null)
-        {
-            ptpSessionBean.getIssueBondLocal().createNewBond();
-        }
         ptpSessionBean.getIssueBondLocal().setUser(selectUser);
-        ptpSessionBean.getIssueBondLocal().setStep1Bond(getBond1());
+        ptpSessionBean.getIssueBondLocal().setStep1Bond(bond1);
         return "issueBond2";
     }
 
-    public void prt()
-    {
-        System.out.println(selectUser.toString());
-    }
     public List<FrontUserEntity> findUser(String target)
     {
         List<FrontUserEntity> userFilter=frontUserEaoLocal.getUserByName("%"+target+"%");
@@ -178,7 +177,6 @@ public class IssueBond1 implements Serializable{
      * @param selectCompany the selectCompany to set
      */
     public void setSelectCompany(CompanyUserEntity selectCompany) {
-        System.out.println("1\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\");
         this.selectCompany = selectCompany;
     }
 

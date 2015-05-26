@@ -45,6 +45,10 @@ public class NewJSFManagedBean {
     public StreamedContent getImage() {
     return this.image;
     }
+    public String test()
+    {
+        return "issueBond2";
+    }
    @PostConstruct
     public void init() {
         try {

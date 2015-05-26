@@ -46,7 +46,6 @@ public class ValidateCode {
   
     private StreamedContent dsc;
     public  ValidateCode() {  
-        this.createCode();  
     }  
   
     /** 
@@ -57,7 +56,6 @@ public class ValidateCode {
     public  ValidateCode(int width,int height) {  
         this.width=width;  
         this.height=height;  
-        this.createCode();  
     }  
     /** 
      *  
@@ -71,7 +69,6 @@ public class ValidateCode {
         this.height=height;  
         this.codeCount=codeCount;  
         this.lineCount=lineCount;  
-        this.createCode();  
     }  
       
     public void createCode() {  
@@ -126,7 +123,7 @@ public class ValidateCode {
         
         InputStream is = null; 
          
-     
+        System.out.println(randomCode);
          
         ByteArrayOutputStream bs = new ByteArrayOutputStream();  
          
@@ -143,7 +140,6 @@ public class ValidateCode {
         }  
         
         dsc=new DefaultStreamedContent(is);
-        System.out.println("ddddd");
     }  
       
     public void write(String path) throws IOException {  

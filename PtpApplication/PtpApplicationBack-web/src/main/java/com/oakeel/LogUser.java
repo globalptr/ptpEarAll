@@ -10,7 +10,7 @@ import com.oakeel.ejb.ptpEnum.SysInfo;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -22,7 +22,7 @@ import org.apache.shiro.subject.Subject;
  * @author root
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class LogUser {
     private String userName;
     private String password;

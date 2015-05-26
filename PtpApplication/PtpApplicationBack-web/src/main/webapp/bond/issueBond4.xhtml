@@ -26,7 +26,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <p:fieldset legend="项目详情">
+                        <p:fieldset legend="项目详情" toggleable="true">
                             <table>
                                 <tr>
                                     <td>
@@ -72,7 +72,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <p:fieldset legend="用户信息">
+                        <p:fieldset legend="用户信息" toggleable="true">
                             <table>
                                 <tr>
                                     <td>
@@ -139,7 +139,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <p:fieldset legend="风控详情">
+                        <p:fieldset legend="风控详情" toggleable="true">
                             <table>
                                 <tr>
                                     <td>
@@ -184,7 +184,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <p:fieldset legend="合同资料">
+                        <p:fieldset legend="合同资料"  toggleable="true">
                             <p:dataGrid paginator="true" paginatorPosition="bottom" rows="32" columns="8" emptyMessage="合同资料图片为空" value="#{issueBond4.contractInfo.imageInfoEntitys}" var="contractInfoImages_var" id="contractInfoImages_id" >
                                 <p:panel style="text-align:center">
                                     <f:facet name="header">
@@ -211,7 +211,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <p:fieldset legend="公司资料">
+                        <p:fieldset legend="公司资料" toggleable="true">
                             <p:dataGrid paginator="true" paginatorPosition="bottom" rows="32" columns="8" emptyMessage="公司资料图片为空" value="#{issueBond4.companyInfo.imageInfoEntitys}" var="companyInfoImages_var" id="companyInfoImages_id" >
                                 <p:panel style="text-align:center">
                                     <f:facet name="header">
@@ -238,7 +238,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <p:fieldset legend="实地考察">
+                        <p:fieldset legend="实地考察" toggleable="true">
                             <p:dataGrid paginator="true" paginatorPosition="bottom" rows="32" columns="8" emptyMessage="考察资料图片为空" value="#{issueBond4.visitInfo.imageInfoEntitys}" var="visitInfoImages_var" id="visitInfoImages_id" >
 
                                 <p:panel style="text-align:center">
@@ -271,26 +271,26 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <p:fieldset legend="基本信息">
+                        <p:fieldset legend="基本信息" toggleable="true">
                             <table>
                                 <tr>
                                     <td>
                                         还款模型
                                     </td>
                                     <td>
-                                        #{issueBond4.bond4.repayModelEnum}
+                                        #{issueBond4.bond4==null?'无':issueBond4.bond4.repayModelEnum}
                                     </td>
                                     <td>
                                         借款总额
                                     </td>
                                     <td>
-                                        
+                                        #{issueBond4.bond4==null?'无':issueBond4.bond4.baseAmount*issueBond4.bond4.copiesNum}
                                     </td>
                                     <td>
                                         开始时间
                                     </td>
                                     <td>
-                                        #{issueBond4.bond4.startDate}
+                                        <h:outputLabel  value="#{issueBond4.bond4==null?issueBond4.defaultDate:issueBond4.bond4.startDate}"  converter="DateConverter"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -298,19 +298,19 @@
                                         年利率
                                     </td>
                                     <td>
-                                        #{issueBond4.bond4.yearRate}
+                                        #{issueBond4.bond4==null?'无':issueBond4.bond4.yearRate}%
                                     </td>
                                     <td>
                                         还款周期
                                     </td>
                                     <td>
-                                        #{issueBond4.bond4.repayCycle}
+                                        #{issueBond4.bond4==null?'无':issueBond4.bond4.repayCycle}
                                     </td>
                                     <td>
                                         还款期数
                                     </td>
                                     <td>
-                                        #{issueBond4.bond4.repayCycleNumber}
+                                        #{issueBond4.bond4==null?'无':issueBond4.bond4.repayCycleNumber}
                                     </td>
                                 </tr>
                             </table>
@@ -319,7 +319,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <p:fieldset legend="账单信息">
+                        <p:fieldset legend="账单信息" toggleable="true">
                             <p:dataTable rowIndexVar="row" style="width:100%" id="repayListTable" value="#{issueBond4.expenseEntitys}" var="repayListVar" paginatorPosition="bottom"  paginator="true" rows="12">
                                 <p:column  headerText="序号" style="width:30px">
                                     <h:outputText value="#{row + 1}"/> 

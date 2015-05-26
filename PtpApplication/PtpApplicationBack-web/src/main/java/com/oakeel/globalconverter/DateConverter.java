@@ -38,7 +38,18 @@ public class DateConverter implements Converter{
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd"); 
-        return formatter.format(value); 
+        String hr;
+        try
+        {
+            hr=formatter.format(value); 
+        }
+        catch(Exception ex)
+        {
+            Date temp=new Date(value.toString());
+            hr=formatter.format(temp); 
+            return hr;
+        }
+        return hr; 
     }
     
 }

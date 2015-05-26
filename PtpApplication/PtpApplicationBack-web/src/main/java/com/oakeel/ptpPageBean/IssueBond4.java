@@ -14,6 +14,7 @@ import com.oakeel.ejb.entityAndEao.financingBusinessLender.FinancingBusinessLend
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import com.oakeel.ejb.ptpEnum.ImageUsedEnum;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -30,7 +31,6 @@ public class IssueBond4 {
 
     @Inject private PtpSessionBean ptpSessionBean;
     private FinancingBusinessLenderEntity financingBusinessLender;
-    private BondEntity bond4;
     private FrontUserEntity frontUserEntity;
     private List<ExpenseEntity> expenseEntitys;
     private List<BondInformationEntity> bondInformationEntitys;
@@ -38,31 +38,40 @@ public class IssueBond4 {
     private BondInformationEntity contractInfo ;
     private BondInformationEntity companyInfo;
     private BondInformationEntity visitInfo;
+    private BondEntity bond4=null;
+    private Date defaultDate;
     /**
      * Creates a new instance of IssueBond4
      */
     public IssueBond4() {
+        defaultDate=new Date();
+        System.out.println(defaultDate.toString());
     }
     @PostConstruct
     public void init()
     {
         bond4=ptpSessionBean.getIssueBondLocal().getCurrBond();
-        setBondInformationEntitys(bond4.getBondInformationEntiys());
-        setFrontUserEntity(ptpSessionBean.getIssueBondLocal().getCurrLender().getLenderUser());
-        setExpenseEntitys(ptpSessionBean.getIssueBondLocal().getCurrLender().getExpenseEntitys());
-        for(BondInformationEntity item:bondInformationEntitys)
+        if(ptpSessionBean.getIssueBondLocal().getIssueUser()!=null)
+            frontUserEntity=ptpSessionBean.getIssueBondLocal().getIssueUser();
+        if(ptpSessionBean.getIssueBondLocal().getExpense()!=null)
+            expenseEntitys=ptpSessionBean.getIssueBondLocal().getExpense();
+        if(ptpSessionBean.getIssueBondLocal().getCurrBond().getBondInformationEntiys()!=null)
         {
-            if(item.getTitle()==ImageUsedEnum.公司资料)
+            bondInformationEntitys=ptpSessionBean.getIssueBondLocal().getCurrBond().getBondInformationEntiys();
+            for(BondInformationEntity item:bondInformationEntitys)
             {
-                contractInfo=item;
-            }
-            else if(item.getTitle()==ImageUsedEnum.公司资料)
-            {
-                companyInfo=item;
-            }
-            else if(item.getTitle()==ImageUsedEnum.考察资料)
-            {
-                visitInfo=item;
+                if(item.getTitle()==ImageUsedEnum.合同资料)
+                {
+                    contractInfo=item;
+                }
+                else if(item.getTitle()==ImageUsedEnum.公司资料)
+                {
+                    companyInfo=item;
+                }
+                else if(item.getTitle()==ImageUsedEnum.考察资料)
+                {
+                    visitInfo=item;
+                }
             }
         }
     }
@@ -87,19 +96,6 @@ public class IssueBond4 {
         this.ptpSessionBean = ptpSessionBean;
     }
 
-    /**
-     * @return the bond4
-     */
-    public BondEntity getBond4() {
-        return bond4;
-    }
-
-    /**
-     * @param bond4 the bond4 to set
-     */
-    public void setBond4(BondEntity bond4) {
-        this.bond4 = bond4;
-    }
 
     /**
      * @return the frontUserEntity
@@ -211,5 +207,33 @@ public class IssueBond4 {
      */
     public void setVisitInfo(BondInformationEntity visitInfo) {
         this.visitInfo = visitInfo;
+    }
+
+    /**
+     * @return the bond4
+     */
+    public BondEntity getBond4() {
+        return bond4;
+    }
+
+    /**
+     * @param bond4 the bond4 to set
+     */
+    public void setBond4(BondEntity bond4) {
+        this.bond4 = bond4;
+    }
+
+    /**
+     * @return the defaultDate
+     */
+    public Date getDefaultDate() {
+        return defaultDate;
+    }
+
+    /**
+     * @param defaultDate the defaultDate to set
+     */
+    public void setDefaultDate(Date defaultDate) {
+        this.defaultDate = defaultDate;
     }
 }
