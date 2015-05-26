@@ -11,5 +11,28 @@ package com.oakeel.ejb.ptpEnum;
  * @author root
  */
 public enum ImageUsedEnum {
-    合同资料,公司资料,考察资料;
+    合同资料("contract"),公司资料("company"),考察资料("visit");
+    private String enStr;
+
+    /**
+     *
+     * @param str
+     */
+    private ImageUsedEnum(String str)
+    {
+        enStr=str;
+    }
+    /**
+     * @return the enStr
+     */
+    public String getEnStr() {
+        return enStr;
+    }
+
+    /**
+     * @param enStr the enStr to set
+     */
+    public void setEnStr(String enStr) {
+        this.enStr = enStr;
+    }
 }

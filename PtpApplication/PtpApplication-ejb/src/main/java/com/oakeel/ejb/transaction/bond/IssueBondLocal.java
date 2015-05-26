@@ -8,7 +8,6 @@ package com.oakeel.ejb.transaction.bond;
 
 import com.oakeel.ejb.entityAndEao.bond.BondEntity;
 import com.oakeel.ejb.entityAndEao.expense.ExpenseEntity;
-import com.oakeel.ejb.entityAndEao.financialProduct.FinancialProductEntity;
 import com.oakeel.ejb.entityAndEao.financingBusinessLender.FinancingBusinessLenderEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import java.util.List;
@@ -31,5 +30,9 @@ public interface IssueBondLocal {
     public void issue();
     public BondEntity getCurrBond();
     public FinancingBusinessLenderEntity getCurrLender();
-    public void createNewBond();
+    public FrontUserEntity getIssueUser();
+    public List<ExpenseEntity> getExpense();
+    public BondEntity getBond1();
+    public BondEntity getBond2();
+    public BondEntity getBond3();
 }
