@@ -1,0 +1,608 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="keywords" content="天天聚财|网络理财|个人理财|投资理财|P2P理财|互联网金融|投资理财|债权转让|理财计划|优选计划|网络贷款|工薪贷|生意贷|网商贷|网贷|小额贷款">
+<meta name="description" content="天天聚财(www.ttjc.com.cn)是目前中国互联网金融中P2P信贷行业中最大、最安全的平台，为投资理财用户和贷款用户两端提供公平、透明、安全、高效的互联网金融服务。投资理财用户可以通过天天聚财平台进行投标、加入优选理财计划、购买债权等方式进行投资获得高收益；贷款用户可以通过平台申请工薪贷、生意贷、网商贷等小额贷款。">
+<link rel="icon" href="http://www.qclcfwzx.com/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="css/alertmsg.css"/>
+<link rel="stylesheet" type="text/css" href="css/basic.css"/>
+<link rel="stylesheet" type="text/css" href="css/pubs.css"/>
+<link rel="stylesheet" type="text/css" href="css/fzm.css"/>
+<link rel="stylesheet" type="text/css" href="css/f_gai.css"/>
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="js/comm.js"></script>
+<script type="text/javascript" src="js/alertmsg.js"></script>
+<script>
+  $(function(){
+	$(".register_list input").focus(function(){
+		$(this).siblings("i").hide();
+		});	
+	$(".register_list input").blur(function(){
+		$(this).siblings("i").show();
+		});	
+		
+		$("#username").focus(function() {
+		var userna = $(this).val().replace(/^(\s|\xA0)+|(\s|\xA0)+$/g, "");
+		if(userna == "6-16个字符，一但注册成功会员名不能更改") {
+			$(this).val("");
+		}
+		$(this).css('color',"#666");
+		$(this).parent().attr('class', 'LandingUserName inputSelected');
+		
+	}).blur(function() {
+		var userna = $(this).val().replace(/^(\s|\xA0)+|(\s|\xA0)+$/g, "");
+		if(userna == "") {
+			$(this).css('color',"#999");
+			$(this).val("6-16个字符，一但注册成功会员名不能更改");
+			$(this).parent().attr('class', 'LandingUserName');
+			$("#usernamecheck").html(' 请输入有效用户名');
+			$("#usernamecheck").attr('class', 'inputspandef');
+			return;
+		}else{
+			//校验用户名
+			if(userna.length < 6 || 16 < userna.length){
+				//长度长了
+				$("#usernamecheck").html(' 用户名字符数长度太短或太长！');
+				$("#usernamecheck").attr('class', 'error_red');
+				$(this).parent().attr('class', 'LandingUserName inputError');
+				return;
+			}else if(userna.indexOf(" ")>=0 || userna.indexOf("'")>=0 || userna.indexOf("=")>=0 || userna.substring(0,3)=="and" || userna.substring(0,2)=="or" || userna.substring(0,2)=="in"){
+				$("#usernamecheck").html(' 用户名不能包含特殊字符！');
+				$("#usernamecheck").attr('class', 'error_red');
+				$(this).parent().attr('class', 'LandingUserName inputError');
+				return;
+			}else{
+				//ajax校验用户名是否被注册
+				$.post("http://www.ttjc.com.cn/ajaxcomment.php", {"query":"username","user":userna}, function(msg) {
+					if(msg=="1"){
+						$("#usernamecheck").html(' 该用户名已被注册！');
+						$("#usernamecheck").attr('class', 'error_red');
+						$("#username").parent().attr('class', 'LandingUserName inputError');
+					}else if(msg=="2"){
+						$("#usererrormsg").val("user");
+					}else{
+						$.msg({type:"error",content:"数据错误请稍后再试！"});
+						return;
+					}
+				});	
+			}
+		}
+		//$("#usererrormsg").val("user");
+		$("#usernamecheck").html(' 输入正确！');
+		$("#usernamecheck").attr('class', 'error_green');
+		$(this).parent().attr('class', 'LandingUserName');
+	});
+	$("#password_text").focus(function() {
+		$(this).hide();
+		$("#password").show().focus();
+	});
+	$("#password").focus(function() {
+		$(this).css('color',"#666");
+		$(this).parent().attr('class', 'LandingPassword inputSelected');
+	}).blur(function() {
+		var pwd = $(this).val().replace(/^(\s|\xA0)+|(\s|\xA0)+$/g, "");
+		if(pwd == '') {
+			$(this).hide();
+			$("#password_text").show();
+			
+			$("#passwordcheck").attr('class', 'inputspandef');
+			$(this).parent().attr('class', 'LandingPassword');
+			return;
+		}else if(pwd.length < 6 || 16 < pwd.length){
+			/**
+			$(this).hide();
+			$("#password_text").show();
+			**/
+			$("#passwordcheck").html('登录密码字符数长度太短或太长！');
+			$("#passwordcheck").attr('class', 'error_red');
+			$(this).parent().attr('class', 'LandingPassword inputError');
+			return;
+		} 
+		$("#passwordcheck").html('输入正确！');
+		$("#passwordcheck").attr('class', 'error_green');
+		$(this).parent().attr('class', 'LandingPassword');
+	});
+	
+	$("#passwordre_text").focus(function() {
+		$(this).hide();
+		$("#passwordre").show().focus();
+	});
+	$("#passwordre").focus(function() {
+		$(this).css('color',"#666");
+		$(this).parent().attr('class', 'LandingPassword inputSelected');
+		
+	}).blur(function() {
+		var pwd1 = $(this).val().replace(/^(\s|\xA0)+|(\s|\xA0)+$/g, "");
+		if(pwd1 == '') {
+			$(this).hide();
+			$("#passwordre_text").show();
+			$(this).parent().attr('class', 'LandingPassword');
+			return;
+		}else if($("#password").val().replace(/^(\s|\xA0)+|(\s|\xA0)+$/g, "")!=pwd1){
+			$("#passwordrecheck").html('两次输入的密码不一致！');
+			$("#passwordrecheck").attr('class', 'error_red');
+			$(this).parent().attr('class', 'LandingPassword inputError');
+			return;
+		}
+		$("#passwordrecheck").html('输入正确！');
+		$("#passwordrecheck").attr('class', 'error_green');
+		$(this).parent().attr('class', 'LandingPassword');
+	});
+	
+
+	$("#validate_code").focus(function() {
+		if($(this).val() == "输入验证码") {
+			$(this).val("");
+		}
+		$(this).css('color',"#666");
+		$(this).parent().attr('class', 'LandingYzm inputSelected');
+		$("#yzmcheck").html('请输入验证码，不区分大小写！');
+		$("#yzmcheck").attr('class', 'error_select');
+	}).blur(function() {
+		if($(this).val() == "" || $(this).val().length != 5) {
+			$(this).css('color',"#999");
+			$(this).val("输入验证码");
+			$("#yzmcheck").html('请输入验证码，不区分大小写！');
+			$("#yzmcheck").attr('class', 'inputspandef');
+			$(this).parent().attr('class', 'LandingYzm');
+			return;
+		}else{
+			//ajax校验验证码
+			$.post("http://www.ttjc.com.cn/ajaxcomment.php", {"seafcode":"yes","code":$("#validate_code").val()}, function(msg) {
+				if(msg!="2"){
+					$("#validate_code").css('color',"#666");
+					$("#validate_code").parent().attr('class', 'LandingYzm inputError');
+					$("#yzmcheck").html('验证码错误！');
+					$("#yzmcheck").attr('class', 'error_red');
+					return;
+				}else if(msg=="2"){
+					$("#codeerrormsg").val("code");
+				}else{
+					$.msg({type:"error",content:"数据错误请稍后再试！"});
+					return;
+				}
+			});	
+		}		
+		$("#yzmcheck").html('输入正确！');
+		$("#yzmcheck").attr('class', 'error_green');
+		$(this).parent().attr('class', 'LandingYzm');
+	});
+	$("#code_change,#code_image").click(function() {
+		var img = $("#code_image").attr("src") + "?d=" + Math.random() ;
+		$("#code_image").attr("src" ,img);
+		$("#validate_code").val("").focus();
+		return false;
+	});
+	//
+	if($("#username").val() == "6-16个字符，一但注册成功会员名不能更改") {
+		$("#username").css("color","#999");
+	} else {
+		$("#username").css("color","#666");
+	}
+	$("#password_text").focus();
+	$("#password").blur();
+	$("#passwordre_text").focus();
+	$("#passwordre").blur();
+	
+	//开起协议
+	$("#show_license").click(function(){
+		$("#dialogOverlay").show();
+		$("#dialog").show();
+    });
+	//关闭协议
+	$("#close_license").click(function(){
+		$("#dialogOverlay").hide();
+		$("#dialog").hide();
+    });
+	//同意协议
+	$("#J-agreement").click(function(){
+		$("#rem").attr("checked","checked");
+		$("#dialogOverlay").hide();
+		$("#dialog").hide();
+    });
+	
+	$("#userPhone").focus(function() {
+		var userPhone = $(this).val().replace(/^(\s|\xA0)+|(\s|\xA0)+$/g, "");
+		if(userPhone == "11位的中国大陆手机号码") {
+			$(this).val("");
+		}
+		$(this).css('color',"#666");
+		$(this).parent().attr('class', 'LandingUserName inputSelected');
+		
+	}).blur(function() {
+		var userPhone = $(this).val().replace(/^(\s|\xA0)+|(\s|\xA0)+$/g, "");
+		if(userPhone == "") {
+			$(this).css('color',"#999");
+			$(this).val("11位的中国大陆手机号码");
+			$(this).parent().attr('class', 'LandingUserName');
+			$("#userPhonecheck").html('请输入正确手机号码');
+			$("#userPhonecheck").attr('class', 'inputspandef');
+			return;
+		}else{
+			//校验用户名
+			if(userPhone.length != 11){
+				//长度长了
+				$("#userPhonecheck").html(' 中国大陆手机必须为13、15等开头的11位数字！');
+				$("#userPhonecheck").attr('class', 'error_red');
+				$(this).parent().attr('class', 'LandingUserName inputError');
+				return;
+			}else if(!isTelephone(userPhone)){
+				$("#userPhonecheck").html(' 中国大陆手机必须为13、15等开头的11位数字！');
+				$("#userPhonecheck").attr('class', 'error_red');
+				$(this).parent().attr('class', 'LandingUserName inputError');
+				return;
+			}
+		}
+		$("#userPhonecheck").html(' 输入正确！');
+		$("#userPhonecheck").attr('class', 'error_green');
+		$(this).parent().attr('class', 'LandingUserName');
+	});	
+	//验证手机号码(检验13,15,18开头的手机号！) 
+	function isTelephone(str){ 
+	/**
+		var reg= /^[1][358]\d{9}$/; 
+			if(str!="" && reg.test(str)){ 
+				return true; 
+			} 
+		return false;
+		**/
+		var patrn=/^1[0-9]{10}$/;
+		if (patrn.exec(str)){
+			return true
+		}else{
+			return false
+		}
+	}
+	if($("#userPhone").val() == "11位的中国大陆手机号码") {
+		$("#userPhone").css("color","#999");
+	} else {
+		$("#userPhone").css("color","#666");
+	}
+	
+	$("#Phonemsg_code").focus(function() {
+		var msgcode = $(this).val().replace(/^(\s|\xA0)+|(\s|\xA0)+$/g, "");
+		if(msgcode == "短信验证码") {
+			$(this).val("");
+		}
+		$(this).css('color',"#666");
+		$(this).parent().attr('class', 'LandingYzm inputSelected');
+		$("#msgyzmcheck").html('<i class="iconfont">&#61510;</i> 请输入短信验证码，不区分大小写！');
+		$("#msgyzmcheck").attr('class', 'error_select');
+	}).blur(function() {
+		var msgcode = $(this).val().replace(/^(\s|\xA0)+|(\s|\xA0)+$/g, "");
+		if(msgcode == "") {
+			$(this).css('color',"#999");
+			$(this).val("短信验证码");
+			$(this).parent().attr('class', 'LandingYzm');
+			$("#msgyzmcheck").html('<i class="iconfont">&#61510;</i> 请输入短信验证码，不区分大小写！');
+			$("#msgyzmcheck").attr('class', 'inputspandef');
+			return;
+		}else{
+			//校验用户名
+			if(msgcode.length != 6){
+				//长度长了
+				$("#msgyzmcheck").html('<i class="iconfont">&#61509;</i> 短信验证码错误！');
+				$("#msgyzmcheck").attr('class', 'error_red');
+				$(this).parent().attr('class', 'LandingYzm inputError');
+				return;
+			}else{
+				//ajax 校验短信验证码
+				$.post("http://www.ttjc.com.cn/ajaxcomment.php", {"phpmsg":"phpmsgcode","msg":msgcode}, function(msg) {
+					if(1*msg==2){
+						$("#phoneerrormsg").val("msg");
+					}else{
+						$("#phoneerrormsg").val("");
+						$("#msgyzmcheck").html('<i class="iconfont">&#61509;</i> 短信验证码错误！');
+						$("#msgyzmcheck").attr('class', 'error_red');
+						$("#Phonemsg_code").parent().attr('class', 'LandingYzm inputError');
+						return;
+					}
+				});	
+				
+			}
+		}
+		$("#msgyzmcheck").html('<i class="iconfont">&#61513;</i> 输入正确！');
+		$("#msgyzmcheck").attr('class', 'error_green');
+		$(this).parent().attr('class', 'LandingYzm');
+	});	
+	if($("#msgcode").val() == "短信验证码") {
+		$("#msgcode").css("color","#999");
+	} else {
+		$("#msgcode").css("color","#666");
+	}
+//用户开始提交
+$("#step_one_submit").click(function() {
+//校验用户名
+	var userna = $("#username").val().replace(/^(\s|\xA0)+|(\s|\xA0)+$/g, "");
+	if(userna.length < 6 || 16 < userna.length || userna=="6-16个字符，一但注册成功会员名不能更改"){
+		$.msg({type:"error",content:"用户名以6-16个字符组成！"});
+		return;
+	}else if($("#usererrormsg").val()!="user"){
+		$.msg({type:"error",content:"用户名输入错误！"});
+		return false;
+	}else if(userna.indexOf(" ")>=0 || userna.indexOf("'")>=0 || userna.indexOf("=")>=0 || userna.substring(0,3)=="and" || userna.substring(0,2)=="or" || userna.substring(0,2)=="in"){
+		$.msg({type:"error",content:"用户名不能包含特殊字符！"});
+		return false;
+	}
+//校验用户密码	
+	var reg_password = $("#password").val().replace(/^(\s|\xA0)+|(\s|\xA0)+$/g, "");
+	var reg_password1 = $("#passwordre").val().replace(/^(\s|\xA0)+|(\s|\xA0)+$/g, "");
+	if(reg_password=="" || reg_password=="输入密码"){
+		$.msg({type:"error",content:"用户密码不能为空！"});
+		return false;
+	}else if(reg_password.length < 6 || 16 < reg_password.length){
+		$.msg({type:"error",content:"登录密码字符数长度太短或太长！"});
+		return false;
+	}
+	if(reg_password1==""){
+		$.msg({type:"error",content:"重复密码不能为空！"});
+		return false;
+	}else if(reg_password1.length < 6 || 16 < reg_password1.length){
+		$.msg({type:"error",content:"重复密码字符数长度太短或太长！"});
+		return false;
+	}else if(reg_password != reg_password1){
+		$.msg({type:"error",content:"两次输入的密码不一致！"});
+		return false;
+		}	
+	var reg_log_yzm = $("#validate_code").val().replace(/^(\s|\xA0)+|(\s|\xA0)+$/g, "");
+	if(reg_log_yzm=="" || reg_log_yzm=="输入验证码" || reg_log_yzm.length != 5){
+		$.msg({type:"error",content:"验证码不能小于5个字符！"});
+		return false;
+	}else if($("#codeerrormsg").val()!="code"){
+		$.msg({type:"error",content:"验证码错误！"});
+		return false;
+	}
+	var reg_isreard = $("#rem").attr("checked");
+	if(!reg_isreard){
+		$.msg({type:"error",content:"请阅读并同意《天天聚财网服务协议》！"});
+		return false;
+	}
+	//第一个校验结束
+	$(".ui-step").find("li").removeClass("ui-step-active");
+	$("#retstep_one").hide();
+	$("#lisetptwo").addClass("ui-step-active");
+	$("#regstet_two").show();
+
+	/*********手机验证码效果开始***********/
+		var InterValObj; //timer变量，控制时间
+		var count = 60; //间隔函数，1秒执行
+		var curCount;//当前剩余秒数
+		function sendMessage(nx) {
+			curCount = count;
+			//设置button效果，开始计时
+				$("#phonesafecode").attr("disabled", "true");
+				$("#phonesafecode").css("background","#ccc");
+				$("#phonesafecode").val("序号："+nx+" ，"+ curCount + " 秒后重新发送");
+				InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+			//timer处理函数
+			function SetRemainTime() {
+				if (curCount == 0) {                
+					window.clearInterval(InterValObj);//停止计时器
+					$("#phonesafecode").removeAttr("disabled");//启用按钮
+					$("#phonesafecode").css("background","#0093dd");
+					$("#phonesafecode").val("重新发送验证码");
+				}
+				else {
+					curCount--;
+					$("#phonesafecode").val("序号："+nx+" ，"+ curCount + " 秒后重新发送");
+				}
+			}
+		}
+	/*********手机验证码效果结束***********/	
+//手机号码
+	$("#phonesafecode").click(function() {
+		var reg_phone= $("#userPhone").val();
+		if(reg_phone=="" || reg_phone=="输入将要注册的手机号码"){
+			$.msg({type:"error",content:"请输入将要注册的手机号码！"});
+			/**
+			$("#userPhone").val("");
+			$("#userPhone").css('color',"#666");
+			$("#userPhone").parent().attr('class', 'LandingUserName inputSelected');
+			$("#userPhonecheck").html('<i class="iconfont">&#61510;</i> 11位的中国大陆手机号码！');
+			$("#userPhonecheck").attr('class', 'error_select');
+			**/
+			return false;
+		}else if(!isTelephone(reg_phone)){
+			$.msg({type:"error",content:"中国大陆手机必须为13、15等开头的11位数字！"});
+			return false;	
+		}
+		$.post("http://www.ttjc.com.cn/ajaxcomment.php", {"query":"phone","u_phone":reg_phone}, function(msg) {
+			if(1*msg==2){
+				$("#phonesafecode").attr("disabled", "true");
+				$("#phonesafecode").css("background","#ccc");
+				$.post("http://www.ttjc.com.cn/ajaxcomment.php", {"get":"phonecode","u_phone":reg_phone}, function(msg) {
+					var msgcode = msg.split("♀")[0];
+					var msxh = msg.split("♀")[1];
+					if(1*msgcode==2){
+						$("#phonechick").val(reg_phone);
+						$.msg({type:"yes",content:"验证码已发送至你手机，请注意查收！"});
+						sendMessage(msxh);//显示效果
+					}else{
+						$("#phonesafecode").removeAttr("disabled");//启用按钮
+						$("#phonesafecode").css("background","#0093dd");
+						$.msg({type:"error",content:"系统繁忙，请稍后再试！"});
+					}
+				});	
+			}else{
+				$("#userPhonecheck").html('该手机号码已被其他人占用！');
+				$("#userPhonecheck").attr('class', 'error_red');
+				$("#userPhone").parent().attr('class', 'LandingUserName inputError');
+			}
+		});	
+	});
+
+	//数据提交
+	$("#step_two_submit").click(function() {
+		//第一个校验结束
+		/**
+		$(".ui-step").find("li").removeClass("ui-step-active");
+		$("#retstep_one").hide();
+		$("#regstet_two").hide();
+		$("#lisetpthree").addClass("ui-step-active");
+		$("#regstet_three").show();
+		**/
+		var reg_phone= $("#userPhone").val();
+		var reh_phone= $("#phonechick").val();
+		var Phonemsg_code= $("#Phonemsg_code").val().replace(/^(\s|\xA0)+|(\s|\xA0)+$/g, "");
+		if(reg_phone != reh_phone){
+			$.msg({type:"error",content:"请填写正确的手机号码！"});
+			return false;	
+		}
+		if(Phonemsg_code.length != 6){
+			$.msg({type:"error",content:"短信验证码错误！"});
+			$("#msgyzmcheck").html('短信验证码错误！');
+			$("#msgyzmcheck").attr('class', 'error_red');
+			$("#Phonemsg_code").parent().attr('class', 'LandingYzm inputError');
+			return false;	
+		}else if($("#phoneerrormsg").val()!="msg"){
+			$.msg({type:"error",content:"短信验证码错误！"});
+			$("#msgyzmcheck").html('短信验证码错误！');
+			$("#msgyzmcheck").attr('class', 'error_red');
+			$("#Phonemsg_code").parent().attr('class', 'LandingYzm inputError');
+			return false;	
+		}
+		$("#reg_form").submit();
+	})
+	
+ })
+//用户提交结束			
+	  })
+</script>
+</head>
+
+<body>
+<!--topbar-->
+<div class="topbar">
+  <div class="topbar_in">
+    <p class="fl"> <span>服务热线：023-65038508</span> <a class="a_wx" href="javascript:;" title="官方微信" hidefocus="true">官方微信</a> <a class="a_qq" target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=77d14c536a83fa744082830e71d032e39075208dab36bb2f5377c1cef1d8f2d3" title="官方QQ群"  hidefocus="true">官方1群</a> <a class="a_qq" target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=77d14c536a83fa744082830e71d032e39075208dab36bb2f5377c1cef1d8f2d3" title="官方QQ群"  hidefocus="true">官方2群</a> </p>
+    <p class="fr"> <a href="#" title="登录">登录</a> <a href="#" title="注册账号" class="reg">注册账号</a> </p>
+  </div>
+</div>
+<div class="clear"></div>
+<!--head-->
+<div class="head">
+  <div class="w1200">
+    <div class="head_top">
+      <div class="logo"> <a href="index.html"><img src="resources/images/logo.jpg" width="168" height="54" /></a> <img src="resources/images/3year.gif" width="78" height="49" /></div>
+       <ul class="nav">
+          <li><a href="#">首页</a></li>
+          <li><a href="#">我要理财</a></li>
+          <li><a href="#">债权转让</a></li>
+          <li><a href="#">我要借款</a></li>
+          <li><a href="#"><span class="trans2"></span>安全保障</a>
+             <div class="subNav">
+               <span></span>
+               <a href="#">我要借款</a>
+               <a href="#">我要借款</a>
+               <a href="#">我要借款</a>
+             </div>
+          </li>
+          <li><a href="#">我的账户</a></li>
+          <li><a href="#">帮助中心</a></li>
+        </ul>
+    </div>
+  </div>
+</div>
+<div class="clear"></div>
+<div class="login_div">
+  <div class="clear"></div>
+  <div class="register_center">
+    <h4><span>账户注册</span></h4>
+    <ul class="Progress">
+      <li class="passed">
+        <p><b>1</b>填写账户信息</p>
+        <span class="sp1"><img src="resources/images/jie_list/zcbg1.jpg" /></span></li>
+      <li class="not_over">
+        <p><b>2</b>填写账户信息</p>
+        <span class="sp2"><img src="resources/images/jie_list/zcbg2.jpg" /></span></li>
+      <li class="not_over">
+        <p><b>3</b>注册成功</p>
+        <span></span></li>
+    </ul>
+    <div class="register_list">
+      <form>
+        <ul>
+          <li>
+            <label><span>*</span>用户名</label>
+            	<div class="LandingUserName"><input name="username" id="username" type="text" value="6-16个字符，一但注册成功会员名不能更改" style="color: rgb(153, 153, 153);"></div>
+			<span id="usernamecheck" class="inputspandef"></span>
+          </li>
+          <li>
+            <label><span>*</span>手机号码</label>
+            <div class="LandingUserName"><input name="userPhone" id="userPhone" type="text" value="11位的中国大陆手机号码" style="color: rgb(153, 153, 153);"></div>
+			<span id="userPhonecheck" class="inputspandef"></span>
+          </li>
+          <li>
+            <label><span>*</span>密码</label>
+           <div class="LandingPassword">
+				<input type="password" name="password" id="password" title="输入密码" style="color: rgb(102, 102, 102); display: none;">
+          		<input name="password_text" id="password_text" type="text" value="6-16个字符，建议使用字母加数字的组合密码！" style="color: rgb(153, 153, 153); display: inline-block;">	
+			</div>
+			<span id="passwordcheck" class="inputspandef"></span>
+          </li>
+          <li>
+            <label><span>*</span>确认密码</label>
+          <div class="LandingPassword">
+				<input type="password" name="passwordre" id="passwordre" title="重复输入密码" style="color: rgb(102, 102, 102); display: none;">
+          		<input name="passwordre_text" id="passwordre_text" type="text" value="重复输入密码" style="color: rgb(153, 153, 153); display: inline-block;">	
+			</div>
+			<span id="passwordrecheck" class="inputspandef"></span>
+          </li>
+          <li>
+            <label><span>*</span>验证码</label>
+            <div class="LandingYzm"><input name="validate_code" id="validate_code" maxlength="5" type="text" value="输入验证码" style="color: rgb(153, 153, 153);"></div>
+            <img src="resources/images/jie_list/zcimg2.jpg" /><a href="#"><img src="resources/images/jie_list/zcimg3.jpg" /></a></li>
+          <li>
+            <input type="checkbox" checked="checked" class="check"/>
+            我已经阅读并同意 《<a href="#">天天聚财网站服务协议</a>》</li>
+          <li>
+            <p class="logonBtn regiBtn"><a href="javascript:;" id="step_one_submit" class="btn trans">进入下一步</a></p>
+          </li>
+        </ul>
+      </form>
+    </div>
+    <!--end register_list--> 
+  </div>
+  <!--end Register_center-->
+  <div class="clear"></div>
+</div>
+<!--end login_div--> 
+
+<!--footer-->
+<div class="footer nomar"> 
+  <!--foot_t-->
+  <div class="foot_t">
+    <div class="w1200">
+      <div class="foot_left">
+        <p class="top_link"><a href="#" title="公司简介">公司简介</a><a href="#" title="法规保障">法规保障</a><a href="#" title="本息保障">本息保障</a><a href="#" title="企业荣誉">企业荣誉</a><a href="#" title="资费说明">资费说明</a><a href="#" title="交易安全">交易安全</a><a href="#" title="认证与安全">认证与安全</a><a href="#" title="管理团队">管理团队</a></p>
+        <div class="ico">
+          <div class="look"><span>关注我们</span><a href="http://weibo.com/p/1006065584238499/home" class="wb trans" title="天天聚财微博" target="_blank"></a><a href="#" class="wx trans" title="天天聚财微信" target="_blank"></a></div>
+          <div class="look hasml"><span>网站地图</span><a href="#" class="tu trans" title="网站地图" target="_blank"></a></div>
+          <div class="look"><span>收益计算器</span><a href="#" class="ca trans" title="收益计算器" target="_blank"></a></div>
+          <div class="code_box"> <img src="http://www.ttjc.com.cn/images/ttjc_weixin.jpg"><em class="fm2">◆</em></div>
+        </div>
+      </div>
+      <dl class="foot_ser">
+        <dt>客服热线（工作时间：9：00—21：00）</dt>
+        <dd>
+          <p class="tel">400-023-3536</p>
+          <div class="icon"> <span><i>客服邮箱</i><a href="mailto:ttjc009@163.com" class="email trans" title="Email" target="_blank"></a></span> <span><i>在线客服</i><a href="http://shang.qq.com/wpa/qunwpa?idkey=77d14c536a83fa744082830e71d032e39075208dab36bb2f5377c1cef1d8f2d3" class="kefu trans" title="在线客服" target="_blank"></a></span> </div>
+        </dd>
+      </dl>
+    </div>
+  </div>
+  <!--foot_b-->
+  <div class="foot_b">
+    <div class="w1200">
+      <div class="link"> <span>友情链接：</span><a href="#">网贷之家</a><a href="#">融途网</a><a href="#">网贷天眼</a><a href="#">网贷第三方</a><a href="#">网贷中国</a><a href="#">网贷点评网</a><a href="#">网贷联盟</a><a href="#">网贷界</a><a href="#">网贷之星</a><a href="#">网贷帮手</a><a href="#">网贷财宝</a> </div>
+      <div class="copyright">
+        <p>版权所有：重庆天天聚财投资管理有限公司        有 ICB备：渝ICP备14003929号-1</p>
+        <div class="foot_m"> <a class="ap1 trans" href="http://beian.cqnet110.gov.cn/home" target="_blank"></a> <a class="ap2 trans" href="http://beian.cqnet110.gov.cn/open/showRecord?id=50010602000558" target="_blank"></a> <a class="ap3 trans" href="https://search.szfw.org/cert/l/CX20140703008333008377" target="_blank"></a> </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

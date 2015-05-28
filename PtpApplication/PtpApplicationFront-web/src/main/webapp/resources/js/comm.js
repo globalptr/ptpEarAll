@@ -27,9 +27,9 @@
 
 
 $(function(){
-	$.wxCode(); //Weixin Code
+	//$.wxCode(); //Weixin Code
 	
-	$.onLine( //在线客服
+	/*$.onLine( //在线客服
 		{
 			//加入要显示QQ和对应名称
 			qn:[
@@ -38,77 +38,13 @@ $(function(){
 				{"qq":"323456789", "name":"技术支持-小何"}
 			]
 		}
-	);
+	);*/
 	
-	$.hdFixed(); //Head 固定头部
+	//$.hdFixed(); //Head 固定头部
+	goToTop();
+	kefu();
+	headSlide();
 	
-	$("div.more_bank_sw").on("click", function(){ //More Bank Show
-		var o = $("div.bType"),
-			p = $(this).find("i"),
-			l = o.find("label"),
-			h = l.eq(0).outerHeight(true);
-
-		if(o.height() <= h*3) {
-			o.animate({
-				"height" : Math.ceil(l.length / 3) * h
-			}, 200, function(){
-				p.addClass("icon_arr_d");
-			});
-		} else {
-			o.animate({
-				"height" : h * 3
-			}, 200, function(){
-				p.removeClass("icon_arr_d");
-			});
-		}
-	});
-	
-	
-	$("div.sum").on("blur", "input.inpte", function(){ //充值金额Set
-		var o = $(this),
-			p = $(".e_tips");
-		if($.trim(o.val()) == "") {
-			p.text("请输入金额");
-		}
-		o.on("focus", function(){
-			p.text("");
-		});
-	});
-	
-	
-	$("div.acc_debt_menu").on("click", "a", function(){ //债权转让&&购买记录
-		var o = $(this),
-			i = o.index("div.acc_debt_menu a");
-			
-		if(o.is(".on")) {
-			return false;
-		}
-		o.addClass("on").siblings().removeClass("on")
-		$("div.acc_debt_status").addClass("dNone").eq(i).removeClass("dNone");
-		$("div.acc_debt_tab").addClass("dNone").eq(i).removeClass("dNone");
-	});
-	
-	$("#btn_infoEdit").on("click", function(){ //信息Edit-切换
-		var o = $(this),
-			p = $("ul.acc_info_list"),
-			t = $.trim(o.text());
-
-		if(t == "修改信息") {
-			p.hide().eq(1).show();
-			o.text("取消修改").attr("title", "取消修改");
-		} else if (t == "取消修改") {
-			p.hide().eq(0).show();
-			o.text("修改信息").attr("title", "修改信息");
-		}
-	});
-	
-	$("div.bType").on("click", "img", function(){ //充值类型Chioce
-		var o = $("div.bType").find("input[type='radio']"),
-			c = $(this);
-		o.prop("checked", false);
-		c.prev().prop("checked", true);
-	});
-
 });
 
 
@@ -217,7 +153,7 @@ $.hdFixed = function(){
 			}
 		}
 		
-		if(sTop>27) {
+		if(sTop>40&&sTop<440) {
 			if(!o.is(".headFixed")) {
 				o.prev().css("marginBottom", o.height());
 				o.addClass("headFixed");
@@ -518,8 +454,37 @@ $.organ = function(o){
 	});
 }
 
-
-
+/*******文字图片缓慢上升********/
+$.introUp=function(o){
+	var upNum=5,
+	    iDiv =$(o).find("li");
+		
+		iDiv.on("mouseover",function(){
+			$(this).stop().animate({marginTop:upNum},300);
+			
+			});
+		iDiv.on("mouseout",function(){
+			$(this).stop().animate({marginTop:0,color:"#333"},300);
+			});	
+	}
+/*文本框边框*/
+$.focusTxt2 = function(o,p){
+		$(o).focus(function(){
+			$(this).parents(p).css("border-color","#0077E5");
+			});	
+		$(o).blur(function(){
+			$(this).parents(p).css("border-color","#ddd");
+			});	
+}
+$.alertTxt=function(o,p,c){
+	//弹出框
+		$(o).click(function(){
+			$(c).fadeIn();
+			});	
+		$(p).click(function(){
+			$(c).fadeOut();
+			});	
+	}
 /** 头部焦点图切换 */
 $.focusCut = function(o, p){
 	//常量
@@ -553,16 +518,16 @@ $.focusCut = function(o, p){
 
 	$("div.focus").hover(function(){
 		window.clearInterval(f_clear);
-		prev.show();
-		next.show();
+		//prev.show();
+		//next.show();
 	},
 	function(){
 		f_clear = setInterval(autoFocus, f_T);
-		prev.hide();
-		next.hide();
+		//prev.hide();
+		//next.hide();
 	});
 
-	prev.on("click", function(){
+	/*prev.on("click", function(){
 		f_cur    = iDiv.parent().find(".on").index();
 		f_newcur = f_cur - 1;
 		f_newcur = f_newcur < 0 ? f_num-1 : f_newcur;
@@ -576,9 +541,9 @@ $.focusCut = function(o, p){
 		f_newcur = f_newcur >= f_num ? 0 : f_newcur;
 		
 		cut(f_cur, f_newcur);
-	});
+	});*/
 	
-	tDiv.find("a").on("mouseover",function(){
+	tDiv.find("a").on("click",function(){
 		clearInterval(f_clear);
 		
 		if($(this).parent().hasClass("on"))
@@ -612,4 +577,90 @@ $.focusCut = function(o, p){
 		iDiv.removeClass("on");
 		iDiv.eq(n).addClass("on");
 	}
+}
+
+/*头部手风琴*/
+function headSlide(){
+	 $(".nav li").hover(function(){
+		$(".nav li").find($(".subNav")).slideUp(400);
+		$(this).find(".subNav").stop().slideDown(400);
+		},function(){
+		$(this).find(".subNav").stop().slideUp(400);	
+		});
+	}
+//返回顶部
+function goToTop() { 
+   //webconfig('wapcode');
+   //webconfig('wxCode');
+   var tophtml="<div id='izl_rmenu' class='izl-rmenu ie6fixedBR'><div class='btn btn-wx'><img class='pic' src='images/QrCode2.jpg'></div><div class='btn btn-top'><p>回到顶部</p></div></div>";
+	$(tophtml).appendTo('body');
+	$("#izl_rmenu").each(function(){
+		$(this).find(".btn-wx").mouseenter(function(){
+			$(this).find(".pic").fadeIn("fast");
+		});
+		$(this).find(".btn-wx").mouseleave(function(){
+			$(this).find(".pic").fadeOut("fast");
+		});
+		$(this).find(".btn-phone").mouseenter(function(){
+			$(this).find(".pic").fadeIn("fast");
+		});
+		$(this).find(".btn-phone").mouseleave(function(){
+			$(this).find(".pic").fadeOut("fast");
+		});
+		$(this).find(".btn-top").click(function(){
+			$("html, body").animate({
+				"scroll-top":0
+			},"fast");
+		});
+		$(this).find(".btn-top").mouseenter(function(){
+			$(this).find("p").fadeIn("fast");
+		});
+		$(this).find(".btn-top").mouseleave(function(){
+			$(this).find("p").fadeOut("fast");
+		});
+	});
+	var lastRmenuStatus=false;
+	$(window).scroll(function(){//bug
+		var _top=$(window).scrollTop();
+		if(_top>200){
+			$("#izl_rmenu").data("expanded",true);
+		}else{
+			$("#izl_rmenu").data("expanded",false);
+		}
+		if($("#izl_rmenu").data("expanded")!=lastRmenuStatus){
+			lastRmenuStatus=$("#izl_rmenu").data("expanded");
+			if(lastRmenuStatus){
+				$("#izl_rmenu .btn-top").slideDown();
+			}else{
+				$("#izl_rmenu .btn-top").slideUp();
+			}
+		}
+	});
+}
+//客服
+function kefu(){
+	var KF = $(".keifu");
+	var wkbox = $(".keifu_box");
+	var kf_close = $(".keifu .keifu_close");
+	var icon_keifu = $(".icon_keifu");
+	var kH = wkbox.height();
+	var kW = wkbox.width();
+	var wH = $(window).height();
+	KF.css({height:kH});
+	icon_keifu.css("top",parseInt((kH-100)/2));
+	var KF_top = (wH-kH)/2;
+	if(KF_top<0) KF_top=0;
+	KF.css("top",KF_top);
+	$(kf_close).click(function(){
+		KF.animate({width:"0"},200,function(){
+			wkbox.hide();
+			icon_keifu.show();
+			KF.animate({width:26},300);		
+		});	
+	});
+	$(icon_keifu).click(function(){
+			$(this).hide();
+			wkbox.show();
+			KF.animate({width:kW},200);
+	});
 }

@@ -1,339 +1,643 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>互联网金融，让改变发生 - 天天聚财官网</title>
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-        <meta name="keywords" content="天天聚财|网络理财|个人理财|投资理财|P2P理财|互联网金融|投资理财|债权转让|理财计划|优选计划|网络贷款|工薪贷|生意贷|网商贷|网贷|小额贷款"/>
-        <meta name="description" content="天天聚财(www.ttjc.com.cn)是目前中国互联网金融中P2P信贷行业中最大、最安全的平台，为投资理财用户和贷款用户两端提供公平、透明、安全、高效的互联网金融服务。投资理财用户可以通过天天聚财平台进行投标、加入优选理财计划、购买债权等方式进行投资获得高收益；贷款用户可以通过平台申请工薪贷、生意贷、网商贷等小额贷款。"/>
-        <link rel="icon" href="http://www.qclcfwzx.com/favicon.ico" type="image/x-icon"/>
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta name="keywords" content="天天聚财|网络理财|个人理财|投资理财|P2P理财|互联网金融|投资理财|债权转让|理财计划|优选计划|网络贷款|工薪贷|生意贷|网商贷|网贷|小额贷款"/>
+    <meta name="description" content="天天聚财(www.ttjc.com.cn)是目前中国互联网金融中P2P信贷行业中最大、最安全的平台，为投资理财用户和贷款用户两端提供公平、透明、安全、高效的互联网金融服务。投资理财用户可以通过天天聚财平台进行投标、加入优选理财计划、购买债权等方式进行投资获得高收益；贷款用户可以通过平台申请工薪贷、生意贷、网商贷等小额贷款。"/>
+    <link rel="icon" href="http://www.qclcfwzx.com/favicon.ico" type="image/x-icon"/>
+    <link href="resources/css/basic.css" rel="stylesheet" type="text/css"/>
+    <link href="resources/css/fzm.css" rel="stylesheet" type="text/css"/>
+    <link href="resources/css/pubs.css" rel="stylesheet" type="text/css"/>
+    <script src="resources/js/comm.js" type="text/javascript"></script>
+    <script src="resources/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="resources/js/scroll.js" type="text/javascript"></script>
+<style>
+.center .plan:hover{border-color:#F60;cursor:pointer;}
+.head_bot .bonus p.register {background:#EEA236;}
+.plan_l h3 span img{transform:rotateY(0deg);-webkit-transition: all 0.6s ease-in; -moz-transition: all 0.6s ease-in; -o-transition: all 0.6s ease-in; -ms-transition: all 0.6s ease-in; transition: all 0.6s ease-in;}
+.center .plan:hover .plan_l h3 span img{transform:rotateY(360deg);}
+.mark .main_mark h2.mark_tit p em{background:url(images/bid_tit1.gif);width:194px;height:51px;margin-left:-10px;display:inline-block;}
+</style>
+<script>
+	 BizQQWPA.addCustom({aty: '1', a: '1002', nameAccount: 800099614, selector: 'BizQQWPA'});
+	 BizQQWPA.addCustom({aty: '1', a: '1003', nameAccount: 800099614, selector: 'BizQQWPA2'});
+	 BizQQWPA.addCustom({aty: '1', a: '1004', nameAccount: 800099614, selector: 'BizQQWPA3'});
+	 BizQQWPA.addCustom({aty: '1', a: '1005', nameAccount: 800099614, selector: 'BizQQWPA4'});
+	 BizQQWPA.addCustom({aty: '1', a: '1006', nameAccount: 800099614, selector: 'BizQQWPA5'});
+$(function(){
+	
+	$(".prog").each(function(i){ //项目LIST进度条
+		var t  = $.trim($(this).text());
+			t  = t.substring(0, t.indexOf("%"));
+		$(this).siblings("p").find("span").css("width", t + "%");
+    });
+	
+	$("a.wx").hover(function(){
+		$("div.code_box").show().animate({
+			"opacity" : 1
+		}, 300);
+	},
+	function(){
+		$("div.code_box").animate({
+			"opacity" : 0
+		}, 300, function(){
+			$(this).hide();
+		});
+	});
+});
+$(function(){
+	$.focusCut("ul.fI", "ul.fT"); //头部焦点图切换
+	var login=false;
+	if(login){
+			  $(".bonus").find(".register").html("<a href='#'>充值</a>");
+			   $(".bonus").find(".register").css("marginTop","30px");
+			  $(".bonus").find(".login").remove();
+			  }
+	setTimeout(function(){
+		  $(".bonus").animate({top:"100px"},1000,function(){
+		  $(this).animate({top:"68px"},300);
+		  
+		  });
+		},1000);
+	
+});
 
-        <link href="resources/css/pubs.css" rel="stylesheet" type="text/css"/>
-        <link href="resources/css/basic.css" rel="stylesheet" type="text/css"/>
-        <script src="resources/js/jquery-1.10.2.min.js" type="text/javascript"></script>
-        <script src="resources/js/comm.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            $(function() {
-                $.organ("ul.func"); //手风琴
+</script>
 
-                $("div.c_plan").each(function(i) { //项目LIST进度条
-                    var t = $.trim($(this).text());
-                    t = t.substring(0, t.indexOf("%"));
-                    t = t * 56;
-                    $(this).css("backgroundPosition", "-" + t + "px 0");
-                });
+<script language="javascript">
+        $(function(){
+                GetRTime685();
+        });
+        var run685times = 0;  
+        function GetRTime685(){  
+        var nMS =1100*1000-run685times*1000;  
+                if (nMS>0){  
+                        var nD=Math.floor(nMS/(1000*60*60*24))%24;if(1&lt;=nD){nD=nD;}
+                        var nH=Math.floor(nMS/(1000*60*60))%24;if(nH&lt;10){nH="0"+String(nH);} 
+                        var nM=Math.floor(nMS/(1000*60)) % 60;if(nM&lt;10){nM="0"+String(nM);}
+                        var nS=Math.floor(nMS/1000) % 60; if(nS&lt;10){nS="0"+String(nS);}
+                        var time='<span>'+nD+'</span><i>天</i><span>'+nH+'</span><i>时</i><span>'+nM+'</span><i>分</i><span>'+nS+'</span><i>秒</i>';
+                        $(".limit").html(time); 
+                        run685times++;  
+                        setTimeout("GetRTime685()",1000);  
+                }else{
+                        $(".limit").html("<p class='end'>投标介绍</p>"); 
+                }
+        }  
+</script>
+</h:head>
 
-                $("a.wx").hover(function() {
-                    $("div.code_box").show().animate({
-                        "opacity": 1
-                    }, 300);
-                },
-                        function() {
-                            $("div.code_box").animate({
-                                "opacity": 0
-                            }, 300, function() {
-                                $(this).hide();
-                            });
-                        });
-            });
-            $(window).load(function() {
-                $.focusCut("ul.fI", "ul.fT"); //头部焦点图切换
-
-                $.digitalScroll("span.charNum"); //数字自增
-                $.digitalScroll("#nemPer", 0);
-            });
-
-        </script>
-    </h:head>
-
-    <h:body>
-        <!--不显示右侧浮动窗-开关-->
-        <input type="hidden" id="inpOnLine" value="0" />
-
-        <div class="topbar">
-            <div class="topbar_in fm2">
-                <p class="fl">
-                    <h:outputLabel value="#{frontSessionBean.logName.name}"/>
-                    <span>您好，欢迎来到天天聚财！</span>
-                    <span class="s2">请</span><a href="./log.xhtml" title="登录">登录</a>
-                    <a href="./ptpRegist.xhtml" title="免费注册">免费注册</a>
-                    <span>客服：400 0233 536</span>
-                </p>
-                <p class="fr">
-                    <a class="a_wx" href="javascript:;" title="官方微信">官方微信</a>
-                    <a class="a_qq" target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=77d14c536a83fa744082830e71d032e39075208dab36bb2f5377c1cef1d8f2d3" title="官方QQ群">官方QQ群</a>
-                </p>
-            </div>
-        </div>
-        <div class="clear"></div>
-
-        <div class="head">
-            <div class="head_in">
-                <div class="logo"><a href="index.xhtml"><img src="../resources/images/logo.png" alt="天天聚财logo" /></a></div>
-                <ul class="nav">
-                    <li class="on"><a href="index.xhtml" title="首页">首页</a><!--<span>◆</span>--></li>
-                    <li><a href="money_list.xhtml" title="我要理财">我要理财</a><span>◆</span></li>
-                    <li><a href="borrow.xhtml" title="我要借款">我要借款</a><span>◆</span></li>
-                    <li><a href="account.xhtml" title="我的账户">我的账户</a><span>◆</span></li>
-                    <li><a href="help.xhtml" title="帮助中心">帮助中心</a><span>◆</span></li>
-                    <li><a href="#" title="关于我们">关于我们</a><span>◆</span></li>
-                </ul>
-            </div>
-            <div class="nav_node" style="display:none;">
-                <div class="nav_node_bg"></div>
-                <div class="nav_node_in">
-                    <a class="on" href="#" title="账户充值">账户充值</a>
-                    <a href="#" title="申请提现">申请提现</a>
-                    <a href="#" title="邀请好友">邀请好友</a>
-                </div>
-            </div>
-        </div>
-        <div class="clear"></div>
-
-        <div class="focus">
-            <ul class="fI">
-                <li class="on" style="background-image:url(../resources/images/banner_01.jpg);"><a href="javascript:;"></a></li>
-                <li style="background-image:url(http://www.ttjc.com.cn/images/indexbanner/free.png);"><a href="javascript:;"></a></li>
-                <li style="background-image:url(http://www.ttjc.com.cn/images/indexbanner/erqianwan.png);"><a href="javascript:;"></a></li>
+<h:body class="index_xin">
+<!--topbar-->
+<div class="topbar">
+  <div class="topbar_in">
+    <p class="fl"> <span>服务热线：023-65038508</span> <a class="a_wx" href="javascript:;" title="官方微信" hidefocus="true">官方微信</a> <a class="a_qq" target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=77d14c536a83fa744082830e71d032e39075208dab36bb2f5377c1cef1d8f2d3" title="官方QQ群"  hidefocus="true">官方1群</a> <a class="a_qq" target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=77d14c536a83fa744082830e71d032e39075208dab36bb2f5377c1cef1d8f2d3" title="官方QQ群"  hidefocus="true">官方2群</a> </p>
+    <p class="fr"> <a href="login.html" title="登录">登录</a> <a href="register.html" title="注册账号" class="reg">注册账号</a> </p>
+  </div>
+</div>
+<div class="clear"></div>
+<!--head-->
+<div class="head">
+  <div class="w1200">
+    <div class="head_top">
+      <div class="logo"> <a href="index.html"><img src="resources/images/logo.jpg" width="168" height="54" /></a> <img src="resources/images/3year.gif" width="78" height="49" /></div>
+       <ul class="nav">
+          <li><a href="index.html">首页</a></li>
+          <li><a href="#">我要理财</a></li>
+          <li><a href="zhuan_xiangq.html">债权转让</a></li>
+          <li><a href="jiekuan_list.html">我要借款</a></li>
+          <li><a href="#"><span class="trans2"></span>安全保障</a>
+             <div class="subNav">
+               <span></span>
+               <a href="#">我要借款</a>
+               <a href="#">我要借款</a>
+               <a href="#">我要借款</a>
+             </div>
+          </li>
+          <li><a href="#">我的账户</a></li>
+          <li><a href="#">帮助中心</a></li>
+        </ul>
+    </div>
+  </div>
+</div>
+<div class="clear"></div>
+<div class="focus">
+   <div class="head_bot">
+        <ul class="fI">
+        <li class="on" style="background-image:url(images/banner.jpg);"><a href="javascript:;"></a></li>
+        <li style="background-image:url(http://www.ttjc.com.cn/images/indexbanner/free.png);"><a href="javascript:;"></a></li>
+        <li style="background-image:url(http://www.ttjc.com.cn/images/indexbanner/erqianwan.png);"><a href="javascript:;"></a></li>
+        <li style="background-image:url(http://www.ttjc.com.cn/images/indexbanner/free.png);"><a href="javascript:;"></a></li>
+        <li style="background-image:url(http://www.ttjc.com.cn/images/indexbanner/erqianwan.png);"><a href="javascript:;"></a></li>
+    </ul>
+    <ul class="fT">
+        <li class="on"><a></a></li>
+        <li><a></a></li>
+         <li><a></a></li>
+          <li><a></a></li>
+        <li class="end"><a></a></li>
+    </ul>
+          <div class="bonus">
+             <h3>天天聚财年化收益率</h3>
+             <p>最高<span class="color">21.2%</span></p>
+             <p><i class="color">30</i>倍活期存储收益<i class="color hasml">3.27</i>倍定期存款收益</p>
+             <p class="register"><a href="#" class="btn">注册领红包</a></p>
+             <p class="login">已有账号？<a href="#" class="trans">立即登录</a></p>
+          </div>
+      </div>
+  </div>
+<!--center-->
+<div class="center" style=" background:#f1f1f1; overflow:hidden;">
+  <div class="w1200">
+    <!--func-->
+    <div class="func">
+      <ul class="intro_txt">
+       <li class="in_txt">
+          <div class="show">
+             <img src="resources/images/icon_an.jpg" width="99" height="99" title="安全"  alt="安全"  class="trans"/>
+          </div>
+          <div class="main_txt"> 
+            <h3 class="trans2">安全</h3>
+            <p class="trans2">运用技术分散<br />帮助人进入本金保障计划</p>
+          </div>
+       </li>
+       <li class="in_txt">
+          <div class="show">
+             <img src="resources/images/icon_shou.jpg" width="83" height="87" title="收益"  alt="收益"  class="trans"/>
+          </div>  
+          <div class="main_txt">  
+          <h3 class="trans2">收益</h3>
+          <p class="trans2">我们不介入交易<br />借款人的利息100%给到人</p>
+          </div>
+        </li>
+       <li class="in_txt">
+          <div class="show"> 
+             <img src="resources/images/icon_bao.jpg" width="83" height="92" title="保障"  alt="保障" class="trans" />
+          </div>  
+          <div class="main_txt"> 
+            <h3 class="trans2">保障</h3>
+            <p class="trans2">不接触资金不赚利差<br />最大地保障了平台安全</p>
+          </div>
+       </li>
+      </ul>
+      <div class="guide">
+         <img src="resources/images/guide.jpg" width="242" height="209" title="新手指南"  alt="新手指南"/>
+      </div>
+    </div>
+    <div class="novice_exclusive">
+    <div class="novice_exclusive_l">
+    <p>限未成功投资过的新用户<br/>仅享有一次机会</p>
+    <p><span>每天9点持续发布</span></p>
+    </div>
+    <div class="novice_exclusive_r">
+    <h4><a  href="#">【新手定投宝】第N2015052302期</a></h4>
+     <ul class="clearfix">                                                 
+            <li><span>总金额</span>
+           <i> 500,000</i>元 
+             </li>
+            <li> <span>原收益8% </span>
+           <p style="line-height:40px;"> 年化收益<b>16.0</b><em>%</em></p>
+            </li>
+            <li> <span>期限</span>
+            <i>1</i>个月
+            </li>
+            <li class="last"><a href="#" class="trans btn">加入</a></li>
             </ul>
-            <ul class="fT">
-                <li class="on"><a></a></li>
-                <li><a></a></li>
-                <li class="end"><a></a></li>
-            </ul>
-            <a href="javascript:;"  class="fsb prev">Prev</a>
-            <a href="javascript:;"  class="fsb next">Next</a>
-        </div>
-        <div class="clear"></div>
+           <div class="jindu"> <p><span></span></p>72%</div>
+    </div>
+    </div>
+    <!--end novice_exclusive-->
+<div class="day_manage">
+  <span class="day_img"></span>
+<ul>
+<li class="one">
+<dl>
+<dd>
+<div class="l"><p>期限&nbsp;3个月</p></div>
+<div class="r">
+<p><span>进阶优选</span></p>
+<p>省心投资，时间短收益高</p>
+</div>
+</dd>
+<dd>
+<p class="l_r">
+<span>起投金额<br/><i>10万元起</i></span> 
+<span class="sp1">收益<br/><i><b>10</b>%</i>
+</span>
+</p>
+</dd>
+<dd><a href="#" class="trans btn">马上投标</a></dd>
+</dl>
+</li>
+<li class="two">
+<dl>
+<dd>
+<div class="l"><p>期限&nbsp;6个月</p></div>
+<div class="r">
+<p><span>进阶优选</span></p>
+<p>省心投资，时间短收益高</p>
+</div>
+</dd>
+<dd>
+<p class="l_r">
+<span>起投金额<br/><i>10万元起</i></span> 
+<span class="sp1">收益<br/><i><b>10</b>%</i>
+</span>
+</p>
+</dd>
+<dd><a href="#" class="trans btn">马上投标</a></dd>
+</dl>
+</li>
+<li class="there">
+<dl>
+<dd>
+<div class="l"><p>期限&nbsp;12个月</p></div>
+<div class="r">
+<p><span>进阶优选</span></p>
+<p>省心投资，时间短收益高</p>
+</div>
+</dd>
+<dd>
+<p class="l_r">
+<span>起投金额<br/><i>10万元起</i></span> 
+<span class="sp1">收益<br/><i><b>10</b>%</i>
+</span>
+</p>
+</dd>
+<dd><a href="#" class="trans btn">马上投标</a></dd>
+</dl>
+</li>
+<li class="last">
+<dl>
+<dd>
+<div class="l"><p>期限&nbsp;12个月</p></div>
+<div class="r">
+<p><span>进阶优选</span></p>
+<p>省心投资，时间短收益高</p>
+</div>
+</dd>
+<dd>
+<p class="l_r">
+<span>起投金额<br/><i>10万元起</i></span> 
+<span class="sp1">收益<br/><i><b>10</b>%</i>
+</span>
+</p>
+</dd>
+<dd><a href="#" class="trans btn">马上投标</a></dd>
+</dl>
+</li>
+</ul>
+</div><!--end day_manage-->
+    <!--recommend-->
+   <!-- <div class="recom">
+       <div class="recom_txt">
+           <div class="recom_tit">
+             <div class="recom_icon">
+               <span class="icontxt iconfont">&#xe626;</span>
+               <i class="contxt"></i>
+             </div>
+             <p class="recom_rtxt">
+               <img src="resources/images/txt_icon1.jpg" />
+               <a href="#">了解详情</a>
+               <span>到期返还</span>
+             </p>
+           </div>
+           <div class="recom_intro">
+             <span class="hasbor"><i class="color3">10</i>万元起</span>
+             <span>期限<i class="color3">3</i>个月</span>
+           </div>
+           <div class="recom_income">
+             <p>收益</p>
+             <p><i class="color3">10%</i>起</p>
+           </div>
+           <div class="recom_bid">
+             <a href="#" class="btn">马上投标</a>
+           </div>
+       </div>
+       
+       <div class="recom_txt lcone">
+           <div class="recom_tit">
+             <div class="recom_icon">
+               <span class="icontxt iconfont">&#xe626;</span>
+               <i class="contxt">理财</i>
+             </div>
+             <p class="recom_rtxt">
+               <img src="resources/images/txt_icon2.jpg" />
+               <a href="#">了解详情</a>
+               <span>到期返还</span>
+             </p>
+           </div>
+           <div class="recom_intro">
+             <span class="hasbor"><i class="color3">10</i>万元起</span>
+             <span>期限<i class="color3">3</i>个月</span>
+           </div>
+           <div class="recom_income">
+             <p>收益</p>
+             <p><i class="color3">10%</i>起</p>
+           </div>
+           <div class="recom_bid">
+             <a href="#" class="btn">马上投标</a>
+           </div>
+       </div>
+       
+       <div class="recom_txt lctwo">
+           <div class="recom_tit">
+             <div class="recom_icon">
+               <span class="icontxt iconfont">&#xe626;</span>
+               <i class="contxt">理财</i>
+             </div>
+             <p class="recom_rtxt">
+               <img src="resources/images/txt_icon3.jpg" />
+               <a href="#">了解详情</a>
+               <span>到期返还</span>
+             </p>
+           </div>
+           <div class="recom_intro">
+             <span class="hasbor"><i class="color3">10</i>万元起</span>
+             <span>期限<i class="color3">3</i>个月</span>
+           </div>
+           <div class="recom_income">
+             <p>收益</p>
+             <p><i class="color3">10%</i>起</p>
+           </div>
+           <div class="recom_bid">
+             <a href="#" class="btn">马上投标</a>
+           </div>
+       </div>
+       
+       <div class="recom_txt tztwo">
+           <div class="recom_tit">
+             <div class="recom_icon">
+               <span class="icontxt iconfont">&#xe626;</span>
+               <i class="contxt"></i>
+             </div>
+             <p class="recom_rtxt">
+               <img src="resources/images/txt_icon4.jpg" />
+               <a href="#">了解详情</a>
+               <span>到期返还</span>
+             </p>
+           </div>
+           <div class="recom_intro">
+             <span class="hasbor"><i class="color3">10</i>万元起</span>
+             <span>期限<i class="color3">3</i>个月</span>
+           </div>
+           <div class="recom_income">
+             <p>收益</p>
+             <p><i class="color3">10%</i>起</p>
+           </div>
+           <div class="recom_bid">
+             <a href="#" class="btn">马上投标</a>
+           </div>
+       </div>
+      
+    </div>
+  </div>-->
+  
+  <!--adver-->
+  <div class="adver">
+  <img src="resources/images/gg01.jpg" width="866" height="136" />
+  </div>
+  
+  <!--mark-->
+  <div class="w1200 lc">
+   <div class="mark fl">
+  <div class="fl_div fl_div1">
+  <p class="jc_img1"><span>抵 押 标</span></p>
+  <h4>还款方式：按日计息，到期还本息 </h4>
+  <ul>
+  <li>
+  <div class="div_p1 clearfix">
+  <a href="#"><img src="resources/images/icon_zhi.jpg" />项目周转借款第2-1-14 </a><span>￥50,000,00</span>
+  <p class="jind"><span></span></p><i class="prog">50%</i>
+  </div>
+  <div class="div_p2 clearfix">
+  <p><span>年化：</span><b>21.8</b>%</p>
+    <p><span>期限：</span><b>3 </b><span>个月</span></p>
+      <p><span>奖励：</span><b>6.30</b>%</p>
+        <p><a href="#" class="btn trans">马上投标</a></p>
+  </div>
+  </li>
+   <li class="last">
+  <div class="div_p1 clearfix">
+  <a href="#"><img src="resources/images/icon_zhi.jpg" />项目周转借款第2-1-14 </a><span>￥50,000,00</span>
+  <p class="jind"><span></span></p><i class="prog">70%</i>
+  </div>
+  <div class="div_p2 clearfix">
+  <p><span>年化：</span><b>21.8</b>%</p>
+    <p><span>期限：</span><b>3 </b><span>个月</span></p>
+      <p><span>奖励：</span><b>6.30</b>%</p>
+        <p><a href="#" class="btn trans">马上投标</a></p>
+  </div>
+  </li>
+  </ul>
+  </div><!--end fl_div1-->
+  <div class="fl_div fl_div2">
+  <p class="jc_img1"><span>担 保 标</span></p>
+  <h4>还款方式：按日计息，到期还本息 </h4>
+  <ul>
+  <li>
+ <div class="div_p1 clearfix">
+  <a href="#"><img src="resources/images/icon_zhi.jpg" />项目周转借款第2-1-14 </a><span>￥50,000,00</span>
+  <p class="jind"><span></span></p><i class="prog">70%</i>
+  </div>
+  <div class="div_p2 clearfix">
+  <p><span>年化：</span><b>21.8</b>%</p>
+    <p><span>期限：</span><b>3 </b><span>个月</span></p>
+      <p><span>奖励：</span><b>6.30</b>%</p>
+        <p><a href="#" class="btn trans">马上投标</a></p>
+  </div>
+  </li>
+   <li class="last">
+ <div class="div_p1 clearfix">
+  <a href="#"><img src="resources/images/icon_zhi.jpg" />项目周转借款第2-1-14 </a><span>￥50,000,00</span>
+  <p class="jind"><span></span></p><i class="prog">70%</i>
+  </div>
+  <div class="div_p2 clearfix">
+  <p><span>年化：</span><b>21.8</b>%</p>
+    <p><span>期限：</span><b>3 </b><span>个月</span></p>
+      <p><span>奖励：</span><b>6.30</b>%</p>
+        <p><a href="#" class="btn trans">马上投标</a></p>
+  </div>
+  </li>
+  </ul>
+  </div><!--end fl_div2-->
+        <div class="fl_div fl_div3">
+  <p class="jc_img1"><span>直 投 标</span></p>
+  <h4>还款方式：按日计息，到期还本息 </h4>
+  <ul>
+  <li>
+ <div class="div_p1 clearfix">
+  <a href="#"><img src="resources/images/icon_zhi.jpg" />项目周转借款第2-1-14 </a><span>￥50,000,00</span>
+  <p class="jind"><span></span></p><i class="prog">70%</i>
+  </div>
+  <div class="div_p2 clearfix">
+  <p><span>年化：</span><b>21.8</b>%</p>
+    <p><span>期限：</span><b>3 </b><span>个月</span></p>
+      <p><span>奖励：</span><b>6.30</b>%</p>
+        <p><a href="#" class="btn trans">马上投标</a></p>
+  </div>
+  </li>
+   <li class="last">
+ <div class="div_p1 clearfix">
+  <a href="#"><img src="resources/images/icon_zhi.jpg" />项目周转借款第2-1-14 </a><span>￥50,000,00</span>
+  <p class="jind"><span></span></p><i class="prog">70%</i>
+  </div>
+  <div class="div_p2 clearfix">
+  <p><span>年化：</span><b>21.8</b>%</p>
+    <p><span>期限：</span><b>3 </b><span>个月</span></p>
+      <p><span>奖励：</span><b>6.30</b>%</p>
+        <p><a href="#" class="btn trans">马上投标</a></p>
+  </div>
+  </li>
+  </ul>
+  </div><!--end fl_div3-->
+  <div class="fl_div fl_div4">
+  <p class="jc_img1"><span>债 权 转 让</span></p>
+  <h4>还款方式：按日计息，到期还本息 </h4>
+  <ul>
+  <li>
+ <div class="div_p1 clearfix">
+  <a href="#"><img src="resources/images/icon_zhi.jpg" />项目周转借款第2-1-14 </a><span>￥50,000,00</span>
+  <p class="jind"><span></span></p><i class="prog">70%</i>
+  </div>
+  <div class="div_p2 clearfix">
+  <p><span>年化：</span><b>21.8</b>%</p>
+    <p><span>期限：</span><b>3 </b><span>个月</span></p>
+      <p><span>奖励：</span><b>6.30</b>%</p>
+        <p><a href="#" class="btn trans">马上投标</a></p>
+  </div>
+  </li>
+   <li class="last">
+ <div class="div_p1 clearfix">
+  <a href="#"><img src="resources/images/icon_zhi.jpg" />项目周转借款第2-1-14 </a><span>￥50,000,00</span>
+  <p class="jind"><span></span></p><i class="prog">70%</i>
+  </div>
+  <div class="div_p2 clearfix">
+  <p><span>年化：</span><b>21.8</b>%</p>
+    <p><span>期限：</span><b>3 </b><span>个月</span></p>
+      <p><span>奖励：</span><b>6.30</b>%</p>
+        <p><a href="#" class="btn trans">马上投标</a></p>
+  </div>
+  </li>
+  </ul>
+  </div><!--end fl_div4-->
+   </div>
+   
+   <!--block_right-->
+   <div class="block_right" id="block_right">
+    <div class="news">
+       <h3>新标预告</h3>
+       <div class="rate">
+          <p>房产抵押、债权转让第3-4期</p>
+          <dl>
+            <dt>年利率</dt>
+            <dd>21.1%</dd>
+          </dl>
+          <dl>
+            <dt>借款期限(月)</dt>
+            <dd class="nobor">12</dd>
+          </dl>
+       </div>
+       <div class="time">
+         <p>发表倒计时</p>
+         <div class="limit">
+             <span>2</span><i>天</i>
+             <span>11</span><i>时</i>
+             <span>25</span><i>分</i>
+             <span>46</span><i>秒</i>
+         </div>
+       </div>
+     </div>
+     <div class="news">
+       <h3><a href="#">&gt;&gt;更多</a>理财资讯</h3>
+       <ul>
+         <li><a href="#">互联网金融新态势</a></li>
+         <li><a href="#">网络安全是P2P行业所面临的问题</a></li>
+         <li><a href="#">P2P互联网金融走向繁荣的原因</a></li>
+         <li><a href="#">网贷优势明显，P2P成微小企业首...</a></li>
+         <li><a href="#">P2P理财悄然上位，夺人眼球</a></li>
+       </ul>
+     </div>
+     <div class="news">
+       <h3><a href="#">&gt;&gt;更多</a>最新公告</h3>
+       <ul>
+         <li><a href="#">某物流公司购车借款项目 第4-5</a></li>
+         <li><a href="#">房产抵押、债权转让第3-1期活动</a></li>
+         <li><a href="#">某物流公司购车借款项目 第3-3</a></li>
+         <li><a href="#">某物流公司购车借款项目 第4-1</a></li>
+         <li><a href="#">项目周转借款第2-13期活动奖励</a></li>
+       </ul>
+     </div>
+     <div class="weixin">
+      <img src="resources/images/weixin.jpg" width="265" height="253" class="trans2" />
+     </div>
+   </div>
+   <div class="clear"></div>
+  </div>
+</div>
 
-        <div class="main">
-            <ul class="count">
-                <li class="data">
-                    <em class="ico"></em>
-                    <div>
-                        <h6><span class="fs_24">数据统计</span></h6>
-                        <p>更新于2014-12-05</p>
-                    </div>
-                </li>
-                <li class="trade">
-                    <em class="ico"></em>
-                    <div>
-                        <h6><b class="fs_16">￥</b><span class="num" ><i></i></span><b class="fs_14">元</b></h6>
-                        <p>累计交易金额</p>
-                    </div>
-                </li>
-                <li class="make">
-                    <em class="ico"></em>
-                    <div>
-                        <h6><b class="fs_16">￥</b><span class="num " ><i></i></span><b class="fs_14">元</b></h6>
-                        <p>总待回收金额</p>
-                    </div>
-                </li>
-                <li class="rake">
-                    <em class="ico"></em>
-                    <div>
-                        <h6><span id="nemPer" class="num" ><i></i></span><b class="fs_14">%</b></h6>
-                        <p>近期利率指数</p>
-                    </div>
-                </li>
-            </ul>
-            <div class="clear"></div>
+<!--footer-->
+<div class="footer">
+  <!--foot_t-->
+  <div class="foot_t">
+    <div class="w1200">
+      <div class="foot_left">
+        <p class="top_link"><a href="#" title="公司简介">公司简介</a><a href="#" title="法规保障">法规保障</a><a href="#" title="本息保障">本息保障</a><a href="#" title="企业荣誉">企业荣誉</a><a href="#" title="资费说明">资费说明</a><a href="#" title="交易安全">交易安全</a><a href="#" title="认证与安全">认证与安全</a><a href="#" title="管理团队">管理团队</a></p>
+        <div class="ico">
+            <div class="look"><span>关注我们</span><a href="http://weibo.com/p/1006065584238499/home" class="wb trans" title="天天聚财微博" target="_blank"></a><a href="#" class="wx trans" title="天天聚财微信" target="_blank"></a></div>
+            <div class="look hasml"><span>网站地图</span><a href="#" class="tu trans" title="网站地图" target="_blank"></a></div>
+            <div class="look"><span>收益计算器</span><a href="#" class="ca trans" title="收益计算器" target="_blank"></a></div>
+          <div class="code_box">
+          <img src="http://www.ttjc.com.cn/images/ttjc_weixin.jpg"/><em class="fm2">◆</em></div>
         </div>
-
-        <div class="main">
-            <ul class="notices">
-                <li><a href="#" title="天天聚财投资公告">天天聚财投资公告&nbsp;&nbsp;{ 当没有 新标预告 时显示此内容 }</a><span>2014-12-05</span><a class="more" href="#" title="更多公告">更多公告</a></li>
-            </ul>
-        </div>
-        <div class="clear"></div>
-
-        <div class="main">
-            <div class="notice_l fl">
-                <div class="notice_ti">
-                    <p class="p1"><span>新标预告</span></p>
-                    <u></u>
-                    <p class="p2">【 发标时间：上午9点30分、14点30分 】</p>
-                </div>
-                <div class="timer fl trans">
-                    <p class="ti">距新标发布还有</p>
-                    <p class="timing">
-                        <span><s id="d">29</s><b>天</b></span>
-                        <em>:</em>
-                        <span><s id="h">23</s><b>小时</b></span>
-                        <em>:</em>
-                        <span><s id="m">59</s><b>分</b></span>
-                    </p>
-                </div>
-                <div class="info fr">
-                    <p class="ti"><a class="hdot" href="#">某物流公司购车借款项目 第2-5期</a><span class="icon_jiang">5.75%</span></p>
-                    <div class="te">
-                        <p><span>借款金额</span><em>10.00 万元</em></p>
-                        <p><span>年化收益</span><em>22 %</em></p>
-                        <p><span>借款期限</span><em class="fs_18 corg">3 个月</em></p>
-                    </div>
-                    <div class="tips">还款方式：按月付息，到期还本</div>
-                </div>
-            </div>
-            <div class="notice_r fr">
-                <div class="fs_24">网站公告</div>
-                <ul>
-                    <li><a href="#">天天聚财投资人考察报告</a></li>
-                    <li><a href="#">新标公示：车辆质押、个人经营周转个人经营周转</a></li>
-                    <li><a href="#">天天聚财第一届投资人交流会圆满成</a></li>
-                    <li><a href="#">新标公示 100万元，房产抵押</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="clear"></div>
-
-        <div class="main proList">
-            <div class="proList_ti"><span>项目列表</span><em>100%本息保障</em></div>
-            <table class="proList_te">
-                <tr>
-                    <th ></th>
-                    <th class="txt_l"><i class="icon_pro1"></i><span>项目名称</span></th>
-                    <th><i class="icon_pro2"></i><span>借款金额</span></th>
-                    <th><i class="icon_pro3"></i><span>年利率</span></th>
-                    <th><i class="icon_pro4"></i><span>借款期限</span></th>
-                    <th><i class="icon_pro5"></i><span>投标进度</span></th>
-                    <th ><i class="icon_pro6"></i><span>状态</span></th>
-                </tr>
-                <tr>
-                    <td><img alt="保" src="../resources/images/icon_bao.gif" /></td>
-                    <td class="txt_l">购买生产设备</td>
-                    <td>1,500,000.00元</td>
-                    <td>18%</td>
-                    <td>2个月</td>
-                    <td><div class="c_plan">5%</div></td>
-                    <td><a class="btn_pro_o" href="#" title="我要投资">我要投资</a></td>
-                </tr>
-                <tr>
-                    <td><img alt="保" src="../resources/images/icon_bao.gif" /></td>
-                    <td class="txt_l">购买生产设备</td>
-                    <td>1,500,000.00元</td>
-                    <td>18%</td>
-                    <td>2个月</td>
-                    <td><div class="c_plan">34%</div></td>
-                    <td><a class="btn_pro_o" href="#" title="我要投资">我要投资</a></td>
-                </tr>
-                <tr>
-                    <td><img alt="保" src="../resources/images/icon_bao.gif" /></td>
-                    <td class="txt_l">购买生产设备</td>
-                    <td>1,500,000.00元</td>
-                    <td>18%</td>
-                    <td>2个月</td>
-                    <td><div class="c_plan">78%</div></td>
-                    <td><a class="btn_pro_o" href="#" title="我要投资">我要投资</a></td>
-                </tr>
-                <tr>
-                    <td><img alt="保" src="../resources/images/icon_bao.gif" /></td>
-                    <td class="txt_l">购买生产设备</td>
-                    <td>1,500,000.00元</td>
-                    <td>18%</td>
-                    <td>2个月</td>
-                    <td><div class="c_plan">93%</div></td>
-                    <td><a class="btn_pro_o" href="#" title="我要投资">我要投资</a></td>
-                </tr>
-                <tr>
-                    <td><img alt="保" src="../resources/images/icon_bao.gif" /></td>
-                    <td class="txt_l">购买生产设备</td>
-                    <td>1,500,000.00元</td>
-                    <td>18%</td>
-                    <td>2个月</td>
-                    <td><div class="c_plan">100%</div></td>
-                    <td><a class="btn_pro_h" title="还款中">还款中</a></td>
-                </tr>
-            </table>
-            <div class="proList_mo">
-                <span class="fl"></span>
-                <span class="fr"></span>
-                <a href="../borrow/index.aspx" title="查看更多投资理财项目">查看更多投资理财项目》</a>
-            </div>
-        </div>
-        <div class="clear"></div>
-
-        <div class="main partner">
-            <div class="ti"><i class="fm2 fs_24">——</i><span class="fs_24">合作伙伴</span><i class="fm2 fs_24">——</i></div>
-            <ul class="partLi">
-                <li><a ><img class="trans" src="../resources/images/idx_part_01.jpg" alt="1"/></a></li>
-                <li><a ><img class="trans" src="../resources/images/idx_part_02.jpg"  alt="1"/></a></li>
-                <li><a ><img class="trans" src="../resources/images/idx_part_03.jpg"  alt="1"/></a></li>
-                <li><a ><img class="trans" src="../resources/images/idx_part_04.jpg"  alt="1"/></a></li>
-                <li><a ><img class="trans" src="../resources/images/idx_part_05.jpg" alt="1" /></a></li>
-                <li class="end"><a ><img class="trans" src="../resources/images/idx_part_06.jpg"  alt="1"/></a></li>        
-                <li><a ><img class="trans" src="../resources/images/idx_part_07.jpg"  alt="1"/></a></li>
-                <li><a ><img class="trans" src="../resources/images/idx_part_08.jpg"  alt="1"/></a></li>
-                <li><a ><img class="trans" src="../resources/images/idx_part_09.jpg"  alt="1"/></a></li>
-            </ul>
-        </div>
-        <div class="clear"></div>
-
-        <div class="footer">
-            <div class="foot_t">
-                <ul class="foot_help">
-                    <li class="l1">
-                        <h6>联系我们</h6>
-                        <p style="padding:4px 0 2px; line-height:1.5;">重庆市沙坪坝区石碾盘东原ARC（拾莲坊）<br />1号写字楼31-4、5、6</p>
-                        <p class="fm3">400 023 3536</p>
-                        <p class="fm3">023-65038506</p>
-                        <p class="fm3">ttjc009@163.com</p>
-                    </li>
-                    <li class="l2">
-                        <h6>新手指引</h6>
-                        <p><a href="http://www.qclcfwzx.com/Article.php?ptid=1&amp;pid=35" target="_blank">什么是银行合作标？</a></p>
-                        <p><a href="http://www.qclcfwzx.com/Article.php?ptid=1&amp;pid=4" target="_blank">什么是机构担保标?</a></p>
-                        <p><a href="http://www.qclcfwzx.com/Article.php?ptid=1&amp;pid=3" target="_blank">什么是个人抵押标?</a></p>
-                        <p><a href="http://www.qclcfwzx.com/Article.php?ptid=1&amp;pid=1" target="_blank">什么是企业抵押标？</a></p>
-                    </li>
-                    <li class="l3">
-                        <h6>法律法规</h6>
-                        <p><a href="http://www.qclcfwzx.com/Article.php?ptid=2&amp;pid=45" target="_blank">电子合同的合法性</a></p>
-                        <p><a href="http://www.qclcfwzx.com/Article.php?ptid=2&amp;pid=44" target="_blank">理财人通过天天聚财平...</a></p>
-                        <p><a href="http://www.qclcfwzx.com/Article.php?ptid=2&amp;pid=43" target="_blank">理财人及借款人双方民...</a></p>
-                        <p><a href="http://www.qclcfwzx.com/Article.php?ptid=2&amp;pid=42" target="_blank">天天聚财平台提供居间...</a></p>
-                    </li>
-                </ul>
-                <dl class="foot_ser">
-                    <dt><i class="icon_kf"></i><span class="va_m fs_16">在线客服</span></dt>
-                    <dd>
-                        <p class="tel"><b>400 023 3536</b><br /><s>(工作时间 9:00-21:00)</s></p>
-                        <div class="ico">
-                            <a class="wx trans" href="javascript:;" title="天天聚财微信"></a>
-                            <a class="wb trans" href="http://weibo.com/3969837318" title="天天聚财微博" target="_blank"></a>
-                            <a class="qu trans" href="http://shang.qq.com/wpa/qunwpa?idkey=77d14c536a83fa744082830e71d032e39075208dab36bb2f5377c1cef1d8f2d3" title="投资理财群"></a>
-                            <a class="em trans" href="mailto:ttjc009@163.com" title="Email"></a>
-                            <a class="ca trans" href="http://www.ttjc.com.cn/calculator.php" title="收益计算器"></a>
-                        </div>
-                    </dd>
-                </dl>
-                <div class="foot_code">
-                    <h6>关注官方微信</h6>
-                    <p><img src="../resources/images/ttjc_weixin.jpg" alt="1"/></p>
-                </div>
-                <div class="clear"></div>
-            </div>
-            <div class="foot_m">
-                <a class="ap1 trans" href="https://sealinfo.verisign.com/splash?form_file=fdf/splash.fdf&amp;dn=www.ttjc.com.cn&amp;lang=zh_cn" target="_blank"></a>
-                <a class="ap2 trans" href="http://webscan.360.cn/index/checkwebsite?url=www.ttjc.com.cn" target="_blank"></a>
-                <a class="ap3 trans" href="http://www.anquan.org/authenticate/cert/?site=www.ttjc.com.cn" target="_blank"></a>
-                <a class="ap4 trans" href="http://beian.cqnet110.gov.cn/open/showRecord?id=50010602000558" target="_blank"></a>
-                <a class="ap5 trans" href="http://www.cfca.com.cn" target="_blank"></a>
-                <a class="ap6 trans" href="http://www.cfca.com.cn" target="_blank"></a>
-            </div>
-            <div class="foot_b">
-                &copy;2014 天天聚财网 All rights reserved<span>|</span>重庆天天聚才投资管理有限公司<span>|</span>ICB备：渝ICP备14003929号-1
-            </div>
-        </div>
-
-        <!--[if IE 6]>
-        <script type="text/javascript" src="../js/DD_belatedPNG.js" ></script>
-        <script type="text/javascript">
-                DD_belatedPNG.fix(".logo img, .dialogOverlay");
-        </script>
-        <![endif]-->
-    </h:body>
+      </div>
+      <dl class="foot_ser">
+         <dt>客服热线（工作时间：9：00—21：00）</dt>
+         <dd>
+           <p class="tel">400-023-3536</p>
+           <div class="icon">
+             <span><i>客服邮箱</i><a href="mailto:ttjc009@163.com" class="email trans" title="Email" target="_blank"></a></span>
+             <span><i>在线客服</i><a href="http://shang.qq.com/wpa/qunwpa?idkey=77d14c536a83fa744082830e71d032e39075208dab36bb2f5377c1cef1d8f2d3" class="kefu trans" title="在线客服" target="_blank"></a></span>
+           </div>
+         </dd>
+      </dl>
+    </div>
+  </div>
+  <!--foot_b-->
+  <div class="foot_b">
+     <div class="w1200">
+       <div class="link">
+         <span>友情链接：</span><a href="#">网贷之家</a><a href="#">融途网</a><a href="#">网贷天眼</a><a href="#">网贷第三方</a><a href="#">网贷中国</a><a href="#">网贷点评网</a><a href="#">网贷联盟</a><a href="#">网贷界</a><a href="#">网贷之星</a><a href="#">网贷帮手</a><a href="#">网贷财宝</a>
+       </div>
+       <div class="copyright">
+         <p>版权所有：重庆天天聚财管理有限公司        有 ICB备：渝ICP备14003929号-1</p>
+         <div class="foot_m">
+             <a class="ap1 trans" href="http://beian.cqnet110.gov.cn/home" target="_blank"></a>
+             <a class="ap2 trans" href="http://beian.cqnet110.gov.cn/open/showRecord?id=50010602000558" target="_blank"></a>
+             <a class="ap3 trans" href="https://search.szfw.org/cert/l/CX20140703008333008377" target="_blank"></a>
+         </div>
+       </div>
+     </div>
+  </div>
+</div>
+</div>
+<div class="keifu ie6fixedBR2">
+  <div class="keifu_tab">
+    <div class="icon_keifu"></div>
+    <div class="keifu_box">
+      <div class="keifu_head"><a href="javascript:void(0)" class="keifu_close"></a></div>
+      <ul class="keifu_con">
+        <li id="BizQQWPA" class="kfbox">客服小徐</li>
+        <li id="BizQQWPA2" class="kfbox">客服小菁</li>
+        <li id="BizQQWPA3" class="kfbox">客服小小</li>
+        <li id="BizQQWPA4" class="kfbox">客服燕子</li>
+        <li id="BizQQWPA5" class="kfbox last">客服小湘</li>
+      </ul>
+      <div class="keifu_bot"></div>
+    </div>
+  </div>
+</div>
+</h:body>
 </html>
