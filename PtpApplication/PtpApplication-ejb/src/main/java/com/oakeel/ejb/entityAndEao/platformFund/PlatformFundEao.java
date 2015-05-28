@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.userSet;
+package com.oakeel.ejb.entityAndEao.platformFund;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EaoRoot;
 import javax.ejb.Stateless;
@@ -14,7 +14,7 @@ import javax.ejb.Stateless;
  * @author root
  */
 @Stateless
-public class UserSetEao extends EaoRoot<UserSetEntity> implements UserSetEaoLocal {
+public class PlatformFundEao extends EaoRoot<PlatformFundEntity> implements PlatformFundEaoLocal {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

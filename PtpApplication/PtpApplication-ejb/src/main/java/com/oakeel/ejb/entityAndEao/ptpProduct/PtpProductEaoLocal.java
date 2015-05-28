@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.userSet;
+package com.oakeel.ejb.entityAndEao.ptpProduct;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EaoRootLocal;
+import com.oakeel.ejb.entityAndEao.permission.PermissionEntity;
 import javax.ejb.Local;
 
 /**
@@ -14,6 +15,6 @@ import javax.ejb.Local;
  * @author root
  */
 @Local
-public interface UserSetEaoLocal extends EaoRootLocal<UserSetEntity> {
+public interface PtpProductEaoLocal  extends EaoRootLocal<PtpProductEntity>{
     
 }

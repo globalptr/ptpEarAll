@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.userSet;
+package com.oakeel.ejb.entityAndEao.backUserSet;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import javax.persistence.Entity;
@@ -14,12 +14,9 @@ import javax.persistence.Entity;
  * @author root
  */
 @Entity
-public class UserSetEntity extends EntityRoot {
+public class BackUserSetEntity extends EntityRoot {
     private static final long serialVersionUID = 1L;
-    
-    public UserSetEntity()
-    {
-    }
+   
     private String userTheme;
 
     /**

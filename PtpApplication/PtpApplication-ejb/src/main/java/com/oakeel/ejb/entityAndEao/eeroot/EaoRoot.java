@@ -40,12 +40,19 @@ public class EaoRoot<T> implements EaoRootLocal<T> {
 
     @Override
     public List<T> getAllEntitys() {
-        CriteriaBuilder builder=em.getCriteriaBuilder();
-        CriteriaQuery<T> query=builder.createQuery(clazz);
-        Root<T> s=query.from(clazz);
-        query.select(s);        
-        TypedQuery<T> q=em.createQuery(query);
-        return q.getResultList();
+        try
+        {
+            CriteriaBuilder builder=em.getCriteriaBuilder();
+            CriteriaQuery<T> query=builder.createQuery(clazz);
+            Root<T> s=query.from(clazz);
+            query.select(s);        
+            TypedQuery<T> q=em.createQuery(query);
+            return q.getResultList();
+        }
+        catch(Exception ex)
+        {
+            return null;
+        }
     }
 
     @Override

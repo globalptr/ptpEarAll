@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.financingBusinessBorrower;
+package com.oakeel.ejb.entityAndEao.frontUserIssueBond;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EaoRootLocal;
 import javax.ejb.Local;
@@ -14,6 +14,6 @@ import javax.ejb.Local;
  * @author root
  */
 @Local
-public interface FinancingBusinessBorrowerEaoLocal extends EaoRootLocal<FinancingBusinessBorrowerEntity> {
+public interface FrontUserIssueBondEaoLocal  extends EaoRootLocal<FrontUserIssueBondEntity>{
     
 }

@@ -12,5 +12,5 @@ package com.oakeel.ejb.ptpEnum;
  */
 //金融产品类型
 public enum FinancialProductType {
-    融资标,聚财宝;
+    融资标,聚财宝,季富宝,月月宝,天天宝;
 }

@@ -9,7 +9,7 @@ package com.oakeel.ejb.entityAndEao.user;
 import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import com.oakeel.ejb.entityAndEao.organization.OrganizationEntity;
 import com.oakeel.ejb.entityAndEao.role.RoleEntity;
-import com.oakeel.ejb.entityAndEao.userSet.UserSetEntity;
+import com.oakeel.ejb.entityAndEao.backUserSet.BackUserSetEntity;
 import com.oakeel.ejb.ptpEnum.CreateAccountModeEnum;
 import com.oakeel.ejb.ptpEnum.SexEnum;
 import java.util.HashSet;
@@ -64,15 +64,19 @@ public class UserEntity extends EntityRoot{
         this.qq=qq;
     }
     static long serialVersionUID = 1L;
-    @Column(nullable=false)
+    @Column(length = 50)
     private String name;
     private int priority=0;
-    @Column(nullable=false)
+    @Column(nullable=false,length = 50)
     private String password;
     
+    @Column(length = 50)
     private String telephone="";
+    @Column(length = 50)
     private String email="";
+    @Column(length = 50)
     private String qq="";
+    @Column(length = 50)
     private String salt="";
     private Boolean locked=false;
     private int age;//年龄
@@ -85,7 +89,7 @@ public class UserEntity extends EntityRoot{
     @ManyToMany(cascade={CascadeType.MERGE})//级联修改user=>role
     private Set<RoleEntity> roleEntitys=new HashSet<>();
     @OneToOne//用户与用户设置是一对一的关系
-    UserSetEntity userSetEntity;
+    BackUserSetEntity userSetEntity;
 
    @Override
     public String toString() {
@@ -261,6 +265,4 @@ public class UserEntity extends EntityRoot{
         this.sexEnum = sexEnum;
     }
 
- 
-    
 }

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.sysSet;
+package com.oakeel.ejb.entityAndEao.backUserSet;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EaoRootLocal;
 import javax.ejb.Local;
@@ -14,5 +14,6 @@ import javax.ejb.Local;
  * @author root
  */
 @Local
-public interface SysSetEaoLocal  extends EaoRootLocal<SysSetEntity>{
+public interface BackUserSetEaoLocal extends EaoRootLocal<BackUserSetEntity> {
+    
 }

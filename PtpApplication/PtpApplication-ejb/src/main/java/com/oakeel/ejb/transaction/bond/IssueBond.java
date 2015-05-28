@@ -7,10 +7,9 @@
 package com.oakeel.ejb.transaction.bond;
 
 import com.oakeel.ejb.entityAndEao.bond.BondEntity;
-import com.oakeel.ejb.entityAndEao.expense.ExpenseEntity;
-import com.oakeel.ejb.entityAndEao.financingBusinessLender.FinancingBusinessLenderEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
-import java.util.List;
+import com.oakeel.ejb.entityAndEao.frontUserIssueBond.FrontUserIssueBondEntity;
+import com.oakeel.ejb.ptpEnum.BondStage;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,8 +24,7 @@ public class IssueBond implements IssueBondLocal {
     EntityManager em;
     BondEntity newBond;
     FrontUserEntity issueBondUser;
-    FinancingBusinessLenderEntity financingBusinessLenderEntity;
-    List<ExpenseEntity> expenseEntitys;
+    FrontUserIssueBondEntity frontUserIssueBondEntity;
     BondEntity bond1=null;
     BondEntity bond2=null;
     BondEntity bond3=null;
@@ -61,7 +59,11 @@ public class IssueBond implements IssueBondLocal {
 
     @Override
     public void issue() {
-        em.persist(financingBusinessLenderEntity);
+        em.persist(newBond);
+        frontUserIssueBondEntity=new FrontUserIssueBondEntity();
+        frontUserIssueBondEntity.setPtpProductEntity(newBond);
+        frontUserIssueBondEntity.setUser(issueBondUser);
+        em.persist(frontUserIssueBondEntity);
     }
 
     // Add business logic below. (Right-click in editor and choose
@@ -83,20 +85,11 @@ public class IssueBond implements IssueBondLocal {
     }
 
 
-    @Override
-    public void setExpense(List<ExpenseEntity> expenseEntitys) {
-        this.expenseEntitys=expenseEntitys;
-    }
 
     @Override
     public void issuePreview() {
     
-        if(expenseEntitys==null)
-        {
-            System.out.println("支出列表为空");
-            return;
-        }
-        else if(issueBondUser==null)
+        if(issueBondUser==null)
         {
             System.out.println("发标用户为空");
             return;
@@ -120,8 +113,8 @@ public class IssueBond implements IssueBondLocal {
         //——————————————————————————————————————————————————————————————
         if(bond1!=null)
         {
-            newBond.setBondNumber(bond1.getBondNumber());
             newBond.setName(bond1.getName());
+            newBond.setBondType(bond1.getBondType());
             newBond.setCompanyUserEntity(bond1.getCompanyUserEntity());
             newBond.setRiskControlDetails(bond1.getRiskControlDetails());
             newBond.setGuaranteeCase(bond1.getGuaranteeCase());
@@ -129,43 +122,39 @@ public class IssueBond implements IssueBondLocal {
         }
         //——————————————————————————————————————————————————————————————
         if(bond2!=null)
+        {
+            newBond.setBondNumber(bond2.getBondNumber());
             newBond.setBondInformationEntiys(bond2.getBondInformationEntiys());
+        }
         //——————————————————————————————————————————————————————————————
         if(bond3!=null)
         {
             newBond.setYearRate(bond3.getYearRate());//年利率
             newBond.setStartDate(bond3.getStartDate());//开始时间
             newBond.setBaseAmount(bond3.getBaseAmount());//基准金
-            newBond.setCopiesNum(bond3.getCopiesNum());//份数
+            newBond.setIssueCopiesNum(bond3.getIssueCopiesNum());//份数
             newBond.setRepayModelEnum(bond3.getRepayModelEnum());//还款模型
             newBond.setRepayCycle(bond3.getRepayCycle());//还款周期
             newBond.setRepayCycleNumber(bond3.getRepayCycleNumber());//还款次数
+            newBond.setExpenseEntitys(bond3.getExpenseEntitys());//还款账单
         }
+        newBond.setBondStage(BondStage.发布);
         //——————————————————————————————————————————————————————————————
-        
-        financingBusinessLenderEntity=new FinancingBusinessLenderEntity();
-        financingBusinessLenderEntity.setExpenseEntitys(expenseEntitys);
-        financingBusinessLenderEntity.setFinancialProductEntity(newBond);
-        financingBusinessLenderEntity.setLenderUser(issueBondUser);
     }
-
-    @Override
-    public FinancingBusinessLenderEntity getCurrLender() {
-        return financingBusinessLenderEntity;
-    }
-
-
 
     @Override
     public FrontUserEntity getIssueUser() {
         return issueBondUser;
     }
 
+
     @Override
-    public List<ExpenseEntity> getExpense() {
-        return expenseEntitys;
+    public FrontUserIssueBondEntity getFrontUserIssueBondEntity() {
+        return frontUserIssueBondEntity;
     }
 
-
-  
+    @Override
+    public void setIssueUser(FrontUserEntity user) {
+        issueBondUser=user;
+    }
 }

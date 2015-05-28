@@ -8,8 +8,8 @@ package com.oakeel.ejb.transaction.bond;
 
 import com.oakeel.ejb.entityAndEao.bond.BondEntity;
 import com.oakeel.ejb.entityAndEao.expense.ExpenseEntity;
-import com.oakeel.ejb.entityAndEao.financingBusinessLender.FinancingBusinessLenderEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
+import com.oakeel.ejb.entityAndEao.frontUserIssueBond.FrontUserIssueBondEntity;
 import java.util.List;
 import javax.ejb.Local;
 import javax.ejb.Remove;
@@ -24,14 +24,13 @@ public interface IssueBondLocal {
     public void setStep1Bond(BondEntity bond);
     public void setStep2Bond(BondEntity bond);
     public void setStep3Bond(BondEntity bond);
-    public void setExpense(List<ExpenseEntity> expenseEntitys);
     public void issuePreview();
     @Remove
     public void issue();
     public BondEntity getCurrBond();
-    public FinancingBusinessLenderEntity getCurrLender();
+    public FrontUserIssueBondEntity getFrontUserIssueBondEntity();
+    public void setIssueUser(FrontUserEntity user);
     public FrontUserEntity getIssueUser();
-    public List<ExpenseEntity> getExpense();
     public BondEntity getBond1();
     public BondEntity getBond2();
     public BondEntity getBond3();

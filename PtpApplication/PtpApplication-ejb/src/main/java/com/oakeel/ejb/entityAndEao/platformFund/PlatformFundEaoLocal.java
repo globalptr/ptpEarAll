@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.financialProduct;
+package com.oakeel.ejb.entityAndEao.platformFund;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EaoRootLocal;
+import com.oakeel.ejb.entityAndEao.ptpProduct.PtpProductEntity;
 import javax.ejb.Local;
 
 /**
@@ -14,6 +15,6 @@ import javax.ejb.Local;
  * @author root
  */
 @Local
-public interface FinancialProductEaoLocal  extends EaoRootLocal<FinancialProductEntity>{
+public interface PlatformFundEaoLocal extends EaoRootLocal<PlatformFundEntity> {
     
 }

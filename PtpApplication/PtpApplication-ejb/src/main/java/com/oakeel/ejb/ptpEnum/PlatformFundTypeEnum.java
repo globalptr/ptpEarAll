@@ -4,15 +4,12 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.sysSet;
-
-import com.oakeel.ejb.entityAndEao.eeroot.EaoRootLocal;
-import javax.ejb.Local;
+package com.oakeel.ejb.ptpEnum;
 
 /**
  *
  * @author root
  */
-@Local
-public interface SysSetEaoLocal  extends EaoRootLocal<SysSetEntity>{
+public enum PlatformFundTypeEnum {
+    聚财宝,季富宝,月月宝,天天宝;
 }

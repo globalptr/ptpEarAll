@@ -7,91 +7,40 @@
 package com.oakeel.ejb.entityAndEao.bond;
 
 import com.oakeel.ejb.entityAndEao.bondInformation.BondInformationEntity;
-import com.oakeel.ejb.entityAndEao.bondState.BondStateEntity;
 import com.oakeel.ejb.entityAndEao.companyUser.CompanyUserEntity;
-import com.oakeel.ejb.entityAndEao.financialProduct.FinancialProductEntity;
-import com.oakeel.ejb.ptpEnum.BondStage;
+import com.oakeel.ejb.entityAndEao.ptpProduct.PtpProductEntity;
 import com.oakeel.ejb.ptpEnum.BondType;
-import com.oakeel.ejb.ptpEnum.RepayModelEnum;
-import com.oakeel.ejb.ptpEnum.SplitUnit;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 /**
  *
  * @author root
  */
 @Entity
-public class BondEntity extends FinancialProductEntity {
+public class BondEntity extends PtpProductEntity {
     private static final long serialVersionUID = 1L;
-    
-    private String bondNumber;
+ 
     //担保公司实体
     @ManyToOne
     private CompanyUserEntity companyUserEntity;//担保公司
+    @Column(length = 100)
     private String riskControlDetails;//风险担保详情
+    @Column(length = 100)
     private String guaranteeCase;//担保情况
+    @Column(length = 100)
     private String reverseGuaranteeCase;//反担保情况
-    private BondStage bondStage;//标的阶段
-    @Enumerated(EnumType.STRING)
-    private RepayModelEnum repayModelEnum;//还款模型
-    private SplitUnit repayCycle;//还款周期
-    private int repayCycleNumber;//期数
     private BondType bondType;//标类型
     @OneToMany(cascade = {CascadeType.ALL})//标的资料，一对多
     private List<BondInformationEntity> bondInformationEntiys=new ArrayList<>();
-    @OneToOne(cascade = {CascadeType.ALL})//标的状态
-    private BondStateEntity bondStateEntity=new BondStateEntity();
 
     
-    /**
-     * @return the bondStateEntity
-     */
-    public BondStateEntity getBondStateEntity() {
-        return bondStateEntity;
-    }
 
-    /**
-     * @param bondStateEntity the bondStateEntity to set
-     */
-    public void setBondStateEntity(BondStateEntity bondStateEntity) {
-        this.bondStateEntity = bondStateEntity;
-    }
-
-    /**
-     * @return the bondStage
-     */
-    public BondStage getBondStage() {
-        return bondStage;
-    }
-
-    /**
-     * @param bondStage the bondStage to set
-     */
-    public void setBondStage(BondStage bondStage) {
-        this.bondStage = bondStage;
-    }
-
-    /**
-     * @return the repayCycle
-     */
-    public SplitUnit getRepayCycle() {
-        return repayCycle;
-    }
-
-    /**
-     * @param repayCycle the repayCycle to set
-     */
-    public void setRepayCycle(SplitUnit repayCycle) {
-        this.repayCycle = repayCycle;
-    }
 
     /**
      * @return the bondType
@@ -107,34 +56,6 @@ public class BondEntity extends FinancialProductEntity {
         this.bondType = bondType;
     }
 
-
-    /**
-     * @return the repayCycleNumber
-     */
-    public int getRepayCycleNumber() {
-        return repayCycleNumber;
-    }
-
-    /**
-     * @param repayCycleNumber the repayCycleNumber to set
-     */
-    public void setRepayCycleNumber(int repayCycleNumber) {
-        this.repayCycleNumber = repayCycleNumber;
-    }
-
-    /**
-     * @return the bondNumber
-     */
-    public String getBondNumber() {
-        return bondNumber;
-    }
-
-    /**
-     * @param bondNumber the bondNumber to set
-     */
-    public void setBondNumber(String bondNumber) {
-        this.bondNumber = bondNumber;
-    }
 
     /**
      * @return the guaranteeCase
@@ -193,20 +114,6 @@ public class BondEntity extends FinancialProductEntity {
     }
 
     /**
-     * @return the repayModelEnum
-     */
-    public RepayModelEnum getRepayModelEnum() {
-        return repayModelEnum;
-    }
-
-    /**
-     * @param repayModelEnum the repayModelEnum to set
-     */
-    public void setRepayModelEnum(RepayModelEnum repayModelEnum) {
-        this.repayModelEnum = repayModelEnum;
-    }
-
-    /**
      * @return the bondInformationEntiys
      */
     public List<BondInformationEntity> getBondInformationEntiys() {
@@ -219,5 +126,6 @@ public class BondEntity extends FinancialProductEntity {
     public void setBondInformationEntiys(List<BondInformationEntity> bondInformationEntiys) {
         this.bondInformationEntiys = bondInformationEntiys;
     }
+
     
 }
