@@ -6,6 +6,12 @@
     <ui:composition template="../main.xhtml" >
 
         <ui:define name="center">
+        <style>
+            .ui-steps.horizontal .ui-steps-item {
+                width: 19.8%;
+                float: left;
+            }
+        </style>
             <h:form>
                     <table style=" margin-left: 50px;width:95% ;margin-top: 30px"> 
                         <tr>
@@ -33,6 +39,16 @@
                             </td>
                             <td style="width:auto">
                                 <p:autoComplete  value="#{issueBond1.selectUser}"  forceSelection="true"  var="selectUser_var" itemLabel="#{selectUser_var.name}" converter="userConverter" itemValue="#{selectUser_var}" completeMethod="#{issueBond1.findUser}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:80px">
+                                <p:outputLabel value="标类型:"/>
+                            </td>
+                            <td style="width:auto">
+                                <p:selectOneMenu value="#{issueBond1.bond1.bondType}">
+                                    <f:selectItems value="#{issueBond1.bondTypes}"/>
+                                </p:selectOneMenu>
                             </td>
                         </tr>
                         <tr>

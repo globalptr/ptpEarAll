@@ -43,7 +43,8 @@
                     <table style="width:100%;height: 100%">
                         <tr>
                             <td style="width:auto">
-                                <div style="font-size:35px;padding-left:35px;vertical-align: top">
+                                <div class=" ui-widget" style="font-size:35px !important;padding-left:35px;vertical-align: top;
+					text-shadow: 0 -1px 0 #374683;">
                                     天天聚财后台管理系统
                                 </div>
                             </td>
@@ -51,7 +52,8 @@
                                 <h:form>
                                     <h:panelGrid columns="2" style=" text-align: center">
                                         <p:outputLabel value="选择主题"/>
-                                        <p:themeSwitcher  effect="fade">  
+                                        <p:themeSwitcher id="theme_id" value="#{main.selectTheme}" effect="fade" >
+                                            <f:ajax event="change" execute="theme_id"  listener="#{main.changeTheme()}"/>
                                             <f:selectItem itemLabel="选择主题" itemValue="" />  
                                             <f:selectItem itemLabel="afterdark" itemValue="afterdark"/>  
                                             <f:selectItem itemLabel="afternoon" itemValue="afternoon " />  
@@ -102,101 +104,26 @@
                     <h:form id="mainform">
                         <p:growl id="maingrowl" autoUpdate="true" showDetail="true" />  
                         <p:panelMenu style="width:210px">
-                            <p:submenu label="管理中心" >
+                            <p:submenu label="控制台" >
                                 <p:menuitem value="个人信息" icon="ui-icon-star" />
-                                <p:submenu label="控制面板" >
-                                    <p:menuitem value="个人信息" icon="ui-icon-star" />
-                                    <p:menuitem value="密码修改"   icon="ui-icon-star" />
-                                </p:submenu>
-                                <p:submenu label="日志管理" >
-                                    <p:menuitem value="操作日志" icon="ui-icon-star" />
-                                    <p:menuitem value="登录日志"   icon="ui-icon-star" />
-                                </p:submenu>
                             </p:submenu>
-                            <p:submenu label="借款中心">
-                                <p:menuitem value="发布借款" icon="ui-icon-star" action="/bond/issueBond1"/>
-                                <p:menuitem value="借款初审" icon="ui-icon-star" />
-                                <p:menuitem value="借款管理" icon="ui-icon-star" />
-                                <p:submenu label="借款管理" >
-                                    <p:menuitem value="增加借款" icon="ui-icon-star" />
-                                    <p:menuitem value="所有借款"   icon="ui-icon-star" />
-                                    <p:menuitem value="借款资料"   icon="ui-icon-star" />
-                                    <p:menuitem value="新标预告"   icon="ui-icon-star" />
-                                    <p:menuitem value="审核中借款"   icon="ui-icon-star" />
-                                    <p:menuitem value="还款中借款"   icon="ui-icon-star" />
-                                    <p:menuitem value="已完成借款"   icon="ui-icon-star" />
-                                    <p:menuitem value="失败借款"   icon="ui-icon-star" />
-                                    <p:menuitem value="逾期借款"   icon="ui-icon-star" />
+                            <p:submenu label="产品中心">
+                                <p:submenu label="融资标" >
+                                    <p:menuitem value="发布融资标" icon="ui-icon-star" action="/bond/issueBond1"/>
+                                    <p:menuitem value="融资标审核"   icon="ui-icon-star" />
+                                    <p:menuitem value="融资标管理"   icon="ui-icon-star" />
                                 </p:submenu>
                                 <p:submenu label="债权转让" >
-                                    <p:menuitem value="所有转让" icon="ui-icon-star" />
-                                    <p:menuitem value="正在转让"   icon="ui-icon-star" />
-                                    <p:menuitem value="转让成功"   icon="ui-icon-star" />
-                                    <p:menuitem value="转让失败"   icon="ui-icon-star" />
+                                    <p:menuitem value="债权转让管理" icon="ui-icon-star" />
                                 </p:submenu>
-                                <p:submenu label="数据记录" >
-                                    <p:menuitem value="投标记录" icon="ui-icon-star" />
-                                    <p:menuitem value="还款记录"   icon="ui-icon-star" />
-                                    <p:menuitem value="收款记录"   icon="ui-icon-star" />
-                                </p:submenu>
-                                <p:submenu label="自动投标" >
-                                    <p:menuitem value="增加自动投标" icon="ui-icon-star" />
-                                    <p:menuitem value="用户设置列表"   icon="ui-icon-star" />
-                                    <p:menuitem value="收款记录"   icon="ui-icon-star" />
+                                <p:submenu label="理财产品" >
+                                    <p:menuitem value="发布理财产品" icon="ui-icon-star" action="/bond/issuePlatformFund1"/>
+                                    <p:menuitem value="理财产品审核"   icon="ui-icon-star" />
+                                    <p:menuitem value="理财产品管理"   icon="ui-icon-star" />
                                 </p:submenu>
                             </p:submenu>
-                            <p:submenu label="用户管理">
-                                <p:submenu label="用户管理" >
-                                    <p:menuitem value="增加用户" icon="ui-icon-star" />
-                                    <p:menuitem value="所有用户"   icon="ui-icon-star" />
-                                    <p:menuitem value="VIP用户"   icon="ui-icon-star" />
-                                    <p:menuitem value="未激活用户"   icon="ui-icon-star" />
-                                    <p:menuitem value="停用用户"   icon="ui-icon-star" />
-                                </p:submenu>
-                                <p:submenu label="用户券管理" >
-                                    <p:menuitem value="增加用户券" icon="ui-icon-star" />
-                                    <p:menuitem value="用户券管理"   icon="ui-icon-star" />
-                                    <p:menuitem value="用户券记录"   icon="ui-icon-star" />
-                                </p:submenu>
-                                <p:submenu label="用户推广" >
-                                    <p:menuitem value="推广设置" icon="ui-icon-star" />
-                                    <p:menuitem value="用户关联"   icon="ui-icon-star" />
-                                    <p:menuitem value="推广能力表"   icon="ui-icon-star" />
-                                    <p:menuitem value="推广记录"   icon="ui-icon-star" />
-                                </p:submenu>
-                                <p:submenu label="用户积分" >
-                                    <p:menuitem value="推广用户积分" icon="ui-icon-star" />
-                                    <p:menuitem value="积分记录"   icon="ui-icon-star" />
-                                </p:submenu>
-                            </p:submenu>
-                            <p:submenu label="审批管理">
-                                <p:submenu label="借款审批" >
-                                    <p:menuitem value="发标初审" icon="ui-icon-star" />
-                                    <p:menuitem value="买标审批" icon="ui-icon-star" />
-                                    <p:menuitem value="提前还款审批" icon="ui-icon-star" />
-                                    <p:menuitem value="借款审批" icon="ui-icon-star" />
-                                </p:submenu>
-                                <p:submenu label="配资类审批" >
-                                    <p:menuitem value="配资申请审批" icon="ui-icon-star" />
-                                    <p:menuitem value="利润提取审批" icon="ui-icon-star" />
-                                    <p:menuitem value="补仓审批" icon="ui-icon-star" />
-                                    <p:menuitem value="展期审批" icon="ui-icon-star" />
-                                    <p:menuitem value="结束配资审批" icon="ui-icon-star" />
-                                </p:submenu>
-                                <p:submenu label="提现审批" >
-                                    <p:menuitem value="待审批提现" icon="ui-icon-star" />
-                                    <p:menuitem value="待复审提现" icon="ui-icon-star" />
-                                    <p:menuitem value="审批已通过" icon="ui-icon-star" />
-                                    <p:menuitem value="审批未通过" icon="ui-icon-star" />
-                                </p:submenu>
-                                <p:submenu label="认证审批" >
-                                    <p:menuitem value="主要认证" icon="ui-icon-star" />
-                                    <p:menuitem value="其他认证" icon="ui-icon-star" />
-                                </p:submenu>
-                                <p:submenu label="额度审批" >
-                                    <p:menuitem value="提现额度审批" icon="ui-icon-star" />
-                                    <p:menuitem value="借款额度审批" icon="ui-icon-star" />
-                                </p:submenu>
+                            <p:submenu label="前台用户中心">
+                                <p:menuitem value="前台用户管理" icon="ui-icon-star" />
                             </p:submenu>
                             <p:submenu label="内容管理">
                                 <p:submenu label="文章管理" >
@@ -215,87 +142,6 @@
                                 <p:submenu label="广告管理" >
                                     <p:menuitem value="广告列表" icon="ui-icon-star" />
                                     <p:menuitem value="广告类型" icon="ui-icon-star" />
-                                </p:submenu>
-                            </p:submenu>
-                            <p:submenu label="财务管理">
-                                <p:submenu label="用户资金" >
-                                    <p:menuitem value="用户账户" icon="ui-icon-star" />
-                                    <p:menuitem value="手动上帐" icon="ui-icon-star" />
-                                </p:submenu>
-                                <p:submenu label="用户充值" >
-                                    <p:menuitem value="全部充值" icon="ui-icon-star" />
-                                    <p:menuitem value="等待审核（挂起）" icon="ui-icon-star" />
-                                    <p:menuitem value="充值成功" icon="ui-icon-star" />
-                                    <p:menuitem value="充值失败" icon="ui-icon-star" />
-                                </p:submenu>
-                                <p:submenu label="用户提现" >
-                                    <p:menuitem value="提现列表" icon="ui-icon-star" />
-                                    <p:menuitem value="等待审核" icon="ui-icon-star" />
-                                    <p:menuitem value="审核通过" icon="ui-icon-star" />
-                                    <p:menuitem value="审核未通过" icon="ui-icon-star" />
-                                    <p:menuitem value="用户撤销" icon="ui-icon-star" />
-                                    <p:menuitem value="提现订单" icon="ui-icon-star" />
-                                </p:submenu>
-                                <p:submenu label="额度管理" >
-                                    <p:menuitem value="充值额度" icon="ui-icon-star" />
-                                    <p:menuitem value="借款申请额度" icon="ui-icon-star" />
-                                    <p:menuitem value="提现额度" icon="ui-icon-star" />
-                                    <p:menuitem value="单标投资" icon="ui-icon-star" />
-                                </p:submenu>
-                                <p:submenu label="收支记录" >
-                                    <p:menuitem value="系统收支" icon="ui-icon-star" />
-                                    <p:menuitem value="用户收支" icon="ui-icon-star" />
-                                </p:submenu>
-                            </p:submenu>
-                            <p:submenu label="系统统计">
-                                <p:submenu label="系统统计" >
-                                    <p:menuitem value="注册用户" icon="ui-icon-star" />
-                                    <p:menuitem value="充值/提现" icon="ui-icon-star" />
-                                    <p:menuitem value="应收/应付" icon="ui-icon-star" />
-                                    <p:menuitem value="其他费用" icon="ui-icon-star" />
-                                </p:submenu>
-                                <p:submenu label="借出/入统计" >
-                                    <p:menuitem value="借出/入总表" icon="ui-icon-star" />
-                                    <p:menuitem value="用户待还款" icon="ui-icon-star" />
-                                    <p:menuitem value="用户投资排名" icon="ui-icon-star" />
-                                    <p:menuitem value="投资人数统计" icon="ui-icon-star" />
-                                    <p:menuitem value="用户投资金额" icon="ui-icon-star" />
-                                    <p:menuitem value="用户投资标准" icon="ui-icon-star" />
-                                    <p:menuitem value="用户已还款" icon="ui-icon-star" />
-                                    <p:menuitem value="逾期未还款" icon="ui-icon-star" />
-                                </p:submenu>
-                                <p:submenu label="债权统计" >
-                                    <p:menuitem value="债权转让统计" icon="ui-icon-star" />
-                                </p:submenu>
-                            </p:submenu>
-                            <p:submenu label="配置管理">
-                                <p:submenu label="资金配置" >
-                                    <p:menuitem value="注册用户" icon="ui-icon-star" />
-                                    <p:menuitem value="充值/提现" icon="ui-icon-star" />
-                                    <p:menuitem value="应收/应付" icon="ui-icon-star" />
-                                    <p:menuitem value="其他费用" icon="ui-icon-star" />
-                                </p:submenu>
-                                <p:submenu label="数据接口" >
-                                    <p:menuitem value="支付服务" icon="ui-icon-star" />
-                                    <p:menuitem value="资金托管" icon="ui-icon-star" />
-                                    <p:menuitem value="身份认证" icon="ui-icon-star" />
-                                    <p:menuitem value="短信服务" icon="ui-icon-star" />
-                                    <p:menuitem value="邮件服务" icon="ui-icon-star" />
-                                </p:submenu>
-                                <p:submenu label="认证积分配置" >
-                                    <p:menuitem value="获得积分配置" icon="ui-icon-star" />
-                                    <p:menuitem value="认证等级配置" icon="ui-icon-star" />
-                                    <p:menuitem value="认证类型配置" icon="ui-icon-star" />
-                                </p:submenu>
-                                <p:submenu label="主导航配置" >
-                                    <p:menuitem value="导航栏目管理" icon="ui-icon-star" />
-                                </p:submenu>
-                                <p:submenu label="系统配置" >
-                                    <p:menuitem value="借款基础配置" icon="ui-icon-star" />
-                                    <p:menuitem value="图片水印设置" icon="ui-icon-star" />
-                                    <p:menuitem value="图片上传配置" icon="ui-icon-star" />
-                                    <p:menuitem value="网站参数" icon="ui-icon-star" />
-                                    <p:menuitem value="首页banner图" icon="ui-icon-star" />
                                 </p:submenu>
                             </p:submenu>
                             <p:submenu label="系统设置">
@@ -324,7 +170,7 @@
                 </p:layoutUnit>
                 <p:layoutUnit position="center" gutter="0" >
                     <ui:insert name="center" >
-                        <h:panelGrid columns="1" style=" text-align: center;width: 100%;height: 100%;background-color: #554c4c;">
+                        <h:panelGrid columns="1" style=" text-align: center;width: 100%;height: 100%;" class="ui-layout-unit-content ui-widget-content">
                             <h:graphicImage library="images" name="newlog.png" style="width:450px;height: 450px;"/>
                         </h:panelGrid>
                     </ui:insert>

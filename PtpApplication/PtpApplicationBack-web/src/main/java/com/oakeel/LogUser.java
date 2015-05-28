@@ -30,6 +30,7 @@ public class LogUser {
     @PostConstruct
     public void init()
     {
+        
     }
     public String log()
     {

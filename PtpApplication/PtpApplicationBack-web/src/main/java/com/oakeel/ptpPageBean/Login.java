@@ -3,20 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.oakeel.ptpPageBean;
 
+import com.oakeel.PtpApplicationBean;
 import com.oakeel.PtpSessionBean;
+import com.oakeel.ejb.entityAndEao.backUser.BackUserEaoLocal;
+import com.oakeel.ejb.entityAndEao.backUser.BackUserEntity;
+import com.oakeel.ejb.entityAndEao.backUserSet.BackUserSetEntity;
+import com.oakeel.ejb.ptpEnum.SysInfo;
 import com.oakeel.globaltool.ValidateCode;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.Conversation;
-import javax.enterprise.context.ConversationScoped;
+import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 
 /**
  *
@@ -24,58 +31,82 @@ import javax.inject.Named;
  */
 @ManagedBean
 @RequestScoped
-public class Login implements Serializable{
+public class Login implements Serializable {
 
     /**
      * Creates a new instance of Login
      */
-    private String userName;
+    private String voucher;
     private String password;
     private String validateStr;
-    private @Inject PtpSessionBean ptpSessionBean;
+    private @Inject
+    PtpSessionBean ptpSessionBean;
+    @Inject
+    PtpApplicationBean ptpApplicationBean;
+    @Inject ValidateCode validateCode;
+    @EJB
+    BackUserEaoLocal backUserEaoLocal;
+
     @PostConstruct
     public void init() {
+
+        
+        BackUserEntity backUser=new BackUserEntity();
+        backUser.setName("2");
+        backUser.setTelephone("1");
+        backUser.setPassword("1");
+        BackUserSetEntity backUserSetEntity=new BackUserSetEntity();
+        backUserSetEntity.setUserTheme("delta");
+        backUser.setBackUserSetEntity(backUserSetEntity);
+        backUserEaoLocal.addEntity(backUser);
     }
+
     public Login() {
     }
-   
-    public String log()
-    {
-        System.out.println(validateStr);
-        System.out.println(ptpSessionBean.getValidateCode().getCode());
-        if(validateStr.equals(ptpSessionBean.getValidateCode().getCode()))
+    
+    public String log() {
+        if(validateCode.getCode().equals(validateStr.toLowerCase()))
         {
-            System.out.println("ok");
+            Subject subject = SecurityUtils.getSubject();
+            UsernamePasswordToken token = new UsernamePasswordToken(voucher, password);
+            try {
+                subject.login(token);       
+                if(backUserEaoLocal.validateUserByName(voucher, password)!=null)
+                {
+                    ptpSessionBean.setLogUser(backUserEaoLocal.validateUserByName(voucher, password));
+                }
+                else if(backUserEaoLocal.validateUserByTelephone(voucher, password)!=null)
+                {
+                    ptpSessionBean.setLogUser(backUserEaoLocal.validateUserByTelephone(voucher, password));
+                }
+                else if(backUserEaoLocal.validateUserByEmail(voucher, password)!=null)
+                {
+                    ptpSessionBean.setLogUser(backUserEaoLocal.validateUserByEmail(voucher, password));
+                }
+                return "main?faces-redirect=true";
+            } 
+            catch (AuthenticationException ex) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(SysInfo.提示.toString(), "用户名/手机号/邮箱和密码不匹配"));
+                return null;
+            }
         }
-        return null;
-//        Subject subject = SecurityUtils.getSubject();
-//        UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
-//        try
-//        {
-//            subject.login(token);
-//            return "main?faces-redirect=true";
-//        }
-//        catch(AuthenticationException ex)
-//        {
-//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(SysInfo.提示.toString(),"用户名/手机号/邮箱和密码不匹配")); 
-//            return null;
-//        }
-        
+        else
+        {
+            return null;
+        }
     }
 
-    /**
-     * @return the userName
-     */
-    public String getUserName() {
-        return userName;
+    public String logout() {
+
+        Subject currentUser = SecurityUtils.getSubject();
+        try {
+            currentUser.logout();
+        } catch (Exception e) {
+            ptpApplicationBean.logMessage(e.toString());
+        }
+        return "index";
     }
 
-    /**
-     * @param userName the userName to set
-     */
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     /**
      * @return the password
@@ -90,7 +121,6 @@ public class Login implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
-
 
     /**
      * @return the validateStr
@@ -119,5 +149,33 @@ public class Login implements Serializable{
     public void setPtpSessionBean(PtpSessionBean ptpSessionBean) {
         this.ptpSessionBean = ptpSessionBean;
     }
-    
+
+    /**
+     * @return the voucher
+     */
+    public String getVoucher() {
+        return voucher;
+    }
+
+    /**
+     * @param voucher the voucher to set
+     */
+    public void setVoucher(String voucher) {
+        this.voucher = voucher;
+    }
+
+    /**
+     * @return the validateCode
+     */
+    public ValidateCode getValidateCode() {
+        return validateCode;
+    }
+
+    /**
+     * @param validateCode the validateCode to set
+     */
+    public void setValidateCode(ValidateCode validateCode) {
+        this.validateCode = validateCode;
+    }
+
 }

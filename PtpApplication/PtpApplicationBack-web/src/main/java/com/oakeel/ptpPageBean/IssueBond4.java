@@ -10,8 +10,8 @@ import com.oakeel.PtpSessionBean;
 import com.oakeel.ejb.entityAndEao.bond.BondEntity;
 import com.oakeel.ejb.entityAndEao.bondInformation.BondInformationEntity;
 import com.oakeel.ejb.entityAndEao.expense.ExpenseEntity;
-import com.oakeel.ejb.entityAndEao.financingBusinessLender.FinancingBusinessLenderEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
+import com.oakeel.ejb.entityAndEao.frontUserIssueBond.FrontUserIssueBondEntity;
 import com.oakeel.ejb.ptpEnum.ImageUsedEnum;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -30,7 +30,7 @@ import javax.inject.Inject;
 public class IssueBond4 {
 
     @Inject private PtpSessionBean ptpSessionBean;
-    private FinancingBusinessLenderEntity financingBusinessLender;
+    private FrontUserIssueBondEntity frontUserIssueBondEntity;
     private FrontUserEntity frontUserEntity;
     private List<ExpenseEntity> expenseEntitys;
     private List<BondInformationEntity> bondInformationEntitys;
@@ -44,17 +44,21 @@ public class IssueBond4 {
      * Creates a new instance of IssueBond4
      */
     public IssueBond4() {
-        defaultDate=new Date();
+        defaultDate=new Date(0);
         System.out.println(defaultDate.toString());
     }
     @PostConstruct
     public void init()
     {
         bond4=ptpSessionBean.getIssueBondLocal().getCurrBond();
+        if(bond4==null)
+        {
+            return;
+        }
         if(ptpSessionBean.getIssueBondLocal().getIssueUser()!=null)
             frontUserEntity=ptpSessionBean.getIssueBondLocal().getIssueUser();
-        if(ptpSessionBean.getIssueBondLocal().getExpense()!=null)
-            expenseEntitys=ptpSessionBean.getIssueBondLocal().getExpense();
+        if(ptpSessionBean.getIssueBondLocal().getCurrBond().getExpenseEntitys()!=null)
+            expenseEntitys=ptpSessionBean.getIssueBondLocal().getCurrBond().getExpenseEntitys();
         if(ptpSessionBean.getIssueBondLocal().getCurrBond().getBondInformationEntiys()!=null)
         {
             bondInformationEntitys=ptpSessionBean.getIssueBondLocal().getCurrBond().getBondInformationEntiys();
@@ -139,19 +143,6 @@ public class IssueBond4 {
         this.bondInformationEntitys = bondInformationEntitys;
     }
 
-    /**
-     * @return the financingBusinessLender
-     */
-    public FinancingBusinessLenderEntity getFinancingBusinessLender() {
-        return financingBusinessLender;
-    }
-
-    /**
-     * @param financingBusinessLender the financingBusinessLender to set
-     */
-    public void setFinancingBusinessLender(FinancingBusinessLenderEntity financingBusinessLender) {
-        this.financingBusinessLender = financingBusinessLender;
-    }
 
     /**
      * @return the allAmount
@@ -235,5 +226,19 @@ public class IssueBond4 {
      */
     public void setDefaultDate(Date defaultDate) {
         this.defaultDate = defaultDate;
+    }
+
+    /**
+     * @return the frontUserIssueBondEntity
+     */
+    public FrontUserIssueBondEntity getFrontUserIssueBondEntity() {
+        return frontUserIssueBondEntity;
+    }
+
+    /**
+     * @param frontUserIssueBondEntity the frontUserIssueBondEntity to set
+     */
+    public void setFrontUserIssueBondEntity(FrontUserIssueBondEntity frontUserIssueBondEntity) {
+        this.frontUserIssueBondEntity = frontUserIssueBondEntity;
     }
 }

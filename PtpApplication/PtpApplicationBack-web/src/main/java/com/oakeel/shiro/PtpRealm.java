@@ -5,7 +5,9 @@
  */
 package com.oakeel.shiro;
 
+import com.oakeel.ejb.entityAndEao.backUser.BackUserEaoLocal;
 import com.oakeel.ejb.entityAndEao.user.UserEaoLocal;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.InitialContext;
@@ -25,7 +27,7 @@ import org.apache.shiro.subject.PrincipalCollection;
  */
 public class PtpRealm extends AuthorizingRealm {
 
-    UserEaoLocal userEaoLocal;
+    BackUserEaoLocal backUserEaoLocal;
     //授权
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection pc) {
@@ -37,23 +39,24 @@ public class PtpRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken at) throws AuthenticationException {
         try {
             InitialContext ic=new InitialContext();
-            userEaoLocal=(UserEaoLocal)ic.lookup("java:global/PTPSystemManage/UserEao");
+            backUserEaoLocal=(BackUserEaoLocal)ic.lookup("java:global/PtpApplicationBack-web/BackUserEao");
         } catch (NamingException ex) {
             Logger.getLogger(PtpRealm.class.getName()).log(Level.SEVERE, null, ex);
         }
         String voucher = (String) at.getPrincipal(); //得到凭证
-        String password = new String((char[]) at.getCredentials()); //得到密码
+        String password = Arrays.toString((char[])at.getCredentials()); //得到密码
+        password=password.substring(1,password.length()-1);//去掉方括号
         //三种验证方式：用户名-密码；手机-密码；邮箱-密码
         Boolean pass=false;
-        if(userEaoLocal.validateUserByName(voucher, password))
+        if(backUserEaoLocal.validateUserByName(voucher, password)!=null)
         {
             pass=true;
         }
-        else if(userEaoLocal.validateUserByTelephone(voucher, password))
+        else if(backUserEaoLocal.validateUserByTelephone(voucher, password)!=null)
         {
             pass=true;
         }
-        else if(userEaoLocal.validateUserByEmail(voucher, password))
+        else if(backUserEaoLocal.validateUserByEmail(voucher, password)!=null)
         {
             pass=true;
         }

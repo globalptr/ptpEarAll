@@ -16,9 +16,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.Random;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageOutputStream;
+import javax.inject.Named;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 
@@ -26,7 +30,9 @@ import org.primefaces.model.StreamedContent;
  *
  * @author root
  */
-public class ValidateCode {
+@Named
+@SessionScoped
+public class ValidateCode implements Serializable{
      // 图片的宽度。  
     private int width = 160;  
     // 图片的高度。  
@@ -42,12 +48,17 @@ public class ValidateCode {
   
     private char[] codeSequence = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',  
             'K', 'L', 'M', 'N',  'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',  
-            'X', 'Y', 'Z',  '1', '2', '3', '4', '5', '6', '7', '8', '9' };  
+            'X', 'Y', 'Z',  '1', '2', '3', '4', '5', '6', '7', '8', '9' ,'a' ,'b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};  
   
-    private StreamedContent dsc;
+    private StreamedContent dsc=null;
     public  ValidateCode() {  
+        
     }  
-  
+    @PostConstruct
+    public void init()
+    {
+        createCode();
+    }
     /** 
      *  
      * @param width 图片宽 
@@ -119,11 +130,10 @@ public class ValidateCode {
             randomCode.append(strRand);  
         }  
         // 将四位数字的验证码保存到Session中。  
-        code=randomCode.toString();       
-        
+        code=randomCode.toString().toLowerCase();       
+        System.out.println("ValidateCode:"+code);
         InputStream is = null; 
          
-        System.out.println(randomCode);
          
         ByteArrayOutputStream bs = new ByteArrayOutputStream();  
          
@@ -162,7 +172,7 @@ public class ValidateCode {
     /**
      * @return the dsc
      */
-    public StreamedContent getDsc() {
+    public StreamedContent getDsc() {            
         return dsc;
     }
 

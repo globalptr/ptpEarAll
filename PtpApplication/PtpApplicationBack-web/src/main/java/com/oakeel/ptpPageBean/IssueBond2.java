@@ -19,7 +19,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import javax.annotation.PostConstruct;
-import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -225,7 +224,7 @@ public class IssueBond2 {
     }
 
     public void createFolder(String folderName) {
-        String folder = "/ptpImageFolder/bondImages/" + ptpSessionBean.getIssueBondLocal().getBond1().getProductId() + "/" + folderName;
+        String folder = "/ptpImageFolder/bondImages/" + bond2.getBondNumber() + "/" + folderName;
         File file = new File(folder);//在e盘的test文件夹下面 创建一个叫 a的文件夹   \\ 是转义用的  
         if (file.exists()) {
             System.out.println("文件夹" + folder + "已经存在！");
@@ -246,7 +245,7 @@ public class IssueBond2 {
     public void handleFileUpload(FileUploadEvent event) throws IOException {
         UploadedFile file = event.getFile();
         InputStream stream = file.getInputstream();
-        String folder = "/bondImages/" + ptpSessionBean.getIssueBondLocal().getBond1().getProductId() + "/" + getSelectImageUsedEnum().getEnStr();
+        String folder = "/bondImages/" +  bond2.getBondNumber() + "/" + getSelectImageUsedEnum().getEnStr();
         String imageRelPath = folder + "/" + file.getFileName();
         String imagePath = "/ptpImageFolder" + imageRelPath;
         System.out.println(file.getFileName());

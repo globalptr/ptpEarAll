@@ -6,7 +6,11 @@
 
 package com.oakeel;
 
+import com.oakeel.ejb.entityAndEao.backUser.BackUserEntity;
+import com.oakeel.ejb.entityAndEao.backUserSet.BackUserSetEaoLocal;
+import com.oakeel.ejb.entityAndEao.backUserSet.BackUserSetEntity;
 import com.oakeel.ejb.transaction.bond.IssueBondLocal;
+import com.oakeel.ejb.transaction.platformFund.IssuePlatformFundLocal;
 import com.oakeel.globaltool.ValidateCode;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -24,8 +28,14 @@ public class PtpSessionBean implements Serializable{
 
     @EJB
     private IssueBondLocal issueBondLocal;
+    @EJB
+    private IssuePlatformFundLocal issuePlatformFundLocal;
+    private BackUserEntity logUser=null;
+    private BackUserSetEntity userSet=null;
+    @EJB
+    private BackUserSetEaoLocal backUserSetEaoLocal;
     
-    private ValidateCode validateCode;
+    
     //对于一个登录用户的session数据，统一使用此bean
     /**
      * Creates a new instance of PtpSessionBean
@@ -34,34 +44,19 @@ public class PtpSessionBean implements Serializable{
     }
     public void createNewCode()
     {
-        validateCode.createCode();
     }
     @PostConstruct
     public void init()
     {
-        validateCode=new ValidateCode(270,35,6,80);
-        validateCode.createCode();
     }
-    public void test()
+    public void changeUserTheme(String theme)
     {
-        System.out.println("调用sessionbean");
+        if(userSet!=null)
+        {
+            userSet.setUserTheme(theme);
+            backUserSetEaoLocal.updateEntity(userSet);
+        }
     }
-    private String userName;//保存会话期内的用户名
-
-    /**
-     * @return the userName
-     */
-    public String getUserName() {
-        return userName;
-    }
-
-    /**
-     * @param userName the userName to set
-     */
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     /**
      * @return the issueBondLocal
      */
@@ -76,20 +71,62 @@ public class PtpSessionBean implements Serializable{
         this.issueBondLocal = issueBondLocal;
     }
 
+
     /**
-     * @return the validateCode
+     * @return the issuePlatformFundLocal
      */
-    public ValidateCode getValidateCode() {
-        return validateCode;
+    public IssuePlatformFundLocal getIssuePlatformFundLocal() {
+        return issuePlatformFundLocal;
     }
 
     /**
-     * @param validateCode the validateCode to set
+     * @param issuePlatformFundLocal the issuePlatformFundLocal to set
      */
-    public void setValidateCode(ValidateCode validateCode) {
-        this.validateCode = validateCode;
+    public void setIssuePlatformFundLocal(IssuePlatformFundLocal issuePlatformFundLocal) {
+        this.issuePlatformFundLocal = issuePlatformFundLocal;
     }
 
+    /**
+     * @return the userSet
+     */
+    public BackUserSetEntity getUserSet() {
+        return userSet;
+    }
 
+    /**
+     * @param userSet the userSet to set
+     */
+    public void setUserSet(BackUserSetEntity userSet) {
+        this.userSet = userSet;
+    }
 
+    /**
+     * @return the logUser
+     */
+    public BackUserEntity getLogUser() {
+        return logUser;
+    }
+
+    /**
+     * @param logUser the logUser to set
+     */
+    public void setLogUser(BackUserEntity logUser) {
+        this.logUser = logUser;
+        if(this.logUser.getBackUserSetEntity()!=null)
+            userSet=this.logUser.getBackUserSetEntity();
+    }
+
+    /**
+     * @return the backUserSetEaoLocal
+     */
+    public BackUserSetEaoLocal getBackUserSetEaoLocal() {
+        return backUserSetEaoLocal;
+    }
+
+    /**
+     * @param backUserSetEaoLocal the backUserSetEaoLocal to set
+     */
+    public void setBackUserSetEaoLocal(BackUserSetEaoLocal backUserSetEaoLocal) {
+        this.backUserSetEaoLocal = backUserSetEaoLocal;
+    }
 }

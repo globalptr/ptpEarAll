@@ -6,6 +6,13 @@
     <ui:composition template="../main.xhtml" >
        
     <ui:define name="center">
+        
+        <style>
+            .ui-steps.horizontal .ui-steps-item {
+                width: 19.8%;
+                float: left;
+            }
+        </style>
         <h:form>
             <table  style="width: 100%;height: 100%;padding-left: 30px;border-collapse:collapse;border:none;margin-top: 30px">    
                 <tr>
@@ -27,15 +34,15 @@
                 <tr>
                     <td colspan="2">
                         <p:fieldset legend="项目详情" toggleable="true">
-                            <table>
+                            <table style="width:100%">
                                 <tr>
-                                    <td>
+                                    <td style="float: right">
                                         名称
                                     </td>
                                     <td>
                                         <p:outputLabel value="#{issueBond4.bond4.name}"/>
                                     </td>
-                                    <td>
+                                    <td style="float: right">
                                         金额
                                     </td>
                                     <td>
@@ -43,13 +50,13 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td style="float: right">
                                         借款方
                                     </td>
                                     <td>
                                         <p:outputLabel value="#{issueBond4.frontUserEntity.name}"/>
                                     </td>
-                                    <td>
+                                    <td style="float: right">
                                         额度
                                     </td>
                                     <td>
@@ -57,7 +64,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td style="float: right">
                                         项目情况
                                     </td>
                                 </tr>
@@ -73,21 +80,21 @@
                 <tr>
                     <td colspan="2">
                         <p:fieldset legend="用户信息" toggleable="true">
-                            <table>
+                            <table style="width:100%">
                                 <tr>
-                                    <td>
+                                    <td style="float: right">
                                         用户名
                                     </td>
                                     <td>
                                         #{issueBond4.frontUserEntity.name}
                                     </td>
-                                    <td>
+                                    <td style="float: right">
                                         信用等级
                                     </td>
                                     <td>
                                         #{issueBond4.frontUserEntity.creditLevelEnum}
                                     </td>
-                                    <td>
+                                    <td style="float: right">
                                         收入范围
                                     </td>
                                     <td>
@@ -95,19 +102,19 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td style="float: right">
                                         年龄
                                     </td>
                                     <td>
                                         #{issueBond4.frontUserEntity.age}
                                     </td>
-                                    <td>
+                                    <td style="float: right">
                                         性别
                                     </td>
                                     <td>
                                         #{issueBond4.frontUserEntity.sexEnum}
                                     </td>
-                                    <td>
+                                    <td style="float: right">
                                         住房条件
                                     </td>
                                     <td>
@@ -115,18 +122,18 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td style="float: right">
                                         成功借款
                                     </td>
                                     <td>
                                     </td>
-                                    <td>
+                                    <td style="float: right">
                                         实名认证
                                     </td>
                                     <td>
                                         <p:outputLabel/>
                                     </td>
-                                    <td>
+                                    <td style="float: right">
                                         逾期记录
                                     </td>
                                     <td>
@@ -140,7 +147,7 @@
                 <tr>
                     <td colspan="2">
                         <p:fieldset legend="风控详情" toggleable="true">
-                            <table>
+                            <table style="width:100%">
                                 <tr>
                                     <td>
                                         担保公司
@@ -272,42 +279,42 @@
                 <tr>
                     <td colspan="2">
                         <p:fieldset legend="基本信息" toggleable="true">
-                            <table>
+                            <table style="width:100%">
                                 <tr>
-                                    <td>
-                                        还款模型
+                                    <td style="float: right">
+                                        还款模型:
                                     </td>
                                     <td>
                                         #{issueBond4.bond4==null?'无':issueBond4.bond4.repayModelEnum}
                                     </td>
-                                    <td>
-                                        借款总额
+                                    <td style="float: right">
+                                        借款总额:
                                     </td>
                                     <td>
-                                        #{issueBond4.bond4==null?'无':issueBond4.bond4.baseAmount*issueBond4.bond4.copiesNum}
+                                        #{issueBond4.bond4==null?'无':issueBond4.bond4.baseAmount*issueBond4.bond4.issueCopiesNum}
                                     </td>
-                                    <td>
-                                        开始时间
+                                    <td style="float: right">
+                                        开始时间:
                                     </td>
                                     <td>
                                         <h:outputLabel  value="#{issueBond4.bond4==null?issueBond4.defaultDate:issueBond4.bond4.startDate}"  converter="DateConverter"/>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        年利率
+                                    <td style="float: right">
+                                        年利率:
                                     </td>
                                     <td>
-                                        #{issueBond4.bond4==null?'无':issueBond4.bond4.yearRate}%
+                                        #{issueBond4.bond4==null?'无':issueBond4.bond4.yearRate}#{issueBond4.bond4==null?'':'%'}
                                     </td>
-                                    <td>
-                                        还款周期
+                                    <td style="float: right">
+                                        还款周期:
                                     </td>
                                     <td>
                                         #{issueBond4.bond4==null?'无':issueBond4.bond4.repayCycle}
                                     </td>
-                                    <td>
-                                        还款期数
+                                    <td style="float: right">
+                                        还款期数:
                                     </td>
                                     <td>
                                         #{issueBond4.bond4==null?'无':issueBond4.bond4.repayCycleNumber}

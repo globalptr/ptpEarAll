@@ -1,0 +1,55 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="../main.xhtml" >
+        <ui:define name="center">
+            <style>
+                .ui-steps.horizontal .ui-steps-item {
+                    width: 23.9%;
+                    float: left;
+                }
+            </style>
+            <h:form>
+                <table style=" margin-left: 50px;width:95% ;margin-top: 30px"> 
+                    <tr>
+                        <td colspan="2" >
+                            <p:steps styleClass="horizontal" activeIndex="0" style=" width:100%;height: 30px">
+                                <p:menuitem value="填写基本信息" />
+                                <p:menuitem value="选择还款模型" />
+                                <p:menuitem value="发布前预览" />
+                                <p:menuitem value="发布成功" />
+                            </p:steps>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:100px">
+                            <p:outputLabel value="选择产品类型:"/>
+                        </td>
+                        <td style="width:auto">
+                            <p:selectOneMenu id="type_id" value="#{issuePlatformFund1.platformFundEntity1.platformFundTypeEnum}">
+                                <f:ajax event="change" execute="type_id" listener="#{issuePlatformFund1.setPlatformFundType()}" render="interest_id"/>
+                                <f:selectItems value="#{issuePlatformFund1.platformFundTypeEnums}"/>
+                            </p:selectOneMenu>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:100px">
+                            <p:outputLabel value="执行利率:"/>
+                        </td>
+                        <td style="width:auto">
+                            <p:inputText id="interest_id"  value="#{issuePlatformFund1.platformFundEntity1.yearRate}" converter="BigDecimalConverter"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="padding-top:10px;padding-bottom:10px">
+                            <p:commandButton style="width:100%;height: 40px" value="下一步" action="#{issuePlatformFund1.toNextStep()}"/>
+                        </td>
+                    </tr>
+                </table>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

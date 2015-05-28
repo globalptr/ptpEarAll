@@ -37,7 +37,6 @@ public class LoginController {
     public LoginController() throws IOException
     {		
     }
-    @RequiresRoles("admin")
     public String authenticate() { 
         
         try{

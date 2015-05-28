@@ -4,7 +4,14 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     <ui:composition template="../main.xhtml" >
+        
         <ui:define name="center">
+            <style>
+                .ui-steps.horizontal .ui-steps-item {
+                    width: 19.8%;
+                    float: left;
+                }
+            </style>
             <h:form id="issue2form">    
                 <p:dialog widgetVar="showImageDlg_wid" resizable="false" header="图片详情">
                     <table>

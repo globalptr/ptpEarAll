@@ -77,10 +77,6 @@ and open the template in the editor.
     margin-top: -15px;
     margin-bottom: 10px;
 }
-.ui-steps.horizontal .ui-steps-item {
-    width: 19.8%;
-    float: left;
-}
 .ui-panel .ui-panel-title
 {
     margin: 0px;

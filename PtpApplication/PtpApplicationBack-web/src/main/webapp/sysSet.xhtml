@@ -10,7 +10,7 @@
                 <table>
                     <tr>
                         <td>
-                            基准金默认值
+                            基准金默认值：
                         </td>
                         <td>
                             <p:inputText value="#{sysSet.sysSetEntity.defaultBaseAmount}"/>
@@ -18,10 +18,42 @@
                     </tr>
                     <tr>
                         <td>
-                            默认利率
+                            默认利率：
                         </td>
                         <td>
-                            <p:inputText value="#{sysSet.sysSetEntity.defaultYearRate}"/>
+                            <p:inputText value="#{sysSet.sysSetEntity.defaultYearRate}" converter="BigDecimalConverter"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            聚财宝利率：
+                        </td>
+                        <td>
+                            <p:inputText value="#{sysSet.sysSetEntity.yearRate}" converter="BigDecimalConverter"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            季富宝利率：
+                        </td>
+                        <td>
+                            <p:inputText value="#{sysSet.sysSetEntity.quarterRate}" converter="BigDecimalConverter"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            月月宝利率：
+                        </td>
+                        <td>
+                            <p:inputText value="#{sysSet.sysSetEntity.monthRate}" converter="BigDecimalConverter"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            天天宝利率：
+                        </td>
+                        <td>
+                            <p:inputText value="#{sysSet.sysSetEntity.dayRate}" converter="BigDecimalConverter"/>
                         </td>
                     </tr>
                     <tr>

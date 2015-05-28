@@ -13,21 +13,18 @@ import com.oakeel.ejb.entityAndEao.sysSet.SysSetEaoLocal;
 import com.oakeel.ejb.entityAndEao.sysSet.SysSetEntity;
 import com.oakeel.ejb.ptpEnum.RepayModelEnum;
 import com.oakeel.ejb.ptpEnum.SplitUnit;
-import com.oakeel.ejb.ptpEnum.SysInfo;
 import com.oakeel.ejb.transaction.RepayModelCaculate.RepayModelCaculateLocal;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.application.ConfigurableNavigationHandler;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 /**
@@ -73,9 +70,11 @@ public class IssueBond3 implements Serializable {
 
         //根据输入和选择的还款模型计算还款列表
         try {
-            Integer baseAmount = bond3.getBaseAmount() * bond3.getCopiesNum();
+            Integer baseAmount = bond3.getBaseAmount() * bond3.getIssueCopiesNum();
             BigDecimal allAmount = new BigDecimal(baseAmount.toString());
-            setExpenseEntitys(repayModelCaculateLocal.caculateRepayModel(bond3.getRepayModelEnum(), bond3.getRepayCycle(), allAmount, bond3.getYearRate().multiply(BigDecimal.valueOf(0.01), MathContext.DECIMAL32), bond3.getRepayCycleNumber(), bond3.getStartDate()));
+            
+            expenseEntitys=repayModelCaculateLocal.caculateRepayModel(bond3.getRepayModelEnum(), bond3.getRepayCycle(), allAmount, bond3.getYearRate().multiply(BigDecimal.valueOf(0.01),MathContext.DECIMAL32), bond3.getRepayCycleNumber(), bond3.getStartDate());
+//            expenseEntitys=repayModelCaculateLocal.caculateRepayModel(bond3.getRepayModelEnum(), bond3.getRepayCycle(), allAmount, bond3.getYearRate().multiply(BigDecimal.valueOf(0.01), MathContext.DECIMAL32), bond3.getRepayCycleNumber(), bond3.getStartDate());
 //            getRepayItemList().clear();
             //计算还款模型输入还款模型、还款单元、贷款总额、年利率、还款周期、开始时间
 //            RepayModelCaculate.caculateRepayModel(RepayModelEnum.定额本息, SplitUnit.月, new BigDecimal("200000"), new BigDecimal("21.5").multiply(BigDecimal.valueOf(0.01),MathContext.DECIMAL32), 24, new Date(), repayItemList);
@@ -95,8 +94,8 @@ public class IssueBond3 implements Serializable {
     }
 
     public String toNextStep() {
-        ptpSessionBean.getIssueBondLocal().setStep3Bond(getBond3());
-        ptpSessionBean.getIssueBondLocal().setExpense(expenseEntitys);
+        bond3.setExpenseEntitys(expenseEntitys);
+        ptpSessionBean.getIssueBondLocal().setStep3Bond(bond3);
         ptpSessionBean.getIssueBondLocal().issuePreview();
         return "issueBond4";
     }

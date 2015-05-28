@@ -11,10 +11,12 @@ import com.oakeel.ejb.transaction.InitEjbLocal;
 import com.oakeel.shiro.PtpRealm;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
+import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy;
 import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
@@ -26,15 +28,20 @@ import org.apache.shiro.mgt.DefaultSecurityManager;
  *
  * @author root
  */
-@ManagedBean(eager=true)
+@Named
 @ApplicationScoped
 public class PtpApplicationBean {
-    
+    private static final Logger log = Logger.getLogger(LoginController.class.getClass());     
     @EJB
     InitEjbLocal initEjbLocal;
     /**
      * Creates a new instance of PtpApplicationBean
+     * @param msg
      */
+    public void logMessage(String msg)
+    {
+        log.info(msg); 
+    }
     @PostConstruct
     public void init()
     {
@@ -55,7 +62,7 @@ public class PtpApplicationBean {
     }
     public void initDB()
     {
-        //initEjbLocal.InitDB();
+        initEjbLocal.InitDB();
         initEjbLocal.addUsers();
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(SysInfo.提示.toString(),  "数据库初始化完毕!") );
