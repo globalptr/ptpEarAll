@@ -10,13 +10,16 @@ import com.oakeel.ejb.entityAndEao.organization.OrganizationEaoLocal;
 import com.oakeel.ejb.entityAndEao.organization.OrganizationEntity;
 import com.oakeel.ejb.entityAndEao.user.UserEaoLocal;
 import com.oakeel.ejb.entityAndEao.user.UserEntity;
+import com.oakeel.ejb.ptpEnum.SysInfo;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
@@ -63,6 +66,7 @@ public class UserManageBean {
      public void updateUser(RowEditEvent event) {
          UserEntity temp=(UserEntity) event.getObject();
          userEaoLocal.updateEntity(temp);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(SysInfo.提示.toString(), "修改成功！"));
     }
      public void deleteUser()
      {

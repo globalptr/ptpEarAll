@@ -9,9 +9,9 @@ package com.oakeel;
 import com.oakeel.ejb.entityAndEao.backUser.BackUserEntity;
 import com.oakeel.ejb.entityAndEao.backUserSet.BackUserSetEaoLocal;
 import com.oakeel.ejb.entityAndEao.backUserSet.BackUserSetEntity;
+import com.oakeel.ejb.ptpEnum.AccountModeEnum;
 import com.oakeel.ejb.transaction.bond.IssueBondLocal;
 import com.oakeel.ejb.transaction.platformFund.IssuePlatformFundLocal;
-import com.oakeel.globaltool.ValidateCode;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -34,6 +34,7 @@ public class PtpSessionBean implements Serializable{
     private BackUserSetEntity userSet=null;
     @EJB
     private BackUserSetEaoLocal backUserSetEaoLocal;
+    private AccountModeEnum logType;
     
     
     //对于一个登录用户的session数据，统一使用此bean
@@ -128,5 +129,19 @@ public class PtpSessionBean implements Serializable{
      */
     public void setBackUserSetEaoLocal(BackUserSetEaoLocal backUserSetEaoLocal) {
         this.backUserSetEaoLocal = backUserSetEaoLocal;
+    }
+
+    /**
+     * @return the logType
+     */
+    public AccountModeEnum getLogType() {
+        return logType;
+    }
+
+    /**
+     * @param logType the logType to set
+     */
+    public void setLogType(AccountModeEnum logType) {
+        this.logType = logType;
     }
 }

@@ -4,10 +4,50 @@
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
     <navigation-rule>
-        <from-view-id>/log.xhtml</from-view-id>
+        <from-view-id>/*</from-view-id>
         <navigation-case>
-            <from-outcome>success</from-outcome>
+            <from-outcome>bond</from-outcome>
+            <to-view-id>/bond/bondMain.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>issueBond</from-outcome>
+            <to-view-id>/bond/issueBond1.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>issuePlatformFund</from-outcome>
+            <to-view-id>/platformFund/issuePlatformFund1.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>operation</from-outcome>
+            <to-view-id>/backUserManage/operation.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>organization</from-outcome>
+            <to-view-id>/backUserManage/organization.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>permission</from-outcome>
+            <to-view-id>/backUserManage/permission.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>role</from-outcome>
+            <to-view-id>/backUserManage/role.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>user</from-outcome>
+            <to-view-id>/backUserManage/user.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>main</from-outcome>
             <to-view-id>/main.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>auditBond</from-outcome>
+            <to-view-id>/bond/auditBond.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
     

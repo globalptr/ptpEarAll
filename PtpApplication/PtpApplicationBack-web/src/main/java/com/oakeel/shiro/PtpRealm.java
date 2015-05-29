@@ -6,7 +6,6 @@
 package com.oakeel.shiro;
 
 import com.oakeel.ejb.entityAndEao.backUser.BackUserEaoLocal;
-import com.oakeel.ejb.entityAndEao.user.UserEaoLocal;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,6 +17,7 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
@@ -31,7 +31,11 @@ public class PtpRealm extends AuthorizingRealm {
     //授权
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection pc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("1111111");
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        String userId =  (String) this.getAvailablePrincipal(pc);
+        System.out.println(userId);
+        return info;
     }
 
     //验证

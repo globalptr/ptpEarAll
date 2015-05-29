@@ -8,21 +8,13 @@ package com.oakeel;
 
 import com.oakeel.ejb.ptpEnum.SysInfo;
 import com.oakeel.ejb.transaction.InitEjbLocal;
-import com.oakeel.shiro.PtpRealm;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.apache.log4j.Logger;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy;
-import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
-import org.apache.shiro.authz.ModularRealmAuthorizer;
-import org.apache.shiro.authz.permission.WildcardPermissionResolver;
-import org.apache.shiro.mgt.DefaultSecurityManager;
 
 /**
  *

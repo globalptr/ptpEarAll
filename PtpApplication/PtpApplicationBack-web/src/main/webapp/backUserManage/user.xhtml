@@ -1,0 +1,225 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="../main.xhtml" >
+        <script>
+            function ss()
+            {
+
+            }
+        </script>
+        <ui:define name="center">
+            <h:form id="formx">
+                <!--为了防止用户回车误删数据-->
+                <p:dialog>
+                    <p:commandButton type="hidden"/>    
+                </p:dialog>
+                <p:dialog widgetVar="adduserdlg" header="添加新用户" resizable="false" >
+                    <table>
+                        <tr>
+                            <td>
+                                <p:outputLabel value="用户名"/>
+                            </td>
+                            <td>
+                                <p:inputText id="user_id" value="#{userManageBean.newUser.name}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel value="密码"/>
+                            </td>
+                            <td>
+                                <p:inputText id="pass_id" value="#{userManageBean.newUser.password}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel value="重复密码"/>
+                            </td>
+                            <td>
+                                <p:password  id="repass_id" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel value="手机号"/>
+                            </td>
+                            <td>
+                                <p:inputText id="tel_id" value="#{userManageBean.newUser.telephone}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel value="邮箱"/>
+                            </td>
+                            <td>
+                                <p:inputText id="email_id" value="#{userManageBean.newUser.email}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:outputLabel value="部门"/>
+                            </td>
+                            <td>
+                                <h:selectOneMenu style="width:100%" converter="OrganizationConverter" value="#{userManageBean.newUser.organizationEntity}">
+                                    <f:selectItems value="#{userManageBean.allOrganization}" var="org_var" itemLabel="#{org_var.name}" itemValue="#{org_var.uuid}"/>
+                                </h:selectOneMenu>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <p:commandButton value="添加" style="width:100%" onclick="PF('adduserdlg').hide()" update=":form:users_id" actionListener="#{userManageBean.addNewUser()}"/>
+                            </td>
+                        </tr>
+                    </table>
+                </p:dialog>
+                <p:dialog widgetVar="deleteuserdlg" resizable="false" header="删除用户">
+                    <table>
+                        <tr>
+                            <td colspan="2">
+                                <p:outputLabel value="是否确定删除此用户"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:commandButton value="删除" onclick="PF('deleteuserdlg').hide()" actionListener="#{userManageBean.deleteUser()}" update=":form:users_id"/>
+                            </td>
+                            <td>
+                                <p:commandButton value="取消" onclick="PF('deleteuserdlg').hide()"/>
+                            </td>
+                        </tr>
+                    </table>
+                </p:dialog>
+
+            </h:form>
+
+            <table style="height: 100%;">
+                <tr >
+                    <td style=" vertical-align: top">
+                        <h:form style="height: 100%" id="form">
+                            <p:dataTable filterEvent="keydown"  rowIndexVar="row" id="users_id" var="users_var" widgetVar="carsTable"  editable="true" value="#{userManageBean.userEntitys}"  emptyMessage="没找到相关用户" filteredValue="#{userManageBean.userFilter}">
+                                <f:facet name="header">
+                                    <table>
+                                        <tr>
+                                            <td style="text-align: center; width: 100%;border: none" rowspan="2">
+                                                <p:outputLabel value="用户信息表"/>
+                                            </td>
+                                            <td style=" width: 20px;border: none">
+                                                <p:commandLink styleClass="ui-icon ui-icon-plus"  onclick="PF('adduserdlg').show()"  immediate="true" id="addNewUser_id">
+                                                    <f:ajax event="click" render=":formx:pass_id :formx:user_id :formx:repass_id :formx:tel_id :formx:email_id"/>
+                                                </p:commandLink>
+                                                <p:tooltip for="addNewUser_id" value="添加新用户"   />
+                                            </td>           
+                                            <td style=" width: 20px;border: none">
+                                                <p:commandLink  styleClass="ui-icon ui-icon-search" immediate="true" id="findUnclassUser_id" update=":form:users_id">
+                                                    <p:ajax event="click"  listener="#{userManageBean.unclassedUser()}" />
+                                                </p:commandLink>
+                                                <p:tooltip for="findUnclassUser_id" value="查找未分类用户"   />
+                                            </td>
+                                            <td style=" width: 20px;border: none">
+                                                <p:commandLink immediate="true" styleClass="ui-icon ui-icon-search" id="findallUser_id" update=":form:users_id">
+                                                    <p:ajax event="click" listener="#{userManageBean.allUser()}" />
+                                                </p:commandLink>
+                                                <p:tooltip for="findallUser_id" value="查找所有用户"   />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="float:right; width: 200px;border: none">
+                                                <h:outputText value="全表搜索:" />
+                                                <p:inputText id="globalFilter" onkeydown="PF('carsTable').filter()" style="width:100px" placeholder="输入关键字"/>
+                                            </td>      
+                                        </tr>
+                                    </table>
+                                </f:facet>       
+                                <p:ajax event="rowEdit" listener="#{userManageBean.updateUser}"  />
+                                <p:column  headerText="序号" style="width:30px">
+                                    <h:outputText value="#{row + 1}"/> 
+                                </p:column>
+                                <p:column headerText="用户名" filterBy="#{users_var.name}"  footerText="包含模式" filterMatchMode="contains">        
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{users_var.name}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:inputText style="width:100%"  value="#{users_var.name}"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column filterBy="#{users_var.password}"   headerText="密码">
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{users_var.password}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:inputText style="width:100%"  value="#{users_var.password}"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column filterBy="#{users_var.telephone}"  headerText="电话">
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{users_var.telephone}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:inputText style="width:100%"  value="#{users_var.telephone}"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column filterBy="#{users_var.email}"  headerText="邮箱">
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{users_var.email}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:inputText style="width:100%"  value="#{users_var.email}"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column filterBy="#{users_var.organizationEntity}"   headerText="机构" style="width:200px">
+                                    <f:facet name="filter">
+                                        <p:selectOneMenu onchange="PF('carsTable').filter()">
+                                            <f:selectItem itemLabel="选择筛选单位" itemValue="#{null}" noSelectionOption="true" />
+                                            <f:selectItems   value="#{userManageBean.allOrganization}"/>
+                                        </p:selectOneMenu>
+                                    </f:facet>
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{users_var.organizationEntity}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:selectOneMenu converter="OrganizationConverter" value="#{users_var.organizationEntity}" style="width:100%">
+                                                <f:selectItems value="#{userManageBean.allOrganization}" var="orgitem_var" itemLabel="#{orgitem_var.name}" itemValue="#{orgitem_var.uuid}"/>
+                                            </h:selectOneMenu>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column filterBy="#{users_var.priority}"  headerText="显示顺序">
+                                    <p:cellEditor>
+                                        <f:facet name="output">
+                                            <h:outputText value="#{users_var.priority}" />
+                                        </f:facet>
+                                        <f:facet name="input">
+                                            <h:inputText style="width:100%"  value="#{users_var.priority}"/>
+                                        </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column style="width:32px" headerText="编辑">
+                                    <p:rowEditor />
+                                </p:column>
+                                <p:column style="width:30px" headerText="删除">
+                                    <p:commandLink  styleClass="ui-icon ui-icon-trash" onclick="PF('deleteuserdlg').show()" update="users_id">
+                                        <f:setPropertyActionListener value="#{users_var}" target="#{userManageBean.deleteUserEntity}" />
+                                    </p:commandLink>
+                                </p:column>
+                            </p:dataTable>
+                        </h:form>
+                    </td>
+                </tr>
+            </table>
+
+        </ui:define>
+    </ui:composition>
+</html>
+

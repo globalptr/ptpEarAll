@@ -41,7 +41,8 @@
                                             </tr>
                                             <tr>
                                                 <td style="padding-right:20px">
-                                                    <p:commandLink  value="回融资标主界面"  style="width:100%;height: 40px" action="viewBond"/>
+                                                    <p:poll interval="1" listener="#{issuePlatformFund4.backToMain()}" update="txt_count" />
+                                                    <p:commandLink  id="txt_count"  value="#{issuePlatformFund4.sec}秒回融资标主界面"  style="width:100%;height: 40px" action="viewBond"/>
                                                 </td>
                                                 <td>
                                                     <p:commandLink  value="点此再发一个"  style="width:100%;height: 40px" action="issueBond1"/>

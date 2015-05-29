@@ -8,6 +8,8 @@ package com.oakeel;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 
 /**
  *
@@ -17,7 +19,17 @@ import javax.inject.Named;
 @RequestScoped
 public class NewClass {
     private String str="1212";
+    public void test()
+    {
+        Subject subject = SecurityUtils.getSubject();
+        if(subject.hasRole("admin")) {
+        //有权限
+        } else {
+        //无权限
+        }
 
+
+    }
     /**
      * @return the str
      */
