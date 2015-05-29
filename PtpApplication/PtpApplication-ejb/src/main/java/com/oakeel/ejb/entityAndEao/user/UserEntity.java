@@ -10,7 +10,7 @@ import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import com.oakeel.ejb.entityAndEao.organization.OrganizationEntity;
 import com.oakeel.ejb.entityAndEao.role.RoleEntity;
 import com.oakeel.ejb.entityAndEao.backUserSet.BackUserSetEntity;
-import com.oakeel.ejb.ptpEnum.CreateAccountModeEnum;
+import com.oakeel.ejb.ptpEnum.AccountModeEnum;
 import com.oakeel.ejb.ptpEnum.SexEnum;
 import java.util.HashSet;
 import java.util.Set;
@@ -36,13 +36,13 @@ public class UserEntity extends EntityRoot{
     public UserEntity() {
     }
  
-    public UserEntity(String param,String password,CreateAccountModeEnum userEnum)
+    public UserEntity(String param,String password,AccountModeEnum userEnum)
     {
-        if(userEnum==CreateAccountModeEnum.用户名)
+        if(userEnum==AccountModeEnum.用户名)
             this.name=param;
-        if(userEnum==CreateAccountModeEnum.电话)
+        if(userEnum==AccountModeEnum.电话)
             this.telephone=param;
-        if(userEnum==CreateAccountModeEnum.邮箱)
+        if(userEnum==AccountModeEnum.邮箱)
             this.email=param;
         this.password=password;
     }

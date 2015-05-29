@@ -19,4 +19,5 @@ public interface BackUserEaoLocal  extends EaoRootLocal<BackUserEntity>{
     public BackUserEntity  validateUserByName(String name,String password);
     public BackUserEntity  validateUserByTelephone(String telephone,String password);
     public BackUserEntity  validateUserByEmail(String email,String password);
+    public BackUserEntity  validateUserByQQ(String qq,String password);
 }

@@ -17,4 +17,5 @@ import javax.persistence.Entity;
 public class BondStateEntity extends EntityRoot {
     private static final long serialVersionUID = 1L;
     Boolean isInformationCompleted;//资料是否齐全
+    Boolean isLogicDelete;//是否逻辑删除
 }

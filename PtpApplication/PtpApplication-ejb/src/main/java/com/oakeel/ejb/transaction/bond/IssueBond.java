@@ -59,6 +59,7 @@ public class IssueBond implements IssueBondLocal {
 
     @Override
     public void issue() {
+     
         em.persist(newBond);
         frontUserIssueBondEntity=new FrontUserIssueBondEntity();
         frontUserIssueBondEntity.setPtpProductEntity(newBond);
@@ -114,6 +115,7 @@ public class IssueBond implements IssueBondLocal {
         if(bond1!=null)
         {
             newBond.setName(bond1.getName());
+            newBond.setIssueAdmin(bond1.getIssueAdmin());
             newBond.setBondType(bond1.getBondType());
             newBond.setCompanyUserEntity(bond1.getCompanyUserEntity());
             newBond.setRiskControlDetails(bond1.getRiskControlDetails());

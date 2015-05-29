@@ -6,6 +6,7 @@
 
 package com.oakeel.ejb.entityAndEao.ptpProduct;
 
+import com.oakeel.ejb.entityAndEao.backUser.BackUserEntity;
 import com.oakeel.ejb.entityAndEao.bondState.BondStateEntity;
 import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import com.oakeel.ejb.entityAndEao.expense.ExpenseEntity;
@@ -28,6 +29,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -57,6 +59,8 @@ public class PtpProductEntity extends EntityRoot {
         Date ddate=new Date();  
         bondNumber=(new SimpleDateFormat("yyyyMMddHHmmss")).format(ddate)+n;
     }
+    @ManyToOne
+    private BackUserEntity issueAdmin;//发标人
     private BondStage bondStage;//标的阶段
     @Temporal(TemporalType.DATE)
     private Date startDate;//开始时间
@@ -308,5 +312,19 @@ public class PtpProductEntity extends EntityRoot {
      */
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
+    }
+
+    /**
+     * @return the issueAdmin
+     */
+    public BackUserEntity getIssueAdmin() {
+        return issueAdmin;
+    }
+
+    /**
+     * @param issueAdmin the issueAdmin to set
+     */
+    public void setIssueAdmin(BackUserEntity issueAdmin) {
+        this.issueAdmin = issueAdmin;
     }
 }

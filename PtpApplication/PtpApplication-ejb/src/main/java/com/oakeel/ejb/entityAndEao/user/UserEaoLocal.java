@@ -19,9 +19,10 @@ import javax.ejb.Local;
 @Local
 public interface UserEaoLocal extends EaoRootLocal<UserEntity>{
   
-    public Boolean  validateUserByName(String name,String password);
-    public Boolean  validateUserByTelephone(String telephone,String password);
-    public Boolean  validateUserByEmail(String email,String password);
+    public UserEntity  validateUserByName(String name,String password);
+    public UserEntity  validateUserByTelephone(String telephone,String password);
+    public UserEntity  validateUserByEmail(String email,String password);
+    public UserEntity  validateUserByQQ(String qq,String password);
     public List<UserEntity> getUsersByOrganization(OrganizationEntity org);
     public  List<UserEntity> getUnclassedUser();
     public void deleteRole(UserEntity user,RoleEntity role);

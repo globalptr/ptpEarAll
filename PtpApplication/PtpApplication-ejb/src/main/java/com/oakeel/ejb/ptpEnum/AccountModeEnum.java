@@ -11,6 +11,6 @@ package com.oakeel.ejb.ptpEnum;
  *
  * @author root
  */
-public enum CreateAccountModeEnum {
+public enum AccountModeEnum {
     用户名,电话,邮箱,QQ号;
 }

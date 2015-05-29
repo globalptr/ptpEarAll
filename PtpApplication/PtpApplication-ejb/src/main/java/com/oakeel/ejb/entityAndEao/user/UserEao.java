@@ -80,32 +80,55 @@ public class UserEao extends EaoRoot<UserEntity> implements UserEaoLocal {
     }
 
     @Override
-    public Boolean validateUserByName(String name, String password) {
+    public UserEntity validateUserByName(String name, String password) {
         CriteriaBuilder builder=em.getCriteriaBuilder();
         CriteriaQuery<UserEntity> query=builder.createQuery(UserEntity.class);
         Root<UserEntity> s=query.from(UserEntity.class);
-        query.select(s).where(builder.or(builder.equal(s.get(UserEntity_.name), name),builder.equal(s.get(UserEntity_.password), password)));
+        query.select(s).where(builder.and(builder.equal(s.get(UserEntity_.name), name),builder.equal(s.get(UserEntity_.password), password)));
         TypedQuery<UserEntity> q=em.createQuery(query);
-        return !q.getResultList().isEmpty();
+        if(!q.getResultList().isEmpty())
+            return q.getResultList().get(0);
+        else
+            return null;
     }
 
     @Override
-    public Boolean validateUserByTelephone(String telephone, String password) {
+    public UserEntity validateUserByTelephone(String telephone, String password) {
         CriteriaBuilder builder=em.getCriteriaBuilder();
         CriteriaQuery<UserEntity> query=builder.createQuery(UserEntity.class);
         Root<UserEntity> s=query.from(UserEntity.class);
-        query.select(s).where(builder.or(builder.equal(s.get(UserEntity_.telephone), telephone),builder.equal(s.get(UserEntity_.password), password)));
+        query.select(s).where(builder.and(builder.equal(s.get(UserEntity_.telephone), telephone),builder.equal(s.get(UserEntity_.password), password)));
         TypedQuery<UserEntity> q=em.createQuery(query);
-        return !q.getResultList().isEmpty();
+        if(!q.getResultList().isEmpty())
+            return q.getResultList().get(0);
+        else
+            return null;
     }
 
     @Override
-    public Boolean validateUserByEmail(String email, String password) {
+    public UserEntity validateUserByEmail(String email, String password) {
         CriteriaBuilder builder=em.getCriteriaBuilder();
         CriteriaQuery<UserEntity> query=builder.createQuery(UserEntity.class);
         Root<UserEntity> s=query.from(UserEntity.class);
-        query.select(s).where(builder.or(builder.equal(s.get(UserEntity_.email), email),builder.equal(s.get(UserEntity_.password), password)));
+        query.select(s).where(builder.and(builder.equal(s.get(UserEntity_.email), email),builder.equal(s.get(UserEntity_.password), password)));
         TypedQuery<UserEntity> q=em.createQuery(query);
-        return !q.getResultList().isEmpty();
+        if(!q.getResultList().isEmpty())
+            return q.getResultList().get(0);
+        else
+            return null;
+    }
+
+    @Override
+    public UserEntity validateUserByQQ(String qq, String password) {
+        
+        CriteriaBuilder builder=em.getCriteriaBuilder();
+        CriteriaQuery<UserEntity> query=builder.createQuery(UserEntity.class);
+        Root<UserEntity> s=query.from(UserEntity.class);
+        query.select(s).where(builder.and(builder.equal(s.get(UserEntity_.qq), qq),builder.equal(s.get(UserEntity_.password), password)));
+        TypedQuery<UserEntity> q=em.createQuery(query);
+        if(!q.getResultList().isEmpty())
+            return q.getResultList().get(0);
+        else
+            return null;
     }
 }

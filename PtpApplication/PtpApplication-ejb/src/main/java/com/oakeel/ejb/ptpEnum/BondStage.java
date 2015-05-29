@@ -11,5 +11,5 @@ package com.oakeel.ejb.ptpEnum;
  * @author root
  */
 public enum BondStage {
-    申请,补充资料,审核,发布,投标,满标,还款,结标;
+    申请,编辑,审核,发布,投标,满标,还款,结标;
 }
