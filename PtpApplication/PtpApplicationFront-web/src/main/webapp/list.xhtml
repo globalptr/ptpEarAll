@@ -1,26 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta name="keywords" content="天天聚财|网络理财|个人理财|投资理财|P2P理财|互联网金融|投资理财|债权转让|理财计划|优选计划|网络贷款|工薪贷|生意贷|网商贷|网贷|小额贷款">
-<meta name="description" content="天天聚财(www.ttjc.com.cn)是目前中国互联网金融中P2P信贷行业中最大、最安全的平台，为投资理财用户和贷款用户两端提供公平、透明、安全、高效的互联网金融服务。投资理财用户可以通过天天聚财平台进行投标、加入优选理财计划、购买债权等方式进行投资获得高收益；贷款用户可以通过平台申请工薪贷、生意贷、网商贷等小额贷款。">
-<link rel="icon" href="http://www.qclcfwzx.com/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" type="text/css" href="css/basic.css"/>
-<link rel="stylesheet" type="text/css" href="css/pubs.css"/>
-<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="js/comm.js"></script>
-<script>
-$(function(){
-	  $(".bidhd li").click(function(){
-	  $(this).addClass("on").siblings().removeClass("on");
-	  $(".bidblock .bidbox").eq($(this).index()).show().siblings().hide();
-	  });
-	});
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+        <meta name="keywords" content="天天聚财|网络理财|个人理财|投资理财|P2P理财|互联网金融|投资理财|债权转让|理财计划|优选计划|网络贷款|工薪贷|生意贷|网商贷|网贷|小额贷款"/>
+        <meta name="description" content="天天聚财(www.ttjc.com.cn)是目前中国互联网金融中P2P信贷行业中最大、最安全的平台，为投资理财用户和贷款用户两端提供公平、透明、安全、高效的互联网金融服务。投资理财用户可以通过天天聚财平台进行投标、加入优选理财计划、购买债权等方式进行投资获得高收益；贷款用户可以通过平台申请工薪贷、生意贷、网商贷等小额贷款。"/>
+        <link rel="icon" href="http://www.qclcfwzx.com/favicon.ico" type="image/x-icon"/>
+        <link href="resources/css/basic.css" rel="stylesheet" type="text/css"/>
+        <link href="resources/css/fzm.css" rel="stylesheet" type="text/css"/>
+        <link href="resources/css/pubs.css" rel="stylesheet" type="text/css"/>
+        <script src="resources/js/comm.js" type="text/javascript"></script>
+        <script src="resources/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script>
+    $(function(){
+              $(".bidhd li").click(function(){
+              $(this).addClass("on").siblings().removeClass("on");
+              $(".bidblock .bidbox").eq($(this).index()).show().siblings().hide();
+              });
+            });
 
-</script>
-</head>
+    </script>
+</h:head>
 
-<body>
+<h:body>
 <!--topbar-->
 <div class="topbar">
   <div class="topbar_in">
@@ -284,10 +287,10 @@ $(function(){
                                                       var nMS =1100*1000-run300times*1000;  
 													  
                                                           if (nMS>0){  
-                                                              var nD=Math.floor(nMS/(1000*60*60*24))%24;if(1<=nD){nD=nD;}
-                                                              var nH=Math.floor(nMS/(1000*60*60))%24;if(nH<10){nH="0"+String(nH);} 
-                                                              var nM=Math.floor(nMS/(1000*60)) % 60;if(nM<10){nM="0"+String(nM);}
-                                                              var nS=Math.floor(nMS/1000) % 60; if(nS<10){nS="0"+String(nS);}
+                                                              var nD=Math.floor(nMS/(1000*60*60*24))%24;if(1&lt;=nD){nD=nD;}
+                                                              var nH=Math.floor(nMS/(1000*60*60))%24;if(nH&lt;10){nH="0"+String(nH);} 
+                                                              var nM=Math.floor(nMS/(1000*60)) % 60;if(nM&lt;10){nM="0"+String(nM);}
+                                                              var nS=Math.floor(nMS/1000) % 60; if(nS&lt;10){nS="0"+String(nS);}
                                                               var time='<span>'+nD+'</span><i>天</i><span>'+nH+'</span><i>时</i><span>'+nM+'</span><i>分</i><span>'+nS+'</span><i>秒</i>';
                                                               $(".limit").html(time); 
                                                               run300times++;  
@@ -497,10 +500,10 @@ $(function(){
                                                       var nMS =1100*1000-run300times*1000;  
 													  
                                                           if (nMS>0){  
-                                                              var nD=Math.floor(nMS/(1000*60*60*24))%24;if(1<=nD){nD=nD;}
-                                                              var nH=Math.floor(nMS/(1000*60*60))%24;if(nH<10){nH="0"+String(nH);} 
-                                                              var nM=Math.floor(nMS/(1000*60)) % 60;if(nM<10){nM="0"+String(nM);}
-                                                              var nS=Math.floor(nMS/1000) % 60; if(nS<10){nS="0"+String(nS);}
+                                                              var nD=Math.floor(nMS/(1000*60*60*24))%24;if(1&lt;=nD){nD=nD;}
+                                                              var nH=Math.floor(nMS/(1000*60*60))%24;if(nH&lt;10){nH="0"+String(nH);} 
+                                                              var nM=Math.floor(nMS/(1000*60)) % 60;if(nM&lt;10){nM="0"+String(nM);}
+                                                              var nS=Math.floor(nMS/1000) % 60; if(nS&lt;10){nS="0"+String(nS);}
                                                               var time='<span>'+nD+'</span><i>天</i><span>'+nH+'</span><i>时</i><span>'+nM+'</span><i>分</i><span>'+nS+'</span><i>秒</i>';
                                                               $(".limit").html(time); 
                                                               run300times++;  
@@ -710,10 +713,10 @@ $(function(){
                                                       var nMS =1100*1000-run300times*1000;  
 													  
                                                           if (nMS>0){  
-                                                              var nD=Math.floor(nMS/(1000*60*60*24))%24;if(1<=nD){nD=nD;}
-                                                              var nH=Math.floor(nMS/(1000*60*60))%24;if(nH<10){nH="0"+String(nH);} 
-                                                              var nM=Math.floor(nMS/(1000*60)) % 60;if(nM<10){nM="0"+String(nM);}
-                                                              var nS=Math.floor(nMS/1000) % 60; if(nS<10){nS="0"+String(nS);}
+                                                              var nD=Math.floor(nMS/(1000*60*60*24))%24;if(1&lt;=nD){nD=nD;}
+                                                              var nH=Math.floor(nMS/(1000*60*60))%24;if(nH&lt;10){nH="0"+String(nH);} 
+                                                              var nM=Math.floor(nMS/(1000*60)) % 60;if(nM&lt;10){nM="0"+String(nM);}
+                                                              var nS=Math.floor(nMS/1000) % 60; if(nS&lt;10){nS="0"+String(nS);}
                                                               var time='<span>'+nD+'</span><i>天</i><span>'+nH+'</span><i>时</i><span>'+nM+'</span><i>分</i><span>'+nS+'</span><i>秒</i>';
                                                               $(".limit").html(time); 
                                                               run300times++;  
@@ -923,10 +926,10 @@ $(function(){
                                                       var nMS =1100*1000-run300times*1000;  
 													  
                                                           if (nMS>0){  
-                                                              var nD=Math.floor(nMS/(1000*60*60*24))%24;if(1<=nD){nD=nD;}
-                                                              var nH=Math.floor(nMS/(1000*60*60))%24;if(nH<10){nH="0"+String(nH);} 
-                                                              var nM=Math.floor(nMS/(1000*60)) % 60;if(nM<10){nM="0"+String(nM);}
-                                                              var nS=Math.floor(nMS/1000) % 60; if(nS<10){nS="0"+String(nS);}
+                                                              var nD=Math.floor(nMS/(1000*60*60*24))%24;if(1&lt;=nD){nD=nD;}
+                                                              var nH=Math.floor(nMS/(1000*60*60))%24;if(nH&lt;10){nH="0"+String(nH);} 
+                                                              var nM=Math.floor(nMS/(1000*60)) % 60;if(nM&lt;10){nM="0"+String(nM);}
+                                                              var nS=Math.floor(nMS/1000) % 60; if(nS&lt;10){nS="0"+String(nS);}
                                                               var time='<span>'+nD+'</span><i>天</i><span>'+nH+'</span><i>时</i><span>'+nM+'</span><i>分</i><span>'+nS+'</span><i>秒</i>';
                                                               $(".limit").html(time); 
                                                               run300times++;  
@@ -960,7 +963,7 @@ $(function(){
           <div class="look"><span>关注我们</span><a href="http://weibo.com/p/1006065584238499/home" class="wb trans" title="天天聚财微博" target="_blank"></a><a href="#" class="wx trans" title="天天聚财微信" target="_blank"></a></div>
           <div class="look hasml"><span>网站地图</span><a href="#" class="tu trans" title="网站地图" target="_blank"></a></div>
           <div class="look"><span>收益计算器</span><a href="#" class="ca trans" title="收益计算器" target="_blank"></a></div>
-          <div class="code_box"> <img src="http://www.ttjc.com.cn/images/ttjc_weixin.jpg"><em class="fm2">◆</em></div>
+          <div class="code_box"> <img src="http://www.ttjc.com.cn/images/ttjc_weixin.jpg"/><em class="fm2">◆</em></div>
         </div>
       </div>
       <dl class="foot_ser">
@@ -983,6 +986,5 @@ $(function(){
     </div>
   </div>
 </div>
-</div>
-</body>
+</h:body>
 </html>
