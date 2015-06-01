@@ -10,8 +10,8 @@ import com.oakeel.ejb.entityAndEao.backUser.BackUserEntity;
 import com.oakeel.ejb.entityAndEao.bondState.BondStateEntity;
 import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import com.oakeel.ejb.entityAndEao.expense.ExpenseEntity;
+import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import com.oakeel.ejb.entityAndEao.frontUserHoldBond.FrontUserHoldBondEntity;
-import com.oakeel.ejb.entityAndEao.frontUserIssueBond.FrontUserIssueBondEntity;
 import com.oakeel.ejb.ptpEnum.BondStage;
 import com.oakeel.ejb.ptpEnum.RepayModelEnum;
 import com.oakeel.ejb.ptpEnum.SplitUnit;
@@ -49,7 +49,6 @@ public class PtpProductEntity extends EntityRoot {
         String n="";
         int getNum;
         do {
-            
             //getNum = Math.abs(rd.nextInt())%10;//产生数字0-9的随机数
             getNum = Math.abs(rd.nextInt())%26 + 97;//产生字母a-z的随机数
             char num1 = (char)getNum;
@@ -60,7 +59,9 @@ public class PtpProductEntity extends EntityRoot {
         bondNumber=(new SimpleDateFormat("yyyyMMddHHmmss")).format(ddate)+n;
     }
     @ManyToOne
-    private BackUserEntity issueAdmin;//发标人
+    private BackUserEntity issueAdmin;//后台发标人
+    @ManyToOne
+    private FrontUserEntity issueUser;//发标用户
     private BondStage bondStage;//标的阶段
     @Temporal(TemporalType.DATE)
     private Date startDate;//开始时间
@@ -70,7 +71,7 @@ public class PtpProductEntity extends EntityRoot {
     private String Details;//详情  
     private BigDecimal yearRate=new BigDecimal("0");//年利率
     @Column(length = 50)
-    private String bondNumber;
+    private String bondNumber;//标号
     private int baseAmount;//基准金额
     private int IssueCopiesNum;//发行份数
     private int transactionCopiesNum;//成交份数
@@ -86,8 +87,6 @@ public class PtpProductEntity extends EntityRoot {
     private List<ExpenseEntity> expenseEntitys=new ArrayList<>();//支出明细
     @OneToMany(mappedBy="ptpProductEntity")
     Set<FrontUserHoldBondEntity> frontUserHoldBondEntitys;
-    @OneToOne(mappedBy="ptpProductEntity")
-    private FrontUserIssueBondEntity frontUserIssueBondEntity;
     /**
      * @return the bondStateEntity
      */
@@ -245,20 +244,6 @@ public class PtpProductEntity extends EntityRoot {
     }
 
     /**
-     * @return the frontUserIssueBondEntity
-     */
-    public FrontUserIssueBondEntity getFrontUserIssueBondEntity() {
-        return frontUserIssueBondEntity;
-    }
-
-    /**
-     * @param frontUserIssueBondEntity the frontUserIssueBondEntity to set
-     */
-    public void setFrontUserIssueBondEntity(FrontUserIssueBondEntity frontUserIssueBondEntity) {
-        this.frontUserIssueBondEntity = frontUserIssueBondEntity;
-    }
-
-    /**
      * @return the yearRate
      */
     public BigDecimal getYearRate() {
@@ -327,4 +312,19 @@ public class PtpProductEntity extends EntityRoot {
     public void setIssueAdmin(BackUserEntity issueAdmin) {
         this.issueAdmin = issueAdmin;
     }
+
+    /**
+     * @return the issueUser
+     */
+    public FrontUserEntity getIssueUser() {
+        return issueUser;
+    }
+
+    /**
+     * @param issueUser the issueUser to set
+     */
+    public void setIssueUser(FrontUserEntity issueUser) {
+        this.issueUser = issueUser;
+    }
+
 }

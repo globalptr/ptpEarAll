@@ -25,9 +25,9 @@ import javax.persistence.OneToMany;
 public class BondInformationEntity extends EntityRoot{
     private static final long serialVersionUID = 1L;
     @Enumerated(EnumType.STRING)
-    private ImageUsedEnum title;
+    private ImageUsedEnum title;//资料图片的分类
     @OneToMany(cascade = {CascadeType.ALL})
-    private List<ImageInfoEntity> imageInfoEntitys=new ArrayList<>();
+    private List<ImageInfoEntity> imageInfoEntitys=new ArrayList<>();//图片列表
 
 
 

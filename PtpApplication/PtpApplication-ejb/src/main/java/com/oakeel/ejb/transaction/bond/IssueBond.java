@@ -8,7 +8,6 @@ package com.oakeel.ejb.transaction.bond;
 
 import com.oakeel.ejb.entityAndEao.bond.BondEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
-import com.oakeel.ejb.entityAndEao.frontUserIssueBond.FrontUserIssueBondEntity;
 import com.oakeel.ejb.ptpEnum.BondStage;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
@@ -24,7 +23,6 @@ public class IssueBond implements IssueBondLocal {
     EntityManager em;
     BondEntity newBond;
     FrontUserEntity issueBondUser;
-    FrontUserIssueBondEntity frontUserIssueBondEntity;
     BondEntity bond1=null;
     BondEntity bond2=null;
     BondEntity bond3=null;
@@ -59,12 +57,8 @@ public class IssueBond implements IssueBondLocal {
 
     @Override
     public void issue() {
-     
+        System.out.println("fdfdf");
         em.persist(newBond);
-        frontUserIssueBondEntity=new FrontUserIssueBondEntity();
-        frontUserIssueBondEntity.setPtpProductEntity(newBond);
-        frontUserIssueBondEntity.setUser(issueBondUser);
-        em.persist(frontUserIssueBondEntity);
     }
 
     // Add business logic below. (Right-click in editor and choose
@@ -90,12 +84,7 @@ public class IssueBond implements IssueBondLocal {
     @Override
     public void issuePreview() {
     
-        if(issueBondUser==null)
-        {
-            System.out.println("发标用户为空");
-            return;
-        }
-        else if(bond1==null)
+        if(bond1==null)
         {
             System.out.println("bond1为空");
             return;
@@ -116,11 +105,13 @@ public class IssueBond implements IssueBondLocal {
         {
             newBond.setName(bond1.getName());
             newBond.setIssueAdmin(bond1.getIssueAdmin());
+            newBond.setDetails(bond1.getDetails());
             newBond.setBondType(bond1.getBondType());
             newBond.setCompanyUserEntity(bond1.getCompanyUserEntity());
             newBond.setRiskControlDetails(bond1.getRiskControlDetails());
             newBond.setGuaranteeCase(bond1.getGuaranteeCase());
             newBond.setReverseGuaranteeCase(bond1.getReverseGuaranteeCase());
+            newBond.setIssueUser(bond1.getIssueUser());
         }
         //——————————————————————————————————————————————————————————————
         if(bond2!=null)
@@ -141,22 +132,7 @@ public class IssueBond implements IssueBondLocal {
             newBond.setExpenseEntitys(bond3.getExpenseEntitys());//还款账单
         }
         newBond.setBondStage(BondStage.发布);
+        
         //——————————————————————————————————————————————————————————————
-    }
-
-    @Override
-    public FrontUserEntity getIssueUser() {
-        return issueBondUser;
-    }
-
-
-    @Override
-    public FrontUserIssueBondEntity getFrontUserIssueBondEntity() {
-        return frontUserIssueBondEntity;
-    }
-
-    @Override
-    public void setIssueUser(FrontUserEntity user) {
-        issueBondUser=user;
     }
 }

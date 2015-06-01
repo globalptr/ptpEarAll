@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.bondIncomeProportion;
+package com.oakeel.ejb.entityAndEao.ptpProductIncomeProportion;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import java.math.BigDecimal;
@@ -15,10 +15,10 @@ import javax.persistence.Entity;
  * @author root
  */
 @Entity
-public class BondIncomeProportionEntity extends EntityRoot {
+public class PtpProductIncomeProportionEntity extends EntityRoot {
     private static final long serialVersionUID = 1L;
-    private int copiesNum;
-    private BigDecimal proportion;
+    private int copiesNum;//份数
+    private BigDecimal proportion;//收益比例
 
     /**
      * @return the copiesNum

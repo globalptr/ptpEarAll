@@ -6,7 +6,6 @@
 
 package com.oakeel.ejb.transaction.platformFund;
 
-import com.oakeel.ejb.entityAndEao.frontUserIssueBond.FrontUserIssueBondEntity;
 import com.oakeel.ejb.entityAndEao.platformFund.PlatformFundEntity;
 import com.oakeel.ejb.ptpEnum.BondStage;
 import javax.ejb.Stateless;
@@ -24,7 +23,6 @@ public class IssuePlatformFund implements IssuePlatformFundLocal {
     private PlatformFundEntity platformFundEntity1=null;
     private PlatformFundEntity platformFundEntity2=null;
     private PlatformFundEntity newRecord=null;
-    FrontUserIssueBondEntity frontUserIssueBondEntity=null;
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
@@ -32,6 +30,7 @@ public class IssuePlatformFund implements IssuePlatformFundLocal {
     /**
      * @return the platformFundEntity1
      */
+    @Override
     public PlatformFundEntity getPlatformFundEntity1() {
         return platformFundEntity1;
     }
@@ -47,6 +46,7 @@ public class IssuePlatformFund implements IssuePlatformFundLocal {
     /**
      * @return the platformFundEntity2
      */
+    @Override
     public PlatformFundEntity getPlatformFundEntity2() {
         return platformFundEntity2;
     }
@@ -66,6 +66,7 @@ public class IssuePlatformFund implements IssuePlatformFundLocal {
         {
             newRecord.setPlatformFundTypeEnum(platformFundEntity1.getPlatformFundTypeEnum());
             newRecord.setYearRate(platformFundEntity1.getYearRate());
+            newRecord.setIssueUser(platformFundEntity1.getIssueUser());
         }
         if(platformFundEntity2!=null)
         {
@@ -84,9 +85,6 @@ public class IssuePlatformFund implements IssuePlatformFundLocal {
     @Override
     public void issue() {
         em.persist(newRecord);
-        frontUserIssueBondEntity=new FrontUserIssueBondEntity();
-        frontUserIssueBondEntity.setPtpProductEntity(newRecord);
-        em.persist(frontUserIssueBondEntity);
     }
 
     /**

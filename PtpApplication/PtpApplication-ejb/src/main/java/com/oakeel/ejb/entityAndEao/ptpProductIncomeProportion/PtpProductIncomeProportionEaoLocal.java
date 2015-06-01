@@ -4,9 +4,8 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.frontUserIssueBond;
+package com.oakeel.ejb.entityAndEao.ptpProductIncomeProportion;
 
-import com.oakeel.ejb.entityAndEao.eeroot.EaoRootLocal;
 import javax.ejb.Local;
 
 /**
@@ -14,6 +13,6 @@ import javax.ejb.Local;
  * @author root
  */
 @Local
-public interface FrontUserIssueBondEaoLocal  extends EaoRootLocal<FrontUserIssueBondEntity>{
+public interface PtpProductIncomeProportionEaoLocal {
     
 }

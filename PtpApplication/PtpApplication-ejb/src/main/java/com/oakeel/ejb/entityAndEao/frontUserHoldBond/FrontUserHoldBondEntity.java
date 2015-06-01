@@ -5,8 +5,7 @@
  */
 package com.oakeel.ejb.entityAndEao.frontUserHoldBond;
 
-import com.oakeel.ejb.entityAndEao.bond.BondEntity;
-import com.oakeel.ejb.entityAndEao.bondIncomeProportion.BondIncomeProportionEntity;
+import com.oakeel.ejb.entityAndEao.ptpProductIncomeProportion.PtpProductIncomeProportionEntity;
 import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import com.oakeel.ejb.entityAndEao.ptpProduct.PtpProductEntity;
@@ -24,27 +23,14 @@ public class FrontUserHoldBondEntity extends EntityRoot {
 
     private static final long serialVersionUID = 1L;
     @ManyToOne
-    private FrontUserEntity user;
+    private FrontUserEntity issueUser;
     @ManyToOne
     private PtpProductEntity ptpProductEntity;
     private int allBondNumber;//所有持标数
     @OneToMany
-    private List<BondIncomeProportionEntity> bondIncomeProportionEntitys; 
+    private List<PtpProductIncomeProportionEntity> bondIncomeProportionEntitys; 
 
 
-    /**
-     * @return the user
-     */
-    public FrontUserEntity getUser() {
-        return user;
-    }
-
-    /**
-     * @param user the user to set
-     */
-    public void setUser(FrontUserEntity user) {
-        this.user = user;
-    }
 
     /**
      * @return the allBondNumber
@@ -63,14 +49,14 @@ public class FrontUserHoldBondEntity extends EntityRoot {
     /**
      * @return the bondIncomeProportionEntitys
      */
-    public List<BondIncomeProportionEntity> getBondIncomeProportionEntitys() {
+    public List<PtpProductIncomeProportionEntity> getBondIncomeProportionEntitys() {
         return bondIncomeProportionEntitys;
     }
 
     /**
      * @param bondIncomeProportionEntitys the bondIncomeProportionEntitys to set
      */
-    public void setBondIncomeProportionEntitys(List<BondIncomeProportionEntity> bondIncomeProportionEntitys) {
+    public void setBondIncomeProportionEntitys(List<PtpProductIncomeProportionEntity> bondIncomeProportionEntitys) {
         this.bondIncomeProportionEntitys = bondIncomeProportionEntitys;
     }
 
@@ -86,6 +72,20 @@ public class FrontUserHoldBondEntity extends EntityRoot {
      */
     public void setPtpProductEntity(PtpProductEntity ptpProductEntity) {
         this.ptpProductEntity = ptpProductEntity;
+    }
+
+    /**
+     * @return the issueUser
+     */
+    public FrontUserEntity getIssueUser() {
+        return issueUser;
+    }
+
+    /**
+     * @param issueUser the issueUser to set
+     */
+    public void setIssueUser(FrontUserEntity issueUser) {
+        this.issueUser = issueUser;
     }
 
 }

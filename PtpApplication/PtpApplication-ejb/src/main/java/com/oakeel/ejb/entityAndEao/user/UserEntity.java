@@ -81,6 +81,7 @@ public class UserEntity extends EntityRoot{
     private Boolean locked=false;
     private int age;//年龄
     @Enumerated(EnumType.STRING)
+    @Column(length = 50)
     private SexEnum sexEnum;
     //用户与机构是多对一关系，主控在用户
     @ManyToOne(cascade={CascadeType.MERGE})//级联修改user=>org
