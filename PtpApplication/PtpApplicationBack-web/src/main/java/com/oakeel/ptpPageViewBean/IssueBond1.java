@@ -40,7 +40,6 @@ public class IssueBond1 implements Serializable{
     private List<CompanyUserEntity> companyUserEntitys;
     private RepayModelEnum[] repayModelArray;//还款模型枚举列表
     private String selectUserName;
-    private FrontUserEntity selectUser;
     private CompanyUserEntity selectCompany;
     private BackUserEntity issueAdmin;
     
@@ -60,10 +59,6 @@ public class IssueBond1 implements Serializable{
         {
             bond1=new BondEntity();
         }
-        if(ptpSessionBean.getIssueBondLocal().getIssueUser()!=null)
-        {
-            selectUser=ptpSessionBean.getIssueBondLocal().getIssueUser();
-        }
         companyUserEntitys=companyUserEaoLocal.getAllEntitys();
         repayModelArray=RepayModelEnum.values();
         setBondTypes(BondType.values());
@@ -71,7 +66,6 @@ public class IssueBond1 implements Serializable{
     }
     public String nextStep()
     {
-        ptpSessionBean.getIssueBondLocal().setUser(selectUser);
         if(null!=ptpSessionBean.getLogUser())
             bond1.setIssueAdmin(ptpSessionBean.getLogUser());
         
@@ -161,19 +155,6 @@ public class IssueBond1 implements Serializable{
         this.selectUserName = selectUserName;
     }
 
-    /**
-     * @return the selectUser
-     */
-    public FrontUserEntity getSelectUser() {
-        return selectUser;
-    }
-
-    /**
-     * @param selectUser the selectUser to set
-     */
-    public void setSelectUser(FrontUserEntity selectUser) {
-        this.selectUser = selectUser;
-    }
 
     /**
      * @return the selectCompany

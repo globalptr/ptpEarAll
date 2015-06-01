@@ -42,7 +42,7 @@
                         <h:outputText value="#{bonds_var.issueCopiesNum*bonds_var.baseAmount}" />
                     </p:column>
                     <p:column headerText="债务人"  footerText="包含模式" >
-                        <h:outputText value="#{bonds_var.frontUserIssueBondEntity.user}" />
+                        <h:outputText value="#{bonds_var.issueUser}" />
                     </p:column>
                     <p:column headerText="标类型"  footerText="包含模式" >
                         <h:outputText value="#{bonds_var.bondType}" />
@@ -66,8 +66,8 @@
                         <p:tooltip for="reIssue_id" value="打回"/>
                     </p:column>
                     <p:column style="width:20px">
-                        <p:commandLink id="look_id"  styleClass="ui-icon ui-icon-search" update="bonds_id">
-                            <f:setPropertyActionListener value="#{bonds_var}" target="#{userManageBean.deleteUserEntity}" />
+                        <p:commandLink id="look_id"  styleClass="ui-icon ui-icon-search" action="issueBond4">
+                            <f:setPropertyActionListener value="#{bonds_var}" target="#{issueBond4.bond4}"/>
                         </p:commandLink>
                         <p:tooltip for="look_id" value="浏览"/>
                     </p:column>

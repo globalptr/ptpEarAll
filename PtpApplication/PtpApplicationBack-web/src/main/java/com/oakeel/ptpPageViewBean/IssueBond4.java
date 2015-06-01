@@ -7,58 +7,106 @@
 package com.oakeel.ptpPageViewBean;
 
 import com.oakeel.PtpSessionBean;
+import com.oakeel.ejb.entityAndEao.bond.BondEaoLocal;
 import com.oakeel.ejb.entityAndEao.bond.BondEntity;
 import com.oakeel.ejb.entityAndEao.bondInformation.BondInformationEntity;
 import com.oakeel.ejb.entityAndEao.expense.ExpenseEntity;
+import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEaoLocal;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
-import com.oakeel.ejb.entityAndEao.frontUserIssueBond.FrontUserIssueBondEntity;
 import com.oakeel.ejb.ptpEnum.ImageUsedEnum;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.annotation.PreDestroy;
+import javax.ejb.EJB;
+import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  *
  * @author root
  */
-@ManagedBean
-@RequestScoped
-public class IssueBond4 {
-
+@Named
+@ConversationScoped
+public class IssueBond4 implements Serializable{
+    @Inject Conversation conversation;
     @Inject private PtpSessionBean ptpSessionBean;
-    private FrontUserIssueBondEntity frontUserIssueBondEntity;
-    private FrontUserEntity frontUserEntity;
     private List<ExpenseEntity> expenseEntitys;
     private List<BondInformationEntity> bondInformationEntitys;
     private BigDecimal allAmount;
     private BondInformationEntity contractInfo ;
     private BondInformationEntity companyInfo;
     private BondInformationEntity visitInfo;
-    private BondEntity bond4=null;
     private Date defaultDate;
+    private Boolean frontUserEditable=false;
+    private List<FrontUserEntity> frontUserEntitys; 
+    @EJB
+    private FrontUserEaoLocal frontUserEaoLocal;
+    @EJB
+    private BondEaoLocal bondEaoLocal;
+    private FrontUserEntity targetFrontUser;
+    private BondEntity bond4=null;
     /**
      * Creates a new instance of IssueBond4
      */
+    
     public IssueBond4() {
-        defaultDate=new Date(0);
-        System.out.println(defaultDate.toString());
+    }
+    public void test()
+    {
+        frontUserEditable=!frontUserEditable;
+    }
+    public void startConversation()
+    {
+        if ( conversation.isTransient()) {
+            System.out.println("///////////////////////////////////////////////////////start");
+            conversation.begin();
+        }
+    }
+    public void endConversation()
+    {
+        System.out.println("setend");
+        conversation.setTimeout(1000);
+        
+    }
+    @PreDestroy
+    public void clear()
+    {
+        System.out.println(conversation.isTransient());
+           System.out.println("///////////////////////////////////////////////////////end");
+           //conversation.end();
+         //如果Conversation不是“瞬时”的，则结束conversion，同时所有ConversationScoped的对象也会销毁
+        if (!conversation.isTransient()) {
+//           System.out.println("///////////////////////////////////////////////////////end");
+//           conversation.end();
+        }
     }
     @PostConstruct
     public void init()
     {
-        bond4=ptpSessionBean.getIssueBondLocal().getCurrBond();
         if(bond4==null)
         {
-            return;
+            bond4=ptpSessionBean.getIssueBondLocal().getCurrBond();
         }
-        if(ptpSessionBean.getIssueBondLocal().getIssueUser()!=null)
-            frontUserEntity=ptpSessionBean.getIssueBondLocal().getIssueUser();
+        if(bond4==null)
+            return;
+         //仅当前页面未被post提交，且conversation是"瞬时"性时，才开始conversation
+  
+        if ( conversation.isTransient()) {
+            conversation.begin();
+        }
+        defaultDate=new Date(0);
+        frontUserEntitys=frontUserEaoLocal.getAllEntitys();
+       
+       
         if(ptpSessionBean.getIssueBondLocal().getCurrBond().getExpenseEntitys()!=null)
+        {
             expenseEntitys=ptpSessionBean.getIssueBondLocal().getCurrBond().getExpenseEntitys();
+        }
         if(ptpSessionBean.getIssueBondLocal().getCurrBond().getBondInformationEntiys()!=null)
         {
             bondInformationEntitys=ptpSessionBean.getIssueBondLocal().getCurrBond().getBondInformationEntiys();
@@ -82,7 +130,6 @@ public class IssueBond4 {
     public String issueBond() {
         
         getPtpSessionBean().getIssueBondLocal().issue();
-        BondEntity temp=getPtpSessionBean().getIssueBondLocal().getCurrBond();
         return "issueBond5";
     }
 
@@ -100,20 +147,6 @@ public class IssueBond4 {
         this.ptpSessionBean = ptpSessionBean;
     }
 
-
-    /**
-     * @return the frontUserEntity
-     */
-    public FrontUserEntity getFrontUserEntity() {
-        return frontUserEntity;
-    }
-
-    /**
-     * @param frontUserEntity the frontUserEntity to set
-     */
-    public void setFrontUserEntity(FrontUserEntity frontUserEntity) {
-        this.frontUserEntity = frontUserEntity;
-    }
 
     /**
      * @return the expenseEntitys
@@ -200,19 +233,6 @@ public class IssueBond4 {
         this.visitInfo = visitInfo;
     }
 
-    /**
-     * @return the bond4
-     */
-    public BondEntity getBond4() {
-        return bond4;
-    }
-
-    /**
-     * @param bond4 the bond4 to set
-     */
-    public void setBond4(BondEntity bond4) {
-        this.bond4 = bond4;
-    }
 
     /**
      * @return the defaultDate
@@ -229,16 +249,88 @@ public class IssueBond4 {
     }
 
     /**
-     * @return the frontUserIssueBondEntity
+     * @return the frontUserEditable
      */
-    public FrontUserIssueBondEntity getFrontUserIssueBondEntity() {
-        return frontUserIssueBondEntity;
+    public Boolean getFrontUserEditable() {
+        return frontUserEditable;
     }
 
     /**
-     * @param frontUserIssueBondEntity the frontUserIssueBondEntity to set
+     * @param frontUserEditable the frontUserEditable to set
      */
-    public void setFrontUserIssueBondEntity(FrontUserIssueBondEntity frontUserIssueBondEntity) {
-        this.frontUserIssueBondEntity = frontUserIssueBondEntity;
+    public void setFrontUserEditable(Boolean frontUserEditable) {
+        this.frontUserEditable = frontUserEditable;
     }
+
+    /**
+     * @return the frontUserEntitys
+     */
+    public List<FrontUserEntity> getFrontUserEntitys() {
+        return frontUserEntitys;
+    }
+
+    /**
+     * @param frontUserEntitys the frontUserEntitys to set
+     */
+    public void setFrontUserEntitys(List<FrontUserEntity> frontUserEntitys) {
+        this.frontUserEntitys = frontUserEntitys;
+    }
+
+    /**
+     * @return the frontUserEaoLocal
+     */
+    public FrontUserEaoLocal getFrontUserEaoLocal() {
+        return frontUserEaoLocal;
+    }
+
+    /**
+     * @param frontUserEaoLocal the frontUserEaoLocal to set
+     */
+    public void setFrontUserEaoLocal(FrontUserEaoLocal frontUserEaoLocal) {
+        this.frontUserEaoLocal = frontUserEaoLocal;
+    }
+
+    /**
+     * @return the bondEaoLocal
+     */
+    public BondEaoLocal getBondEaoLocal() {
+        return bondEaoLocal;
+    }
+
+    /**
+     * @param bondEaoLocal the bondEaoLocal to set
+     */
+    public void setBondEaoLocal(BondEaoLocal bondEaoLocal) {
+        this.bondEaoLocal = bondEaoLocal;
+    }
+
+    /**
+     * @return the targetFrontUser
+     */
+    public FrontUserEntity getTargetFrontUser() {
+        return targetFrontUser;
+    }
+
+    /**
+     * @param targetFrontUser the targetFrontUser to set
+     */
+    public void setTargetFrontUser(FrontUserEntity targetFrontUser) {
+        this.targetFrontUser = targetFrontUser;
+    }
+
+    /**
+     * @return the bond4
+     */
+    public BondEntity getBond4() {
+        return bond4;
+    }
+
+    /**
+     * @param bond4 the bond4 to set
+     */
+    public void setBond4(BondEntity bond4) {
+        System.out.println(bond4.getBondNumber());
+        this.bond4 = bond4;
+    }
+
 }

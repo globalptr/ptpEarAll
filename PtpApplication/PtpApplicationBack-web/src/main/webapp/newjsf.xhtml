@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:outputLabel value="#{newClass1.str}" id="kkk">
+                <f:ajax event="click" listener="#{newClass1.tt()}"/>
+            </h:outputLabel>
+            <p:commandButton value="111" actionListener="#{newClass1.tt()}" >
+                <f:param name="jfwid" value="#{javax.enterprise.context.conversation.id}"/>
+            </p:commandButton>
+            <p:commandButton value="22" actionListener="#{newClass1.tx()}" >
+                <f:param name="jfwid" value="#{javax.enterprise.context.conversation.id}"/>
+            </p:commandButton>
+            <p:commandButton value="3333" actionListener="#{newClass1.addStr()}" >
+                <f:ajax event="click" render="kkk"/>
+            </p:commandButton>
+        </h:form>
+    </h:body>
+</html>
+

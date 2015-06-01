@@ -46,7 +46,7 @@
                                 <p:outputLabel value="发标人:"/>
                             </td>
                             <td style="width:auto">
-                                <p:autoComplete  value="#{issueBond1.selectUser}"  forceSelection="true"  var="selectUser_var" itemLabel="#{selectUser_var.name}" converter="userConverter" itemValue="#{selectUser_var}" completeMethod="#{issueBond1.findUser}"/>
+                                <p:autoComplete  value="#{issueBond1.bond1.issueUser}"  forceSelection="true"  var="selectUser_var" itemLabel="#{selectUser_var.name}" converter="userConverter" itemValue="#{selectUser_var}" completeMethod="#{issueBond1.findUser}"/>
                             </td>
                         </tr>
                         <tr>
@@ -63,7 +63,7 @@
                             <td style="width:80px">
                                 <p:outputLabel value="项目情况:"/>
                             </td>
-                            <td>   
+                            <td>
                                 <p:inputTextarea placeholder="输入项目情况" value="#{issueBond1.bond1.details}" style=" width: 95%" rows="5" cols="30"  counter="display1" maxlength="200" counterTemplate="您还可以输入{0}个字符" autoResize="true" />
                                 <br/>
                                 <h:outputText id="display1" />

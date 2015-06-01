@@ -16,6 +16,11 @@
             <redirect/>
         </navigation-case>
         <navigation-case>
+            <from-outcome>issueBond4</from-outcome>
+            <to-view-id>/bond/issueBond4.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
             <from-outcome>issuePlatformFund</from-outcome>
             <to-view-id>/platformFund/issuePlatformFund1.xhtml</to-view-id>
         </navigation-case>

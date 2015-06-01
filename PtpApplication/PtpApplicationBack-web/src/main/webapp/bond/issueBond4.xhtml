@@ -13,7 +13,7 @@
                 float: left;
             }
         </style>
-        <h:form>
+        <h:form id="viewForm">
             <table  style="width: 100%;height: 100%;padding-left: 30px;border-collapse:collapse;border:none;margin-top: 30px">    
                 <tr>
                     <td colspan="2">
@@ -36,39 +36,58 @@
                         <p:fieldset legend="项目详情" toggleable="true">
                             <table style="width:100%">
                                 <tr>
-                                    <td style="float: right">
-                                        名称
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                                        名称:
                                     </td>
-                                    <td>
+                                    <td style="width:200px;padding-top: 10px;padding-bottom: 10px">
                                         <p:outputLabel value="#{issueBond4.bond4.name}"/>
                                     </td>
-                                    <td style="float: right">
-                                        金额
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                                        借款方:
+                                    </td>
+                                    <td style="width:200px;padding-top: 10px;padding-bottom: 10px">
+                                        <h:outputLabel id="frontUserShow_id" rendered="#{!issueBond4.frontUserEditable}" value="#{issueBond4.bond4.issueUser}"  >
+                                            <f:ajax event="click" listener="#{issueBond4.test()}" render="viewForm" />
+                                        </h:outputLabel>
+                                        <h:selectOneMenu id="frontUserEdit_id"  value="#{issueBond4.bond4.issueUser}"  rendered="#{issueBond4.frontUserEditable}" converter="frontUserConverter">
+                                            <f:ajax event="change" execute="frontUserEdit_id" />
+                                            <f:ajax event="blur" listener="#{issueBond4.test()}" render=" viewForm" />
+                                            <f:selectItems value="#{issueBond4.frontUserEntitys}" var="frontUsers" itemLabel="#{frontUsers.name}" itemValue="#{frontUsers}"/>
+                                        </h:selectOneMenu>
+                                    </td>
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                                        额度:
                                     </td>
                                     <td>
-                                        <p:outputLabel value="#{issueBond4.allAmount}"/>
+                                        <p:outputLabel value="#{issueBond4.bond4.issueUser.creditLevelEnum.fundingLine}"/>
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                                        基本金:
+                                    </td>
+                                    <td>
+                                        <p:outputLabel value="#{issueBond4.bond4.baseAmount}"/>
+                                    </td>
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                                        份数:
+                                    </td>
+                                    <td>
+                                        <p:outputLabel value="#{issueBond4.bond4.issueCopiesNum}"/>
+                                    </td>
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                                        贷款金额:
+                                    </td>
+                                    <td>
+                                        <p:outputLabel value="#{issueBond4.bond4.issueCopiesNum*issueBond4.bond4.baseAmount}"/>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="float: right">
-                                        借款方
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                                        项目情况:
                                     </td>
-                                    <td>
-                                        <p:outputLabel value="#{issueBond4.frontUserEntity.name}"/>
-                                    </td>
-                                    <td style="float: right">
-                                        额度
-                                    </td>
-                                    <td>
-                                        <p:outputLabel value="#{issueBond4.frontUserEntity.creditLevelEnum.fundingLine}"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="float: right">
-                                        项目情况
-                                    </td>
-                                </tr>
-                                <tr>
                                     <td>
                                         <p:outputLabel value="#{issueBond4.bond4.details}"/>
                                     </td>
@@ -82,59 +101,59 @@
                         <p:fieldset legend="用户信息" toggleable="true">
                             <table style="width:100%">
                                 <tr>
-                                    <td style="float: right">
-                                        用户名
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                                        用户名:
                                     </td>
-                                    <td>
-                                        #{issueBond4.frontUserEntity.name}
+                                    <td style="width:200px;padding-top: 10px;padding-bottom: 10px">
+                                        #{issueBond4.bond4.issueUser.name}
                                     </td>
-                                    <td style="float: right">
-                                        信用等级
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                                        信用等级:
                                     </td>
-                                    <td>
-                                        #{issueBond4.frontUserEntity.creditLevelEnum}
+                                    <td style="width:200px;padding-top: 10px;padding-bottom: 10px">
+                                        #{issueBond4.bond4.issueUser.creditLevelEnum}
                                     </td>
-                                    <td style="float: right">
-                                        收入范围
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                                        收入范围:
                                     </td>
-                                    <td>
-                                        #{issueBond4.frontUserEntity.income_start}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="float: right">
-                                        年龄
-                                    </td>
-                                    <td>
-                                        #{issueBond4.frontUserEntity.age}
-                                    </td>
-                                    <td style="float: right">
-                                        性别
-                                    </td>
-                                    <td>
-                                        #{issueBond4.frontUserEntity.sexEnum}
-                                    </td>
-                                    <td style="float: right">
-                                        住房条件
-                                    </td>
-                                    <td>
-                                        #{issueBond4.frontUserEntity.liveCaseEnum}
+                                    <td >
+                                        #{issueBond4.bond4.issueUser.income_start}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="float: right">
-                                        成功借款
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                                        年龄:
+                                    </td>
+                                    <td style="width:200px;padding-top: 10px;padding-bottom: 10px">
+                                        #{issueBond4.bond4.issueUser.age}
+                                    </td>
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                                        性别:
+                                    </td>
+                                    <td style="width:200px;padding-top: 10px;padding-bottom: 10px">
+                                        #{issueBond4.bond4.issueUser.sexEnum}
+                                    </td>
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                                        住房条件:
+                                    </td>
+                                    <td >
+                                        #{issueBond4.bond4.issueUser.liveCaseEnum}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                                        成功借款:
                                     </td>
                                     <td>
                                     </td>
-                                    <td style="float: right">
-                                        实名认证
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                                        实名认证:
                                     </td>
                                     <td>
                                         <p:outputLabel/>
                                     </td>
-                                    <td style="float: right">
-                                        逾期记录
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                                        逾期记录:
                                     </td>
                                     <td>
                                         <p:outputLabel/>
@@ -149,23 +168,23 @@
                         <p:fieldset legend="风控详情" toggleable="true">
                             <table style="width:100%">
                                 <tr>
-                                    <td>
-                                        担保公司
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                                        担保公司:
                                     </td>
                                     <td>
                                         #{issueBond4.bond4.companyUserEntity}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        担保情况
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                                        担保情况:
                                     </td>
                                     <td>
                                         #{issueBond4.bond4.guaranteeCase}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
                                         反担保情况
                                     </td>
                                     <td>
@@ -173,7 +192,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
                                         风控详情
                                     </td>
                                     <td>
@@ -281,42 +300,42 @@
                         <p:fieldset legend="基本信息" toggleable="true">
                             <table style="width:100%">
                                 <tr>
-                                    <td style="float: right">
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
                                         还款模型:
                                     </td>
-                                    <td>
+                                    <td style="width:200px;padding-top: 10px;padding-bottom: 10px">
                                         #{issueBond4.bond4==null?'无':issueBond4.bond4.repayModelEnum}
                                     </td>
-                                    <td style="float: right">
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
                                         借款总额:
                                     </td>
-                                    <td>
+                                    <td style="width:200px;padding-top: 10px;padding-bottom: 10px">
                                         #{issueBond4.bond4==null?'无':issueBond4.bond4.baseAmount*issueBond4.bond4.issueCopiesNum}
                                     </td>
-                                    <td style="float: right">
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
                                         开始时间:
                                     </td>
-                                    <td>
+                                    <td >
                                         <h:outputLabel  value="#{issueBond4.bond4==null?issueBond4.defaultDate:issueBond4.bond4.startDate}"  converter="DateConverter"/>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="float: right">
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
                                         年利率:
                                     </td>
-                                    <td>
+                                    <td style="width:200px;padding-top: 10px;padding-bottom: 10px">
                                         #{issueBond4.bond4==null?'无':issueBond4.bond4.yearRate}#{issueBond4.bond4==null?'':'%'}
                                     </td>
-                                    <td style="float: right">
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
                                         还款周期:
                                     </td>
-                                    <td>
+                                    <td style="width:200px;padding-top: 10px;padding-bottom: 10px">
                                         #{issueBond4.bond4==null?'无':issueBond4.bond4.repayCycle}
                                     </td>
-                                    <td style="float: right">
+                                    <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
                                         还款期数:
                                     </td>
-                                    <td>
+                                    <td >
                                         #{issueBond4.bond4==null?'无':issueBond4.bond4.repayCycleNumber}
                                     </td>
                                 </tr>
