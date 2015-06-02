@@ -135,4 +135,9 @@ public class IssueBond implements IssueBondLocal {
         
         //——————————————————————————————————————————————————————————————
     }
+
+    @Override
+    public void setCurrBond(BondEntity bond) {
+        newBond=bond;
+    }
 }

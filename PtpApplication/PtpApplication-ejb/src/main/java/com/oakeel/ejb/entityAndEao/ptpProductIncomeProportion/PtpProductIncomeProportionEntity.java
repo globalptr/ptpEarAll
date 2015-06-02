@@ -17,6 +17,7 @@ import javax.persistence.Entity;
 @Entity
 public class PtpProductIncomeProportionEntity extends EntityRoot {
     private static final long serialVersionUID = 1L;
+    
     private int copiesNum;//份数
     private BigDecimal proportion;//收益比例
 

@@ -25,6 +25,7 @@ public interface IssueBondLocal {
     public void issuePreview();
     @Remove
     public void issue();
+    public void setCurrBond(BondEntity bond);
     public BondEntity getCurrBond();
     public BondEntity getBond1();
     public BondEntity getBond2();
