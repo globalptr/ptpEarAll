@@ -66,8 +66,8 @@
                         <p:tooltip for="reIssue_id" value="打回"/>
                     </p:column>
                     <p:column style="width:20px">
-                        <p:commandLink id="look_id"  styleClass="ui-icon ui-icon-search" action="issueBond4">
-                            <f:setPropertyActionListener value="#{bonds_var}" target="#{issueBond4.bond4}"/>
+                        <p:commandLink immediate="true" id="look_id"  styleClass="ui-icon ui-icon-search" action="#{auditBond.setTargetBond()}">
+                            <f:setPropertyActionListener value="#{bonds_var}" target="#{auditBond.targetBond}"/>
                         </p:commandLink>
                         <p:tooltip for="look_id" value="浏览"/>
                     </p:column>

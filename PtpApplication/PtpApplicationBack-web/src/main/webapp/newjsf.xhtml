@@ -8,19 +8,14 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h:form>
-            <h:outputLabel value="#{newClass1.str}" id="kkk">
-                <f:ajax event="click" listener="#{newClass1.tt()}"/>
+        <h:form id="ddx">
+            <h:outputLabel for="pp"  value="#{newClass.str}" id="kkk" rendered="#{!newClass.visible}">
+                <f:ajax event="click" listener="#{newClass.change()}" render="ddx"/>
             </h:outputLabel>
-            <p:commandButton value="111" actionListener="#{newClass1.tt()}" >
-                <f:param name="jfwid" value="#{javax.enterprise.context.conversation.id}"/>
-            </p:commandButton>
-            <p:commandButton value="22" actionListener="#{newClass1.tx()}" >
-                <f:param name="jfwid" value="#{javax.enterprise.context.conversation.id}"/>
-            </p:commandButton>
-            <p:commandButton value="3333" actionListener="#{newClass1.addStr()}" >
-                <f:ajax event="click" render="kkk"/>
-            </p:commandButton>
+            <p:inputText id="pp"  value="#{newClass.strx}" rendered="#{newClass.visible}">
+                <f:ajax execute="pp" listener="#{newClass.setnewvalue()}" event="keyup"/>
+                <f:ajax event="blur"  listener="#{newClass.change()}" render="ddx"/>
+            </p:inputText>
         </h:form>
     </h:body>
 </html>

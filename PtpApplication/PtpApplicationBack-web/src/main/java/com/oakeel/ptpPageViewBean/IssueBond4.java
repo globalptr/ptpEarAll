@@ -23,6 +23,7 @@ import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -31,7 +32,7 @@ import javax.inject.Named;
  * @author root
  */
 @Named
-@ConversationScoped
+@SessionScoped
 public class IssueBond4 implements Serializable{
     @Inject Conversation conversation;
     @Inject private PtpSessionBean ptpSessionBean;
@@ -50,55 +51,89 @@ public class IssueBond4 implements Serializable{
     private BondEaoLocal bondEaoLocal;
     private FrontUserEntity targetFrontUser;
     private BondEntity bond4=null;
+    private BondEntity bond4Edit;
+    private Boolean baseAmountEdit=false;
+    private Boolean issueCopiesNumEdit=false;
+    
     /**
      * Creates a new instance of IssueBond4
      */
     
     public IssueBond4() {
     }
-    public void test()
+    public void switchIssueUser()
     {
+        System.out.println("switch");
         frontUserEditable=!frontUserEditable;
+    }
+    public void flushIssueUser()
+    {
+        System.out.println("ffffffffffffffffffffffdddddddddddddddddddddddddd");
+        bond4.setIssueUser(bond4Edit.getIssueUser());
     }
     public void startConversation()
     {
-        if ( conversation.isTransient()) {
-            System.out.println("///////////////////////////////////////////////////////start");
-            conversation.begin();
-        }
+//        if ( conversation.isTransient()) {
+//            System.out.println("///////////////////////////////////////////////////////start");
+//            conversation.begin();
+//        }
+    }
+    public void flushBaseAmount()
+    {
+        bond4.setBaseAmount(bond4Edit.getBaseAmount());
+    }
+    public void flushIssueCopiesNum()
+    {
+        bond4.setIssueCopiesNum(bond4Edit.getIssueCopiesNum());
+    }
+    public void switchBaseAmountEdit()
+    {
+        baseAmountEdit=!baseAmountEdit;
+    }
+    public void switchIssueCopiesNumEdit()
+    {
+        issueCopiesNumEdit=!issueCopiesNumEdit;
+    }
+    
+    public List<FrontUserEntity> findUser(String target)
+    {
+        List<FrontUserEntity> userFilter=frontUserEaoLocal.getUserByName("%"+target+"%");
+        return userFilter;
     }
     public void endConversation()
     {
         System.out.println("setend");
-        conversation.setTimeout(1000);
+//        conversation.setTimeout(1000);
         
     }
     @PreDestroy
     public void clear()
     {
-        System.out.println(conversation.isTransient());
-           System.out.println("///////////////////////////////////////////////////////end");
-           //conversation.end();
-         //如果Conversation不是“瞬时”的，则结束conversion，同时所有ConversationScoped的对象也会销毁
-        if (!conversation.isTransient()) {
+//        System.out.println(conversation.isTransient());
+//           System.out.println("///////////////////////////////////////////////////////end");
+//           //conversation.end();
+//         //如果Conversation不是“瞬时”的，则结束conversion，同时所有ConversationScoped的对象也会销毁
+//        if (!conversation.isTransient()) {
 //           System.out.println("///////////////////////////////////////////////////////end");
 //           conversation.end();
-        }
+//        }
     }
     @PostConstruct
     public void init()
     {
         if(bond4==null)
         {
+            System.out.println("newbean");
             bond4=ptpSessionBean.getIssueBondLocal().getCurrBond();
         }
         if(bond4==null)
             return;
+        bond4Edit=bond4;
          //仅当前页面未被post提交，且conversation是"瞬时"性时，才开始conversation
-  
-        if ( conversation.isTransient()) {
-            conversation.begin();
-        }
+//  
+//        if ( conversation.isTransient()) {
+//            conversation.begin();
+//        }
         defaultDate=new Date(0);
         frontUserEntitys=frontUserEaoLocal.getAllEntitys();
        
@@ -329,8 +364,49 @@ public class IssueBond4 implements Serializable{
      * @param bond4 the bond4 to set
      */
     public void setBond4(BondEntity bond4) {
-        System.out.println(bond4.getBondNumber());
         this.bond4 = bond4;
+    }
+
+    /**
+     * @return the baseAmountEdit
+     */
+    public Boolean getBaseAmountEdit() {
+        return baseAmountEdit;
+    }
+
+    /**
+     * @param baseAmountEdit the baseAmountEdit to set
+     */
+    public void setBaseAmountEdit(Boolean baseAmountEdit) {
+        this.baseAmountEdit = baseAmountEdit;
+    }
+
+    /**
+     * @return the issueCopiesNumEdit
+     */
+    public Boolean getIssueCopiesNumEdit() {
+        return issueCopiesNumEdit;
+    }
+
+    /**
+     * @param issueCopiesNumEdit the issueCopiesNumEdit to set
+     */
+    public void setIssueCopiesNumEdit(Boolean issueCopiesNumEdit) {
+        this.issueCopiesNumEdit = issueCopiesNumEdit;
+    }
+
+    /**
+     * @return the bond4Edit
+     */
+    public BondEntity getBond4Edit() {
+        return bond4Edit;
+    }
+
+    /**
+     * @param bond4Edit the bond4Edit to set
+     */
+    public void setBond4Edit(BondEntity bond4Edit) {
+        this.bond4Edit = bond4Edit;
     }
 
 }
