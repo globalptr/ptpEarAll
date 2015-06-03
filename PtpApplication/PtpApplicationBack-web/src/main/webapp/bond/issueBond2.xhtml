@@ -16,20 +16,21 @@
                 <p:dialog widgetVar="showImageDlg_wid" resizable="false" header="图片详情">
                     <table>
                         <tr>
-                            <td colspan="2" style=" text-align: center">
+                            <td class="ui-steps-item ui-state-default ui-state-disabled" >
+                                <p:commandLink value="&lt;&lt;">
+                                    <p:ajax listener="#{issueBond2.toPrevImage()}" update="imageDetail :mainform:maingrowl"/>
+                                </p:commandLink>
+                            </td>
+                            <td colspan="2" style=" text-align: center;">
                                 <p:graphicImage id="imageDetail" value="#{issueBond2.targetImageInfo.imagePath}"/>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p:commandButton value="上一个">
-                                    <p:ajax listener="#{issueBond2.toPrevImage()}" update="imageDetail :mainform:maingrowl"/>
-                                </p:commandButton>
-                            </td>
-                            <td>
-                                <p:commandButton value="下一个">
+                            <td class="ui-steps-item ui-state-default ui-state-disabled" style="min-height:200px " >
+                                <h:commandLink >
+                                    <div class="ui-state-default" style="min-height:200px ">
+                                        &gt;&gt;
+                                    </div>
                                     <p:ajax listener="#{issueBond2.toNextImage()}" update="imageDetail :mainform:maingrowl"/>
-                                </p:commandButton>
+                                </h:commandLink>
                             </td>
                         </tr>
                     </table>
@@ -61,10 +62,12 @@
                         </tr>
                         <tr>
                             <td style="width:50%">
-                                <p:commandButton style="width:100%" value="上传完成" onclick="PF('uploadImageDlg_wid').hide()" update="imageTabs_id"/>
+                                <p:commandButton style="width:100%" value="上传完成" onclick="PF('uploadImageDlg_wid').hide()">
+                                    <f:ajax event="click" listener="#{issueBond2.saveUploadFileAndEntity()}" render="imageTabs_id"/>
+                                </p:commandButton>
                             </td>
                             <td style="width:50%">
-                                <p:commandButton style="width:100%" value="关闭" onclick="PF('uploadImageDlg_wid').hide()"/>
+                                <p:commandButton style="width:100%" value="关闭" onclick="PF('uploadImageDlg_wid').hide()" actionListener="#{issueBond2.closeUploadDlg()}"/>
                             </td>
                         </tr>
                     </table>
@@ -156,7 +159,9 @@
                                             </f:facet>   
                                             <h:panelGrid columns="1" style="width:100%">
                                                 <p:graphicImage  value="#{companyInfoImages_var.imagePath}" style=" margin: 0 auto"  alt="Image Description for #{companyInfoImages_var.imagePath}" width="64" height="64" title="#{companyInfoImages_var.imagePath}"/>
-                                                <p:commandLink styleClass="ui-icon ui-icon-search"    immediate="true" style=" margin: 0 auto" id="lookImage_id"/>
+                                                <p:commandLink styleClass="ui-icon ui-icon-search" immediate="true" style=" margin: 0 auto" id="lookImage_id" onclick="PF('showImageDlg_wid').show()" update=":issue2form:imageDetail">
+                                                    <f:setPropertyActionListener value="#{companyInfoImages_var}" target="#{issueBond2.targetImageInfo}"/>
+                                                </p:commandLink>
                                             </h:panelGrid>
                                         </p:panel>
                                     </p:dataGrid>
@@ -192,7 +197,9 @@
                                             </f:facet>   
                                             <h:panelGrid columns="1" style="width:100%">
                                                 <p:graphicImage value="#{visitImages_var.imagePath}" style=" margin: 0 auto"  alt="Image Description for #{visitImages_var.imagePath}" width="64" height="64" title="#{visitImages_var.imagePath}"/>
-                                                <p:commandLink styleClass="ui-icon ui-icon-search"    immediate="true" style=" margin: 0 auto" id="lookImage_id"/>
+                                                <p:commandLink styleClass="ui-icon ui-icon-search" immediate="true" style=" margin: 0 auto" id="lookImage_id" onclick="PF('showImageDlg_wid').show()" update=":issue2form:imageDetail">
+                                                    <f:setPropertyActionListener value="#{visitImages_var}" target="#{issueBond2.targetImageInfo}"/>
+                                                </p:commandLink>
                                             </h:panelGrid>
                                         </p:panel>
                                     </p:dataGrid>

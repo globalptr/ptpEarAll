@@ -5,6 +5,7 @@
  */
 package com.oakeel;
 
+import com.oakeel.ejb.entityAndEao.bond.BondEntity;
 import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
@@ -23,9 +24,10 @@ public class NewClass implements Serializable {
     private String str = "1212";
     private String strx;
     private Boolean visible = false;
+    private BondEntity bond=new BondEntity();
     public void change()
     {
-        System.out.println("ffffffffffffff");
+        System.out.println(bond);
         visible=!visible;
     }
     public void test() {
@@ -37,7 +39,14 @@ public class NewClass implements Serializable {
         }
 
     }
-
+    public void ttt()
+    {
+        System.out.println("change");
+    }
+    public void yyy()
+    {
+        System.out.println("blur");
+    }
     public void setnewvalue() {
         str=strx;
     }
@@ -96,5 +105,19 @@ public class NewClass implements Serializable {
      */
     public void setSss(String sss) {
         this.sss = sss;
+    }
+
+    /**
+     * @return the bond
+     */
+    public BondEntity getBond() {
+        return bond;
+    }
+
+    /**
+     * @param bond the bond to set
+     */
+    public void setBond(BondEntity bond) {
+        this.bond = bond;
     }
 }

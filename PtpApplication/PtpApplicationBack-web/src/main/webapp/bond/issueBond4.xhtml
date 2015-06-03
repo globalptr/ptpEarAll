@@ -14,6 +14,64 @@
             }
         </style>
         <h:form id="viewForm">
+            
+        <p:dialog widgetVar="showImageDlg_wid" resizable="false" header="图片详情">
+            <table>
+                <tr>
+                    <td colspan="2" style=" text-align: center">
+                        <p:graphicImage id="imageDetail" value="#{issueBond2.targetImageInfo.imagePath}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p:commandButton value="上一个">
+                            <p:ajax listener="#{issueBond2.toPrevImage()}" update="imageDetail :mainform:maingrowl"/>
+                        </p:commandButton>
+                    </td>
+                    <td>
+                        <p:commandButton value="下一个">
+                            <p:ajax listener="#{issueBond2.toNextImage()}" update="imageDetail :mainform:maingrowl"/>
+                        </p:commandButton>
+                    </td>
+                </tr>
+            </table>
+        </p:dialog>
+        <p:dialog widgetVar="deleteContractImageDlg_wid" resizable="false" header="警告" closable="false">
+              <table>
+                <tr>
+                    <td colspan="2">
+                        <p:outputLabel value="是否确定删除此图片？"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p:commandButton value="删除" onclick="PF('deleteImageDlg_wid').hide()" update="#{issueBond4.imageUsedEnum.enStr}"/>
+                    </td>
+                    <td>
+                        <p:commandButton value="取消" onclick="PF('deleteImageDlg_wid').hide()"/>
+                    </td>
+                </tr>
+            </table>
+        </p:dialog>
+        <p:dialog widgetVar="uploadImageDlg_wid"  id="uploadImageDlg_id" resizable="false" header="上传图片至'#{issueBond.selectImageUsedEnum}'目录" position="top" closable="false">
+            <table style="width:100%">
+                <tr>
+                    <td colspan="2">
+                        <p:fileUpload cancelLabel="取消" uploadLabel="上传" label="选择文件" multiple="true"  fileUploadListener="#{issueBond4.handleFileUpload}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:50%">
+                        <p:commandButton id="save" style="width:100%" value="保存" onclick="PF('uploadImageDlg_wid').hide()">
+                            <f:ajax listener="#{issueBond4.saveUploadFileAndEntity()}" render="#{issueBond4.imageUsedEnum.enStr}"/>
+                        </p:commandButton>
+                    </td>
+                    <td style="width:50%">
+                        <p:commandButton style="width:100%" value="关闭" onclick="PF('uploadImageDlg_wid').hide()"/>
+                    </td>
+                </tr>
+            </table>
+        </p:dialog>
             <table  style="width: 100%;height: 100%;padding-left: 30px;border-collapse:collapse;border:none;margin-top: 30px">    
                 <tr>
                     <td colspan="2">
@@ -69,7 +127,6 @@
                                         基本金:
                                     </td>
                                     <td>
-                                    
                                         <h:outputLabel  value="#{issueBond4.bond4.baseAmount}" id="baseAmount_id" rendered="#{!issueBond4.baseAmountEdit}">
                                             <f:ajax event="click" listener="#{issueBond4.switchBaseAmountEdit()}" render="viewForm"/>
                                         </h:outputLabel>
@@ -77,7 +134,6 @@
                                             <f:ajax execute="baseAmountEdit_id" listener="#{issueBond4.flushBaseAmount()}" event="keyup"/>
                                             <f:ajax event="blur"  listener="#{issueBond4.switchBaseAmountEdit()}" render="viewForm"/>
                                         </p:inputText>
-                                                
                                     </td>
                                     <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
                                         份数:
@@ -192,6 +248,7 @@
                                         担保公司:
                                     </td>
                                     <td>
+                                        
                                         #{issueBond4.bond4.companyUserEntity}
                                     </td>
                                 </tr>
@@ -200,7 +257,13 @@
                                         担保情况:
                                     </td>
                                     <td>
-                                        #{issueBond4.bond4.guaranteeCase}
+                                        <h:outputLabel  value="#{issueBond4.bond4.guaranteeCase}" id="guaranteeCase_id" rendered="#{!issueBond4.guaranteeCaseEdit}">
+                                            <f:ajax event="click" listener="#{issueBond4.switchGuaranteeCase()}" render="viewForm"/>
+                                        </h:outputLabel>
+                                        <p:inputTextarea id="guaranteeCaseEdit_id"  value="#{issueBond4.bond4Edit.guaranteeCase}" rendered="#{issueBond4.guaranteeCaseEdit}">
+                                            <f:ajax execute="guaranteeCaseEdit_id" listener="#{issueBond4.flushGuaranteeCase()}" event="keyup"/>
+                                            <f:ajax event="blur"  listener="#{issueBond4.switchGuaranteeCase()}" render="viewForm"/>
+                                        </p:inputTextarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -208,7 +271,13 @@
                                         反担保情况
                                     </td>
                                     <td>
-                                        #{issueBond4.bond4.reverseGuaranteeCase}
+                                        <h:outputLabel  value="#{issueBond4.bond4.reverseGuaranteeCase}" id="reverseGuaranteeCase_id" rendered="#{!issueBond4.reverseGuaranteeCaseEdit}">
+                                            <f:ajax event="click" listener="#{issueBond4.switchReverseGuaranteeCase()}" render="viewForm"/>
+                                        </h:outputLabel>
+                                        <p:inputTextarea id="reverseGuaranteeCaseEdit_id"  value="#{issueBond4.bond4Edit.reverseGuaranteeCase}" rendered="#{issueBond4.reverseGuaranteeCaseEdit}">
+                                            <f:ajax execute="reverseGuaranteeCaseEdit_id" listener="#{issueBond4.flushReverseGuaranteeCase()}" event="keyup"/>
+                                            <f:ajax event="blur"  listener="#{issueBond4.switchReverseGuaranteeCase()}" render="viewForm"/>
+                                        </p:inputTextarea>
                                     </td>
                                 </tr>
                                 <tr>
@@ -216,7 +285,13 @@
                                         风控详情
                                     </td>
                                     <td>
-                                        #{issueBond4.bond4.riskControlDetails}
+                                        <h:outputLabel  value="#{issueBond4.bond4.riskControlDetails}" id="riskControlDetails_id" rendered="#{!issueBond4.riskControlDetailEdit}">
+                                            <f:ajax event="click" listener="#{issueBond4.switchRiskControlDetail()}" render="viewForm"/>
+                                        </h:outputLabel>
+                                        <p:inputTextarea id="riskControlDetailsEdit_id"  value="#{issueBond4.bond4Edit.riskControlDetails}" rendered="#{issueBond4.riskControlDetailEdit}">
+                                            <f:ajax execute="riskControlDetailsEdit_id" listener="#{issueBond4.flushRiskControlDetail()}" event="keyup"/>
+                                            <f:ajax event="blur"  listener="#{issueBond4.switchRiskControlDetail()}" render="viewForm"/>
+                                        </p:inputTextarea>
                                     </td>
                                 </tr>
                             </table>
@@ -231,7 +306,22 @@
                 <tr>
                     <td colspan="2">
                         <p:fieldset legend="合同资料"  toggleable="true">
-                            <p:dataGrid paginator="true" paginatorPosition="bottom" rows="32" columns="8" emptyMessage="合同资料图片为空" value="#{issueBond4.contractInfo.imageInfoEntitys}" var="contractInfoImages_var" id="contractInfoImages_id" >
+                            <p:dataGrid  paginator="true" paginatorPosition="bottom" rows="32" columns="8" emptyMessage="合同资料图片为空" value="#{issueBond4.contractInfo.imageInfoEntitys}" var="contractInfoImages_var" id="contract" >
+                                <f:facet name="header">
+                                     <table>
+                                         <tr>
+                                             <td style="text-align: center; width: 100%;border: none" rowspan="2">
+                                                 <p:outputLabel value="合同资料详情"/>
+                                             </td>
+                                             <td style=" width: 20px;border: none">
+                                                 <p:commandLink styleClass="ui-icon ui-icon-arrowthickstop-1-n"  onclick="PF('uploadImageDlg_wid').show()" update=":viewForm:save" immediate="true" id="uploadImage_id">
+                                                     <f:setPropertyActionListener value="#{issueBond4.contractImageUsedEnum}" target="#{issueBond4.imageUsedEnum}" />
+                                                 </p:commandLink>
+                                                 <p:tooltip for="uploadImage_id" value="上传资料图片"   />
+                                             </td>          
+                                         </tr>
+                                     </table>
+                                 </f:facet>   
                                 <p:panel style="text-align:center">
                                     <f:facet name="header">
                                         <table>
@@ -242,13 +332,13 @@
                                                 <td style=" width: 20px;border: none">
                                                     <p:commandLink styleClass="ui-icon ui-icon-trash"  onclick="PF('deleteImageDlg_wid').show()"  immediate="true" id="uploadImageItem_id"/>
                                                     <p:tooltip for="uploadImageItem_id" value="删除资料图片"   />
-                                                </td>          
+                                                </td>
                                             </tr>
                                         </table>
-                                    </f:facet>   
+                                    </f:facet>
                                     <h:panelGrid columns="1" style="width:100%">
                                         <p:graphicImage  value="#{contractInfoImages_var.imagePath}" style=" margin: 0 auto"  alt="Image Description for #{contractInfoImages_var.imagePath}" width="64" height="64" title="#{contractInfoImages_var.imagePath}"/>
-                                        <p:commandLink styleClass="ui-icon ui-icon-search"    immediate="true" style=" margin: 0 auto" id="lookImage_id"/>
+                                        <p:commandLink styleClass="ui-icon ui-icon-search" immediate="true" style=" margin: 0 auto" id="lookImage_id"/>
                                     </h:panelGrid>
                                 </p:panel>
                             </p:dataGrid>
@@ -258,13 +348,28 @@
                 <tr>
                     <td colspan="2">
                         <p:fieldset legend="公司资料" toggleable="true">
-                            <p:dataGrid paginator="true" paginatorPosition="bottom" rows="32" columns="8" emptyMessage="公司资料图片为空" value="#{issueBond4.companyInfo.imageInfoEntitys}" var="companyInfoImages_var" id="companyInfoImages_id" >
+                            <p:dataGrid  paginator="true" paginatorPosition="bottom" rows="32" columns="8" emptyMessage="公司资料图片为空" value="#{issueBond4.companyInfo.imageInfoEntitys}" var="companyInfoImages_var" id="company" >
+                                 <f:facet name="header">
+                                     <table>
+                                         <tr>
+                                             <td style="text-align: center; width: 100%;border: none" rowspan="2">
+                                                 <p:outputLabel value="公司资料详情"/>
+                                             </td>
+                                             <td style=" width: 20px;border: none">
+                                                 <p:commandLink styleClass="ui-icon ui-icon-arrowthickstop-1-n"  onclick="PF('uploadImageDlg_wid').show()"  update=":viewForm:save" immediate="true" id="uploadImage_id">
+                                                     <f:setPropertyActionListener value="#{issueBond4.companyImageUsedEnum}" target="#{issueBond4.imageUsedEnum}"/>
+                                                 </p:commandLink>
+                                                 <p:tooltip for="uploadImage_id" value="上传资料图片"   />
+                                             </td>          
+                                         </tr>
+                                     </table>
+                                 </f:facet>  
                                 <p:panel style="text-align:center">
                                     <f:facet name="header">
                                         <table>
                                             <tr>
                                                 <td style="text-align: center; width: 100%;border: none" rowspan="2">
-                                                    <p:outputLabel value="#{contractImages_var.imageName}"/>
+                                                    <p:outputLabel value="#{companyInfoImages_var.imageName}"/>
                                                 </td>
                                                 <td style=" width: 20px;border: none">
                                                     <p:commandLink styleClass="ui-icon ui-icon-trash"  onclick="PF('deleteImageDlg_wid').show()"  immediate="true" id="uploadImageItem_id"/>
@@ -285,14 +390,28 @@
                 <tr>
                     <td colspan="2">
                         <p:fieldset legend="实地考察" toggleable="true">
-                            <p:dataGrid paginator="true" paginatorPosition="bottom" rows="32" columns="8" emptyMessage="考察资料图片为空" value="#{issueBond4.visitInfo.imageInfoEntitys}" var="visitInfoImages_var" id="visitInfoImages_id" >
-
+                            <p:dataGrid paginator="true" paginatorPosition="bottom" rows="32" columns="8" emptyMessage="考察资料图片为空" value="#{issueBond4.visitInfo.imageInfoEntitys}" var="visitInfoImages_var" id="visit" >
+                                <f:facet name="header">
+                                     <table>
+                                         <tr>
+                                             <td style="text-align: center; width: 100%;border: none" rowspan="2">
+                                                 <p:outputLabel value="实地考察详情"/>
+                                             </td>
+                                             <td style=" width: 20px;border: none">
+                                                 <p:commandLink styleClass="ui-icon ui-icon-arrowthickstop-1-n"  onclick="PF('uploadImageDlg_wid').show()"  update=":viewForm:save" immediate="true" id="uploadImage_id">
+                                                     <f:setPropertyActionListener value="#{issueBond4.visitImageUsedEnum}" target="#{issueBond4.imageUsedEnum}"/>
+                                                 </p:commandLink>
+                                                 <p:tooltip for="uploadImage_id" value="上传资料图片"   />
+                                             </td>          
+                                         </tr>
+                                     </table>
+                                 </f:facet>  
                                 <p:panel style="text-align:center">
                                     <f:facet name="header">
                                         <table>
                                             <tr>
                                                 <td style="text-align: center; width: 100%;border: none" rowspan="2">
-                                                    <p:outputLabel value="#{contractImages_var.imageName}"/>
+                                                    <p:outputLabel value="#{visitInfoImages_var.imageName}"/>
                                                 </td>
                                                 <td style=" width: 20px;border: none">
                                                     <p:commandLink styleClass="ui-icon ui-icon-trash"  onclick="PF('deleteImageDlg_wid').show()"  immediate="true" id="uploadImageItem_id"/>

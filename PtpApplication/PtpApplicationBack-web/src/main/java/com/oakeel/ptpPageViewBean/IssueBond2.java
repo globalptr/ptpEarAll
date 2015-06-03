@@ -12,12 +12,16 @@ import com.oakeel.ejb.entityAndEao.imageInfo.ImageInfoEntity;
 import com.oakeel.ejb.ptpEnum.ImageUsedEnum;
 import com.oakeel.ejb.ptpEnum.SysInfo;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -47,8 +51,15 @@ public class IssueBond2 {
     private BondInformationEntity companyInfo;
     private BondInformationEntity visitInfo;
     private ImageInfoEntity targetImageInfo;
+    
+    private List<UploadedFile> contractUploadFiles;
+    private List<UploadedFile> companyUploadFiles;
+    private List<UploadedFile> visitUploadFiles;
 
     public IssueBond2() {
+        contractUploadFiles=new ArrayList<>();
+        companyUploadFiles=new ArrayList<>();
+        visitUploadFiles=new ArrayList<>();
     }
 
     @PostConstruct
@@ -241,44 +252,151 @@ public class IssueBond2 {
 
         }
     }
-
-    public void handleFileUpload(FileUploadEvent event) throws IOException {
-        UploadedFile file = event.getFile();
-        InputStream stream = file.getInputstream();
-        String folder = "/bondImages/" +  bond2.getBondNumber() + "/" + getSelectImageUsedEnum().getEnStr();
-        String imageRelPath = folder + "/" + file.getFileName();
-        String imagePath = "/ptpImageFolder" + imageRelPath;
-        System.out.println(file.getFileName());
-
-        File diskfile = new File(imagePath);
-        if (diskfile.exists()) {
-            System.out.println("创建单个文件" + imagePath + "失败，目标文件已存在！");
-            return;
+    public void closeUploadDlg()
+    {
+        
+        companyUploadFiles.clear();
+        contractUploadFiles.clear();
+        visitUploadFiles.clear();
+    }
+    public void saveUploadFileAndEntity()
+    {
+        String folder = "/bondImages/" +  bond2.getBondNumber() + "/" + selectImageUsedEnum.getEnStr();
+        if(!companyUploadFiles.isEmpty())
+        {
+            for(UploadedFile item:companyUploadFiles)
+            {
+                String imageRelPath = folder + "/" + item.getFileName();
+                String imagePath = "/ptpImageFolder" + imageRelPath;
+                saveUploadFile(item,imagePath);
+                saveUploadFileEntity(item, imageRelPath);
+            }
         }
-        if (imagePath.endsWith(File.separator)) {
-            System.out.println("创建单个文件" + imagePath + "失败，目标不能是目录！");
-            return;
+        if(!contractUploadFiles.isEmpty())
+        {
+            for(UploadedFile item:contractUploadFiles)
+            {
+                String imageRelPath = folder + "/" + item.getFileName();
+                String imagePath = "/ptpImageFolder" + imageRelPath;
+                saveUploadFile(item,imagePath);
+                saveUploadFileEntity(item, imageRelPath);
+            }
         }
-
-        FileOutputStream fos = new FileOutputStream(diskfile);
-
-        int read = 0;
-        byte[] bytes = new byte[1024];
-        while ((read = stream.read(bytes)) != -1) {
-            fos.write(bytes, 0, read);
+        if(!visitUploadFiles.isEmpty())
+        {
+            for(UploadedFile item:visitUploadFiles)
+            {
+                String imageRelPath = folder + "/" + item.getFileName();
+                String imagePath = "/ptpImageFolder" + imageRelPath;
+                saveUploadFile(item,imagePath);
+                saveUploadFileEntity(item, imageRelPath);
+            }
         }
+        closeUploadDlg();
+    }
+    
+    public void saveUploadFileEntity(UploadedFile file,String relPath)
+    {
         ImageInfoEntity image = new ImageInfoEntity();
-        image.setImagePath(imageRelPath);
+        image.setImagePath(relPath);
         image.setImageName(file.getFileName().substring(0, file.getFileName().lastIndexOf(".")));
-        System.out.println(file.getFileName());
+        image.setImageSize(file.getSize());
         if (selectImageUsedEnum.equals(ImageUsedEnum.公司资料)) {
             companyInfo.getImageInfoEntitys().add(image);
         } else if (selectImageUsedEnum.equals(ImageUsedEnum.合同资料)) {
-            System.out.println(imageRelPath);
             contractInfo.getImageInfoEntitys().add(image);
         } else if (selectImageUsedEnum.equals(ImageUsedEnum.考察资料)) {
             visitInfo.getImageInfoEntitys().add(image);
         }
+    }
+    
+    public void saveUploadFile(UploadedFile file,String path)
+    {
+        InputStream stream = null;
+        try {
+            stream = file.getInputstream();
+        } catch (IOException ex) {
+            Logger.getLogger(IssueBond2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(stream==null)
+            return;
+        File diskfile = new File(path);
+        path=path.substring(0,path.lastIndexOf("/"));
+        if (diskfile.exists()) {
+            System.out.println("创建单个文件" + path + "失败，目标文件已存在！");
+            return;
+        }
+        if (path.endsWith(File.separator)) {
+            System.out.println("创建单个文件" + path + "失败，目标不能是目录！");
+            return;
+        }
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(diskfile);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(IssueBond2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        int read = 0;
+        byte[] bytes = new byte[1024];
+        try {
+            while ((read = stream.read(bytes)) != -1) {
+                try {
+                    if(fos!=null)
+                        fos.write(bytes, 0, read);
+                } catch (IOException ex) {
+                    Logger.getLogger(IssueBond2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(IssueBond2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void handleFileUpload(FileUploadEvent event)  {
+        
+        UploadedFile file = event.getFile();
+        if (selectImageUsedEnum.equals(ImageUsedEnum.公司资料)) {
+            companyUploadFiles.add(file);
+        } else if (selectImageUsedEnum.equals(ImageUsedEnum.合同资料)) {
+            contractUploadFiles.add(file);
+        } else if (selectImageUsedEnum.equals(ImageUsedEnum.考察资料)) {
+            visitUploadFiles.add(file);
+        }
+//        UploadedFile file = event.getFile();
+//        InputStream stream = file.getInputstream();
+//        String folder = "/bondImages/" +  bond2.getBondNumber() + "/" + getSelectImageUsedEnum().getEnStr();
+//        String imageRelPath = folder + "/" + file.getFileName();
+//        String imagePath = "/ptpImageFolder" + imageRelPath;
+//
+//        File diskfile = new File(imagePath);
+//        if (diskfile.exists()) {
+//            System.out.println("创建单个文件" + imagePath + "失败，目标文件已存在！");
+//            return;
+//        }
+//        if (imagePath.endsWith(File.separator)) {
+//            System.out.println("创建单个文件" + imagePath + "失败，目标不能是目录！");
+//            return;
+//        }
+//
+//        FileOutputStream fos = new FileOutputStream(diskfile);
+//
+//        int read = 0;
+//        byte[] bytes = new byte[1024];
+//        while ((read = stream.read(bytes)) != -1) {
+//            fos.write(bytes, 0, read);
+//        }
+//        ImageInfoEntity image = new ImageInfoEntity();
+//        image.setImagePath(imageRelPath);
+//        image.setImageName(file.getFileName().substring(0, file.getFileName().lastIndexOf(".")));
+//        System.out.println(file.getFileName());
+//        if (selectImageUsedEnum.equals(ImageUsedEnum.公司资料)) {
+//            companyInfo.getImageInfoEntitys().add(image);
+//        } else if (selectImageUsedEnum.equals(ImageUsedEnum.合同资料)) {
+//            contractInfo.getImageInfoEntitys().add(image);
+//        } else if (selectImageUsedEnum.equals(ImageUsedEnum.考察资料)) {
+//            visitInfo.getImageInfoEntitys().add(image);
+//        }
 
         //application code
     }
@@ -365,6 +483,48 @@ public class IssueBond2 {
      */
     public void setPtpSessionBean(PtpSessionBean ptpSessionBean) {
         this.ptpSessionBean = ptpSessionBean;
+    }
+
+    /**
+     * @return the contractUploadFiles
+     */
+    public List<UploadedFile> getContractUploadFiles() {
+        return contractUploadFiles;
+    }
+
+    /**
+     * @param contractUploadFiles the contractUploadFiles to set
+     */
+    public void setContractUploadFiles(List<UploadedFile> contractUploadFiles) {
+        this.contractUploadFiles = contractUploadFiles;
+    }
+
+    /**
+     * @return the companyUploadFiles
+     */
+    public List<UploadedFile> getCompanyUploadFiles() {
+        return companyUploadFiles;
+    }
+
+    /**
+     * @param companyUploadFiles the companyUploadFiles to set
+     */
+    public void setCompanyUploadFiles(List<UploadedFile> companyUploadFiles) {
+        this.companyUploadFiles = companyUploadFiles;
+    }
+
+    /**
+     * @return the visitUploadFiles
+     */
+    public List<UploadedFile> getVisitUploadFiles() {
+        return visitUploadFiles;
+    }
+
+    /**
+     * @param visitUploadFiles the visitUploadFiles to set
+     */
+    public void setVisitUploadFiles(List<UploadedFile> visitUploadFiles) {
+        this.visitUploadFiles = visitUploadFiles;
     }
 
 }
