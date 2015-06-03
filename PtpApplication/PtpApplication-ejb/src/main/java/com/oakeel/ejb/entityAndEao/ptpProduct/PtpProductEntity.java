@@ -86,7 +86,7 @@ public class PtpProductEntity extends EntityRoot {
     @OneToMany(cascade = {CascadeType.PERSIST})//与支出明细是一对多的关系
     private List<ExpenseEntity> expenseEntitys=new ArrayList<>();//支出明细
     @OneToMany(mappedBy="ptpProductEntity")
-    Set<FrontUserHoldBondEntity> frontUserHoldBondEntitys;
+    Set<FrontUserHoldBondEntity> frontUserHoldBondEntitys;//投标人
     /**
      * @return the bondStateEntity
      */
