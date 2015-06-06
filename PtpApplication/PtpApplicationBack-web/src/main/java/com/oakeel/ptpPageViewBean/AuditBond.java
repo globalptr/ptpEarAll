@@ -11,8 +11,8 @@ import com.oakeel.ejb.entityAndEao.backUser.BackUserEaoLocal;
 import com.oakeel.ejb.entityAndEao.backUser.BackUserEntity;
 import com.oakeel.ejb.entityAndEao.bond.BondEaoLocal;
 import com.oakeel.ejb.entityAndEao.bond.BondEntity;
+import com.oakeel.ejb.ptpEnum.OperationEnum;
 import com.oakeel.ejb.ptpEnum.SysInfo;
-import com.oakeel.ejb.transaction.bond.IssueBondLocal;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -50,6 +50,21 @@ public class AuditBond {
         bondEntitys=bondEaoLocal.getAllEntitys();
         backUserEntitys=backUserEaoLocal.getAllEntitys();
     }
+    public void backBond()
+    {
+        if(targetBond!=null)
+        {
+            System.out.println("1");
+            ptpSessionBean.getIssueBondLocal().setCurrBond(targetBond);
+            ptpSessionBean.getIssueBondLocal().backToApplication();
+        }
+        else
+        {
+            System.out.println("2");
+            FacesMessage msg = new FacesMessage(SysInfo.错误.toString(), "查看的目标融资标为空");
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+    }
     /**
      * @return the bondEntitys
      */
@@ -61,6 +76,7 @@ public class AuditBond {
         if(targetBond!=null)
         {
             ptpSessionBean.getIssueBondLocal().setCurrBond(targetBond);
+            ptpSessionBean.setOperationEnum(OperationEnum.查询);
             return "issueBond4";
         }
         else

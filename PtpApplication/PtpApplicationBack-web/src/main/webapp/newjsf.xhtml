@@ -9,6 +9,7 @@
     </h:head>
     <h:body>
         <h:form id="ddx">
+            <p:growl id="msgs" showDetail="true" />
             <h:outputLabel for="pp"  value="#{newClass.str}" id="kkk" rendered="#{!newClass.visible}">
                 <f:ajax event="click" listener="#{newClass.change()}" render="ddx"/>
             </h:outputLabel>
@@ -16,6 +17,9 @@
                 <f:ajax execute="pp" listener="#{newClass.setnewvalue()}" event="keyup"/>
                 <f:ajax event="blur"  listener="#{newClass.change()}" render="ddx"/>
             </p:inputText>
+            <p:calendar mode="popup">            
+                <p:ajax event="dateSelect" listener="#{newClass.ttt()}" update="msgs" />
+            </p:calendar>
         </h:form>
     </h:body>
 </html>

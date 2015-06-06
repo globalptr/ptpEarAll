@@ -60,8 +60,8 @@
                         <h:outputText value="#{bonds_var.startDate}" converter="DateConverter"/>
                     </p:column>
                     <p:column style="width:20px">
-                        <p:commandLink id="reIssue_id" styleClass="ui-icon ui-icon-arrowrefresh-1-w"  update="bonds_id">
-                            <f:setPropertyActionListener value="#{bonds_var}" target="#{userManageBean.deleteUserEntity}" />
+                        <p:commandLink immediate="true" id="reIssue_id" styleClass="ui-icon ui-icon-arrowrefresh-1-w"  update="bonds_id" action="#{auditBond.backBond()}">
+                            <f:setPropertyActionListener value="#{bonds_var}" target="#{auditBond.targetBond}"/>
                         </p:commandLink>
                         <p:tooltip for="reIssue_id" value="打回"/>
                     </p:column>
@@ -73,7 +73,7 @@
                     </p:column>
                     <p:column style="width:20px">
                         <p:commandLink id="issue_id"  styleClass="ui-icon ui-icon-newwin" update="bonds_id">
-                            <f:setPropertyActionListener value="#{bonds_var}" target="#{userManageBean.deleteUserEntity}" />
+                            <f:setPropertyActionListener value="#{bonds_var}" target="#{userManageBean.deleteUserEntity}"/>
                         </p:commandLink>
                         <p:tooltip for="issue_id" value="发布"/>
                     </p:column>

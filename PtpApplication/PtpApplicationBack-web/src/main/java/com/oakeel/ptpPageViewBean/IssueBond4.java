@@ -15,7 +15,11 @@ import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEaoLocal;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import com.oakeel.ejb.entityAndEao.imageInfo.ImageInfoEntity;
 import com.oakeel.ejb.ptpEnum.ImageUsedEnum;
+import com.oakeel.ejb.ptpEnum.OperationEnum;
+import com.oakeel.ejb.ptpEnum.RepayModelEnum;
+import com.oakeel.ejb.ptpEnum.SplitUnit;
 import com.oakeel.ejb.ptpEnum.SysInfo;
+import com.oakeel.ejb.transaction.RepayModelCaculate.RepayModelCaculateLocal;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -23,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -34,11 +39,11 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -46,9 +51,10 @@ import org.primefaces.model.UploadedFile;
  *
  * @author root
  */
-@Named
-@SessionScoped
+@ManagedBean
+@ViewScoped
 public class IssueBond4 implements Serializable{
+    private OperationEnum operationEnum;
     @Inject Conversation conversation;
     @Inject private PtpSessionBean ptpSessionBean;
     private List<ExpenseEntity> expenseEntitys;
@@ -69,18 +75,17 @@ public class IssueBond4 implements Serializable{
     private BondEaoLocal bondEaoLocal;
     private FrontUserEntity targetFrontUser;
     private BondEntity bond4=null;
-    private BondEntity bond4Edit;
-    private Boolean baseAmountEdit=false;
-    private Boolean issueCopiesNumEdit=false;
-    private Boolean guaranteeCaseEdit=false;
-    private Boolean reverseGuaranteeCaseEdit=false;
-    private Boolean riskControlDetailEdit=false;
     private ImageUsedEnum imageUsedEnum;
     private ImageUsedEnum contractImageUsedEnum=ImageUsedEnum.合同资料;
     private ImageUsedEnum companyImageUsedEnum=ImageUsedEnum.公司资料;
     private ImageUsedEnum visitImageUsedEnum=ImageUsedEnum.考察资料;
-    private String kkk="contract";
     private ImageInfoEntity targetImageInfo;
+    private RepayModelEnum[] repayModelEnums;
+    private SplitUnit[] splitUnits;
+    private String nextText;
+    @EJB
+    RepayModelCaculateLocal repayModelCaculateLocal;
+    
     
     /**
      * Creates a new instance of IssueBond4
@@ -93,17 +98,25 @@ public class IssueBond4 implements Serializable{
         contractUploadFiles=new ArrayList<>();
         companyUploadFiles=new ArrayList<>();
         visitUploadFiles=new ArrayList<>();
+        repayModelEnums=RepayModelEnum.values();
+        splitUnits=SplitUnit.values();
     }
     @PostConstruct
     public void init()
     {
+        
         if(bond4==null)
         {
             bond4=ptpSessionBean.getIssueBondLocal().getCurrBond();
         }
+        
         if(bond4==null)
             return;
-        bond4Edit=bond4;
+        if(ptpSessionBean.getOperationEnum().equals(OperationEnum.查询))
+            nextText="审核通过";
+        else
+            nextText="发布";
+            
          //仅当前页面未被post提交，且conversation是"瞬时"性时，才开始conversation
 //  
 //        if ( conversation.isTransient()) {
@@ -111,7 +124,6 @@ public class IssueBond4 implements Serializable{
 //        }
         defaultDate=new Date(0);
         frontUserEntitys=frontUserEaoLocal.getAllEntitys();
-       
        
         if(ptpSessionBean.getIssueBondLocal().getCurrBond().getExpenseEntitys()!=null)
         {
@@ -137,16 +149,47 @@ public class IssueBond4 implements Serializable{
             }
         }
     }
+    public void test()
+    {
+        System.out.println("fsdfsfsfdsf");
+    }
+    public String toFront()
+    {
+        if(ptpSessionBean.getOperationEnum()==OperationEnum.新增)
+        {
+            return "issueBond3";
+        }
+        else if(ptpSessionBean.getOperationEnum()==OperationEnum.查询)
+        {
+            return "auditBond";
+        }
+        return null;
+    }
+    public void caculateModel() {
+
+        //根据输入和选择的还款模型计算还款列表
+        try {
+            Integer baseAmount = bond4.getBaseAmount() * bond4.getIssueCopiesNum();
+            BigDecimal allAmount = new BigDecimal(baseAmount.toString());
+            expenseEntitys=repayModelCaculateLocal.caculateRepayModel(bond4.getRepayModelEnum(), bond4.getRepayCycle(), allAmount, bond4.getYearRate().multiply(BigDecimal.valueOf(0.01),MathContext.DECIMAL32), bond4.getRepayCycleNumber(), bond4.getStartDate());
+         
+            bond4 = new BondEntity();
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
+    }
+    public List<FrontUserEntity> findUser(String target)
+    {
+        List<FrontUserEntity> userFilter=frontUserEaoLocal.getUserByName("%"+target+"%");
+        return userFilter;
+        
+    }
     public void switchIssueUser()
     {
         bond4.getGuaranteeCase();
         bond4.getReverseGuaranteeCase();
         bond4.getRiskControlDetails();
         frontUserEditable=!frontUserEditable;
-    }
-    public void flushIssueUser()
-    {
-        bond4.setIssueUser(bond4Edit.getIssueUser());
     }
     public void startConversation()
     {
@@ -159,42 +202,9 @@ public class IssueBond4 implements Serializable{
     {
         bond4.setRiskControlDetails(bond4.getRiskControlDetails());
     }
-    public void switchRiskControlDetail()
-    {
-        riskControlDetailEdit=!riskControlDetailEdit;
-    }
     public void flushReverseGuaranteeCase()
     {
         bond4.setReverseGuaranteeCase(bond4.getReverseGuaranteeCase());
-    }
-    public void switchReverseGuaranteeCase()
-    {
-        reverseGuaranteeCaseEdit=!reverseGuaranteeCaseEdit;
-    }
-    public void flushGuaranteeCase()
-    {
-        bond4.setGuaranteeCase(bond4Edit.getGuaranteeCase());
-    }
-    public void switchGuaranteeCase()
-    {
-        guaranteeCaseEdit=!guaranteeCaseEdit;
-    }
-    public void flushBaseAmount()
-    {
-        bond4.setBaseAmount(bond4Edit.getBaseAmount());
-    }
-    public void flushIssueCopiesNum()
-    {
-        bond4.setIssueCopiesNum(bond4Edit.getIssueCopiesNum());
-    }
-    
-    public void switchBaseAmountEdit()
-    {
-        baseAmountEdit=!baseAmountEdit;
-    }
-    public void switchIssueCopiesNumEdit()
-    {
-        issueCopiesNumEdit=!issueCopiesNumEdit;
     }
     public void saveUploadFileAndEntity()
     {
@@ -430,11 +440,6 @@ public class IssueBond4 implements Serializable{
 
         //application code
     }
-    public List<FrontUserEntity> findUser(String target)
-    {
-        List<FrontUserEntity> userFilter=frontUserEaoLocal.getUserByName("%"+target+"%");
-        return userFilter;
-    }
     public void endConversation()
     {
         System.out.println("setend");
@@ -454,9 +459,17 @@ public class IssueBond4 implements Serializable{
 //        }
     }
     public String issueBond() {
-        
-        getPtpSessionBean().getIssueBondLocal().issue();
-        return "issueBond5";
+        System.out.println(ptpSessionBean.getOperationEnum());
+        if(ptpSessionBean.getOperationEnum()==OperationEnum.新增)
+        {
+            getPtpSessionBean().getIssueBondLocal().issue();
+            return "issueBond5";
+        }
+        else
+        {
+            ptpSessionBean.getIssueBondLocal().passAudit();
+            return "auditBond";
+        }
     }
 
     /**
@@ -659,90 +672,6 @@ public class IssueBond4 implements Serializable{
     }
 
     /**
-     * @return the baseAmountEdit
-     */
-    public Boolean getBaseAmountEdit() {
-        return baseAmountEdit;
-    }
-
-    /**
-     * @param baseAmountEdit the baseAmountEdit to set
-     */
-    public void setBaseAmountEdit(Boolean baseAmountEdit) {
-        this.baseAmountEdit = baseAmountEdit;
-    }
-
-    /**
-     * @return the issueCopiesNumEdit
-     */
-    public Boolean getIssueCopiesNumEdit() {
-        return issueCopiesNumEdit;
-    }
-
-    /**
-     * @param issueCopiesNumEdit the issueCopiesNumEdit to set
-     */
-    public void setIssueCopiesNumEdit(Boolean issueCopiesNumEdit) {
-        this.issueCopiesNumEdit = issueCopiesNumEdit;
-    }
-
-    /**
-     * @return the bond4Edit
-     */
-    public BondEntity getBond4Edit() {
-        return bond4Edit;
-    }
-
-    /**
-     * @param bond4Edit the bond4Edit to set
-     */
-    public void setBond4Edit(BondEntity bond4Edit) {
-        this.bond4Edit = bond4Edit;
-    }
-
-    /**
-     * @return the guaranteeCaseEdit
-     */
-    public Boolean getGuaranteeCaseEdit() {
-        return guaranteeCaseEdit;
-    }
-
-    /**
-     * @param guaranteeCaseEdit the guaranteeCaseEdit to set
-     */
-    public void setGuaranteeCaseEdit(Boolean guaranteeCaseEdit) {
-        this.guaranteeCaseEdit = guaranteeCaseEdit;
-    }
-
-    /**
-     * @return the reverseGuaranteeCaseEdit
-     */
-    public Boolean getReverseGuaranteeCaseEdit() {
-        return reverseGuaranteeCaseEdit;
-    }
-
-    /**
-     * @param reverseGuaranteeCaseEdit the reverseGuaranteeCaseEdit to set
-     */
-    public void setReverseGuaranteeCaseEdit(Boolean reverseGuaranteeCaseEdit) {
-        this.reverseGuaranteeCaseEdit = reverseGuaranteeCaseEdit;
-    }
-
-    /**
-     * @return the riskControlDetailEdit
-     */
-    public Boolean getRiskControlDetailEdit() {
-        return riskControlDetailEdit;
-    }
-
-    /**
-     * @param riskControlDetailEdit the riskControlDetailEdit to set
-     */
-    public void setRiskControlDetailEdit(Boolean riskControlDetailEdit) {
-        this.riskControlDetailEdit = riskControlDetailEdit;
-    }
-
-    /**
      * @return the imageUsedEnum
      */
     public ImageUsedEnum getImageUsedEnum() {
@@ -841,20 +770,6 @@ public class IssueBond4 implements Serializable{
     }
 
     /**
-     * @return the kkk
-     */
-    public String getKkk() {
-        return kkk;
-    }
-
-    /**
-     * @param kkk the kkk to set
-     */
-    public void setKkk(String kkk) {
-        this.kkk = kkk;
-    }
-
-    /**
      * @return the targetImageInfo
      */
     public ImageInfoEntity getTargetImageInfo() {
@@ -868,5 +783,60 @@ public class IssueBond4 implements Serializable{
         this.targetImageInfo = targetImageInfo;
     }
 
+    /**
+     * @return the repayModelEnums
+     */
+    public RepayModelEnum[] getRepayModelEnums() {
+        return repayModelEnums;
+    }
+
+    /**
+     * @param repayModelEnums the repayModelEnums to set
+     */
+    public void setRepayModelEnums(RepayModelEnum[] repayModelEnums) {
+        this.repayModelEnums = repayModelEnums;
+    }
+
+    /**
+     * @return the splitUnits
+     */
+    public SplitUnit[] getSplitUnits() {
+        return splitUnits;
+    }
+
+    /**
+     * @param splitUnits the splitUnits to set
+     */
+    public void setSplitUnits(SplitUnit[] splitUnits) {
+        this.splitUnits = splitUnits;
+    }
+
+    /**
+     * @return the operationEnum
+     */
+    public OperationEnum getOperationEnum() {
+        return operationEnum;
+    }
+
+    /**
+     * @param operationEnum the operationEnum to set
+     */
+    public void setOperationEnum(OperationEnum operationEnum) {
+        this.operationEnum = operationEnum;
+    }
+
+    /**
+     * @return the nextText
+     */
+    public String getNextText() {
+        return nextText;
+    }
+
+    /**
+     * @param nextText the nextText to set
+     */
+    public void setNextText(String nextText) {
+        this.nextText = nextText;
+    }
 
 }

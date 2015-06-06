@@ -11,6 +11,7 @@ import com.oakeel.ejb.entityAndEao.bond.BondEntity;
 import com.oakeel.ejb.entityAndEao.expense.ExpenseEntity;
 import com.oakeel.ejb.entityAndEao.sysSet.SysSetEaoLocal;
 import com.oakeel.ejb.entityAndEao.sysSet.SysSetEntity;
+import com.oakeel.ejb.ptpEnum.OperationEnum;
 import com.oakeel.ejb.ptpEnum.RepayModelEnum;
 import com.oakeel.ejb.ptpEnum.SplitUnit;
 import com.oakeel.ejb.transaction.RepayModelCaculate.RepayModelCaculateLocal;
@@ -97,6 +98,7 @@ public class IssueBond3 implements Serializable {
         bond3.setExpenseEntitys(expenseEntitys);
         ptpSessionBean.getIssueBondLocal().setStep3Bond(bond3);
         ptpSessionBean.getIssueBondLocal().issuePreview();
+        ptpSessionBean.setOperationEnum(OperationEnum.新增);
         return "issueBond4";
     }
 

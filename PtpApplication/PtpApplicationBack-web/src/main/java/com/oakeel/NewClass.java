@@ -7,11 +7,15 @@ package com.oakeel;
 
 import com.oakeel.ejb.entityAndEao.bond.BondEntity;
 import java.io.Serializable;
-import javax.enterprise.context.RequestScoped;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -25,6 +29,7 @@ public class NewClass implements Serializable {
     private String strx;
     private Boolean visible = false;
     private BondEntity bond=new BondEntity();
+    private Date date1;
     public void change()
     {
         System.out.println(bond);
@@ -38,6 +43,11 @@ public class NewClass implements Serializable {
             //无权限
         }
 
+    }
+    public void onDateSelect(SelectEvent event) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
     }
     public void ttt()
     {
@@ -119,5 +129,19 @@ public class NewClass implements Serializable {
      */
     public void setBond(BondEntity bond) {
         this.bond = bond;
+    }
+
+    /**
+     * @return the date1
+     */
+    public Date getDate1() {
+        return date1;
+    }
+
+    /**
+     * @param date1 the date1 to set
+     */
+    public void setDate1(Date date1) {
+        this.date1 = date1;
     }
 }
