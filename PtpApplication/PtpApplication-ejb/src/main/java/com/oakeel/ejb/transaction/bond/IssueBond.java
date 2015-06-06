@@ -27,6 +27,7 @@ public class IssueBond implements IssueBondLocal {
     BondEntity bond2=null;
     BondEntity bond3=null;
     
+    
     @Override
     public void setStep1Bond(BondEntity bond) {
         bond1=bond;
@@ -57,7 +58,6 @@ public class IssueBond implements IssueBondLocal {
 
     @Override
     public void issue() {
-        System.out.println("fdfdf");
         em.persist(newBond);
     }
 
@@ -139,5 +139,19 @@ public class IssueBond implements IssueBondLocal {
     @Override
     public void setCurrBond(BondEntity bond) {
         newBond=bond;
+    }
+
+    @Override
+    public void passAudit() {
+        if(newBond!=null) {
+            newBond.setBondStage(BondStage.审核);
+            em.merge(newBond);
+        }
+    }
+
+    @Override
+    public void backToApplication() {
+        newBond.setBondStage(BondStage.申请);
+        em.merge(newBond);
     }
 }

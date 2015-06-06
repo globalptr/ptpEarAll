@@ -62,6 +62,7 @@ public class PtpProductEntity extends EntityRoot {
     private BackUserEntity issueAdmin;//后台发标人
     @ManyToOne
     private FrontUserEntity issueUser;//发标用户
+    @Enumerated(EnumType.STRING)
     private BondStage bondStage;//标的阶段
     @Temporal(TemporalType.DATE)
     private Date startDate;//开始时间
@@ -79,6 +80,7 @@ public class PtpProductEntity extends EntityRoot {
     @Enumerated(EnumType.STRING)
     @Column(length = 50)
     private RepayModelEnum repayModelEnum;//还款模型
+    @Enumerated(EnumType.STRING)
     private SplitUnit repayCycle;//还款周期
     private int repayCycleNumber;//期数
     @OneToOne(cascade = {CascadeType.ALL})//标的状态
@@ -87,6 +89,7 @@ public class PtpProductEntity extends EntityRoot {
     private List<ExpenseEntity> expenseEntitys=new ArrayList<>();//支出明细
     @OneToMany(mappedBy="ptpProductEntity")
     Set<FrontUserHoldBondEntity> frontUserHoldBondEntitys;//投标人
+    private Boolean active=true;//是否激活
     /**
      * @return the bondStateEntity
      */
@@ -325,6 +328,20 @@ public class PtpProductEntity extends EntityRoot {
      */
     public void setIssueUser(FrontUserEntity issueUser) {
         this.issueUser = issueUser;
+    }
+
+    /**
+     * @return the active
+     */
+    public Boolean getActive() {
+        return active;
+    }
+
+    /**
+     * @param active the active to set
+     */
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
 }
