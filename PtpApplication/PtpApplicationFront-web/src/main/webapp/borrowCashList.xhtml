@@ -1,0 +1,393 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+        <meta name="keywords" content="天天聚财|网络理财|个人理财|投资理财|P2P理财|互联网金融|投资理财|债权转让|理财计划|优选计划|网络贷款|工薪贷|生意贷|网商贷|网贷|小额贷款"/>
+        <meta name="description" content="天天聚财(www.ttjc.com.cn)是目前中国互联网金融中P2P信贷行业中最大、最安全的平台，为投资理财用户和贷款用户两端提供公平、透明、安全、高效的互联网金融服务。投资理财用户可以通过天天聚财平台进行投标、加入优选理财计划、购买债权等方式进行投资获得高收益；贷款用户可以通过平台申请工薪贷、生意贷、网商贷等小额贷款。"/>
+        <link rel="icon" href="http://www.qclcfwzx.com/favicon.ico" type="image/x-icon"/>
+        <h:outputStylesheet library="css" name="basic.css"/>
+        <h:outputStylesheet library="css" name="fzm.css"/>
+        <h:outputStylesheet library="css" name="pubs.css"/>
+        <h:outputScript library="js" name="comm.js"/>
+        <h:outputScript library="js" name="jquery-1.10.2.min.js"/>
+        <h:outputScript>
+            $(function() {
+            $(".jie_div1_l li a").click(function() {
+            $(this).addClass("cur").siblings().removeClass("cur");
+            });
+            })
+        </h:outputScript>
+    </h:head>
+
+    <h:body>
+        <!--topbar-->
+        <h:form>
+        <div class="topbar">
+            <div class="topbar_in">
+                
+                    <p class="fl"> <span>服务热线：023-65038508</span> 
+                        <h:commandLink class="a_wx" 
+                                       action="javascript:;" title="官方微信" value="官方微信" /> 
+                       <h:commandLink class="a_qq" target="_blank" 
+                                      action="http://shang.qq.com/wpa/qunwpa?idkey=77d14c536a83fa744082830e71d032e39075208dab36bb2f5377c1cef1d8f2d3" title="官方QQ群" 
+                                      value="官方1群"/> 
+                      <h:commandLink class="a_qq" target="_blank" action="http://shang.qq.com/wpa/qunwpa?idkey=77d14c536a83fa744082830e71d032e39075208dab36bb2f5377c1cef1d8f2d3" 
+                                     title="官方QQ群"  value="官方2群"/> 
+                    </p>
+                    <p class="fr"> 
+                        <h:commandLink action="#" title="登录" value="登录"/> 
+                        <h:commandLink action="#" title="注册账号" class="reg" value="注册账号" /> 
+                    </p>
+                
+            </div>
+        </div>
+        </h:form>
+        <div class="clear"></div>
+        <!--head-->
+        <h:form>
+        <div class="head">
+            <div class="w1200">
+                <div class="head_top">
+                    <div class="logo"> 
+                        <h:commandLink action="index.html">
+                            <h:graphicImage value="resources/images/logo.jpg" width="168" height="54" />
+                        </h:commandLink>
+                        <h:graphicImage value="resources/images/3year.gif" width="78" height="49" />
+                    </div>
+                    <ul class="nav">
+                        <li> <h:commandLink action="#" value="首页"/></li>
+                        <li> <h:commandLink action="#" value="我要理财"/></li>
+                        <li> <h:commandLink action="#" value="债权转让"/></li>
+                        <li> <h:commandLink action="#" value="我要借款"/></li>
+                        <li> <h:commandLink action="#"><span class="trans2"></span>安全保障</h:commandLink>
+                            <div class="subNav">
+                                <span></span>
+                                <h:commandLink action="#" value="我要借款" />
+                                <h:commandLink action="#" value="我要借款" />
+                                <h:commandLink action="#" value="我要借款" />
+                            </div>
+                        </li>
+                        <li><h:commandLink action="#" value="我的账户"/></li>
+                        <li><h:commandLink action="#" value="帮助中心"/></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </h:form>
+        <div class="clear"></div>
+
+        <!--end jie_banner-->
+        <h:form>
+        <div class="center"  style=" background:#f1f1f1; padding:30px  0 50px 0;">
+            <div class="jie_list w1200">
+                <div class="jie_div1">
+                    <div class="jie_div1_l">
+                        <ul>
+                            <li><b>投标类型 </b>
+                                <p>   
+                                    <h:commandLink action="#"  class="cur" value="全部"/>
+                                    <h:commandLink action="#" value="抵押标"/>
+                                    <h:commandLink action="#"  value="担保标"/>
+                                    <h:commandLink action="#" value="值投标"/>
+                                    <h:commandLink action="#"   value="债权转让"/>
+                                </p>
+                            </li>
+                            <li><b>投标期限 </b>
+                                <p>
+                                    <h:commandLink action="#"  class="cur" value="全部" />
+                                    <h:commandLink action="#" value="0~3个月" />
+                                    <h:commandLink action="#"  value="4~6个月"/>
+                                    <h:commandLink action="#"  value="7~12个月"/>
+                                    <h:commandLink action="#"  value="12个月以上"/>
+                                </p>
+                            </li>
+                            <li><b>还款方式 </b>
+                                <p>
+                                    <h:commandLink action="#"  class="cur" value="全部" />
+                                    <h:commandLink action="#" value="等额本息" />
+                                    <h:commandLink action="#"  value="一次付息，到期还本"/>
+                                </p>
+                            </li>
+                            <li><b>信用等级 </b>
+                                <p>
+                                    <h:commandLink action="#"  class="cur" value="全部" />
+                                    <h:commandLink action="#" value="AA+" />
+                                    <h:commandLink action="#"  value="A+"/>
+                                    <h:commandLink action="#"  value="B+"/>
+                                    <h:commandLink action="#"  value="C+"/>
+                                    <h:commandLink action="#"  value="D+"/>
+                                    <h:commandLink action="#"  value="E+"/>
+                                    <h:commandLink action="#"  value="HR+"/>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--end jie_div1_l-->
+                    <div class="jie_div1_r">
+                        <h4>新手指导</h4>
+                        <ul>
+                            <li>
+                                <h:commandLink action="#" value="什么是抵押标？" />
+                            </li>
+                            <li>
+                                <h:commandLink action="#" value="什么是债权转让？"/>
+                            </li>
+                            <li>
+                                <h:commandLink action="#" value="如何分散投标？"/>
+                            </li>
+                            <li>
+                                <h:commandLink action="#" value="怎样充值或提现？"/>
+                            </li>
+                            <li class="last">
+                                <h:commandLink action="#" value="借款人逾期还款怎么办？"/>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--end jie_div1_r--> 
+                </div>
+                <!--end jie_div1-->
+                <div class="jie_div2">
+                    <table>
+                        <tr>
+                            <th width="270">标题</th>
+                            <th width="100">当前利率</th>
+                            <th width="100">金额</th>
+                            <th width="80">期限</th>
+                            <th width="100">进度</th>
+                            <th width="150"></th>
+                        </tr>
+                        <tr class="first">
+                            <td class="left">
+                                <h4><h:commandLink action="#" value="新手体验-模拟投资"/></h4>
+                            </td>
+                            <td class="bai_shu"><b>20</b> % </td>
+                            <td> ￥ <b>10,000</b></td>
+                            <td><b>4</b> 周</td>
+                            <td class="jind">
+                                <p class="jd"><span></span></p>
+                                <p class="can_shu"> 已有3人投标<br/>
+                                    已完成30% </p>
+                            </td>
+                            <td>
+                                <h:commandLink action="#" value="了解详情"/>
+                            </td>
+                        </tr>
+                        <c:forEach items="#{borrowC.listPro}" var="lp">
+                            <tr >
+                            <td class="left">
+                                <h4> 
+                                    <h:graphicImage value="resources/images/jie_list/bt3.jpg" />
+                                    <h:commandLink action="#" value="#{lp.name}" />
+                                </h4>
+                                <p><span>编号#{lp.bondNumber}</span>
+                                    <h:graphicImage value="resources/images/jie_list/bt5.jpg" />
+                                    <h:graphicImage value="resources/images/jie_list/bt4.jpg" /></p></td>
+                                <td class="bai_shu"><b>#{lp.yearRate}</b> % <br/>
+                                    <span>奖励：4.50%</span></td>
+                                <td> ￥ <b>#{lp.baseAmount}</b></td>
+                                <td>
+                                    <b>${lp.repayCycleNumber}</b> 
+                                    <c:if test="${lp.repayCycle eq '月' or lp.repayCycle eq '季度'}"> 个</c:if> ${lp.repayCycle}
+                                </td>
+                                <td class="jind">
+                                    <p class="jd"><span></span></p>
+                                    <p class="can_shu"> 已有${lp.frontUserHoldBonds.size()}人投标<br/>已完成#{lp.transactionCopiesNum/lp.issueCopiesNum * 100} % </p>
+                                </td>
+                                <td>
+                                    <h:commandLink action="#" class="trans btn" value="马上登录" />
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        <tr >
+                            <td class="left">
+                                <h4>
+                                    <h:graphicImage value="resources/images/jie_list/bt7.jpg"/>
+                                    <h:commandLink action="#" value="XX建筑公司-工程周转2-1-11"/>
+                                </h4>
+                                <p><span>编号201504150208</span>
+                                    <h:graphicImage value="resources/images/jie_list/bt5.jpg" />
+                                    <h:graphicImage value="resources/images/jie_list/bt4.jpg" />
+                                </p>
+                            </td>
+                            <td class="bai_shu"><b>20</b> % <br/>
+                                <span>奖励：4.50%</span></td>
+                            <td> ￥ <b>10,000</b></td>
+                            <td><b>4</b> 周</td>
+                            <td class="jind"><p class="jd"><span></span></p>
+                                <p class="can_shu"> 已有3人投标<br/>
+                                    已完成30% </p></td>
+                            <td>
+                                <h:commandLink action="#" class="trans btn" value="马上登录" />
+                            </td>
+                        </tr>
+                        <tr >
+                            <td class="left">
+                                <h4>
+                                    <h:graphicImage value="resources/images/jie_list/bt5.jpg" />
+                                    <h:commandLink action="#" class="trans btn" value="XX建筑公司-工程周转2-1-11" />
+                                </h4>
+                                <p><span>编号201504150208</span>
+                                    <h:graphicImage value="resources/images/jie_list/bt5.jpg" />
+                                    <h:graphicImage value="resources/images/jie_list/bt4.jpg" />
+                                </p></td>
+                            <td class="bai_shu"><b>20</b> % <br/>
+                                <span>奖励：4.50%</span></td>
+                            <td> ￥ <b>10,000</b></td>
+                            <td><b>4</b> 周</td>
+                            <td class="jind"><p class="jd"><span></span></p>
+                                <p class="can_shu"> 已有3人投标<br/>
+                                    已完成30% </p></td>
+                            <td>
+                                <h:commandLink action="#" class="trans btn" value="马上登录" />
+                            </td>
+                        </tr>
+                        <tr >
+                            <td class="left">
+                                <h4>
+                                    <h:graphicImage value="resources/images/jie_list/bt6.jpg" />
+                                    <h:commandLink action="#" value="XX建筑公司-工程周转2-1-11" />
+                                </h4>
+                                <p>
+                                    <span>编号201504150208</span>
+                                    <h:graphicImage value="resources/images/jie_list/bt5.jpg" />
+                                </p>
+                            </td>
+                            <td class="bai_shu"><b>20</b> % <br/>
+                                <span>奖励：4.50%</span></td>
+                            <td> ￥ <b>10,000</b></td>
+                            <td><b>4</b> 周</td>
+                            <td class="jind"><p class="jd"><span></span></p>
+                                <p class="can_shu"> 已有3人投标<br/>
+                                    已完成30% </p></td>
+                            <td>
+                                <h:commandLink action="#" class="trans btn" value="马上登录" />
+                            </td>
+                        </tr>
+                        <tr >
+                            <td class="left">
+                                <h4>
+                                    <h:graphicImage value="resources/images/jie_list/bt8.jpg" />
+                                    <h:commandLink action="#" class="trans btn" value="XX建筑公司-工程周转2-1-11" />
+                                </h4>
+                                <p><span>编号201504150208</span>
+                                    <h:graphicImage value="resources/images/jie_list/bt5.jpg" />
+                                </p>
+                            </td>
+                            <td class="bai_shu"><b>20</b> % <br/>
+                                <span>奖励：4.50%</span></td>
+                            <td> ￥ <b>10,000</b></td>
+                            <td><b>4</b> 周</td>
+                            <td class="jind">
+                                <p class="jd"><span></span></p>
+                                <p class="can_shu"> 已有3人投标<br/>已完成30% </p>
+                            </td>
+                            <td>
+                                <h:commandLink action="#" class="trans btn" value="马上登录" />
+                            </td>
+                        </tr>
+                    </table>
+                    <p class="page">
+                        <span> <h:commandLink action="#" value="首页"/></span> 
+                        <span> <h:commandLink action="#" value="&lt;"/></span>
+                        <span><h:commandLink action="#" value="1"/></span>
+                        <span><h:commandLink action="#" value="2"/></span> 
+                        <span><h:commandLink action="#" value="3"/></span> 
+                        <span><h:commandLink action="#" value="4"/></span> 
+                        <span><h:commandLink action="#" value="5"/></span>
+                        <span><h:commandLink action="#" value="&gt;"/></span>
+                        <span><h:commandLink action="#" value="尾页"/></span>
+                    </p>
+                </div>
+                <!--end jie_div2--> 
+            </div>
+            <!--end jie_list--> 
+        </div>
+        </h:form>
+        <!--end center--> 
+        <!--footer-->
+        <h:form>
+        <div class="footer nomar"> 
+            <!--foot_t-->
+            <div class="foot_t">
+                <div class="w1200">
+                    <div class="foot_left">
+                        <p class="top_link">
+                            <h:commandLink action="#" title="公司简介" value="公司简介"/>
+                            <h:commandLink action="#" title="法规保障" value="法规保障"/>
+                            <h:commandLink action="#" title="本息保障" value="本息保障"/>
+                            <h:commandLink action="#" title="企业荣誉" value="企业荣誉"/>
+                            <h:commandLink action="#" title="资费说明" value="资费说明"/>
+                            <h:commandLink action="#" title="交易安全" value="交易安全" />
+                            <h:commandLink action="#" title="认证与安全" value="认证与安全" />
+                            <h:commandLink action="#" title="管理团队" value="管理团队" />
+                        </p>
+                        <div class="ico">
+                            <div class="look">
+                                <span>关注我们</span>
+                                <h:commandLink action="http://weibo.com/p/1006065584238499/home" class="wb trans" title="天天聚财微博" target="_blank"/>
+                                <h:commandLink action="#" class="wx trans" title="天天聚财微信" target="_blank"/>
+                            </div>
+                            <div class="look hasml">
+                                <span>网站地图</span>
+                                <h:commandLink action="#" class="tu trans" title="网站地图" target="_blank"/>
+                            </div>
+                            <div class="look">
+                                <span>收益计算器</span>
+                                <h:commandLink action="#" class="ca trans" title="收益计算器" target="_blank"/>
+                            </div>
+                            <div class="code_box"> 
+                                <h:graphicImage value="http://www.ttjc.com.cn/images/ttjc_weixin.jpg"/><em class="fm2">◆</em>
+                            </div>
+                        </div>
+                    </div>
+                    <dl class="foot_ser">
+                        <dt>客服热线（工作时间：9：00—21：00）</dt>
+                        <dd>
+                            <p class="tel">400-023-3536</p>
+                            <div class="icon"> 
+                                <span><i>客服邮箱</i>
+                                    <h:commandLink action="mailto:ttjc009@163.com"  class="email trans"  title="Email" target="_blank"/>
+                                </span>
+                                <span><i>在线客服</i>
+                                    <h:commandLink action="http://shang.qq.com/wpa/qunwpa?idkey=77d14c536a83fa744082830e71d032e39075208dab36bb2f5377c1cef1d8f2d3"
+                                                       class="kefu trans" title="在线客服" target="_blank"/>
+                                </span> 
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <!--foot_b-->
+            <div class="foot_b">
+                <div class="w1200">
+                    <div class="link"> 
+                        <span>友情链接：</span>
+                        <h:commandLink value="网贷之家"/>
+                        <h:commandLink value="融途网"/>
+                        <h:commandLink value="网贷天眼"/>
+                        <h:commandLink value="网贷第三方"/>
+                        <h:commandLink value="网贷中国"/>
+                        <h:commandLink value="网贷点评网"/>
+                        <h:commandLink value="网贷联盟"/>
+                        <h:commandLink value="网贷界"/>
+                        <h:commandLink value="网贷之星"/>
+                        <h:commandLink value="网贷帮手"/>
+                        <h:commandLink value="网贷财宝"/>
+                    </div>
+                    <div class="copyright">
+                    <p>版权所有：重庆天天聚财投资管理有限公司        有 ICB备：渝ICP备14003929号-1</p>
+                    <div class="foot_m"> 
+                        <h:commandLink  class="ap1 trans" action="http://beian.cqnet110.gov.cn/home" target="_blank"/>
+                        <h:commandLink  class="ap2 trans" action="http://beian.cqnet110.gov.cn/open/showRecord?id=50010602000558" target="_blank"/>
+                        <h:commandLink  class="ap3 trans" action="https://search.szfw.org/cert/l/CX20140703008333008377" target="_blank"/> 
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        </h:form>
+    </h:body>
+</html>

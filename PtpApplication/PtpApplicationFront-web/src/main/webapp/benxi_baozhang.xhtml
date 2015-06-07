@@ -1,35 +1,49 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-<h:head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-    <meta name="keywords" content="天天聚财|网络理财|个人理财|投资理财|P2P理财|互联网金融|投资理财|债权转让|理财计划|优选计划|网络贷款|工薪贷|生意贷|网商贷|网贷|小额贷款"/>
-    <meta name="description" content="天天聚财(www.ttjc.com.cn)是目前中国互联网金融中P2P信贷行业中最大、最安全的平台，为投资理财用户和贷款用户两端提供公平、透明、安全、高效的互联网金融服务。投资理财用户可以通过天天聚财平台进行投标、加入优选理财计划、购买债权等方式进行投资获得高收益；贷款用户可以通过平台申请工薪贷、生意贷、网商贷等小额贷款。"/>
-    <link rel="icon" href="http://www.qclcfwzx.com/favicon.ico" type="image/x-icon"/>
-    <link href="resources/css/basic.css" rel="stylesheet" type="text/css"/>
-    <link href="resources/css/fzm.css" rel="stylesheet" type="text/css"/>
-    <link href="resources/css/pubs.css" rel="stylesheet" type="text/css"/>
-    <script src="resources/js/comm.js" type="text/javascript"></script>
-    <script src="resources/js/jquery-1.10.2.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-    function setTabCatGoods(name,cursel,n){
-        for(i=1;i&lt;=n;i++){
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+        <meta name="keywords" content="天天聚财|网络理财|个人理财|投资理财|P2P理财|互联网金融|投资理财|债权转让|理财计划|优选计划|网络贷款|工薪贷|生意贷|网商贷|网贷|小额贷款"/>
+        <meta name="description" content="天天聚财(www.ttjc.com.cn)是目前中国互联网金融中P2P信贷行业中最大、最安全的平台，为投资理财用户和贷款用户两端提供公平、透明、安全、高效的互联网金融服务。投资理财用户可以通过天天聚财平台进行投标、加入优选理财计划、购买债权等方式进行投资获得高收益；贷款用户可以通过平台申请工薪贷、生意贷、网商贷等小额贷款。"/>
+        <link rel="icon" action="http://www.qclcfwzx.com/favicon.ico" type="image/x-icon"/>
+        <h:outputStylesheet library="css" name="basic.css"/>
+        <h:outputStylesheet library="css" name="fzm.css"/>
+        <h:outputStylesheet library="css" name="pubs.css"/>
+        <h:outputScript library="js" name="comm.js"/>
+        <h:outputScript library="js" name="jquery-1.10.2.min.js"/>
+        <h:outputScript>
+            function setTabCatGoods(name,cursel,n){
+            for(i=1;i&lt;=n;i++){
             var menu=document.getElementById(name+i);
             var con=document.getElementById("con_"+name+"_"+i);
             con.style.display=i==cursel?"block":"none";
             menu.className=i==cursel?"curr":"";
-        }
-    }
-    </script>
-</h:head>
+            }
+            }
+        </h:outputScript>
+    </h:head>
 
     <h:body>
         <!--topbar-->
         <div class="topbar">
             <div class="topbar_in">
-                <p class="fl"> <span>服务热线：023-65038508</span> <a class="a_wx" href="javascript:;" title="官方微信" hidefocus="true">官方微信</a> <a class="a_qq" target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=77d14c536a83fa744082830e71d032e39075208dab36bb2f5377c1cef1d8f2d3" title="官方QQ群"  hidefocus="true">官方1群</a> <a class="a_qq" target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=77d14c536a83fa744082830e71d032e39075208dab36bb2f5377c1cef1d8f2d3" title="官方QQ群"  hidefocus="true">官方2群</a> </p>
-                <p class="fr"> <a href="#" title="登录">登录</a> <a href="#" title="注册账号" class="reg">注册账号</a> </p>
+                <h:form>
+                    <p class="fl"> <span>服务热线：023-65038508</span> 
+                        <h:commandLink class="a_wx" action="javascript:;" title="官方微信" value="官方微信"/>
+                        <h:commandLink  class="a_qq" target="_blank" 
+                                        action="http://shang.qq.com/wpa/qunwpa?idkey=77d14c536a83fa744082830e71d032e39075208dab36bb2f5377c1cef1d8f2d3"
+                                        title="官方QQ群" value="官方1群"/>
+                        <h:commandLink class="a_qq" target="_blank"
+                                       action="http://shang.qq.com/wpa/qunwpa?idkey=77d14c536a83fa744082830e71d032e39075208dab36bb2f5377c1cef1d8f2d3" 
+                                       title="官方QQ群"  value="官方2群"/>
+                    </p>
+                    <p class="fr"> 
+                        <h:commandLink  action="#" title="登录" value="登录"/>
+                        <h:commandLink  action="#" title="注册账号" class="reg" value="注册账号"/>
+                    </p>
+                </h:form>
             </div>
         </div>
         <div class="clear"></div>
@@ -37,22 +51,31 @@
         <div class="head">
             <div class="w1200">
                 <div class="head_top">
-                    <div class="logo"> <a href="index.html"><img src="resources/images/logo.jpg" width="168" height="54" /></a> <img src="resources/images/3year.gif" width="78" height="49" /></div>
+                    <div class="logo">
+                        <h:form>
+                            <h:commandLink action="index.html">
+                                <p:graphicImage value="resources/images/logo.jpg" width="168" height="54"/>
+                            </h:commandLink>
+                        </h:form>
+                        <p:graphicImage value="resources/images/3year.gif" width="78" height="49"/>
+                    </div>
                     <ul class="nav">
-                        <li><a href="#">首页</a></li>
-                        <li><a href="#">我要理财</a></li>
-                        <li><a href="#">债权转让</a></li>
-                        <li><a href="#">我要借款</a></li>
-                        <li><a href="#"><span class="trans2"></span>安全保障</a>
-                            <div class="subNav">
-                                <span></span>
-                                <a href="#">我要借款</a>
-                                <a href="#">我要借款</a>
-                                <a href="#">我要借款</a>
-                            </div>
-                        </li>
-                        <li><a href="#">我的账户</a></li>
-                        <li><a href="#">帮助中心</a></li>
+                        <h:form>
+                            <li> <h:commandLink action="#" value="首页"/></li>
+                            <li> <h:commandLink action="#" value="我要理财"/></li>
+                            <li> <h:commandLink action="#" value="债权转让"/></li>
+                            <li> <h:commandLink action="#" value="我要借款"/></li>
+                            <li> <h:commandLink action="#"><span class="trans2"></span>安全保障</h:commandLink>
+                                <div class="subNav">
+                                    <span></span>
+                                    <h:commandLink action="#" value="我要借款" />
+                                    <h:commandLink action="#" value="我要借款" />
+                                    <h:commandLink action="#" value="我要借款" />
+                                </div>
+                            </li>
+                            <li><h:commandLink action="#" value="我的账户"/></li>
+                            <li><h:commandLink action="#" value="帮助中心"/></li>
+                        </h:form>
                     </ul>
                 </div>
             </div>
@@ -60,13 +83,16 @@
         <div class="clear"></div>
         <div class="baozhang_bg"></div><!--end baozhang_bg-->
         <div class="guarantee">
-            <div class="qh">                                                                                                                    
-                <p> <a href="javascript:void();" class="curr first" id="goods1" onclick="setTabCatGoods(&#39;goods&#39;,1,5)">本息保障</a>
-                    <a href="javascript:void();" id="goods2" onclick="setTabCatGoods(&#39;goods&#39;,2,5)"> 法规保障 </a> 
-                    <a href="javascript:void();" id="goods3" onclick="setTabCatGoods(&#39;goods&#39;,3,5)"> 过程透明</a> 
-                    <a href="javascript:void();" id="goods4" onclick="setTabCatGoods(&#39;goods&#39;,4,5)">项目审核 </a> 
-                    <a href="javascript:void();" id="goods5" onclick="setTabCatGoods(&#39;goods&#39;,5,5)">交易安全 </a> 
-                </p>
+            <div class="qh">    
+                <h:form>
+
+                    <p> <h:commandLink class="curr first" id="goods1" onclick="setTabCatGoods( &#39; goods &#39; , 1, 5)" value="本息保障"/>
+                        <h:commandLink id="goods2" onclick="setTabCatGoods( &#39; goods &#39; , 1, 5)" value="法规保障"/>
+                        <h:commandLink id="goods3" onclick="setTabCatGoods( &#39; goods &#39; , 1, 5)" value="过程透明"/>
+                        <h:commandLink id="goods4" onclick="setTabCatGoods( &#39; goods &#39; , 1, 5)" value="项目审核"/>
+                        <h:commandLink id="goods5" onclick="setTabCatGoods( &#39; goods &#39; , 1, 5)" value="交易安全"/>
+                    </p>
+                </h:form>
             </div>
             <!--end qiehuan-->
             <div class="mc" id="con_goods_1" >
@@ -76,8 +102,8 @@
                             <h2><span>什么是“本息保障”计划？</span></h2>
                             <p class="center">保障投资人在天天聚财投资理财的本金和利息收益安全</p>
                             <dl>
-                                <dd><div class="l"><img src="resources/images/jie_list/ba_img1.jpg" /></div><div class="r">天天聚财推出“本息保障计划”，保障投资人在天天聚财投资理财的本金和利息收益安全。</div></dd>
-                                <dd><div class="l"><img src="resources/images/jie_list/ba_img1.jpg" /></div><div class="r">"本息保障计划”：是指在天天聚财投资的投资者其投资本金及利息都受到保护，不会因为借款人逾期、不还款等违约行为而受到损失。</div></dd>
+                                <dd><div class="l"><p:graphicImage value="resources/images/jie_list/ba_img1.jpg"/></div><div class="r">天天聚财推出“本息保障计划”，保障投资人在天天聚财投资理财的本金和利息收益安全。</div></dd>
+                                <dd><div class="l"><p:graphicImage value="resources/images/jie_list/ba_img1.jpg"/></div><div class="r">"本息保障计划”：是指在天天聚财投资的投资者其投资本金及利息都受到保护，不会因为借款人逾期、不还款等违约行为而受到损失。</div></dd>
                             </dl>
                         </div>
                     </li>
@@ -85,12 +111,12 @@
                         <div class="w1200 benxi">
                             <h2><span>学会五招，本息有保障 !</span></h2>
                             <div class="li_two_dl">
-                                <div class="l_img"><img src="resources/images/jie_list/ba_img6.jpg"/></div>
+                                <div class="l_img"><p:graphicImage value="resources/images/jie_list/ba_img6.jpg"/></div>
                                 <dl>
-                                    <dd><img src="resources/images/jie_list/ba_img5.jpg" /></dd>
-                                    <dd><div class="l"><img src="resources/images/jie_list/ba_img8.jpg" /></div><div class="r">出现坏账，偿付投资人剩余本金及利息；</div></dd>
-                                    <dd><div class="l"><img src="resources/images/jie_list/ba_img8.jpg" /></div><div class="r">出现逾期，担保履约还未完成时，投资人不会承担任何损失；</div></dd>
-                                    <dd><div class="l"><img src="resources/images/jie_list/ba_img8.jpg" /></div><div class="r">天天聚财将会在逾期当天使用“风险备用金”向理财人垫付此笔借款的逾期本息 。</div></dd>
+                                    <dd><p:graphicImage value="resources/images/jie_list/ba_img5.jpg" /></dd>
+                                    <dd><div class="l"><p:graphicImage value="resources/images/jie_list/ba_img8.jpg" /></div><div class="r">出现坏账，偿付投资人剩余本金及利息；</div></dd>
+                                    <dd><div class="l"><p:graphicImage value="resources/images/jie_list/ba_img8.jpg" /></div><div class="r">出现逾期，担保履约还未完成时，投资人不会承担任何损失；</div></dd>
+                                    <dd><div class="l"><p:graphicImage value="resources/images/jie_list/ba_img8.jpg" /></div><div class="r">天天聚财将会在逾期当天使用“风险备用金”向理财人垫付此笔借款的逾期本息 。</div></dd>
                                 </dl>
                             </div>
                             <div class="li_two_dr">
@@ -98,8 +124,8 @@
                                 <div class="l_img"><img src="resources/images/jie_list/ba_img7.jpg" /></div>
                                 <dl>
                                     <dd><img src="resources/images/jie_list/ba_img4.jpg" /></dd>
-                                    <dd><div class="l"><img src="resources/images/jie_list/ba_img8.png" /></div><div class="r">天天聚财自动通知托管平台将回款转入投资人的帐号</div></dd>
-                                    <dd><div class="l"><img src="resources/images/jie_list/ba_img8.png" /></div><div class="r">如借款期限届满之日借款者不能偿还投资者本金及利息，担保机构将按照本合同约定向投资者偿付借款的本金和利息。</div></dd>
+                                    <dd><div class="l"><p:graphicImage value="resources/images/jie_list/ba_img8.png" /></div><div class="r">天天聚财自动通知托管平台将回款转入投资人的帐号</div></dd>
+                                    <dd><div class="l"><p:graphicImage value="resources/images/jie_list/ba_img8.png" /></div><div class="r">如借款期限届满之日借款者不能偿还投资者本金及利息，担保机构将按照本合同约定向投资者偿付借款的本金和利息。</div></dd>
                                 </dl>
                             </div>
                             <div class="li_two_dl">
@@ -107,21 +133,21 @@
                                 <div class="l_img"><img src="resources/images/jie_list/ba_img9.jpg" /></div>
                                 <dl>
                                     <dd><img src="resources/images/jie_list/ba_img10.jpg" /></dd>
-                                    <dd><div class="l"><img src="resources/images/jie_list/ba_img8.jpg" /></div><div class="r">担保机构提供100%本息连带责任担保，完全保障投资人本金及理财利息 ; </div></dd>
-                                    <dd><div class="l"><img src="resources/images/jie_list/ba_img8.jpg" /></div><div class="r">所有天天聚财投资人的投资本金都将自动获得本息保障，无需特别加入或任何费用 。</div></dd>
+                                    <dd><div class="l"><p:graphicImage value="resources/images/jie_list/ba_img8.jpg" /></div><div class="r">担保机构提供100%本息连带责任担保，完全保障投资人本金及理财利息 ; </div></dd>
+                                    <dd><div class="l"><p:graphicImage value="resources/images/jie_list/ba_img8.jpg" /></div><div class="r">所有天天聚财投资人的投资本金都将自动获得本息保障，无需特别加入或任何费用 。</div></dd>
                                 </dl>
                             </div>
                             <div class="li_two_dr">
 
-                                <div class="l_img"><img src="resources/images/jie_list/ba_img12.jpg" /></div>
+                                <div class="l_img"><p:graphicImage value="resources/images/jie_list/ba_img12.jpg" /></div>
                                 <dl>
-                                    <dd><img src="resources/images/jie_list/ba_img11.jpg" /></dd>
-                                    <dd style="padding-top:20px;"><div class="l"><img src="resources/images/jie_list/ba_img8.png" /></div><div class="r">风险备用金账户，担保公司全额本息担保！ </div></dd>
+                                    <dd><p:graphicImage value="resources/images/jie_list/ba_img11.jpg" /></dd>
+                                    <dd style="padding-top:20px;"><div class="l"><p:graphicImage value="resources/images/jie_list/ba_img8.png" /></div><div class="r">风险备用金账户，担保公司全额本息担保！ </div></dd>
                                 </dl>
                             </div>
                             <div class="li_two_div">
-                                <p class="center"><img src="resources/images/jie_list/ba_img13.jpg" /></p>
-                                <h4 class="center"><img src="resources/images/jie_list/ba_img17.jpg" /></h4>
+                                <p class="center"><p:graphicImage value="resources/images/jie_list/ba_img13.jpg" /></p>
+                                <h4 class="center"><p:graphicImage value="resources/images/jie_list/ba_img17.jpg" /></h4>
                                 <p>天天聚财的优势在于可以提供丰富的投资项目，让投资人看到真实、透明的借款信息，进行自由选择以组成最合您心意的专有投资组合。即便在有本金保障的情况下，一旦借款人不能按时偿还本金，触发本金保障垫付前的资金回收延迟会降低您的整体资金利用效率，影响您的加权收益率。因此，为保证更有效地利用资金，我们建议您积极自主地判断项目风险并挑选投资项目。
                                 </p>
                             </div>
@@ -133,22 +159,22 @@
                             <p class="center">保障投资人在天天聚财投资理财的本金和利息收益安全</p>
                             <dl>
                                 <dd class="l">
-                                    <h4 class="h4_one"><img src="resources/images/jie_list/ba_img15.jpg" />风险备用金账户</h4>
+                                    <h4 class="h4_one"><p:graphicImage value="resources/images/jie_list/ba_img15.jpg" />风险备用金账户</h4>
                                     <p>天天聚财设立“风险备用金账户”，为“本息保障计划”提供资金保障。“风险备用金账户”资金来源：借款人融资金额中收取0.5%-1%作为风险备用金；担保公司担保费中收取30%作为风险备用金；借款人逾期违约金计入风险备用金账户。
                                     </p>
                                 </dd>
                                 <dd class="r">
-                                    <h4 class="h4_two"><img src="resources/images/jie_list/ba_img14.jpg" />担保公司全额本息担保 </h4>
+                                    <h4 class="h4_two"><p:graphicImage value="resources/images/jie_list/ba_img14.jpg" />担保公司全额本息担保 </h4>
                                     <p>天天聚财平台任何一笔借款都获得担保公司全额本息担保。当借款人出现逾期、违约时由担保公司垫付全部本金和利息。担保公司全额本息担保是保障投资人利益和平台安全的核心举措。</p>
-                                    <p class="right"><a href="#">登科担保详情查询>></a></p>
+                                    <p class="right"> <h:commandLink  action="#" value="登科担保详情查询" /></p>
                                 </dd>
                                 <dd class="l">
-                                    <h4 class="h4_three"><img src="resources/images/jie_list/ba_img16.jpg" />反担保措施 </h4>
+                                    <h4 class="h4_three"><p:graphicImage value="resources/images/jie_list/ba_img16.jpg" />反担保措施 </h4>
                                     <p>任何借款人都会向担保公司提供反担保方案，包括但不限于不动产抵押（例如：房产抵押、厂房抵押、土地抵押）、机动车抵质押、动产抵押质押、设备机械质押、权利质押等各种反担保措施。
                                     </p>
                                 </dd>
                                 <dd class="r">
-                                    <h4 class="h4_four"><img src="resources/images/jie_list/ba_img18.jpg" />成熟可信的收益模式</h4>
+                                    <h4 class="h4_four"><p:graphicImage value="resources/images/jie_list/ba_img18.jpg" />成熟可信的收益模式</h4>
                                     <p>天天聚财联合担保公司做个人和中小微企业中短期借款业务，操作方式成熟，经营丰富。天天聚财收取借款人融资服务费用，不承担借款人违约风险，保证平台独立安全运营。担保公司推荐标的，提供担保服务，承担违约风险。</p>
                                 </dd>
                             </dl>
@@ -160,7 +186,7 @@
                 <ul>
                     <li class="li_one">
                         <div class="w1200">
-                            <div class="fg_l" style="width:350px;"><img src="resources/images/jie_list/fz_img1.jpg" /></div>
+                            <div class="fg_l" style="width:350px;"><p:graphicImage value="resources/images/jie_list/fz_img1.jpg" /></div>
                             <div class="fg_r" style="width:800px;"><h1>天天聚财平台提供居间撮合服务的合法性</h1>
                                 <p class="text_indent"> 根据《合同法》第23章关于“居间合同”的规定，特别是第424条规定的“居间合同是居间人向委托人报告订立合同的机会或者提供订立合同的媒介服务，委托人支付报酬的合同”，天天聚财平台作为合法设立的中介服务机构，为民间借贷提供撮合，使借贷双方形成借贷关系并收取相关报酬的居间服务有着明确的法律基础。</p>
                             </div>
@@ -178,12 +204,12 @@
                             <div class="fg_l" style="width:800px;"><h1>理财人通过天天聚财平台获得的出借理财收益的合法性</h1>
                                 <p class="text_indent">  根据最高人民法院《关于人民法院审理借贷案件的若干意见》第6条：“民间借贷的利率可以适当高于银行的利率，各地人民法院可以根据本地区的实际情况具体掌握，但最高不得超过银行同类贷款利率的四倍（包含利率本数）。超出此限度的，超出部分的利息不予保护。”天天聚财的出借理财收益未超过银行同类贷款利率的四倍，为合法利息收益，受到法律保护。</p>
                             </div>
-                            <div class="fg_r" style="width:380px; padding:20px 0;"><img src="resources/images/jie_list/fz_img2.jpg" /></div>
+                            <div class="fg_r" style="width:380px; padding:20px 0;"><p:graphicImage value="resources/images/jie_list/fz_img2.jpg" /></div>
                         </div>
                     </li>
                     <li class="li_two">
                         <div class="w1200">
-                            <p class="center"><img src="resources/images/jie_list/fz_img3.jpg" /></p>
+                            <p class="center"><p:graphicImage value="resources/images/jie_list/fz_img3.jpg" /></p>
                             <h1 class="center">理财人及借款人双方民间借贷关系的合法性</h1>
                             <p class="text_indent">  根据《合同法》第196条规定“借款合同是借款人向贷款人借款，到期返还借款并支付利息的合同”，《合同法》允许自然人等普通民事主体之间发生借贷关系，并允许出借方到期可以收回本金和符合法律规定的利息。</p>
                         </div>
@@ -195,7 +221,7 @@
                 <ul>
                     <li class="li_two">
                         <div class="w1200">
-                            <div class="fg_l" style="width:440px; text-align:center;"><img src="resources/images/jie_list/gc_img1.jpg"/></div>
+                            <div class="fg_l" style="width:440px; text-align:center;"><p:graphicImage value="resources/images/jie_list/gc_img1.jpg"/></div>
                             <div class="fg_r" style="width:700px;">
                                 <h1>保障一：融资人信息公开透明</h1>
                                 <p class="text_indent">所有尽职调查信息都会被公开，投资人在投资前就能对项目有100%的掌控。</p>
@@ -213,7 +239,7 @@
                                 <h1 class="h1_two">保障四：平台透明</h1>
                                 <p class="text_indent">以中小微企业和个人提供综合性的金融服务为核心业务。以信誉为基本的互联网网贷平台，平台数据信息皆为真实可靠。</p>
                             </div>
-                            <div class="fg_r" style="width:460px; text-align:center;"><img src="resources/images/jie_list/gc_img2.jpg"/></div>
+                            <div class="fg_r" style="width:460px; text-align:center;"><p:graphicImage value="resources/images/jie_list/gc_img2.jpg"/></div>
                         </div>
                     </li>
                 </ul>
@@ -224,7 +250,7 @@
                 <ul>
                     <li class="li_two">
                         <div class="w1200">
-                            <div class="fg_l" style="width:440px; text-align:center;"><img src="resources/images/jie_list/sh_img1.jpg"/></div>
+                            <div class="fg_l" style="width:440px; text-align:center;"><p:graphicImage value="resources/images/jie_list/sh_img1.jpg"/></div>
                             <div class="fg_r" style="width:700px;">
                                 <h1>第一道审核：</h1>
                                 <p class="text_indent">贷款机构核实包括获取、鉴别、审核借款客户的个人信息，征信报告，联系人信息，工作信息，银行流水，实地验证，财产信息等信用信息。然后由独立的风控团队独立审核，项目才可以通过第一道审核。</p>
@@ -238,13 +264,13 @@
 
                             <h1 class="jiek">借款项目审核流程明细</h1>
                             <dl>
-                                <dd><img src="resources/images/jie_list/sh_img2.jpg" /><p><b>实地考察：</b>担保公司实地考察线下借款人</p></dd>
-                                <dd><img src="resources/images/jie_list/sh_img3.jpg" /><p><b>资料审核：</b>审核包括银行流水、资产情况等十余项必备材料</p></dd>
-                                <dd><img src="resources/images/jie_list/sh_img4.jpg" /><p><b>背景调查：</b>对借款人背景、联系人信息详尽调查</p></dd>
-                                <dd><img src="resources/images/jie_list/sh_img5.jpg" /><p><b>还款能力：</b>结合资料审查和数据分析综合评估其还款能力</p></dd>
-                                <dd><img src="resources/images/jie_list/sh_img6.jpg" /><p><b>资产评估：</b>严格评估抵押/质押的资产状况</p></dd>
-                                <dd><img src="resources/images/jie_list/sh_img7.jpg" /><p><b>抵押办理：</b>资产通过估值后办理相关抵押手续</p></dd>
-                                <dd><img src="resources/images/jie_list/sh_img8.jpg" /><p><b>会议决定：</b>我们会根据融资人的具体情况制定出一整套安全可行的融资方案。只有收益和风险最佳的项目共放在平台上供投资人选择。</p></dd>
+                                <dd><p:graphicImage value="resources/images/jie_list/sh_img2.jpg" /><p><b>实地考察：</b>担保公司实地考察线下借款人</p></dd>
+                                <dd><p:graphicImage value="resources/images/jie_list/sh_img3.jpg" /><p><b>资料审核：</b>审核包括银行流水、资产情况等十余项必备材料</p></dd>
+                                <dd><p:graphicImage value="resources/images/jie_list/sh_img4.jpg" /><p><b>背景调查：</b>对借款人背景、联系人信息详尽调查</p></dd>
+                                <dd><p:graphicImage value="resources/images/jie_list/sh_img5.jpg" /><p><b>还款能力：</b>结合资料审查和数据分析综合评估其还款能力</p></dd>
+                                <dd><p:graphicImage value="resources/images/jie_list/sh_img6.jpg" /><p><b>资产评估：</b>严格评估抵押/质押的资产状况</p></dd>
+                                <dd><p:graphicImage value="resources/images/jie_list/sh_img7.jpg" /><p><b>抵押办理：</b>资产通过估值后办理相关抵押手续</p></dd>
+                                <dd><p:graphicImage value="resources/images/jie_list/sh_img8.jpg" /><p><b>会议决定：</b>我们会根据融资人的具体情况制定出一整套安全可行的融资方案。只有收益和风险最佳的项目共放在平台上供投资人选择。</p></dd>
                             </dl>
                         </div>
                     </li>
@@ -258,7 +284,7 @@
                 <ul>
                     <li class="li_two">
                         <div class="w1200">
-                            <div class="fg_l" style="width:480px; text-align:center;"><img src="resources/images/jie_list/aq_img1.jpg"/></div>
+                            <div class="fg_l" style="width:480px; text-align:center;"><p:graphicImage value="resources/images/jie_list/aq_img1.jpg"/></div>
                             <div class="fg_r" style="width:700px;">
                                 <h1><b>隐私安全</b></h1>
                                 <p class="text_indent"> 我们郑重承诺并尊重、保护用户的个人隐私，未经用户授权我们不会公布与用户个人有关的资料，除非有法律程序要求。我们将定期检查隐私保护措施，跟踪安全技术的发展趋势，更新技术和管理措施。</p>
@@ -278,7 +304,7 @@
                                 <p class="text_indent">为了保障您在天天聚财平台的正常运作，避免账户遭他人恶意盗用造成的个人信息外泄或资金损失，除了平台本身提供的安全防护措施以外，我们建议您提升个人电脑的安全级别以及自身的安全防范意识。</p>
                                 <p class="text_indent">采用ssl加密通道传输数据。从技术上避免外部窃取资料。进一步保障客户投资的安全性！</p>
                             </div>
-                            <div class="fg_r" style="width:550px; text-align:center;"><img src="resources/images/jie_list/aq_img2.jpg"/></div>
+                            <div class="fg_r" style="width:550px; text-align:center;"><p:graphicImage value="resources/images/jie_list/aq_img2.jpg"/></div>
                         </div>
                     </li>
                 </ul>
@@ -292,30 +318,71 @@
             <div class="foot_t">
                 <div class="w1200">
                     <div class="foot_left">
-                        <p class="top_link"><a href="#" title="公司简介">公司简介</a><a href="#" title="法规保障">法规保障</a><a href="#" title="本息保障">本息保障</a><a href="#" title="企业荣誉">企业荣誉</a><a href="#" title="资费说明">资费说明</a><a href="#" title="交易安全">交易安全</a><a href="#" title="认证与安全">认证与安全</a><a href="#" title="管理团队">管理团队</a></p>
+                        <p class="top_link">
+                            <h:form>
+                                <h:commandLink action="#" title="公司简介" value="公司简介" />
+                                <h:commandLink action="#" title="法规保障" value="法规保障"/>
+                                <h:commandLink action="#" title="本息保障" value="本息保障"/> 
+                                <h:commandLink action="#" title="企业荣誉" value="企业荣誉"/> 
+                                <h:commandLink action="#" title="资费说明" value="资费说明"/>
+                                <h:commandLink action="#" title="交易安全" value="交易安全"/> 
+                                <h:commandLink action="#" title="认证与安全" value="认证与安全"/> 
+                                <h:commandLink action="#" title="企业荣誉" value="企业荣誉"/> 
+                                <h:commandLink action="#" title="管理团队" value="管理团队"/>
+                            </h:form>
+                        </p>
                         <div class="ico">
-                            <div class="look"><span>关注我们</span><a href="http://weibo.com/p/1006065584238499/home" class="wb trans" title="天天聚财微博" target="_blank"></a><a href="#" class="wx trans" title="天天聚财微信" target="_blank"></a></div>
-                            <div class="look hasml"><span>网站地图</span><a href="#" class="tu trans" title="网站地图" target="_blank"></a></div>
-                            <div class="look"><span>收益计算器</span><a href="#" class="ca trans" title="收益计算器" target="_blank"></a></div>
-                            <div class="code_box"> <img src="http://www.ttjc.com.cn/images/ttjc_weixin.jpg"/><em class="fm2">◆</em></div>
+                            <h:form>
+                                <div class="look"><span>关注我们</span> <h:commandLink action="http://weibo.com/p/1006065584238499/home" class="wb trans" title="天天聚财微博" target="_blank"/> <h:commandLink action="#" class="wx trans" title="天天聚财微信" target="_blank"/></div>
+                                <div class="look hasml"><span>网站地图</span> <h:commandLink action="#" class="tu trans" title="网站地图" target="_blank"/></div>
+                                <div class="look"><span>收益计算器</span> <h:commandLink action="#" class="ca trans" title="收益计算器" target="_blank"/></div>
+                                <div class="code_box"> <h:graphicImage value="http://www.ttjc.com.cn/images/ttjc_weixin.jpg"/><em class="fm2">◆</em></div>
+                            </h:form>
                         </div>
                     </div>
                     <dl class="foot_ser">
                         <dt>客服热线（工作时间：9：00—21：00）</dt>
-                        <dd>
-                            <p class="tel">400-023-3536</p>
-                            <div class="icon"> <span><i>客服邮箱</i><a href="mailto:ttjc009@163.com" class="email trans" title="Email" target="_blank"></a></span> <span><i>在线客服</i><a href="http://shang.qq.com/wpa/qunwpa?idkey=77d14c536a83fa744082830e71d032e39075208dab36bb2f5377c1cef1d8f2d3" class="kefu trans" title="在线客服" target="_blank"></a></span> </div>
-                        </dd>
+                        <h:form>
+                            <dd>
+                                <p class="tel">400-023-3536</p>
+                                <div class="icon"> <span><i>客服邮箱</i> 
+                                        <h:commandLink action="mailto:ttjc009@163.com" class="email trans" title="Email" target="_blank"/>
+                                    </span> <span><i>在线客服</i> 
+                                        <h:commandLink action="http://shang.qq.com/wpa/qunwpa?idkey=77d14c536a83fa744082830e71d032e39075208dab36bb2f5377c1cef1d8f2d3" class="kefu trans" title="在线客服" target="_blank"/></span> </div>
+                            </dd>
+                        </h:form>
                     </dl>
                 </div>
             </div>
             <!--foot_b-->
             <div class="foot_b">
                 <div class="w1200">
-                    <div class="link"> <span>友情链接：</span><a href="#">网贷之家</a><a href="#">融途网</a><a href="#">网贷天眼</a><a href="#">网贷第三方</a><a href="#">网贷中国</a><a href="#">网贷点评网</a><a href="#">网贷联盟</a><a href="#">网贷界</a><a href="#">网贷之星</a><a href="#">网贷帮手</a><a href="#">网贷财宝</a> </div>
+                    <div class="link">
+                          <h:form>
+                        <span>友情链接：</span>
+                      
+                            <h:commandLink action="#"  value="网贷之家"/>  
+                            <h:commandLink action="#" value="融途网"/> 
+                            <h:commandLink action="#" value="网贷天眼"/> 
+                            <h:commandLink action="#" value="网贷第三方"/>
+                            <h:commandLink action="#" value="网贷中国"/> 
+                            <h:commandLink action="#" value="网贷点评网"/>  
+                            <h:commandLink action="#" value="网贷联盟"/> 
+                            <h:commandLink action="#" value="网贷界"/>  
+                            <h:commandLink action="#" value="网贷之星"/>
+                            <h:commandLink action="#"  value="网贷帮手"/> 
+                            <h:commandLink action="#" value="网贷财宝"/>
+                        </h:form>
+                    </div>
                     <div class="copyright">
-                        <p>版权所有：重庆天天聚财投资管理有限公司        有 ICB备：渝ICP备14003929号-1</p>
-                        <div class="foot_m"> <a class="ap1 trans" href="http://beian.cqnet110.gov.cn/home" target="_blank"></a> <a class="ap2 trans" href="http://beian.cqnet110.gov.cn/open/showRecord?id=50010602000558" target="_blank"></a> <a class="ap3 trans" href="https://search.szfw.org/cert/l/CX20140703008333008377" target="_blank"></a> </div>
+                         <h:form>
+                            <p>版权所有：重庆天天聚财投资管理有限公司        有 ICB备：渝ICP备14003929号-1</p>
+                            <div class="foot_m"> 
+                                <h:commandLink  class="ap1 trans" action="http://beian.cqnet110.gov.cn/home" target="_blank"/>
+                                <h:commandLink  class="ap2 trans" action="http://beian.cqnet110.gov.cn/open/showRecord?id=50010602000558" target="_blank"/>
+                                <h:commandLink  class="ap3 trans" action="https://search.szfw.org/cert/l/CX20140703008333008377" target="_blank"/> 
+                            </div>
+                        </h:form>
                     </div>
                 </div>
             </div>
