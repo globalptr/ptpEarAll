@@ -9,7 +9,7 @@ package com.oakeel.ejb.transaction.bond;
 import com.oakeel.ejb.entityAndEao.bond.BondEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import com.oakeel.ejb.ptpEnum.BondStage;
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -17,9 +17,10 @@ import javax.persistence.PersistenceContext;
  *
  * @author root
  */
-@Stateful
+@Stateless
 public class IssueBond implements IssueBondLocal {
-    @PersistenceContext(unitName = "ptpEjbPu")
+
+  @PersistenceContext(unitName = "ptpEjbPu")
     EntityManager em;
     BondEntity newBond;
     FrontUserEntity issueBondUser;
@@ -141,17 +142,4 @@ public class IssueBond implements IssueBondLocal {
         newBond=bond;
     }
 
-    @Override
-    public void passAudit() {
-        if(newBond!=null) {
-            newBond.setBondStage(BondStage.审核);
-            em.merge(newBond);
-        }
-    }
-
-    @Override
-    public void backToApplication() {
-        newBond.setBondStage(BondStage.申请);
-        em.merge(newBond);
-    }
 }

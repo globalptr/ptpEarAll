@@ -17,6 +17,7 @@ import javax.ejb.Remove;
  */
 @Local
 public interface IssueBondLocal {
+    
     public void setUser(FrontUserEntity bondUser);
     public void setStep1Bond(BondEntity bond);
     public void setStep2Bond(BondEntity bond);
@@ -29,7 +30,5 @@ public interface IssueBondLocal {
     public BondEntity getBond1();
     public BondEntity getBond2();
     public BondEntity getBond3();
-    public void passAudit();
-    public void backToApplication();
     
 }
