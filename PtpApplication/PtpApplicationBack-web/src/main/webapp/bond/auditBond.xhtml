@@ -72,14 +72,14 @@
                         <p:tooltip for="look_id" value="浏览"/>
                     </p:column>
                     <p:column style="width:20px">
-                        <p:commandLink id="issue_id"  styleClass="ui-icon ui-icon-newwin" update="bonds_id">
-                            <f:setPropertyActionListener value="#{bonds_var}" target="#{userManageBean.deleteUserEntity}"/>
+                        <p:commandLink id="issue_id"  styleClass="ui-icon ui-icon-newwin" update="bonds_id" action="#{auditBond.passAudit()}">
+                            <f:setPropertyActionListener value="#{bonds_var}" target="#{auditBond.targetBond}"/>
                         </p:commandLink>
                         <p:tooltip for="issue_id" value="发布"/>
                     </p:column>
                     <p:column style="width:20px">
-                        <p:commandLink id="delete_id"  styleClass="ui-icon ui-icon-trash" update="bonds_id">
-                            <f:setPropertyActionListener value="#{bonds_var}" target="#{userManageBean.deleteUserEntity}" />
+                        <p:commandLink id="delete_id"  styleClass="ui-icon ui-icon-trash" update="bonds_id" immediate="true" action="#{auditBond.logicDeleteBond()}">
+                            <f:setPropertyActionListener value="#{bonds_var}" target="#{auditBond.targetBond}" />
                         </p:commandLink>
                         <p:tooltip for="delete_id" value="移至回收站"/>
                     </p:column>

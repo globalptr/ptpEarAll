@@ -47,20 +47,23 @@ public class AuditBond {
     @PostConstruct
     public void init()
     {
-        bondEntitys=bondEaoLocal.getAllEntitys();
+        bondEntitys=bondEaoLocal.getAllAuditBonds();
         backUserEntitys=backUserEaoLocal.getAllEntitys();
+    }
+    public void passAudit()
+    {
+        if(targetBond!=null)
+            bondEaoLocal.passAudit(targetBond);
     }
     public void backBond()
     {
         if(targetBond!=null)
         {
-            System.out.println("1");
-            ptpSessionBean.getIssueBondLocal().setCurrBond(targetBond);
-            ptpSessionBean.getIssueBondLocal().backToApplication();
+            bondEaoLocal.backToApplication(targetBond);
+            bondEntitys.remove(targetBond);
         }
         else
         {
-            System.out.println("2");
             FacesMessage msg = new FacesMessage(SysInfo.错误.toString(), "查看的目标融资标为空");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
@@ -84,6 +87,14 @@ public class AuditBond {
             FacesMessage msg = new FacesMessage(SysInfo.错误.toString(), "查看的目标融资标为空");
             FacesContext.getCurrentInstance().addMessage(null, msg);
             return null;
+        }
+    }
+    public void logicDeleteBond()
+    {
+        if(targetBond!=null)
+        {
+            bondEaoLocal.logicDeleteBond(targetBond);
+            bondEntitys.remove(targetBond);
         }
     }
     /**

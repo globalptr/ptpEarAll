@@ -467,7 +467,7 @@ public class IssueBond4 implements Serializable{
         }
         else
         {
-            ptpSessionBean.getIssueBondLocal().passAudit();
+            bondEaoLocal.passAudit(ptpSessionBean.getIssueBondLocal().getCurrBond());
             return "auditBond";
         }
     }

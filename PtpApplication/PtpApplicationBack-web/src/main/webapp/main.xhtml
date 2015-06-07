@@ -102,8 +102,6 @@
                 
                 <p:layoutUnit position="west" gutter="0"  size="230" header="工具栏" collapsible="true">
                     <h:form id="mainform">
-                        
-                        <p:commandButton value="111" actionListener="#{newClass.test()}"/>
                         <p:growl id="maingrowl" autoUpdate="true" showDetail="true" />  
                         <p:panelMenu style="width:210px">
                             <p:submenu label="控制台" >
@@ -114,7 +112,7 @@
                                     <p:menuitem value="主界面" icon="ui-icon-star" action="bond"/>
                                     <p:menuitem value="发布融资标" icon="ui-icon-star" action="issueBond"/>
                                     <p:menuitem value="融资标审核"   icon="ui-icon-star" action="auditBond"/>
-                                    <p:menuitem value="融资标管理"   icon="ui-icon-star" />
+                                    <p:menuitem value="回收站"   icon="ui-icon-star" />
                                 </p:submenu>
                                 <p:submenu label="债权转让" >
                                     <p:menuitem value="债权转让管理" icon="ui-icon-star" />
@@ -125,7 +123,7 @@
                                     <p:menuitem value="理财产品管理"   icon="ui-icon-star" />
                                 </p:submenu>
                             </p:submenu>
-                            <p:submenu label="前台用户中心">
+                            <p:submenu label="前端用户中心">
                                 <p:menuitem value="前台用户管理" icon="ui-icon-star" />
                             </p:submenu>
                             <p:submenu label="内容管理">
