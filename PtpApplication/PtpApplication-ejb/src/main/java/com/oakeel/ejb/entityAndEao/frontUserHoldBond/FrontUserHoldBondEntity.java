@@ -23,7 +23,7 @@ public class FrontUserHoldBondEntity extends EntityRoot {
 
     private static final long serialVersionUID = 1L;
     @ManyToOne
-    private FrontUserEntity issueUser;
+    private FrontUserEntity holdUser;
     @ManyToOne
     private PtpProductEntity ptpProductEntity;
     private int allBondNumber;//所有持标数
@@ -75,17 +75,17 @@ public class FrontUserHoldBondEntity extends EntityRoot {
     }
 
     /**
-     * @return the issueUser
+     * @return the holdUser
      */
-    public FrontUserEntity getIssueUser() {
-        return issueUser;
+    public FrontUserEntity getHoldUser() {
+        return holdUser;
     }
 
     /**
-     * @param issueUser the issueUser to set
+     * @param holdUser the holdUser to set
      */
-    public void setIssueUser(FrontUserEntity issueUser) {
-        this.issueUser = issueUser;
+    public void setHoldUser(FrontUserEntity holdUser) {
+        this.holdUser = holdUser;
     }
 
 }

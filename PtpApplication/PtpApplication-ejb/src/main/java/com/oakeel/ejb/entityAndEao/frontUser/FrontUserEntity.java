@@ -6,11 +6,12 @@
 package com.oakeel.ejb.entityAndEao.frontUser;
 
 import com.oakeel.ejb.entityAndEao.bankCard.BankCardEntity;
+import com.oakeel.ejb.entityAndEao.bond.BondEntity;
 import com.oakeel.ejb.entityAndEao.frontUserHoldBond.FrontUserHoldBondEntity;
-import com.oakeel.ejb.entityAndEao.ptpProduct.PtpProductEntity;
 import com.oakeel.ejb.entityAndEao.user.UserEntity;
 import com.oakeel.ejb.ptpEnum.CreditLevelEnum;
 import com.oakeel.ejb.ptpEnum.LiveCaseEnum;
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -25,10 +26,10 @@ import javax.persistence.OneToMany;
 public class FrontUserEntity extends UserEntity {
 
     private static final long serialVersionUID = 1L;
-    @OneToMany(mappedBy = "issueUser")//与用户控标实体是一对多的关系，主控在控标实体
+    @OneToMany(mappedBy = "holdUser")//与用户控标实体是一对多的关系，主控在控标实体
     private Set<FrontUserHoldBondEntity> frontUserBondEntitys;
     @OneToMany(mappedBy = "issueUser")//与用户发标实体是一对多的关系，主控在发标实体
-    private Set<PtpProductEntity> ptpProductEntitys;
+    private Set<BondEntity> bondEntitys=new HashSet<>();
     //////////////////////////////////////////
     @OneToMany//用户与银行卡之间是一对多的关系
     private Set<BankCardEntity> bankCardEntitys;
@@ -140,20 +141,6 @@ public class FrontUserEntity extends UserEntity {
     }
 
     /**
-     * @return the ptpProductEntitys
-     */
-    public Set<PtpProductEntity> getPtpProductEntitys() {
-        return ptpProductEntitys;
-    }
-
-    /**
-     * @param ptpProductEntitys the ptpProductEntitys to set
-     */
-    public void setPtpProductEntitys(Set<PtpProductEntity> ptpProductEntitys) {
-        this.ptpProductEntitys = ptpProductEntitys;
-    }
-
-    /**
      * @return the bankCardEntitys
      */
     public Set<BankCardEntity> getBankCardEntitys() {
@@ -165,6 +152,20 @@ public class FrontUserEntity extends UserEntity {
      */
     public void setBankCardEntitys(Set<BankCardEntity> bankCardEntitys) {
         this.bankCardEntitys = bankCardEntitys;
+    }
+
+    /**
+     * @return the bondEntitys
+     */
+    public Set<BondEntity> getBondEntitys() {
+        return bondEntitys;
+    }
+
+    /**
+     * @param bondEntitys the bondEntitys to set
+     */
+    public void setBondEntitys(Set<BondEntity> bondEntitys) {
+        this.bondEntitys = bondEntitys;
     }
 
 }

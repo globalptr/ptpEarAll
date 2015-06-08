@@ -8,6 +8,7 @@ package com.oakeel.ejb.entityAndEao.bond;
 
 import com.oakeel.ejb.entityAndEao.bondInformation.BondInformationEntity;
 import com.oakeel.ejb.entityAndEao.companyUser.CompanyUserEntity;
+import com.oakeel.ejb.entityAndEao.folder.NewEntity;
 import com.oakeel.ejb.entityAndEao.ptpProduct.PtpProductEntity;
 import com.oakeel.ejb.ptpEnum.BondType;
 import java.util.ArrayList;

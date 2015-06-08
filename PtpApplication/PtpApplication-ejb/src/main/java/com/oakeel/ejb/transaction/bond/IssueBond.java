@@ -60,6 +60,8 @@ public class IssueBond implements IssueBondLocal {
     @Override
     public void issue() {
         em.persist(newBond);
+        System.out.println(newBond.getIssueUser().getName());
+        System.out.println(newBond.getIssueUser().getBondEntitys().size());
     }
 
     // Add business logic below. (Right-click in editor and choose
