@@ -1,0 +1,188 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="../main.xhtml" >
+
+        <ui:define name="center">
+            <h:form>
+                <table style="width:100%">
+                    <tr>
+                        <td class="ui-steps-item ui-state-default ui-state-disabled" colspan="12" style="height:40px;font-size: 18px;padding-left: 12px">
+                            用户基本信息
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:90px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                            用户名:
+                        </td>
+                        <td>
+                            #{frontUserAccount.frontUser.name}
+                        </td>
+                        <td style="width:90px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                            性别:
+                        </td>
+                        <td>
+                            #{frontUserAccount.frontUser.sexEnum}
+                        </td>
+                        <td style="width:90px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                            密码:
+                        </td>
+                        <td>
+                            #{frontUserAccount.frontUser.password}
+                        </td>
+                        <td style="width:90px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                            年龄:
+                        </td>
+                        <td>
+                            #{frontUserAccount.frontUser.age}
+                        </td>
+                        <td style="width:90px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                            信用等级:
+                        </td>
+                        <td>
+                            #{frontUserAccount.frontUser.creditLevelEnum}
+                        </td>
+                        <td style="width:90px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                            是否锁定:
+                        </td>
+                        <td>
+                            #{frontUserAccount.frontUser.locked}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:90px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                            邮箱:
+                        </td>
+                        <td>
+                            #{frontUserAccount.frontUser.email}
+                        </td>
+                        <td style="width:90px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                            QQ号:
+                        </td>
+                        <td>
+                            #{frontUserAccount.frontUser.qq}
+                        </td>
+                        <td style="width:90px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                            手机:
+                        </td>
+                        <td>
+                            #{frontUserAccount.frontUser.telephone}
+                        </td>
+                        <td style="width:90px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                            住房情况:
+                        </td>
+                        <td>
+                            #{frontUserAccount.frontUser.liveCaseEnum}
+                        </td>
+                        <td style="width:90px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                            借款成功次数:
+                        </td>
+                        <td>
+                            #{frontUserAccount.frontUser.successBorrowNumber}
+                        </td>
+                        <td style="width:90px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                            借款超期次数:
+                        </td>
+                        <td>
+                            #{frontUserAccount.frontUser.extendNumber}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="12">
+                            <p:dataTable value="#{frontUserAccount.frontUser.bankCardEntitys}" var="cards_var">
+                                <f:facet name="header">
+                                    关联银行卡
+                                </f:facet>
+                                <p:column headerText="银行名称">
+                                    #{cards_var.bankName}
+                                </p:column>
+                                <p:column headerText="卡号">
+                                    #{cards_var.cardNumber}
+                                </p:column>
+                            </p:dataTable>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="12">
+                            <p:dataTable rowIndexVar="row" value="#{frontUserAccount.frontUser.frontUserBondEntitys}" var="frontUserBond_var">
+                                <f:facet name="header">
+                                    投资记录
+                                </f:facet>  
+                                <p:column  headerText="序号" style="width:30px">
+                                    <h:outputText value="#{row + 1}"/> 
+                                </p:column>
+                                <p:column style="width:16px">
+                                    <p:rowToggler/>
+                                </p:column>
+                                <p:column headerText="标号">
+                                    #{frontUserBond_var.ptpProductEntity.bondNumber}
+                                </p:column>>
+                                <p:column headerText="发标人">
+                                    #{frontUserBond_var.holdUser.name}
+                                </p:column>
+                                <p:column headerText="购买份数">
+                                    #{frontUserBond_var.allBondNumber}
+                                </p:column>
+                                <p:rowExpansion>
+                                    <p:dataTable value="#{frontUserBond_var.bondIncomeProportionEntitys}" var="bondIncomes_var">
+                                        <p:column headerText="copies">
+                                            #{bondIncomes_var.copies}
+                                        </p:column> 
+                                        <p:column headerText="Numproportion">
+                                            #{bondIncomes_var.Numproportion}
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:rowExpansion>
+                            </p:dataTable>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="12">
+                            <p:dataTable rowIndexVar="row" value="#{frontUserAccount.frontUser.bondEntitys}" var="ptpProducts_var">
+                                <f:facet name="header">
+                                    融资记录
+                                </f:facet>
+                                <p:column  headerText="序号" style="width:30px">
+                                    <h:outputText value="#{row + 1}"/> 
+                                </p:column>
+                                <p:column  headerText="标号" >
+                                    <h:outputText value="#{ptpProducts_var.bondNumber}"/> 
+                                </p:column>
+                                <p:column  headerText="标名" >
+                                    <h:outputText value="#{ptpProducts_var.name}"/> 
+                                </p:column>
+                            </p:dataTable>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="12">
+                            <p:dataTable rowIndexVar="row" >
+                                <f:facet name="header">
+                                    资金变动记录
+                                </f:facet>
+                                <p:column  headerText="序号" style="width:30px">
+                                    <h:outputText value="#{row + 1}"/> 
+                                </p:column>
+                            </p:dataTable>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="12">
+                            <p:dataTable rowIndexVar="row">
+                                <f:facet name="header" >
+                                    债权转让记录
+                                </f:facet>
+                                <p:column  headerText="序号" style="width:30px">
+                                    <h:outputText value="#{row + 1}"/> 
+                                </p:column>
+                            </p:dataTable>
+                        </td>
+                    </tr>
+                </table>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

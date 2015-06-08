@@ -124,7 +124,7 @@
                                 </p:submenu>
                             </p:submenu>
                             <p:submenu label="前端用户中心">
-                                <p:menuitem value="前台用户管理" icon="ui-icon-star" />
+                                <p:menuitem value="前台用户管理" icon="ui-icon-star" action="frontUserView"/>
                             </p:submenu>
                             <p:submenu label="内容管理">
                                 <p:submenu label="文章管理" >
@@ -154,7 +154,7 @@
                                     <p:menuitem value="角色资源操作管理" icon="ui-icon-key"  action="permission"/>
                                 </p:submenu>
                                 <p:submenu label="前台用户管理" >
-                                    <p:menuitem value="用户列表" icon="ui-icon-key" action="organization"/>
+                                    <p:menuitem value="用户列表" icon="ui-icon-key" action="frontUserView"/>
                                 </p:submenu>
                                 <p:submenu label="手机短信管理" >
                                     <p:menuitem value="发送记录" icon="ui-icon-star" />
@@ -166,7 +166,7 @@
                                     <p:menuitem value="邮件模板" icon="ui-icon-star" />
                                     <p:menuitem value="接口设置" icon="ui-icon-star" />
                                 </p:submenu>
-                                <p:menuitem value="初始化数据库" actionListener="#{ptpApplicationBean.initDB()}" icon="ui-icon-notice"/>
+                                <p:menuitem value="初始化数据库" actionListener="#{ptpApplicationBean.ttt()}" icon="ui-icon-notice"/>
                                 <p:menuitem value="初始化系统配置" actionListener="#{ptpApplicationBean.initSysSet()}" icon="ui-icon-notice"/>
                             </p:submenu>
                         </p:panelMenu>

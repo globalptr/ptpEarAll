@@ -1,0 +1,176 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="../main.xhtml" >
+
+        <ui:define name="center">
+            <h:form >
+                
+                <p:dataTable filterEvent="keydown" editable="true"  rowIndexVar="row" id="frontUser_id" var="frontUser_var" widgetVar="frontUser_wid" value="#{frontUserView.frontUserEntitys}"  emptyMessage="用户列表为空" filteredValue="#{frontUserView.frontUserFilter}">
+                    <p:ajax event="rowEdit" listener="#{frontUserView.rowEdit}"/>
+                    <f:facet name="header">
+                        前端用户列表
+                    </f:facet>
+                    <p:column  headerText="序号" style="width:30px">
+                        <h:outputText value="#{row + 1}"/> 
+                    </p:column>
+                    <p:column headerText="姓名" filterBy="#{frontUser_var.name}" style="width:110px"  footerText="包含模式" filterMatchMode="contains">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{frontUser_var.name}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{frontUser_var.name}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="密码"  filterBy="#{frontUser_var.password}" style="width:110px">     
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{frontUser_var.password}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{frontUser_var.password}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="年龄"  filterBy="#{frontUser_var.age}" style="width:110px">
+                        <p:cellEditor>
+                            <f:facet name="output">              
+                                <h:outputText value="#{frontUser_var.age}"/>
+                            </f:facet>
+                            <f:facet name="input">              
+                                <h:inputText value="#{frontUser_var.age}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="邮箱"  filterBy="#{frontUser_var.email}" style="width:110px">  
+                        <p:cellEditor>
+                            <f:facet name="output">              
+                                <h:outputText value="#{frontUser_var.email}"/>
+                            </f:facet>
+                            <f:facet name="input">              
+                                <h:inputText value="#{frontUser_var.email}"/>
+                            </f:facet>
+                        </p:cellEditor>                     
+                    </p:column>
+                    <p:column headerText="电话"  filterBy="#{frontUser_var.telephone}" style="width:110px">   
+                        <p:cellEditor>
+                            <f:facet name="output">              
+                                <h:outputText value="#{frontUser_var.telephone}"/>
+                            </f:facet>
+                            <f:facet name="input">              
+                                <h:inputText value="#{frontUser_var.telephone}"/>
+                            </f:facet>
+                        </p:cellEditor>     
+                    </p:column>
+                    <p:column headerText="QQ"  filterBy="#{frontUser_var.qq}" style="width:110px">
+                        <p:cellEditor>
+                            <f:facet name="output">              
+                                <h:outputText value="#{frontUser_var.qq}"/>
+                            </f:facet>
+                            <f:facet name="input">              
+                                <h:inputText value="#{frontUser_var.qq}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="xx"  style="width:110px">
+                        
+                        <h:outputText value="#{frontUser_var.bondEntitys}"/>
+                    </p:column>
+                    <p:column headerText="是否锁定"  filterBy="#{frontUser_var.locked}" style="width:80px">
+                         <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('frontUser_wid').filter()">
+                                <f:selectItem itemLabel="所有"  itemValue="#{null}" noSelectionOption="true"/>
+                                <f:selectItem itemLabel="true" itemValue="true"/>
+                                <f:selectItem itemLabel="false" itemValue="false"/>
+                            </p:selectOneMenu>
+                        </f:facet>
+                        <p:cellEditor>
+                            <f:facet name="output">              
+                                <h:outputText value="#{frontUser_var.locked}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:selectOneMenu value="#{frontUser_var.locked}" style="width:100%">
+                                    <f:selectItem itemLabel="true" itemValue="true"/>
+                                    <f:selectItem itemLabel="false" itemValue="true"/>
+                                </h:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="信用等级"  filterBy="#{frontUser_var.creditLevelEnum}" style="width:80px">
+                         <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('frontUser_wid').filter()">
+                                <f:selectItem itemLabel="所有"  itemValue="#{null}" noSelectionOption="true"/>
+                                <f:selectItems value="#{frontUserView.creditLevelEnums}" />
+                            </p:selectOneMenu>
+                        </f:facet>
+                        <p:cellEditor>
+                            <f:facet name="output">              
+                                <h:outputText value="#{frontUser_var.creditLevelEnum}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:selectOneMenu style="width:100%"  value="#{frontUser_var.creditLevelEnum}">
+                                    <f:selectItems value="#{frontUserView.creditLevelEnums}" var="creditLevel_var" itemLabel="#{creditLevel_var}" itemValue="#{creditLevel_var}"/>
+                                </h:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="住房情况"  filterBy="#{frontUser_var.liveCaseEnum}" style="width:100px">
+                         <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('frontUser_wid').filter()">
+                                <f:selectItem itemLabel="所有"  itemValue="#{null}" noSelectionOption="true"/>
+                                <f:selectItems value="#{frontUserView.liveCaseEnums}" />
+                            </p:selectOneMenu>
+                        </f:facet>
+                        <p:cellEditor>
+                            <f:facet name="output">              
+                                <h:outputText value="#{frontUser_var.liveCaseEnum}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:selectOneMenu style="width:100%" value="#{frontUser_var.liveCaseEnum}">
+                                    <f:selectItems value="#{frontUserView.liveCaseEnums}" var="liveCase_var" itemLabel="#{liveCase_var}" itemValue="#{liveCase_var}"/>
+                                </h:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="性别"  filterBy="#{frontUser_var.sexEnum}" style="width:50px">
+                         <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('frontUser_wid').filter()">
+                                <f:selectItem itemLabel="所有"  itemValue="#{null}" noSelectionOption="true"/>
+                                <f:selectItems value="#{frontUserView.sexEnums}" var="sexEnum_var" itemLabel="#{sexEnum_var}" itemValue="#{sexEnum_var}"/>
+                            </p:selectOneMenu>
+                        </f:facet>
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{frontUser_var.sexEnum}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:selectOneMenu value="#{frontUser_var.sexEnum}" style="width:100%">
+                                    <f:selectItems value="#{frontUserView.sexEnums}" var="sexEnum_var" itemLabel="#{sexEnum_var}" itemValue="#{sexEnum_var}"/>
+                                </h:selectOneMenu>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column style="width:32px">
+                        <p:rowEditor />
+                    </p:column>
+                    <p:column style="width:20px">
+                        <p:commandLink  id="look_id"  styleClass="ui-icon ui-icon-search" action="#{frontUserView.toUserAccountPage()}" immediate="true">
+                            <f:setPropertyActionListener value="#{frontUser_var}" target="#{frontUserView.targetFrontUser}"/>
+                        </p:commandLink>
+                        <p:tooltip for="look_id" value="查看账户及交易信息"/>
+                    </p:column>
+                    <p:column style="width:20px">
+                        <p:commandLink id="delete_id"  styleClass="ui-icon ui-icon-trash" update="frontUser_id" immediate="true">
+                            <f:setPropertyActionListener value="#{frontUser_var}" target="#{frontUserView.targetFrontUser}" />
+                        </p:commandLink>
+                        <p:tooltip for="delete_id" value="删除用户"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

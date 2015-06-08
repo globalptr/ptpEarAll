@@ -7,9 +7,10 @@
 package com.oakeel.ptpPageViewBean;
 
 import com.oakeel.PtpSessionBean;
+import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 /**
@@ -17,44 +18,35 @@ import javax.inject.Inject;
  * @author root
  */
 @ManagedBean
-@RequestScoped
-public class Main {
+@ViewScoped
+public class FrontUserAccount {
 
-    /**
-     * Creates a new instance of Main
-     */
-    
     @Inject private PtpSessionBean ptpSessionBean;
-    private String selectTheme;
-    public Main() {
+    private FrontUserEntity frontUser;
+    /**
+     * Creates a new instance of FrontUserAccount
+     */
+    public FrontUserAccount() {
     }
     @PostConstruct
     public void init()
     {
-        if(ptpSessionBean.getUserSet()!=null)
-            selectTheme=ptpSessionBean.getUserSet().getUserTheme();
-    }
-    public void changeTheme()
-    {
-        if(ptpSessionBean.getUserSet()!=null)
-        {
-           
-            ptpSessionBean.changeUserTheme(selectTheme);
-        }
-        
-    }
-    /**
-     * @return the selectTheme
-     */
-    public String getSelectTheme() {
-        return selectTheme;
+        frontUser=ptpSessionBean.getFrontUserEntity();
+        System.out.println(frontUser.getBondEntitys().size());
     }
 
     /**
-     * @param selectTheme the selectTheme to set
+     * @return the frontUser
      */
-    public void setSelectTheme(String selectTheme) {
-        this.selectTheme = selectTheme;
+    public FrontUserEntity getFrontUser() {
+        return frontUser;
+    }
+
+    /**
+     * @param frontUser the frontUser to set
+     */
+    public void setFrontUser(FrontUserEntity frontUser) {
+        this.frontUser = frontUser;
     }
 
     /**

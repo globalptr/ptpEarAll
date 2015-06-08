@@ -54,6 +54,11 @@
             <to-view-id>/bond/auditBond.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>frontUserView</from-outcome>
+            <to-view-id>/frontUser/frontUserView.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
     </navigation-rule>
     
     <application>
@@ -72,4 +77,12 @@
         <managed-bean-class>com.oakeel.PtpSessionBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <navigation-rule>
+        <from-view-id>/frontUser/frontUserView.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>frontUserAccount</from-action>
+            <to-view-id>/frontUser/frontUserAccount.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

@@ -9,6 +9,7 @@ package com.oakeel;
 import com.oakeel.ejb.entityAndEao.backUser.BackUserEntity;
 import com.oakeel.ejb.entityAndEao.backUserSet.BackUserSetEaoLocal;
 import com.oakeel.ejb.entityAndEao.backUserSet.BackUserSetEntity;
+import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import com.oakeel.ejb.ptpEnum.AccountModeEnum;
 import com.oakeel.ejb.ptpEnum.OperationEnum;
 import com.oakeel.ejb.transaction.bond.IssueBondLocal;
@@ -27,6 +28,9 @@ import javax.inject.Named;
 @SessionScoped
 public class PtpSessionBean implements Serializable{
 
+    //
+    private FrontUserEntity frontUserEntity;
+    //
     @EJB
     private IssueBondLocal issueBondLocal;
     @EJB
@@ -158,5 +162,19 @@ public class PtpSessionBean implements Serializable{
      */
     public void setOperationEnum(OperationEnum operationEnum) {
         this.operationEnum = operationEnum;
+    }
+
+    /**
+     * @return the frontUserEntity
+     */
+    public FrontUserEntity getFrontUserEntity() {
+        return frontUserEntity;
+    }
+
+    /**
+     * @param frontUserEntity the frontUserEntity to set
+     */
+    public void setFrontUserEntity(FrontUserEntity frontUserEntity) {
+        this.frontUserEntity = frontUserEntity;
     }
 }
