@@ -61,6 +61,14 @@
                         </tr>
                         <tr>
                             <td style="width:80px">
+                                <p:outputLabel value="开始时间:"/>
+                            </td>
+                            <td style="width:auto">
+                                <p:calendar id="startDate_id" value="#{issueBond1.bond1.issueDate}"  locale="cn" navigator="true" pattern="yyyy-MMM-dd" converter="DateConverter"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:80px">
                                 <p:outputLabel value="项目情况:"/>
                             </td>
                             <td>

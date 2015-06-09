@@ -6,8 +6,8 @@
 
 package com.oakeel;
 
-import com.oakeel.ejb.entityAndEao.folder.NewEntity;
-import com.oakeel.ejb.entityAndEao.folder.NewEntity1;
+import com.oakeel.ejb.entityAndEao.bond.BondEntity;
+import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import com.oakeel.ejb.ptpEnum.SysInfo;
 import com.oakeel.ejb.transaction.InitEjbLocal;
 import com.oakeel.ejb.transaction.Test;
@@ -16,8 +16,6 @@ import java.util.logging.Level;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
-import javax.ejb.TransactionManagement;
-import javax.ejb.TransactionManagementType;
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -29,7 +27,6 @@ import javax.transaction.HeuristicRollbackException;
 import javax.transaction.NotSupportedException;
 import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
-import javax.transaction.Transactional;
 import javax.transaction.UserTransaction;
 import org.apache.log4j.Logger;
 
@@ -59,13 +56,18 @@ public class PtpApplicationBean {
     {
         try {
             ut.begin();
-            NewEntity1 test=new NewEntity1();
-            NewEntity entity=new NewEntity();
-            test.setSss(entity);
-            em.persist(test);
+            BondEntity bond1=new BondEntity();
+            FrontUserEntity user=new FrontUserEntity();
+            user.setName("ddd");
+            user.setPassword("fsfdsf");
+            em.persist(user);
+            bond1.setIssueUser(user);
+            em.persist(bond1);
             ut.commit();
-            em.refresh(entity);
-            System.out.println(entity.getSsf().size());
+            ut.begin();
+            FrontUserEntity kk=em.merge(user);
+            em.refresh(kk);
+            System.out.println("fsdfsfsfsthis is"+kk.getBondEntitys().size());
         } catch (NotSupportedException ex) {
             java.util.logging.Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SystemException ex) {
@@ -108,9 +110,8 @@ public class PtpApplicationBean {
     }
     public void initDB()
     {
-        test.test();
-//        initEjbLocal.InitDB();
-//        initEjbLocal.addUsers();
+        initEjbLocal.InitDB();
+        initEjbLocal.addUsers();
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(SysInfo.提示.toString(),  "数据库初始化完毕!") );
     }

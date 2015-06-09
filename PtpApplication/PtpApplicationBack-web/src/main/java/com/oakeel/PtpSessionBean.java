@@ -6,6 +6,7 @@
 
 package com.oakeel;
 
+import com.oakeel.ejb.entityAndEao.backUser.BackUserEaoLocal;
 import com.oakeel.ejb.entityAndEao.backUser.BackUserEntity;
 import com.oakeel.ejb.entityAndEao.backUserSet.BackUserSetEaoLocal;
 import com.oakeel.ejb.entityAndEao.backUserSet.BackUserSetEntity;
@@ -35,6 +36,7 @@ public class PtpSessionBean implements Serializable{
     private IssueBondLocal issueBondLocal;
     @EJB
     private IssuePlatformFundLocal issuePlatformFundLocal;
+    @EJB BackUserEaoLocal backUserEaoLocal;
     private BackUserEntity logUser=null;
     private BackUserSetEntity userSet=null;
     @EJB
@@ -54,6 +56,10 @@ public class PtpSessionBean implements Serializable{
     @PostConstruct
     public void init()
     {
+    }
+    public void updateBackUser()
+    {
+        backUserEaoLocal.updateEntity(logUser);
     }
     public void changeUserTheme(String theme)
     {

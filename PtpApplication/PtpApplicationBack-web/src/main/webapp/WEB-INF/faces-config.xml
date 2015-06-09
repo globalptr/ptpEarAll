@@ -59,6 +59,16 @@
             <to-view-id>/frontUser/frontUserView.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>backUserMessage</from-outcome>
+            <to-view-id>/backUserManage/backUserMessage.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>bondTrash</from-outcome>
+            <to-view-id>/bond/bondTrash.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
     </navigation-rule>
     
     <application>

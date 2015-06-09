@@ -147,11 +147,47 @@
                                 <p:column  headerText="序号" style="width:30px">
                                     <h:outputText value="#{row + 1}"/> 
                                 </p:column>
-                                <p:column  headerText="标号" >
+                                <p:column  headerText="标号" style="width:150px">
                                     <h:outputText value="#{ptpProducts_var.bondNumber}"/> 
                                 </p:column>
                                 <p:column  headerText="标名" >
                                     <h:outputText value="#{ptpProducts_var.name}"/> 
+                                </p:column>
+                                <p:column  headerText="担保公司" >
+                                    <h:outputText value="#{ptpProducts_var.companyUserEntity}"/> 
+                                </p:column>
+                                <p:column  headerText="发标时间" >
+                                    <h:outputText value="#{ptpProducts_var.issueDate}"  converter="DateConverter"/> 
+                                </p:column>
+                                <p:column  headerText="还款模型" >
+                                    <h:outputText value="#{ptpProducts_var.repayModelEnum}"/> 
+                                </p:column>
+                                <p:column  headerText="基准金" >
+                                    <h:outputText value="#{ptpProducts_var.baseAmount}"/> 
+                                </p:column>
+                                <p:column  headerText="发行份数" >
+                                    <h:outputText value="#{ptpProducts_var.issueCopiesNum}"/> 
+                                </p:column>
+                                <p:column  headerText="借款总额" >
+                                    <h:outputText value="#{ptpProducts_var.baseAmount*ptpProducts_var.issueCopiesNum}"/> 
+                                </p:column>
+                                <p:column  headerText="年利率" >
+                                    <h:outputText value="#{ptpProducts_var.yearRate}"/> 
+                                </p:column>
+                                <p:column  headerText="还款周期" >
+                                    <h:outputText value="#{ptpProducts_var.repayCycle}"/> 
+                                </p:column>
+                                <p:column  headerText="还款期数" >
+                                    <h:outputText value="#{ptpProducts_var.repayCycleNumber}"/> 
+                                </p:column>
+                                <p:column  headerText="开始时间" >
+                                    <h:outputText value="#{ptpProducts_var.startDate}"  converter="DateConverter"/> 
+                                </p:column>
+                                <p:column style="width:20px">
+                                    <p:commandLink  id="look_id"  styleClass="ui-icon ui-icon-search" action="#{frontUserAccount.bondDetail()}" immediate="true">
+                                        <f:setPropertyActionListener value="#{ptpProducts_var}" target="#{frontUserAccount.targetBond}"/>
+                                    </p:commandLink>
+                                    <p:tooltip for="look_id" value="查看详情"/>
                                 </p:column>
                             </p:dataTable>
                         </td>

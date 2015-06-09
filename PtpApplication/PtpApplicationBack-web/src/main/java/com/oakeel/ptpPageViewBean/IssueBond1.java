@@ -77,12 +77,6 @@ public class IssueBond1 implements Serializable{
     {
         List<FrontUserEntity> userFilter=frontUserEaoLocal.getUserByName("%"+target+"%");
         return userFilter;
-        
-//        List<FrontUserEntity> frontUser2=frontUserEaoLocal.getUserByEmail(target);
-//        List<FrontUserEntity> frontUser3=frontUserEaoLocal.getUserByTelephone(target);
-//        getUsers().addAll(frontUser1);
-//        getUsers().addAll(frontUser2);
-//        getUsers().addAll(frontUser3);
     }
     /**
      * @return the bond1

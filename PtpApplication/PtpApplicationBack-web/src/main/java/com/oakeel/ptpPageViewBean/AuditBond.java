@@ -11,7 +11,12 @@ import com.oakeel.ejb.entityAndEao.backUser.BackUserEaoLocal;
 import com.oakeel.ejb.entityAndEao.backUser.BackUserEntity;
 import com.oakeel.ejb.entityAndEao.bond.BondEaoLocal;
 import com.oakeel.ejb.entityAndEao.bond.BondEntity;
+import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEaoLocal;
+import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
+import com.oakeel.ejb.ptpEnum.BondType;
 import com.oakeel.ejb.ptpEnum.OperationEnum;
+import com.oakeel.ejb.ptpEnum.RepayModelEnum;
+import com.oakeel.ejb.ptpEnum.SplitUnit;
 import com.oakeel.ejb.ptpEnum.SysInfo;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -39,16 +44,36 @@ public class AuditBond {
     private List<BondEntity> bondEntitys;
     private List<BondEntity> bondEntitysFilter;
     private List<BackUserEntity> backUserEntitys;
+    private BondType[] bondTypes;
+    private SplitUnit[] splitUnits;
+    private RepayModelEnum[] repayModelEnums;
     @EJB
     private BackUserEaoLocal backUserEaoLocal;
     @Inject PtpSessionBean ptpSessionBean;
+    private List<FrontUserEntity> frontUserEntitys;
+    @EJB FrontUserEaoLocal frontUserEaoLocal;
     public AuditBond() {
+        bondTypes=BondType.values();
+        repayModelEnums=RepayModelEnum.values();
+        splitUnits=SplitUnit.values();
     }
     @PostConstruct
     public void init()
     {
         bondEntitys=bondEaoLocal.getAllAuditBonds();
         backUserEntitys=backUserEaoLocal.getAllEntitys();
+        frontUserEntitys=frontUserEaoLocal.getAllEntitys();
+    }
+    
+    public List<FrontUserEntity> findFrontUser(String target)
+    {
+        List<FrontUserEntity> userFilter=frontUserEaoLocal.getUserByName("%"+target+"%");
+        return userFilter;
+    }
+    public List<BackUserEntity> findBackUser(String target)
+    {
+        List<BackUserEntity> userFilter=backUserEaoLocal.getUserByName("%"+target+"%");
+        return userFilter;
     }
     public void passAudit()
     {
@@ -74,7 +99,7 @@ public class AuditBond {
     public List<BondEntity> getBondEntitys() {
         return bondEntitys;
     }
-    public String setTargetBond()
+    public String bondDetail()
     {
         if(targetBond!=null)
         {
@@ -158,6 +183,62 @@ public class AuditBond {
      */
     public void setTargetBond(BondEntity targetBond) {
         this.targetBond = targetBond;
+    }
+
+    /**
+     * @return the frontUserEntitys
+     */
+    public List<FrontUserEntity> getFrontUserEntitys() {
+        return frontUserEntitys;
+    }
+
+    /**
+     * @param frontUserEntitys the frontUserEntitys to set
+     */
+    public void setFrontUserEntitys(List<FrontUserEntity> frontUserEntitys) {
+        this.frontUserEntitys = frontUserEntitys;
+    }
+
+    /**
+     * @return the bondTypes
+     */
+    public BondType[] getBondTypes() {
+        return bondTypes;
+    }
+
+    /**
+     * @param bondTypes the bondTypes to set
+     */
+    public void setBondTypes(BondType[] bondTypes) {
+        this.bondTypes = bondTypes;
+    }
+
+    /**
+     * @return the repayModelEnums
+     */
+    public RepayModelEnum[] getRepayModelEnums() {
+        return repayModelEnums;
+    }
+
+    /**
+     * @param repayModelEnums the repayModelEnums to set
+     */
+    public void setRepayModelEnums(RepayModelEnum[] repayModelEnums) {
+        this.repayModelEnums = repayModelEnums;
+    }
+
+    /**
+     * @return the splitUnits
+     */
+    public SplitUnit[] getSplitUnits() {
+        return splitUnits;
+    }
+
+    /**
+     * @param splitUnits the splitUnits to set
+     */
+    public void setSplitUnits(SplitUnit[] splitUnits) {
+        this.splitUnits = splitUnits;
     }
     
 }

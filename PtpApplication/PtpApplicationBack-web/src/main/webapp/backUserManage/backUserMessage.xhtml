@@ -1,0 +1,70 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="../main.xhtml" >
+
+        <ui:define name="center">
+            <h:form>
+                <table>
+                    <tr>
+                        <td>
+                            用户名
+                        </td>
+                        <td>
+                            #{ptpSessionBean.logUser.name}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            密码
+                        </td>
+                        <td>
+                            <p:inputText value="#{ptpSessionBean.logUser.password}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            年龄
+                        </td>
+                        <td>
+                            <p:inputText value="#{ptpSessionBean.logUser.age}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            电话
+                        </td>
+                        <td>
+                            <p:inputText value="#{ptpSessionBean.logUser.telephone}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            邮箱
+                        </td>
+                        <td>
+                            <p:inputText value="#{ptpSessionBean.logUser.email}"/>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            QQ
+                        </td>
+                        <td>
+                            <p:inputText value="#{ptpSessionBean.logUser.qq}"/>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p:commandButton value="修改个人信息" actionListener="#{ptpSessionBean.updateBackUser()}"/>
+                        </td>
+                    </tr>
+                </table>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

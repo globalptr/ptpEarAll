@@ -43,8 +43,7 @@
                     <table style="width:100%;height: 100%">
                         <tr>
                             <td style="width:auto">
-                                <div class=" ui-widget" style="font-size:35px !important;padding-left:35px;vertical-align: top;
-					text-shadow: 0 -1px 0 #374683;">
+                                <div class=" ui-widget" style="font-size:35px !important;padding-left:35px;vertical-align: top;text-shadow: 0 -1px 0 #374683;">
                                     天天聚财后台管理系统
                                 </div>
                             </td>
@@ -52,46 +51,46 @@
                                 <h:form>
                                     <h:panelGrid columns="2" style=" text-align: center">
                                         <p:outputLabel value="选择主题"/>
-                                        <p:themeSwitcher id="theme_id" value="#{main.selectTheme}" effect="fade" >
+                                        <p:themeSwitcher id="theme_id" value="#{main.selectTheme}" effect="fade">
                                             <f:ajax event="change" execute="theme_id"  listener="#{main.changeTheme()}"/>
-                                            <f:selectItem itemLabel="选择主题" itemValue="" />  
+                                            <f:selectItem itemLabel="选择主题" itemValue=""/>  
                                             <f:selectItem itemLabel="afterdark" itemValue="afterdark"/>  
-                                            <f:selectItem itemLabel="afternoon" itemValue="afternoon " />  
-                                            <f:selectItem itemLabel="afterwork" itemValue="afterwork " />  
-                                            <f:selectItem itemLabel="aristo" itemValue="aristo" />  
-                                            <f:selectItem itemLabel="black-tie" itemValue="black-tie" />  
+                                            <f:selectItem itemLabel="afternoon" itemValue="afternoon"/>
+                                            <f:selectItem itemLabel="afterwork" itemValue="afterwork"/>
+                                            <f:selectItem itemLabel="aristo" itemValue="aristo"/>  
+                                            <f:selectItem itemLabel="black-tie" itemValue="black-tie"/>  
 <!--                                            <f:selectItem itemLabel="blitzer" itemValue="blitzer " /> -->
-                                            <f:selectItem itemLabel="bluesky" itemValue="bluesky" />  
-                                            <f:selectItem itemLabel="casablanca" itemValue="casablanca" />  
-                                            <f:selectItem itemLabel="cruze" itemValue="cruze " />  
-                                            <f:selectItem itemLabel="cupertino" itemValue="cupertino " />  
-                                            <f:selectItem itemLabel="dark-hive" itemValue="dark-hive " />  
-                                            <f:selectItem itemLabel="delta" itemValue="delta " />  
-                                            <f:selectItem itemLabel="dot-luv" itemValue="dot-luv " />  
-                                            <f:selectItem itemLabel="eggplant" itemValue="eggplant " />  
-                                            <f:selectItem itemLabel="excite-bike" itemValue="excite-bike " />  
-                                            <f:selectItem itemLabel="flick" itemValue="flick " />  
-                                            <f:selectItem itemLabel="glass-x" itemValue="glass-x" />  
-                                            <f:selectItem itemLabel="home" itemValue="home " />  
-                                            <f:selectItem itemLabel="hot-sneaks" itemValue="hot-sneaks " />  
-                                            <f:selectItem itemLabel="humanity" itemValue="humanity " />  
-                                            <f:selectItem itemLabel="le-frog " itemValue="le-frog " />  
-                                            <f:selectItem itemLabel="midnight" itemValue="midnight" />  
-                                            <f:selectItem itemLabel="mint-choc" itemValue="mint-choc " />  
-                                            <f:selectItem itemLabel="overcast" itemValue="overcast " />  
-                                            <f:selectItem itemLabel="pepper-grinder" itemValue="pepper-grinder " />  
-                                            <f:selectItem itemLabel="redmond" itemValue="redmond " />  
-                                            <f:selectItem itemLabel="rocket" itemValue="rocket" />  
-                                            <f:selectItem itemLabel="sam" itemValue="sam " />  
-                                            <f:selectItem itemLabel="smoothness" itemValue="smoothness " />  
-                                            <f:selectItem itemLabel="south-street" itemValue="south-street " />  
-                                            <f:selectItem itemLabel="start" itemValue="start " />  
-                                            <f:selectItem itemLabel="sunny" itemValue="sunny " />  
-                                            <f:selectItem itemLabel="swanky-purse" itemValue="swanky-purse " />  
-                                            <f:selectItem itemLabel="trontastic" itemValue="trontastic " />  
-                                            <f:selectItem itemLabel="ui-darkness" itemValue="ui-darkness " />  
-                                            <f:selectItem itemLabel="ui-lightness" itemValue="ui-lightness " />  
-                                            <f:selectItem itemLabel="vader" itemValue="vader " />  
+                                            <f:selectItem itemLabel="bluesky" itemValue="bluesky"/>  
+                                            <f:selectItem itemLabel="casablanca" itemValue="casablanca"/>  
+                                            <f:selectItem itemLabel="cruze" itemValue="cruze"/>  
+                                            <f:selectItem itemLabel="cupertino" itemValue="cupertino"/>  
+                                            <f:selectItem itemLabel="dark-hive" itemValue="dark-hive"/>  
+                                            <f:selectItem itemLabel="delta" itemValue="delta"/>  
+                                            <f:selectItem itemLabel="dot-luv" itemValue="dot-luv"/>  
+                                            <f:selectItem itemLabel="eggplant" itemValue="eggplant"/>  
+                                            <f:selectItem itemLabel="excite-bike" itemValue="excite-bike"/>  
+                                            <f:selectItem itemLabel="flick" itemValue="flick"/>  
+                                            <f:selectItem itemLabel="glass-x" itemValue="glass-x"/>  
+                                            <f:selectItem itemLabel="home" itemValue="home"/>  
+                                            <f:selectItem itemLabel="hot-sneaks" itemValue="hot-sneaks"/>  
+                                            <f:selectItem itemLabel="humanity" itemValue="humanity"/>  
+                                            <f:selectItem itemLabel="le-frog " itemValue="le-frog"/>  
+                                            <f:selectItem itemLabel="midnight" itemValue="midnight"/>  
+                                            <f:selectItem itemLabel="mint-choc" itemValue="mint-choc"/>  
+                                            <f:selectItem itemLabel="overcast" itemValue="overcast"/>  
+                                            <f:selectItem itemLabel="pepper-grinder" itemValue="pepper-grinder"/>  
+                                            <f:selectItem itemLabel="redmond" itemValue="redmond"/>  
+                                            <f:selectItem itemLabel="rocket" itemValue="rocket"/>  
+                                            <f:selectItem itemLabel="sam" itemValue="sam"/>  
+                                            <f:selectItem itemLabel="smoothness" itemValue="smoothness"/>  
+                                            <f:selectItem itemLabel="south-street" itemValue="south-street"/>  
+                                            <f:selectItem itemLabel="start" itemValue="start"/>  
+                                            <f:selectItem itemLabel="sunny" itemValue="sunny"/>  
+                                            <f:selectItem itemLabel="swanky-purse" itemValue="swanky-purse"/>  
+                                            <f:selectItem itemLabel="trontastic" itemValue="trontastic"/>  
+                                            <f:selectItem itemLabel="ui-darkness" itemValue="ui-darkness"/>  
+                                            <f:selectItem itemLabel="ui-lightness" itemValue="ui-lightness"/>  
+                                            <f:selectItem itemLabel="vader" itemValue="vader"/>  
                                         </p:themeSwitcher> 
                                     </h:panelGrid>
                                 </h:form>
@@ -102,25 +101,28 @@
                 
                 <p:layoutUnit position="west" gutter="0"  size="230" header="工具栏" collapsible="true">
                     <h:form id="mainform">
-                        <p:growl id="maingrowl" autoUpdate="true" showDetail="true" />  
+                        <p:growl id="maingrowl" autoUpdate="true" showDetail="true"/>  
                         <p:panelMenu style="width:210px">
                             <p:submenu label="控制台" >
-                                <p:menuitem value="个人信息" icon="ui-icon-star" />
+                                <p:menuitem value="个人基本信息" icon="ui-icon-star" action="backUserMessage"/>
+                                <p:menuitem value="发标记录" icon="ui-icon-star"/>
+                                <p:menuitem value="操作日志" icon="ui-icon-star"/>
                             </p:submenu>
                             <p:submenu label="产品中心">
                                 <p:submenu label="融资标" >
                                     <p:menuitem value="主界面" icon="ui-icon-star" action="bond"/>
                                     <p:menuitem value="发布融资标" icon="ui-icon-star" action="issueBond"/>
                                     <p:menuitem value="融资标审核"   icon="ui-icon-star" action="auditBond"/>
-                                    <p:menuitem value="回收站"   icon="ui-icon-star" />
+                                    <p:menuitem value="回收站"   icon="ui-icon-star" action="bondTrash"/>
                                 </p:submenu>
                                 <p:submenu label="债权转让" >
-                                    <p:menuitem value="债权转让管理" icon="ui-icon-star" />
+                                    <p:menuitem value="债权转让管理" icon="ui-icon-star"/>
                                 </p:submenu>
-                                <p:submenu label="理财产品" >
-                                    <p:menuitem value="发布理财产品" icon="ui-icon-star" action="issuePlatformFund"/>
-                                    <p:menuitem value="理财产品审核"   icon="ui-icon-star" />
-                                    <p:menuitem value="理财产品管理"   icon="ui-icon-star" />
+                                <p:submenu label="平台标" >
+                                    <p:menuitem value="主界面" icon="ui-icon-star"/>
+                                    <p:menuitem value="发布平台标" icon="ui-icon-star" action="issuePlatformFund"/>
+                                    <p:menuitem value="平台标审核"   icon="ui-icon-star"/>
+                                    <p:menuitem value="回收站"   icon="ui-icon-star"/>
                                 </p:submenu>
                             </p:submenu>
                             <p:submenu label="前端用户中心">
@@ -153,9 +155,6 @@
                                     <p:menuitem value="用户角色管理" icon="ui-icon-key"  action="role"/>
                                     <p:menuitem value="角色资源操作管理" icon="ui-icon-key"  action="permission"/>
                                 </p:submenu>
-                                <p:submenu label="前台用户管理" >
-                                    <p:menuitem value="用户列表" icon="ui-icon-key" action="frontUserView"/>
-                                </p:submenu>
                                 <p:submenu label="手机短信管理" >
                                     <p:menuitem value="发送记录" icon="ui-icon-star" />
                                     <p:menuitem value="短信模板" icon="ui-icon-star" />
@@ -166,7 +165,7 @@
                                     <p:menuitem value="邮件模板" icon="ui-icon-star" />
                                     <p:menuitem value="接口设置" icon="ui-icon-star" />
                                 </p:submenu>
-                                <p:menuitem value="初始化数据库" actionListener="#{ptpApplicationBean.ttt()}" icon="ui-icon-notice"/>
+                                <p:menuitem value="初始化数据库" actionListener="#{ptpApplicationBean.initDB()}" icon="ui-icon-notice"/>
                                 <p:menuitem value="初始化系统配置" actionListener="#{ptpApplicationBean.initSysSet()}" icon="ui-icon-notice"/>
                             </p:submenu>
                         </p:panelMenu>
