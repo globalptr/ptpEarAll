@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 /**
@@ -34,6 +35,7 @@ public class NewEntity1 implements Serializable {
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="ttttttt")
     private NewEntity sss;
     @Override
     public int hashCode() {

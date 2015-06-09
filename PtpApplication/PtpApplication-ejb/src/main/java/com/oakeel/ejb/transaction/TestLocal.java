@@ -6,6 +6,8 @@
 
 package com.oakeel.ejb.transaction;
 
+import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
+import java.util.List;
 import javax.ejb.Local;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
@@ -16,5 +18,5 @@ import javax.ejb.TransactionManagementType;
  */
 @Local
 public interface TestLocal {
-    public void test();
+    public void test(List<FrontUserEntity> list);
 }

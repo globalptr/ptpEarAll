@@ -59,13 +59,11 @@ public class IssueBond implements IssueBondLocal {
 
     @Override
     public void issue() {
+        
         em.persist(newBond);
-        System.out.println(newBond.getIssueUser().getName());
-        System.out.println(newBond.getIssueUser().getBondEntitys().size());
+        FrontUserEntity user=em.merge(newBond.getIssueUser());
+        em.refresh(user);
     }
-
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
 
     @Override
     public BondEntity getCurrBond() {
@@ -115,6 +113,7 @@ public class IssueBond implements IssueBondLocal {
             newBond.setGuaranteeCase(bond1.getGuaranteeCase());
             newBond.setReverseGuaranteeCase(bond1.getReverseGuaranteeCase());
             newBond.setIssueUser(bond1.getIssueUser());
+            newBond.setIssueDate(bond1.getIssueDate());//开始时间
         }
         //——————————————————————————————————————————————————————————————
         if(bond2!=null)
@@ -125,8 +124,8 @@ public class IssueBond implements IssueBondLocal {
         //——————————————————————————————————————————————————————————————
         if(bond3!=null)
         {
-            newBond.setYearRate(bond3.getYearRate());//年利率
             newBond.setStartDate(bond3.getStartDate());//开始时间
+            newBond.setYearRate(bond3.getYearRate());//年利率
             newBond.setBaseAmount(bond3.getBaseAmount());//基准金
             newBond.setIssueCopiesNum(bond3.getIssueCopiesNum());//份数
             newBond.setRepayModelEnum(bond3.getRepayModelEnum());//还款模型

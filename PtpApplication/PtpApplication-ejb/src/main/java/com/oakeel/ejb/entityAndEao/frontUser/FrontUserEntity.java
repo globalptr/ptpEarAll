@@ -28,8 +28,8 @@ public class FrontUserEntity extends UserEntity {
     private static final long serialVersionUID = 1L;
     @OneToMany(mappedBy = "holdUser")//与用户控标实体是一对多的关系，主控在控标实体
     private Set<FrontUserHoldBondEntity> frontUserBondEntitys;
-    @OneToMany(mappedBy = "issueUser")//与用户发标实体是一对多的关系，主控在发标实体
-    private Set<BondEntity> bondEntitys=new HashSet<>();
+    @OneToMany(targetEntity=BondEntity.class,mappedBy = "issueUser")//与用户发标实体是一对多的关系，主控在发标实体
+    private Set<BondEntity> bondEntitys;
     //////////////////////////////////////////
     @OneToMany//用户与银行卡之间是一对多的关系
     private Set<BankCardEntity> bankCardEntitys;

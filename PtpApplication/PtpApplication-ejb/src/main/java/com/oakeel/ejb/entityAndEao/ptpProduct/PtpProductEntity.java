@@ -66,6 +66,8 @@ public class PtpProductEntity extends EntityRoot {
     private BondStage bondStage;//标的阶段
     @Temporal(TemporalType.DATE)
     private Date startDate;//开始时间
+    @Temporal(TemporalType.DATE)
+    private Date issueDate;//发布时间
     @Column(length = 50)
     private String name;//名字
     @Column(length = 100)
@@ -342,6 +344,20 @@ public class PtpProductEntity extends EntityRoot {
      */
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    /**
+     * @return the issueDate
+     */
+    public Date getIssueDate() {
+        return issueDate;
+    }
+
+    /**
+     * @param issueDate the issueDate to set
+     */
+    public void setIssueDate(Date issueDate) {
+        this.issueDate = issueDate;
     }
 
 }

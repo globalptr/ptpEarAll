@@ -7,6 +7,7 @@
 package com.oakeel.ejb.entityAndEao.backUser;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EaoRootLocal;
+import java.util.List;
 import javax.ejb.Local;
 
 /**
@@ -15,7 +16,7 @@ import javax.ejb.Local;
  */
 @Local
 public interface BackUserEaoLocal  extends EaoRootLocal<BackUserEntity>{
-    
+    public List<BackUserEntity> getUserByName(String name);
     public BackUserEntity  validateUserByName(String name,String password);
     public BackUserEntity  validateUserByTelephone(String telephone,String password);
     public BackUserEntity  validateUserByEmail(String email,String password);

@@ -6,17 +6,13 @@
 
 package com.oakeel.ejb.entityAndEao.folder;
 
-import com.oakeel.ejb.entityAndEao.bond.BondEntity;
-import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -38,8 +34,8 @@ public class NewEntity implements Serializable{
         this.id = id;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private NewEntity sss;
+    @OneToMany(targetEntity = NewEntity1.class,mappedBy="sss")
+    private List<NewEntity1> kkk=new ArrayList<>();
     @Override
     public int hashCode() {
         int hash = 0;
@@ -65,23 +61,8 @@ public class NewEntity implements Serializable{
         return "com.oakeel.ejb.entityAndEao.folder.NewEntity1[ id=" + id + " ]";
     }
 
-    /**
-     * @return the sss
-     */
-    public NewEntity getSss() {
-        return sss;
-    }
-
-    /**
-     * @param sss the sss to set
-     */
-    public void setSss(NewEntity sss) {
-        this.sss = sss;
-    }
 
     private String test;
-    @OneToMany(mappedBy="sss")
-    private List<NewEntity1> ssf;//发标用户
 
     /**
      * @return the test
@@ -97,18 +78,19 @@ public class NewEntity implements Serializable{
         this.test = test;
     }
 
+
     /**
-     * @return the ssf
+     * @return the kkk
      */
-    public List<NewEntity1> getSsf() {
-        return ssf;
+    public List<NewEntity1> getKkk() {
+        return kkk;
     }
 
     /**
-     * @param ssf the ssf to set
+     * @param kkk the kkk to set
      */
-    public void setSsf(List<NewEntity1> ssf) {
-        this.ssf = ssf;
+    public void setKkk(List<NewEntity1> kkk) {
+        this.kkk = kkk;
     }
 
   
