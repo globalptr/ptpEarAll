@@ -1,0 +1,130 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="../main.xhtml" >
+
+        <ui:define name="center">
+        <style>
+            .ui-steps.horizontal .ui-steps-item {
+                width: 19.8%;
+                float: left;
+            }
+        </style>
+            <h:form>
+                    <table style=" margin-left: 50px;width:95% ;margin-top: 30px"> 
+                        <tr>
+                            <td colspan="3" >
+                                <p:steps styleClass="horizontal" activeIndex="0" style=" width:100%;height: 30px">
+                                    <p:menuitem value="填写投标信息" />
+                                    <p:menuitem value="上传认证资料" />
+                                    <p:menuitem value="选择还款模型" />
+                                    <p:menuitem value="发布前预览" />
+                                    <p:menuitem value="发布成功" />
+                                </p:steps>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:80px">
+                                <p:outputLabel value="发标人:"/>
+                            </td>
+                            <td style="width:auto">
+                                <p:outputLabel value="#{issuePersonalBond1.issueAdmin}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:80px">
+                                <p:outputLabel value="项目名称:"/>
+                            </td>
+                            <td style="width:auto">
+                                <p:inputText placeholder="输入项目名称" value="#{issuePersonalBond1.bond1.name}" style=" width: 200px"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:80px">
+                                <p:outputLabel value="债务人:"/>
+                            </td>
+                            <td style="width:auto">
+                                <p:autoComplete  value="#{issuePersonalBond1.bond1.issueUser}"  forceSelection="true"  var="selectUser_var" itemLabel="#{selectUser_var.name}" converter="userConverter" itemValue="#{selectUser_var}" completeMethod="#{issuePersonalBond1.findUser}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:80px">
+                                <p:outputLabel value="标类型:"/>
+                            </td>
+                            <td style="width:auto">
+                                <p:selectOneMenu value="#{issuePersonalBond1.bond1.bondType}">
+                                    <f:selectItems value="#{issuePersonalBond1.bondTypes}"/>
+                                </p:selectOneMenu>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:80px">
+                                <p:outputLabel value="开始时间:"/>
+                            </td>
+                            <td style="width:auto">
+                                <p:calendar id="startDate_id" value="#{issuePersonalBond1.bond1.issueDate}"  locale="cn" navigator="true" pattern="yyyy-MMM-dd" converter="DateConverter"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:80px">
+                                <p:outputLabel value="项目情况:"/>
+                            </td>
+                            <td>
+                                <p:inputTextarea placeholder="输入项目情况" value="#{issuePersonalBond1.bond1.details}" style=" width: 95%" rows="5" cols="30"  counter="display1" maxlength="200" counterTemplate="您还可以输入{0}个字符" autoResize="true" />
+                                <br/>
+                                <h:outputText id="display1" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:80px">
+                                <p:outputLabel value="担保公司:"/>
+                            </td>
+                            <td>   
+                                <p:selectOneMenu value="#{issuePersonalBond1.bond1.companyUserEntity}" converter="companyUserConverter">
+                                    <f:selectItems value="#{issuePersonalBond1.companyUserEntitys}" var="companyUser_var" itemLabel="#{companyUser_var.name}" itemValue="#{companyUser_var.uuid}" />
+                                </p:selectOneMenu>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:80px">
+                                <p:outputLabel value="担保情况:"/>
+                            </td>
+                            <td>   
+                                <p:inputTextarea  placeholder="输入担保情况" value="#{issuePersonalBond1.bond1.guaranteeCase}" style=" width: 95%"  rows="5" cols="30"  counter="display2" maxlength="100" counterTemplate="您还可以输入{0}个字符" autoResize="false" /> 
+                                <br/>
+                                <h:outputText id="display2" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:80px">
+                                <p:outputLabel value="反担保情况:"/>
+                            </td>
+                            <td>   
+                                <p:inputTextarea placeholder="输入反担保情况" value="#{issuePersonalBond1.bond1.reverseGuaranteeCase}" style=" width: 95%" rows="5" cols="30"  counter="display3" maxlength="100" counterTemplate="您还可以输入{0}个字符" autoResize="false" />
+                                <br/>
+                                <h:outputText id="display3" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:80px">
+                                <p:outputLabel value="风控详情:"/>
+                            </td>
+                            <td>   
+                                <p:inputTextarea placeholder="输入风控情况" value="#{issuePersonalBond1.bond1.riskControlDetails}" style=" width: 95%"  rows="5" cols="30" counter="display4" maxlength="200" counterTemplate="您还可以输入{0}个字符" autoResize="false" />
+                                <br/>
+                                <h:outputText id="display4" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="padding-top:10px;padding-bottom:10px">
+                                <p:commandButton style="width:100%;height: 40px" value="下一步" action="#{issuePersonalBond1.nextStep()}"/>
+                            </td>
+                        </tr>
+                    </table>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

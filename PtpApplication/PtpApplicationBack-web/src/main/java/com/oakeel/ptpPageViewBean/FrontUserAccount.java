@@ -7,7 +7,7 @@
 package com.oakeel.ptpPageViewBean;
 
 import com.oakeel.PtpSessionBean;
-import com.oakeel.ejb.entityAndEao.bond.BondEntity;
+import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import com.oakeel.ejb.ptpEnum.OperationEnum;
 import com.oakeel.ejb.ptpEnum.SysInfo;
@@ -29,7 +29,7 @@ public class FrontUserAccount {
     @Inject private PtpSessionBean ptpSessionBean;
     
     private FrontUserEntity frontUser;
-    private BondEntity targetBond;
+    private PersonalBondEntity targetBond;
     /**
      * Creates a new instance of FrontUserAccount
      */
@@ -88,15 +88,16 @@ public class FrontUserAccount {
     /**
      * @return the targetBond
      */
-    public BondEntity getTargetBond() {
+    public PersonalBondEntity getTargetBond() {
         return targetBond;
     }
 
     /**
      * @param targetBond the targetBond to set
      */
-    public void setTargetBond(BondEntity targetBond) {
+    public void setTargetBond(PersonalBondEntity targetBond) {
         this.targetBond = targetBond;
     }
+
     
 }

@@ -6,27 +6,39 @@
     <navigation-rule>
         <from-view-id>/*</from-view-id>
         <navigation-case>
-            <from-outcome>bond</from-outcome>
-            <to-view-id>/bond/bondMain.xhtml</to-view-id>
+            <from-outcome>personalBondMain</from-outcome>
+            <to-view-id>/bond/personalBondMain.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
-            <from-outcome>issueBond</from-outcome>
-            <to-view-id>/bond/issueBond1.xhtml</to-view-id>
+            <from-outcome>issuePersonalBond</from-outcome>
+            <to-view-id>/bond/issuePersonalBond1.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
-            <from-outcome>issueBond4</from-outcome>
-            <to-view-id>/bond/issueBond4.xhtml</to-view-id>
+            <from-outcome>frontUserExtractCash</from-outcome>
+            <to-view-id>/frontUser/frontUserExtractCash.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
-            <from-outcome>issuePlatformFund</from-outcome>
-            <to-view-id>/platformFund/issuePlatformFund1.xhtml</to-view-id>
+            <from-outcome>issuePersonalBond4</from-outcome>
+            <to-view-id>/bond/issuePersonalBond4.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>issuePlatBond</from-outcome>
+            <to-view-id>/platBond/issuePlatBond1.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>platBondManage</from-outcome>
+            <to-view-id>/platBond/platBondManage.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>operation</from-outcome>
             <to-view-id>/backUserManage/operation.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>organization</from-outcome>
@@ -50,8 +62,8 @@
             <redirect/>
         </navigation-case>
         <navigation-case>
-            <from-outcome>auditBond</from-outcome>
-            <to-view-id>/bond/auditBond.xhtml</to-view-id>
+            <from-outcome>personalBondManage</from-outcome>
+            <to-view-id>/bond/personalBondManage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -65,8 +77,8 @@
             <redirect/>
         </navigation-case>
         <navigation-case>
-            <from-outcome>bondTrash</from-outcome>
-            <to-view-id>/bond/bondTrash.xhtml</to-view-id>
+            <from-outcome>personalBondTrash</from-outcome>
+            <to-view-id>/bond/personalBondTrash.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>

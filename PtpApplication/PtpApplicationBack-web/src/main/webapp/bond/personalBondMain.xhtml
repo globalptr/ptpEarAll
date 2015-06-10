@@ -1,0 +1,151 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="../main.xhtml" >
+        <ui:define name="center">
+            <h:form id="form">
+                <p:notificationBar position="bottom" effect="slide" styleClass="top" widgetVar="bar">
+                    <table style="width: 100%;padding-top: 15px">
+                        <tr style="text-align: center">
+                            <td style="padding-left: 50px">
+                                <p:commandLink>
+                                    <p:graphicImage library="images/appico" name="1.png"/>
+                                </p:commandLink>
+                            </td>
+                            <td >
+                                <p:commandLink>
+                                    <p:graphicImage library="images/appico" name="2.png"/>
+                                </p:commandLink>
+                            </td>
+                            <td >
+                                <p:commandLink>
+                                    <p:graphicImage library="images/appico" name="3.png"/>
+                                </p:commandLink>
+                            </td>
+                            <td >
+                                <p:commandLink>
+                                    <p:graphicImage library="images/appico" name="4.png"/>
+                                </p:commandLink>
+                            </td>
+                            <td >
+                                <p:commandLink>
+                                    <p:graphicImage library="images/appico" name="5.png"/>
+                                </p:commandLink>
+                            </td>
+                            <td >
+                                <p:commandLink>
+                                    <p:graphicImage library="images/appico" name="6.png"/>
+                                </p:commandLink>
+                            </td>
+                            <td >
+                                <p:commandLink>
+                                    <p:graphicImage library="images/appico" name="7.png"/>
+                                </p:commandLink>
+                            </td>
+                            <td >
+                                <p:commandLink>
+                                    <p:graphicImage library="images/appico" name="8.png"/>
+                                </p:commandLink>
+                            </td>
+                            <td >
+                                <p:commandLink>
+                                    <p:graphicImage library="images/appico" name="9.png"/>
+                                </p:commandLink>
+                            </td>
+                            <td >
+                                <p:commandLink>
+                                    <p:graphicImage library="images/appico" name="10.png"/>
+                                </p:commandLink>
+                            </td>
+                            <td >
+                                <p:commandLink>
+                                    <p:graphicImage library="images/appico" name="11.png"/>
+                                </p:commandLink>
+                            </td>
+                            <td >
+                                <p:commandLink>
+                                    <p:graphicImage library="images/appico" name="12.png"/>
+                                </p:commandLink>
+                            </td>
+                            <td >
+                                <p:commandLink>
+                                    <p:graphicImage library="images/appico" name="13.png"/>
+                                </p:commandLink>
+                            </td>
+                            <td >
+                                <p:commandLink>
+                                    <p:graphicImage library="images/appico" name="14.png"/>
+                                </p:commandLink>
+                            </td>
+                            <td >
+                                <p:commandLink>
+                                    <p:graphicImage library="images/appico" name="15.png"/>
+                                </p:commandLink>
+                            </td>
+                            <td >
+                                <p:commandLink>
+                                    <p:graphicImage library="images/appico" name="16.png"/>
+                                </p:commandLink>
+                            </td>
+                            <td >
+                                <p:commandLink>
+                                    <p:graphicImage library="images/appico" name="17.png"/>
+                                </p:commandLink>
+                            </td>
+                            <td >
+                                <p:commandLink>
+                                    <p:graphicImage library="images/appico" name="18.png"/>
+                                </p:commandLink>
+                            </td>
+                            <td >
+                                <p:commandLink>
+                                    <p:graphicImage library="images/appico" name="19.png"/>
+                                </p:commandLink>
+                            </td>
+                            <td >
+                                <p:commandLink>
+                                    <p:graphicImage library="images/appico" name="20.png"/>
+                                </p:commandLink>
+                            </td>
+                            <td style="float: right;width:50px">
+                                <p:commandLink id="closePanel_id" styleClass="ui-icon ui-icon-close"   onclick="PF('bar').hide()">
+                                </p:commandLink>
+                                <p:tooltip for="closePanel_id" value="关闭面板"/>
+                            </td>
+                        </tr>
+                    </table>
+                </p:notificationBar>
+                
+            </h:form>
+            
+            <h:form style="width:100%">
+                <table style="width:100%">
+                    <tr >
+                         <td>
+                            <p:chart type="bar" model="#{personalBondMain.dateModel}" style="height:350px;"/>
+                         </td>
+                     </tr>
+                     <tr style="width: 250px;">
+                         <td>
+                            <p:separator style="height:3px"/>
+                         </td>
+                     </tr>
+                     <tr >
+                         <td>
+                            <p:chart type="bar" model="#{personalBondMain.dateModelx}" style="height:350px;"/>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td style="text-align: center;width:100%">
+                                 <p:commandButton value="打开操作面板" onclick="PF('bar').show()" style="width:98%;height:35px"/>
+                         </td>
+                     </tr>
+                 </table>
+            </h:form>
+ 
+        </ui:define>
+    </ui:composition>
+</html>
+

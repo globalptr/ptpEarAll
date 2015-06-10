@@ -19,18 +19,18 @@
             <table>
                 <tr>
                     <td colspan="2" style=" text-align: center">
-                        <p:graphicImage id="imageDetail" value="#{issuePersonalBond2.targetImageInfo.imagePath}"/>
+                        <p:graphicImage id="imageDetail" value="#{issuePersonalBond4.targetImageInfo.imagePath}"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <p:commandButton value="上一个">
-                            <p:ajax listener="#{issuePersonalBond2.toPrevImage()}" update="imageDetail :mainform:maingrowl"/>
+                            <p:ajax listener="#{issuePersonalBond4.toPrevImage()}" update="imageDetail :mainform:maingrowl"/>
                         </p:commandButton>
                     </td>
                     <td>
                         <p:commandButton value="下一个">
-                            <p:ajax listener="#{issuePersonalBond2.toNextImage()}" update="imageDetail :mainform:maingrowl"/>
+                            <p:ajax listener="#{issuePersonalBond4.toNextImage()}" update="imageDetail :mainform:maingrowl"/>
                         </p:commandButton>
                     </td>
                 </tr>
@@ -110,48 +110,33 @@
                                         借款方:
                                     </td>
                                     <td>
-                                        <h:outputLabel id="frontUserShow_id" value="#{issuePersonalBond4.bond4.issueUser}"  rendered="#{!issuePersonalBond4.frontUserEditable}" >
-                                            <f:ajax event="click" listener="#{issuePersonalBond4.switchIssueUser()}" render="viewForm" />
-                                        </h:outputLabel>
-
-                                        <h:selectOneMenu id="frontUserEdit_id"  value="#{issuePersonalBond4.bond4.issueUser}"  rendered="#{issuePersonalBond4.frontUserEditable}" converter="frontUserConverter">
-                                            <f:ajax event="change" execute="frontUserEdit_id" />
-                                            <f:ajax event="blur" listener="#{issuePersonalBond4.switchIssueUser()}" render=" viewForm" />
-                                            <f:selectItems value="#{issuePersonalBond4.frontUserEntitys}" var="frontUsers" itemLabel="#{frontUsers.name}" itemValue="#{frontUsers}"/>
-                                        </h:selectOneMenu>
+                                        <p:autoComplete  value="#{issuePersonalBond4.bond4.issueUser}"  forceSelection="true"  var="selectUser_var" itemLabel="#{selectUser_var.name}" converter="userConverter" itemValue="#{selectUser_var}" completeMethod="#{issuePersonalBond4.findUser}">
+                                            <f:ajax event="blur" render="userMsg_id"/>
+                                        </p:autoComplete>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
-                      
                                         基本金:
                                     </td>
                                     <td>
-                                        <h:outputLabel  value="#{issuePersonalBond4.bond4.baseAmount}" id="baseAmount_id" rendered="#{!issuePersonalBond4.baseAmountEdit}">
-                                            <f:ajax event="click" listener="#{issuePersonalBond4.switchBaseAmountEdit()}" render="viewForm"/>
-                                        </h:outputLabel>
-                                        <p:inputText id="baseAmountEdit_id"  value="#{issuePersonalBond4.bond4Edit.baseAmount}" rendered="#{issuePersonalBond4.baseAmountEdit}">
-                                            <f:ajax execute="baseAmountEdit_id" listener="#{issuePersonalBond4.flushBaseAmount()}" event="keyup"/>
-                                            <f:ajax event="blur"  listener="#{issuePersonalBond4.switchBaseAmountEdit()}" render="viewForm"/>
+                                        <p:inputText id="baseAmountEdit_id"  value="#{issuePersonalBond4.bond4.baseAmount}">
+                                            <f:ajax event="blur"  render="allMount_id allMount2_id"/>
                                         </p:inputText>
                                     </td>
                                     <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
                                         份数:
                                     </td>
                                     <td>
-                                        <h:outputLabel id="issueCopiesNum_id" value="#{issuePersonalBond4.bond4.issueCopiesNum}" rendered="#{!issuePersonalBond4.issueCopiesNumEdit}">
-                                            <f:ajax event="click" listener="#{issuePersonalBond4.switchIssueCopiesNumEdit()}" render="viewForm"/>
-                                        </h:outputLabel>
-                                        <p:inputText id="issueCopiesNumEdit_id" value="#{issuePersonalBond4.bond4.issueCopiesNum}" rendered="#{issuePersonalBond4.issueCopiesNumEdit}">
-                                            <f:ajax execute="issueCopiesNumEdit_id" listener="#{issuePersonalBond4.flushIssueCopiesNum()}" event="keyup"/>
-                                            <f:ajax event="blur"  listener="#{issuePersonalBond4.switchIssueCopiesNumEdit()}" render="viewForm"/>
+                                        <p:inputText id="issueCopiesNumEdit_id" value="#{issuePersonalBond4.bond4.issueCopiesNum}">
+                                            <f:ajax event="blur"  render="allMount_id allMount2_id"/>
                                         </p:inputText>
                                     </td>
                                     <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
                                         贷款金额:
                                     </td>
                                     <td>
-                                        <p:outputLabel value="#{issuePersonalBond4.bond4.issueCopiesNum*issuePersonalBond4.bond4.baseAmount}"/>
+                                        <p:outputLabel id="allMount_id" value="#{issuePersonalBond4.bond4.issueCopiesNum*issuePersonalBond4.bond4.baseAmount}"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -168,7 +153,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <p:fieldset legend="用户信息" toggleable="true">
+                        <p:fieldset legend="用户信息" id="userMsg_id" toggleable="true">
                             <table style="width:100%">
                                 <tr>
                                     <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
@@ -248,7 +233,6 @@
                                         担保公司:
                                     </td>
                                     <td>
-                                        
                                         #{issuePersonalBond4.bond4.companyUserEntity}
                                     </td>
                                 </tr>
@@ -257,13 +241,7 @@
                                         担保情况:
                                     </td>
                                     <td>
-                                        <h:outputLabel  value="#{issuePersonalBond4.bond4.guaranteeCase}" id="guaranteeCase_id" rendered="#{!issuePersonalBond4.guaranteeCaseEdit}">
-                                            <f:ajax event="click" listener="#{issuePersonalBond4.switchGuaranteeCase()}" render="viewForm"/>
-                                        </h:outputLabel>
-                                        <p:inputTextarea id="guaranteeCaseEdit_id"  value="#{issuePersonalBond4.bond4Edit.guaranteeCase}" rendered="#{issuePersonalBond4.guaranteeCaseEdit}">
-                                            <f:ajax execute="guaranteeCaseEdit_id" listener="#{issuePersonalBond4.flushGuaranteeCase()}" event="keyup"/>
-                                            <f:ajax event="blur"  listener="#{issuePersonalBond4.switchGuaranteeCase()}" render="viewForm"/>
-                                        </p:inputTextarea>
+                                        <p:inputTextarea style="width:100%;" id="guaranteeCaseEdit_id"  value="#{issuePersonalBond4.bond4.guaranteeCase}"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -271,13 +249,7 @@
                                         反担保情况
                                     </td>
                                     <td>
-                                        <h:outputLabel  value="#{issuePersonalBond4.bond4.reverseGuaranteeCase}" id="reverseGuaranteeCase_id" rendered="#{!issuePersonalBond4.reverseGuaranteeCaseEdit}">
-                                            <f:ajax event="click" listener="#{issuePersonalBond4.switchReverseGuaranteeCase()}" render="viewForm"/>
-                                        </h:outputLabel>
-                                        <p:inputTextarea id="reverseGuaranteeCaseEdit_id"  value="#{issuePersonalBond4.bond4Edit.reverseGuaranteeCase}" rendered="#{issuePersonalBond4.reverseGuaranteeCaseEdit}">
-                                            <f:ajax execute="reverseGuaranteeCaseEdit_id" listener="#{issuePersonalBond4.flushReverseGuaranteeCase()}" event="keyup"/>
-                                            <f:ajax event="blur"  listener="#{issuePersonalBond4.switchReverseGuaranteeCase()}" render="viewForm"/>
-                                        </p:inputTextarea>
+                                        <p:inputTextarea style="width:100%" id="reverseGuaranteeCaseEdit_id"  value="#{issuePersonalBond4.bond4.reverseGuaranteeCase}"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -285,13 +257,7 @@
                                         风控详情
                                     </td>
                                     <td>
-                                        <h:outputLabel  value="#{issuePersonalBond4.bond4.riskControlDetails}" id="riskControlDetails_id" rendered="#{!issuePersonalBond4.riskControlDetailEdit}">
-                                            <f:ajax event="click" listener="#{issuePersonalBond4.switchRiskControlDetail()}" render="viewForm"/>
-                                        </h:outputLabel>
-                                        <p:inputTextarea id="riskControlDetailsEdit_id"  value="#{issuePersonalBond4.bond4Edit.riskControlDetails}" rendered="#{issuePersonalBond4.riskControlDetailEdit}">
-                                            <f:ajax execute="riskControlDetailsEdit_id" listener="#{issuePersonalBond4.flushRiskControlDetail()}" event="keyup"/>
-                                            <f:ajax event="blur"  listener="#{issuePersonalBond4.switchRiskControlDetail()}" render="viewForm"/>
-                                        </p:inputTextarea>
+                                        <p:inputTextarea style="width:100%" id="riskControlDetailsEdit_id"  value="#{issuePersonalBond4.bond4.riskControlDetails}"/>
                                     </td>
                                 </tr>
                             </table>
@@ -443,31 +409,21 @@
                                         还款模型:
                                     </td>
                                     <td style="width:200px;padding-top: 10px;padding-bottom: 10px">
-                                        <h:outputLabel value="#{issuePersonalBond4.bond4==null?'无':issuePersonalBond4.bond4.repayModelEnum}" rendered="#{!issuePersonalBond4.repayModelEnumEdit}">
-                                            <f:ajax event="click" listener="#{issuePersonalBond4.switchRepayModelEnum()}" render="viewForm"/>
-                                        </h:outputLabel>
-                                        <h:selectOneMenu value="#{issuePersonalBond4.bond4Edit.repayModelEnum}" rendered="#{issuePersonalBond4.repayModelEnumEdit}">
-                                            <f:ajax event="change" listener="#{issuePersonalBond4.flushRepayModelEnum()}"/>
-                                            <f:ajax event="blur" listener="#{issuePersonalBond4.switchRepayModelEnum()}" render="viewForm"/>
+                                        <p:selectOneMenu id="repayModelEnum_id" value="#{issuePersonalBond4.bond4.repayModelEnum}">
                                             <f:selectItems value="#{issuePersonalBond4.repayModelEnums}" var="repayModelEnumEdit_var" itemValue="#{repayModelEnumEdit_var}" itemLabel="#{repayModelEnumEdit_var}"/>
-                                        </h:selectOneMenu>
+                                        </p:selectOneMenu>
                                     </td>
                                     <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
                                         借款总额:
                                     </td>
                                     <td style="width:200px;padding-top: 10px;padding-bottom: 10px">
-                                        #{issuePersonalBond4.bond4==null?'无':issuePersonalBond4.bond4.baseAmount*issuePersonalBond4.bond4.issueCopiesNum}
+                                        <p:outputLabel id="allMount2_id" value="#{issuePersonalBond4.bond4==null?'0':issuePersonalBond4.bond4.baseAmount*issuePersonalBond4.bond4.issueCopiesNum}"/>
                                     </td>
                                     <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
                                         开始时间:
                                     </td>
                                     <td >
-                                        <h:outputLabel id="startDate_id" rendered="#{!issuePersonalBond4.startDateEdit}" value="#{issuePersonalBond4.bond4==null?issuePersonalBond4.defaultDate:issuePersonalBond4.bond4.startDate}"  converter="DateConverter">
-                                            <f:ajax event="click" listener="#{issuePersonalBond4.switchStartDate()}" render="viewForm"/>
-                                        </h:outputLabel>
-                                        <p:calendar id="startDateEdit_id" value="#{issuePersonalBond4.bond4Edit.startDate}" rendered="#{issuePersonalBond4.startDateEdit}">
-                                            <p:ajax  event="dateSelect"   listener="#{issuePersonalBond4.flushStartDate()}" update="viewForm"/>
-                                        </p:calendar>
+                                        <p:calendar id="startDateEdit_id" value="#{issuePersonalBond4.bond4.startDate}"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -475,23 +431,32 @@
                                         年利率:
                                     </td>
                                     <td style="width:200px;padding-top: 10px;padding-bottom: 10px">
-                                        #{issuePersonalBond4.bond4==null?'无':issuePersonalBond4.bond4.yearRate}#{issuePersonalBond4.bond4==null?'':'%'}
+                                        <p:inputText id="yearRate_id" value="#{issuePersonalBond4.bond4==null?'0':issuePersonalBond4.bond4.yearRate}"  converter="PercentSignConverter">
+                                            <p:ajax event="blur" update="yearRate_id"/>
+                                        </p:inputText>
                                     </td>
                                     <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
                                         还款周期:
                                     </td>
                                     <td style="width:200px;padding-top: 10px;padding-bottom: 10px">
-                                        #{issuePersonalBond4.bond4==null?'无':issuePersonalBond4.bond4.repayCycle}
+                                        <p:selectOneMenu id="repayCycle_id" value="#{issuePersonalBond4.bond4==null?'无':issuePersonalBond4.bond4.repayCycle}">
+                                            <f:selectItems value="#{issuePersonalBond4.splitUnits}" var="split_var" itemValue="#{split_var}" itemLabel="#{split_var}"/>
+                                        </p:selectOneMenu>
                                     </td>
                                     <td style="width:70px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
                                         还款期数:
                                     </td>
                                     <td >
-                                        #{issuePersonalBond4.bond4==null?'无':issuePersonalBond4.bond4.repayCycleNumber}
+                                        <p:inputText id="repayNumber_id" value="#{issuePersonalBond4.bond4==null?'0':issuePersonalBond4.bond4.repayCycleNumber}"/>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <p:commandButton value="重新计算" style="width:100%"/>
+                                    <td colspan="6">
+                                        <p:commandButton value="重新计算" style="width:100%;height:35px">
+                                            <f:ajax event="click" execute="repayModelEnum_id issueCopiesNumEdit_id baseAmountEdit_id startDateEdit_id yearRate_id repayCycle_id repayNumber_id" listener="#{issuePersonalBond4.caculateModel()}" render="repayListTable"/>
+                                        </p:commandButton>
+                                        
+                                    </td>
                                 </tr>
                             </table>
                         </p:fieldset>
@@ -531,10 +496,10 @@
                 </tr>
                 <tr>
                     <td style="padding-top:10px;padding-bottom:10px;width: 50%">
-                        <p:commandButton id="front" value="上一步"  style="width:100%;height: 40px" action="issueBond3"/>
+                        <p:commandButton id="front" value="上一步"  style="width:100%;height: 40px" action="#{issuePersonalBond4.toFront()}"/>
                     </td>
                     <td style="padding-top:10px;padding-bottom:10px;width:50%">
-                        <p:commandButton id="next" value="发布" style="width:100%;height: 40px"  action="#{issuePersonalBond4.issueBond()}"/>
+                        <p:commandButton id="next" value="#{issuePersonalBond4.nextText}" style="width:100%;height: 40px"  action="#{issuePersonalBond4.issueBond()}"/>
                     </td>
                 </tr>
             </table>

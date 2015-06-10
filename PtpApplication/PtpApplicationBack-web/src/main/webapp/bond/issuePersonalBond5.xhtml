@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="../main.xhtml" >
+
+        <ui:define name="center">
+            <style>
+                .ui-steps.horizontal .ui-steps-item {
+                    width: 19.8%;
+                    float: left;
+                }
+            </style>
+            <h:form>
+                <table  style="width: 100%;height: 100%;padding-left: 30px;border-collapse:collapse;border:none;margin-top: 30px">
+                <tr>
+                    <td colspan="2">
+                        <p:steps styleClass="horizontal" activeIndex="4" style=" width:100%;height: 30px">
+                            <p:menuitem value="填写投标信息" />
+                            <p:menuitem value="上传认证资料" />
+                            <p:menuitem value="选择还款模型" />
+                            <p:menuitem value="发布前预览" />
+                            <p:menuitem value="发布成功" />
+                        </p:steps>
+                    </td>
+                </tr>
+                    <tr>
+                        <td  style="padding-top:10px;padding-bottom:10px;width: 100%; text-align: center">
+                                <table style="width:100%;padding-top:100px">
+                                    <tr>
+                                        <td style="text-align:right;width:46%;padding-right: 30px">
+                                            <p:graphicImage library="images/sysico" name="alarm_icons_004.png"/>
+                                        </td>
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <div style="font-size: 35px;font-weight:bold;padding-bottom:10px">
+                                                            发布成功!
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-right:20px">
+                                                        <p:poll interval="1" listener="#{issuePersonalBond5.backToMain()}" update="txt_count" />
+                                                        <p:commandLink  id="txt_count"  value="#{issuePersonalBond5.sec}秒回融资标主界面"  style="width:100%;height: 40px" action="personalBondManage"/>
+                                                    </td>
+                                                    <td>
+                                                        <p:commandLink  value="点此再发一个"  style="width:100%;height: 40px" action="issuePersonalBond1"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                        </td>
+                    </tr>
+                </table>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

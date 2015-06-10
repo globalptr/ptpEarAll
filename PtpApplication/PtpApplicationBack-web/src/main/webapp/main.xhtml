@@ -109,24 +109,22 @@
                                 <p:menuitem value="操作日志" icon="ui-icon-star"/>
                             </p:submenu>
                             <p:submenu label="产品中心">
-                                <p:submenu label="融资标" >
-                                    <p:menuitem value="主界面" icon="ui-icon-star" action="bond"/>
-                                    <p:menuitem value="发布融资标" icon="ui-icon-star" action="issueBond"/>
-                                    <p:menuitem value="融资标审核"   icon="ui-icon-star" action="auditBond"/>
-                                    <p:menuitem value="回收站"   icon="ui-icon-star" action="bondTrash"/>
-                                </p:submenu>
-                                <p:submenu label="债权转让" >
-                                    <p:menuitem value="债权转让管理" icon="ui-icon-star"/>
+                                <p:submenu label="个人标" >
+                                    <p:menuitem value="主界面" icon="ui-icon-star" action="personalBondMain"/>
+                                    <p:menuitem value="发布个人标" icon="ui-icon-star" action="issuePersonalBond"/>
+                                    <p:menuitem value="管理个人标"   icon="ui-icon-star" action="personalBondManage"/>
+                                    <p:menuitem value="个人标回收站"   icon="ui-icon-star" action="personalBondTrash"/>
                                 </p:submenu>
                                 <p:submenu label="平台标" >
                                     <p:menuitem value="主界面" icon="ui-icon-star"/>
-                                    <p:menuitem value="发布平台标" icon="ui-icon-star" action="issuePlatformFund"/>
-                                    <p:menuitem value="平台标审核"   icon="ui-icon-star"/>
+                                    <p:menuitem value="发布平台标" icon="ui-icon-star" action="issuePlatBond"/>
+                                    <p:menuitem value="平台标管理"   icon="ui-icon-star" action="platBondManage"/>
                                     <p:menuitem value="回收站"   icon="ui-icon-star"/>
                                 </p:submenu>
                             </p:submenu>
                             <p:submenu label="前端用户中心">
                                 <p:menuitem value="前台用户管理" icon="ui-icon-star" action="frontUserView"/>
+                                <p:menuitem value="前台用户提现" icon="ui-icon-star" action="frontUserExtractCash"/>
                             </p:submenu>
                             <p:submenu label="内容管理">
                                 <p:submenu label="文章管理" >

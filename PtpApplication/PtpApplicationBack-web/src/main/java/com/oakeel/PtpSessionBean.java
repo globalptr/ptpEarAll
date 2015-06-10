@@ -14,7 +14,7 @@ import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import com.oakeel.ejb.ptpEnum.AccountModeEnum;
 import com.oakeel.ejb.ptpEnum.OperationEnum;
 import com.oakeel.ejb.transaction.bond.IssueBondLocal;
-import com.oakeel.ejb.transaction.platformFund.IssuePlatformFundLocal;
+import com.oakeel.ejb.transaction.platformFund.IssuePlatBondLocal;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -35,7 +35,7 @@ public class PtpSessionBean implements Serializable{
     @EJB
     private IssueBondLocal issueBondLocal;
     @EJB
-    private IssuePlatformFundLocal issuePlatformFundLocal;
+    private IssuePlatBondLocal issuePlatBondLocal;
     @EJB BackUserEaoLocal backUserEaoLocal;
     private BackUserEntity logUser=null;
     private BackUserSetEntity userSet=null;
@@ -81,21 +81,6 @@ public class PtpSessionBean implements Serializable{
      */
     public void setIssueBondLocal(IssueBondLocal issueBondLocal) {
         this.issueBondLocal = issueBondLocal;
-    }
-
-
-    /**
-     * @return the issuePlatformFundLocal
-     */
-    public IssuePlatformFundLocal getIssuePlatformFundLocal() {
-        return issuePlatformFundLocal;
-    }
-
-    /**
-     * @param issuePlatformFundLocal the issuePlatformFundLocal to set
-     */
-    public void setIssuePlatformFundLocal(IssuePlatformFundLocal issuePlatformFundLocal) {
-        this.issuePlatformFundLocal = issuePlatformFundLocal;
     }
 
     /**
@@ -182,5 +167,19 @@ public class PtpSessionBean implements Serializable{
      */
     public void setFrontUserEntity(FrontUserEntity frontUserEntity) {
         this.frontUserEntity = frontUserEntity;
+    }
+
+    /**
+     * @return the issuePlatBondLocal
+     */
+    public IssuePlatBondLocal getIssuePlatBondLocal() {
+        return issuePlatBondLocal;
+    }
+
+    /**
+     * @param issuePlatBondLocal the issuePlatBondLocal to set
+     */
+    public void setIssuePlatBondLocal(IssuePlatBondLocal issuePlatBondLocal) {
+        this.issuePlatBondLocal = issuePlatBondLocal;
     }
 }

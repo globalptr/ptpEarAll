@@ -1,0 +1,178 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="../main.xhtml" >
+   
+    <ui:define name="center">
+        <style>
+            .ui-steps.horizontal .ui-steps-item {
+                width: 23.9%;
+                float: left;
+            }
+        </style>
+        <h:form>
+            <table  style="width: 100%;height: 100%;padding-left: 30px;border-collapse:collapse;border:none;margin-top: 30px">
+                <tr>
+                    <td  colspan="15" >
+                        <p:steps styleClass="horizontal" activeIndex="0" style=" width:100%;height: 30px">
+                            <p:menuitem value="填写基本信息" />
+                            <p:menuitem value="选择还款模型" />
+                            <p:menuitem value="发布前预览" />
+                            <p:menuitem value="发布成功" />
+                        </p:steps>
+                    </td>
+                </tr>
+                <tr >
+                    <td class="bordertd">
+                        <p:outputLabel value="还款模型:"/>
+                    </td>
+                    <td  class="bordertd" colspan="14">
+                        <p:selectOneMenu id="repayModel_id" value="#{issuePlatBond2.platformFundEntity2.repayModelEnum}" >
+                            <f:ajax event="change" execute="repayModel_id" render="des good bad suitable"/>
+                            <f:selectItem itemLabel="选择还款模型" itemValue="-1"/>
+                            <f:selectItems value="#{issuePlatBond2.repayModelList}" />
+                        </p:selectOneMenu>
+                    </td>
+                </tr>
+                <tr >
+                    <td  class="bordertd">
+                        <p:outputLabel value="优点:"/>
+                    </td>
+                    <td  class="bordertd" colspan="14">
+                        <p:outputLabel id="good" value="#{issuePlatBond2.platformFundEntity2.repayModelEnum.good}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td  class="bordertd">
+                        <p:outputLabel value="缺点:"/>
+                    </td>
+                    <td class="bordertd" colspan="14">
+                        <p:outputLabel id="bad" value="#{issuePlatBond2.platformFundEntity2.repayModelEnum.bad}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bordertd">
+                        <p:outputLabel value="适用人群:"/>
+                    </td>
+                    <td class="bordertd" colspan="14">
+                        <p:outputLabel id="suitable" value="#{issuePlatBond2.platformFundEntity2.repayModelEnum.suitable}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bordertd" style="height: 30px">
+                        <p:outputLabel value="算法介绍:"/>
+                    </td>
+                    <td class="bordertd" colspan="14">
+                        <p:outputLabel id="des" value="#{issuePlatBond2.platformFundEntity2.repayModelEnum.description}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bordertd" style="height: 50px">
+                        <p:outputLabel value="算法公式:"/>
+                    </td>
+                    <td class="bordertd" colspan="14">
+                        <h:graphicImage library="images/repayModel" name="dqbx.png"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bordertd"  style="width:60px;height: 30px">
+                        <p:outputLabel value="基准金:"/>
+                    </td>
+                    <td class="bordertd" style="width:30px">
+                        <p:inputText id="baseAmount_id" value="#{issuePlatBond2.platformFundEntity2.baseAmount}" >
+                            <f:ajax execute="baseAmount_id copiesNum_id" event="blur" render="allAmount_id"/>
+                        </p:inputText>
+                    </td>
+                    <td class="bordertd"  style="width:30px;height: 30px">
+                        <p:outputLabel value="发行份数:"/>
+                    </td>
+                    <td class="bordertd" style="width:30px">
+                        <p:inputText id="copiesNum_id" value="#{issuePlatBond2.platformFundEntity2.issueCopiesNum}"  >
+                            <f:ajax execute="baseAmount_id copiesNum_id" event="blur" render="allAmount_id"/>
+                        </p:inputText>
+                    </td>
+                    <td class="bordertd"  style="width:60px;height: 30px">
+                        <p:outputLabel value="借款总额:"/>
+                    </td>
+                    <td class="bordertd" style="width:30px">
+                        <p:inputText id="allAmount_id" value="#{issuePlatBond2.platformFundEntity2.issueCopiesNum*issuePlatBond2.platformFundEntity2.baseAmount}" disabled="true" converter="moneyFormater"/>
+                    </td>
+                    <td class="bordertd">
+                        <p:outputLabel value="年利率:"/>
+                    </td>
+                    <td class="bordertd" style="width:30px">
+                        <p:inputText id="percent" value="#{issuePlatBond2.platformFundEntity2.yearRate}"  disabled="true"  converter="PercentSignConverter">
+                            <p:ajax event="blur" update="percent"/>
+                        </p:inputText>
+                    </td>
+                    <td class="bordertd">
+                        <p:outputLabel value="还款周期:"/>
+                    </td>
+                    <td class="bordertd" style="width:30px">
+                        <p:selectOneMenu id="fselectSplitUnit"  value="#{issuePlatBond2.platformFundEntity2.repayCycle}">
+                            <f:selectItems value="#{issuePlatBond2.splitUnit}"/>
+                        </p:selectOneMenu>
+                    </td>
+                    <td class="bordertd" >
+                        <p:outputLabel value="还款期数:"/>
+                    </td>
+                    <td  class="bordertd" style="width:30px">
+                        <p:inputText id="repayCycleNumber_id" value="#{issuePlatBond2.platformFundEntity2.repayCycleNumber}"/>
+                    </td>
+                    <td class="bordertd">
+                        <p:outputLabel value="开始时间:"/>
+                    </td>
+                    <td class="bordertd" style="width:30px">
+                        <p:calendar id="startDate_id" value="#{issuePlatBond2.platformFundEntity2.startDate}"  locale="cn" navigator="true" pattern="yyyy-MMM-dd" converter="DateConverter"/>
+                    </td>
+                    <td class="bordertd" style="width:120px" >
+
+                        <p:commandButton value="计算" style="width:100%"  icon="ui-icon-calculator">
+                            <f:ajax event="click" execute="repayModel_id allAmount_id percent fselectSplitUnit repayCycleNumber_id startDate_id" listener="#{issuePlatBond2.caculateModel()}" render="repayListTable"/>
+                        </p:commandButton>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bordertd" colspan="15">
+                        <p:dataTable selectionMode="single" rowKey="#{repayListVar.periodNum}" rowIndexVar="row" style="width:100%" id="repayListTable" value="#{issuePlatBond2.expenseEntitys}" var="repayListVar" paginatorPosition="bottom"  paginator="true" rows="12">
+                            <p:column  headerText="序号" style="width:30px">
+                                <h:outputText value="#{row + 1}"/> 
+                            </p:column>
+                            <p:column  headerText="期数" style="width:100px">
+                                <h:outputText value="第#{repayListVar.periodNum}期"/> 
+                            </p:column>
+                            <p:column headerText="还款日期">
+                                <h:outputText value="#{repayListVar.settlementTime}" converter="DateConverter"/>
+                            </p:column>
+                            <p:column headerText="期初余额">
+                                <h:outputText value="#{repayListVar.beforeBalance}"/>
+                            </p:column>
+                            <p:column headerText="本期还款总额">
+                                <h:outputText  value="#{repayListVar.payable}"/>
+                            </p:column>
+                            <p:column headerText="本金">
+                                <h:outputText value="#{repayListVar.principal}"/>
+                            </p:column>
+                            <p:column headerText="利息">
+                                <h:outputText value="#{repayListVar.interest}" />
+                            </p:column>
+                            <p:column headerText="期末余额">
+                                <h:outputText value="#{repayListVar.afterBalance}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </td>
+                </tr>
+                    <tr>
+                        <h:panelGrid columns="2" style="width: 100%">
+                            <p:commandButton id="front" value="上一步"  style="width:100%;height: 40px" action="issuePlatBond1"/>
+                            <p:commandButton id="next" value="发布预览" style="width:100%;height: 40px"  action="#{issuePlatBond2.toNextStep()}"/>
+                        </h:panelGrid>
+                    </tr>
+            </table>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
+

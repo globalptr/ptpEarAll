@@ -1,0 +1,136 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="../main.xhtml" >
+
+        <ui:define name="center">
+            <h:form >
+                <style>
+                    .test
+                    {
+                        
+                    }
+                    .ui-autocomplete-input
+                    {
+                        width:90px !important;
+                    }
+                    table th:nth-child(2) .ui-inputtext
+                    {
+                        width:115px !important;
+                    }
+                    .ui-inputtext{
+                        width:60px !important;
+                    }
+                    .ui-inputfield
+                    {
+                        width:80px;
+                    }
+                </style>
+                    
+                <p:dataTable filterEvent="keydown"  rowIndexVar="row" id="bonds_id" var="bonds_var" widgetVar="bonds_wid" value="#{platBondManage.platBondEntitys}"  emptyMessage="没有需要发布的融资标" filteredValue="#{personalBondManage.bondEntitysFilter}">
+                    <f:facet name="header">
+                        平台标管理
+                    </f:facet>
+                    <p:column  headerText="序号" style="width:30px">
+                        <h:outputText value="#{row + 1}"/> 
+                    </p:column>
+                    <p:column headerText="标号" filterBy="#{bonds_var.bondNumber}" style="width:135px"  footerText="包含模式" filterMatchMode="contains">
+                        <h:outputText value="#{bonds_var.bondNumber}" />
+                    </p:column>
+                    <p:column headerText="发布人" filterBy="#{bonds_var.issueAdmin}" style="width:135px">
+                        <f:facet name="filter">
+                            <p:autoComplete  forceSelection="true"  completeMethod="#{personalBondManage.findBackUser}">
+                                <p:ajax event="itemSelect" oncomplete="PF('bonds_wid').filter()"/>
+                            </p:autoComplete>
+                        </f:facet>
+                        <h:outputText value="#{bonds_var.issueAdmin}"/>
+                    </p:column>
+                    <p:column headerText="年利率"  footerText="包含模式" filterBy="#{bonds_var.yearRate}">
+                        <h:outputText value="#{bonds_var.yearRate}" converter="BigDecimalConverter"/>
+                    </p:column>
+                    <p:column headerText="基本金"  filterBy="#{bonds_var.baseAmount}" footerText="包含模式" >
+                        <h:outputText value="#{bonds_var.baseAmount}" />
+                    </p:column>
+                    <p:column headerText="发行份数"  filterBy="#{bonds_var.issueCopiesNum}" footerText="包含模式" >
+                        <h:outputText value="#{bonds_var.issueCopiesNum}" />
+                    </p:column>
+                    <p:column headerText="总金额"  footerText="包含模式" filterMatchMode="lte">
+                        <h:outputText value="#{bonds_var.issueCopiesNum*bonds_var.baseAmount}" />
+                    </p:column>
+                    <p:column headerText="债务人"  footerText="包含模式"   filterBy="#{bonds_var.issueUser}" style="width:110px">
+                        <f:facet name="filter">
+                            <p:autoComplete  forceSelection="true"  completeMethod="#{personalBondManage.findFrontUser}">
+                                <p:ajax event="itemSelect" oncomplete="PF('bonds_wid').filter()"/>
+                            </p:autoComplete>
+                        </f:facet>
+                        <h:outputText value="#{bonds_var.issueUser}" />
+                    </p:column>
+                    <p:column headerText="标类型"  footerText="包含模式"  filterBy="#{bonds_var.platBondTypeEnum}">
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('bonds_wid').filter()">
+                                <f:selectItem itemLabel="选择类型" itemValue="#{null}" noSelectionOption="true" />
+                                <f:selectItems   value="#{platBondManage.platBondTypeEnums}"/>
+                            </p:selectOneMenu>
+                        </f:facet>
+                        <h:outputText value="#{bonds_var.platBondTypeEnum}" />
+                    </p:column>
+                    <p:column headerText="还款周期"  footerText="包含模式"  filterBy="#{bonds_var.repayCycle}">
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('bonds_wid').filter()">
+                                <f:selectItem itemLabel="选择类型" itemValue="#{null}" noSelectionOption="true" />
+                                <f:selectItems   value="#{platBondManage.splitUnits}"/>
+                            </p:selectOneMenu>
+                        </f:facet>
+                        <h:outputText value="#{bonds_var.repayCycle}" />
+                    </p:column>
+                    <p:column headerText="还款期数"  footerText="包含模式" filterBy="#{bonds_var.repayCycleNumber}">
+                        <h:outputText value="#{bonds_var.repayCycleNumber}" />
+                    </p:column>
+                    <p:column headerText="还款模型"  footerText="包含模式"  filterBy="#{bonds_var.repayModelEnum}" style="width:150px">
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('bonds_wid').filter()">
+                                <f:selectItem itemLabel="选择类型" itemValue="#{null}" noSelectionOption="true" />
+                                <f:selectItems value="#{platBondManage.repayModelEnums}"/>
+                            </p:selectOneMenu>
+                        </f:facet>
+                        <h:outputText value="#{bonds_var.repayModelEnum}" />
+                    </p:column>
+                    <p:column headerText="时间"  footerText="包含模式"  filterBy="#{bonds_var.startDate}">
+                        <f:facet name="filter">
+                            <p:calendar >
+                                <p:ajax event="dateSelect" oncomplete="PF('bonds_wid').filter()"/>
+                            </p:calendar>
+                        </f:facet>
+                        <h:outputText value="#{bonds_var.startDate}" converter="DateConverter"/>
+                    </p:column>
+                    <p:column style="width:20px">
+                        <p:commandLink immediate="true" id="reIssue_id" styleClass="ui-icon ui-icon-arrowrefresh-1-w"  update="bonds_id" action="#{platBondManage.backBond()}">
+                            <f:setPropertyActionListener value="#{bonds_var}" target="#{platBondManage.targetBond}"/>
+                        </p:commandLink>
+                        <p:tooltip for="reIssue_id" value="打回"/>
+                    </p:column>
+                    <p:column style="width:20px">
+                        <p:commandLink immediate="true" id="look_id"  styleClass="ui-icon ui-icon-search" action="#{platBondManage.bondDetail()}">
+                            <f:setPropertyActionListener value="#{bonds_var}" target="#{platBondManage.targetBond}"/>
+                        </p:commandLink>
+                        <p:tooltip for="look_id" value="浏览"/>
+                    </p:column>
+                    <p:column style="width:20px">
+                        <p:commandLink id="issue_id"  styleClass="ui-icon ui-icon-newwin" update="bonds_id" action="#{platBondManage.passAudit()}">
+                            <f:setPropertyActionListener value="#{bonds_var}" target="#{platBondManage.targetBond}"/>
+                        </p:commandLink>
+                        <p:tooltip for="issue_id" value="发布"/>
+                    </p:column>
+                    <p:column style="width:20px">
+                        <p:commandLink id="delete_id"  styleClass="ui-icon ui-icon-trash" update="bonds_id" immediate="true" action="#{platBondManage.logicDeleteBond()}">
+                            <f:setPropertyActionListener value="#{bonds_var}" target="#{platBondManage.targetBond}" />
+                        </p:commandLink>
+                        <p:tooltip for="delete_id" value="移至回收站"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

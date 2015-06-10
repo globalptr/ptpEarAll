@@ -6,13 +6,9 @@
 
 package com.oakeel;
 
-import com.oakeel.ejb.entityAndEao.bond.BondEntity;
-import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import com.oakeel.ejb.ptpEnum.SysInfo;
 import com.oakeel.ejb.transaction.InitEjbLocal;
-import com.oakeel.ejb.transaction.Test;
 import com.oakeel.ejb.transaction.TestLocal;
-import java.util.logging.Level;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
@@ -22,11 +18,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 import org.apache.log4j.Logger;
 
@@ -54,37 +45,6 @@ public class PtpApplicationBean {
     
     public void ttt()
     {
-        try {
-            ut.begin();
-            BondEntity bond1=new BondEntity();
-            FrontUserEntity user=new FrontUserEntity();
-            user.setName("ddd");
-            user.setPassword("fsfdsf");
-            em.persist(user);
-            bond1.setIssueUser(user);
-            em.persist(bond1);
-            ut.commit();
-            ut.begin();
-            FrontUserEntity kk=em.merge(user);
-            em.refresh(kk);
-            System.out.println("fsdfsfsfsthis is"+kk.getBondEntitys().size());
-        } catch (NotSupportedException ex) {
-            java.util.logging.Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SystemException ex) {
-            java.util.logging.Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (RollbackException ex) {
-            java.util.logging.Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (HeuristicMixedException ex) {
-            java.util.logging.Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (HeuristicRollbackException ex) {
-            java.util.logging.Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SecurityException ex) {
-            java.util.logging.Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalStateException ex) {
-            java.util.logging.Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(SysInfo.提示.toString(),  "数据库初始化完毕!") );
     }
     public void logMessage(String msg)
     {

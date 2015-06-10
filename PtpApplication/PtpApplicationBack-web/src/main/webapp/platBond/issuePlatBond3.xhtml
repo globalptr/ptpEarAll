@@ -1,0 +1,146 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="../main.xhtml" >
+       
+    <ui:define name="center">
+        <style>
+            .ui-steps.horizontal .ui-steps-item {
+                width: 23.9%;
+                float: left;
+            }
+        </style>
+        <h:form>
+            <table  style="width: 100%;height: 100%;padding-left: 30px;border-collapse:collapse;border:none;margin-top: 30px">
+                <tr>
+                    <td colspan="2">
+                        <p:steps styleClass="horizontal" activeIndex="3" style="width:100%;height: 30px">
+                            <p:menuitem value="填写基本信息"/>
+                            <p:menuitem value="选择还款模型"/>
+                            <p:menuitem value="发布前预览"/>
+                            <p:menuitem value="发布成功"/>
+                        </p:steps>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ui-steps-item ui-state-default ui-state-disabled" colspan="2" style="height:40px;font-size: 18px;padding-left: 12px">
+                        基本信息
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p:fieldset legend="项目详情" toggleable="true">
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="float: right">
+                                        基金类型
+                                    </td>
+                                    <td>
+                                        <p:outputLabel value="#{issuePlatBond3.platformFundEntity3.platBondTypeEnum}"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </p:fieldset>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ui-steps-item ui-state-default ui-state-disabled" colspan="2" style="height:40px;font-size: 18px;padding-left: 12px">
+                        还款模型
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p:fieldset legend="基本信息" toggleable="true">
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="float: right">
+                                        还款模型:
+                                    </td>
+                                    <td>
+                                        #{issuePlatBond3.platformFundEntity3==null?'无':issuePlatBond3.platformFundEntity3.repayModelEnum}
+                                    </td>
+                                    <td style="float: right">
+                                        借款总额:
+                                    </td>
+                                    <td>
+                                        #{issuePlatBond3.platformFundEntity3==null?'无':issuePlatBond3.platformFundEntity3.baseAmount*issuePlatBond3.platformFundEntity3.issueCopiesNum}
+                                    </td>
+                                    <td style="float: right">
+                                        开始时间:
+                                    </td>
+                                    <td>
+                                        <h:outputLabel  value="#{issuePlatBond3.platformFundEntity3==null?issuePersonalBond4.defaultDate:issuePlatBond3.platformFundEntity3.startDate}"  converter="DateConverter"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="float: right">
+                                        年利率:
+                                    </td>
+                                    <td>
+                                        #{issuePlatBond3.platformFundEntity3==null?'无':issuePlatBond3.platformFundEntity3.yearRate}#{issuePlatBond3.platformFundEntity3==null?'':'%'}
+                                    </td>
+                                    <td style="float: right">
+                                        还款周期:
+                                    </td>
+                                    <td>
+                                        #{issuePlatBond3.platformFundEntity3==null?'无':issuePlatBond3.platformFundEntity3.repayCycle}
+                                    </td>
+                                    <td style="float: right">
+                                        还款期数:
+                                    </td>
+                                    <td>
+                                        #{issuePlatBond3.platformFundEntity3==null?'无':issuePlatBond3.platformFundEntity3.repayCycleNumber}
+                                    </td>
+                                </tr>
+                            </table>
+                        </p:fieldset>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p:fieldset legend="账单信息" toggleable="true">
+                            <p:dataTable rowIndexVar="row" style="width:100%" id="repayListTable" value="#{issuePlatBond3.platformFundEntity3.expenseEntitys}" var="repayListVar" paginatorPosition="bottom"  paginator="true" rows="12">
+                                <p:column  headerText="序号" style="width:30px">
+                                    <h:outputText value="#{row + 1}"/> 
+                                </p:column>
+                                <p:column  headerText="期数" style="width:100px">
+                                    <h:outputText value="第#{repayListVar.periodNum}期"/> 
+                                </p:column>
+                                <p:column headerText="还款日期">
+                                    <h:outputText value="#{repayListVar.settlementTime}" converter="DateConverter"/>
+                                </p:column>
+                                <p:column headerText="期初余额">
+                                    <h:outputText value="#{repayListVar.beforeBalance}"/>
+                                </p:column>
+                                <p:column headerText="本期还款总额">
+                                    <h:outputText  value="#{repayListVar.payable}"/>
+                                </p:column>
+                                <p:column headerText="本金">
+                                    <h:outputText value="#{repayListVar.principal}"/>
+                                </p:column>
+                                <p:column headerText="利息">
+                                    <h:outputText value="#{repayListVar.interest}" />
+                                </p:column>
+                                <p:column headerText="期末余额">
+                                    <h:outputText value="#{repayListVar.afterBalance}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </p:fieldset>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-top:10px;padding-bottom:10px;width: 50%">
+                        <p:commandButton id="front" value="上一步"  style="width:100%;height: 40px" action="issueBond3"/>
+                    </td>
+                    <td style="padding-top:10px;padding-bottom:10px;width:50%">
+                        <p:commandButton id="next" value="发布" style="width:100%;height: 40px"  action="#{issuePlatBond3.issuePlatBond()}"/>
+                    </td>
+                </tr>
+            </table>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
+

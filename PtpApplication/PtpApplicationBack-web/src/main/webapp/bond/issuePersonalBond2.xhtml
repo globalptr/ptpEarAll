@@ -1,0 +1,223 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="../main.xhtml" >
+        
+        <ui:define name="center">
+            <style>
+                .ui-steps.horizontal .ui-steps-item {
+                    width: 19.8%;
+                    float: left;
+                }
+            </style>
+            <h:form id="issue2form">    
+                <p:dialog widgetVar="showImageDlg_wid" resizable="false" header="图片详情">
+                    <table>
+                        <tr>
+                            <td class="ui-steps-item ui-state-default ui-state-disabled" >
+                                <p:commandLink value="&lt;&lt;">
+                                    <p:ajax listener="#{issuePersonalBond2.toPrevImage()}" update="imageDetail :mainform:maingrowl"/>
+                                </p:commandLink>
+                            </td>
+                            <td colspan="2" style=" text-align: center;">
+                                <p:graphicImage id="imageDetail" value="#{issuePersonalBond2.targetImageInfo.imagePath}"/>
+                            </td>
+                            <td class="ui-steps-item ui-state-default ui-state-disabled" style="min-height:200px " >
+                                <h:commandLink >
+                                    <div class="ui-state-default" style="min-height:200px ">
+                                        &gt;&gt;
+                                    </div>
+                                    <p:ajax listener="#{issuePersonalBond2.toNextImage()}" update="imageDetail :mainform:maingrowl"/>
+                                </h:commandLink>
+                            </td>
+                        </tr>
+                    </table>
+                </p:dialog>
+                <p:dialog widgetVar="deleteImageDlg_wid" resizable="false" header="警告" closable="false">
+                      <table>
+                        <tr>
+                            <td colspan="2">
+                                <p:outputLabel value="是否确定删除此图片？"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p:commandButton value="删除" onclick="PF('deleteImageDlg_wid').hide()" update="imageTabs_id"/>
+                            </td>
+                            <td>
+                                <p:commandButton value="取消" onclick="PF('deleteImageDlg_wid').hide()"/>
+                            </td>
+                        </tr>
+                    </table>
+                </p:dialog>
+                <p:dialog widgetVar="uploadImageDlg_wid"  id="uploadImageDlg_id" resizable="false" header="上传图片至'#{issueBond.selectImageUsedEnum}'目录" position="top" closable="false">
+                    
+                    <table style="width:100%">
+                        <tr>
+                            <td colspan="2">
+                                <p:fileUpload cancelLabel="取消" uploadLabel="上传" label="选择文件" multiple="true"  fileUploadListener="#{issuePersonalBond2.handleFileUpload}"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:50%">
+                                <p:commandButton style="width:100%" value="上传完成" onclick="PF('uploadImageDlg_wid').hide()">
+                                    <f:ajax event="click" listener="#{issuePersonalBond2.saveUploadFileAndEntity()}" render="imageTabs_id"/>
+                                </p:commandButton>
+                            </td>
+                            <td style="width:50%">
+                                <p:commandButton style="width:100%" value="关闭" onclick="PF('uploadImageDlg_wid').hide()" actionListener="#{issuePersonalBond2.closeUploadDlg()}"/>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                </p:dialog>
+                <table style=" margin-left: 0px;width:100% ;margin-top: 30px">
+                    <tr>
+                 
+                        <td colspan="2">
+                                <p:steps styleClass="horizontal" activeIndex="1" style=" width:100%;height: 30px">
+                                    <p:menuitem value="填写投标信息" />
+                                    <p:menuitem value="上传认证资料" />
+                                    <p:menuitem value="选择还款模型" />
+                                    <p:menuitem value="发布前预览" />
+                                    <p:menuitem value="发布成功" />
+                                </p:steps>
+                        </td>
+                    </tr>
+                    <tr style="width:100%">
+                        <td colspan="2">
+                            <p:tabView id="imageTabs_id">
+                                <p:ajax event="tabChange" listener="#{issuePersonalBond2.onTabChange}" update=":mainform:maingrowl :issue2form:uploadImageDlg_id"/>
+                                <p:tab title="合同资料">
+                                    <p:dataGrid paginator="true" paginatorPosition="bottom" rows="32" columns="8" emptyMessage="合同资料图片为空" value="#{issuePersonalBond2.contractInfo.imageInfoEntitys}"  var="contractImages_var" id="contractImages_id" >
+                                        <f:facet name="header">
+                                            <table>
+                                                <tr>
+                                                    <td style="text-align: center; width: 100%;border: none" rowspan="2">
+                                                        <p:outputLabel value="合同资料详情"/>
+                                                    </td>
+                                                    <td style=" width: 20px;border: none">
+                                                        <p:commandLink styleClass="ui-icon ui-icon-arrowthickstop-1-n"  onclick="PF('uploadImageDlg_wid').show()"  immediate="true" id="uploadImage_id"/>
+                                                        <p:tooltip for="uploadImage_id" value="上传资料图片"   />
+                                                    </td>          
+                                                </tr>
+                                            </table>
+                                        </f:facet>   
+                                        <p:panel style="text-align:center"> 
+                                            <f:facet name="header">
+                                                <table>
+                                                    <tr>
+                                                        <td style="text-align: center; width: 100%;border: none" rowspan="2">
+                                                            <p:outputLabel value="#{contractImages_var.imageName}"/>
+                                                        </td>
+                                                        <td style=" width: 20px;border: none">
+                                                            <p:commandLink styleClass="ui-icon ui-icon-trash"  onclick="PF('deleteImageDlg_wid').show()"  immediate="true" id="uploadImageItem_id"/>
+                                                            <p:tooltip for="uploadImageItem_id" value="删除资料图片"/>
+                                                        </td>          
+                                                    </tr>
+                                                </table>
+                                            </f:facet>   
+                                            <h:panelGrid columns="1" style="width:100%">
+                                                <h:graphicImage value="#{contractImages_var.imagePath}" style=" margin: 0 auto"  alt="#{contractImages_var.imagePath}" width="64" height="64" title="#{contractImages_var.imagePath}"/>
+                                                <p:commandLink styleClass="ui-icon ui-icon-search" immediate="true" style=" margin: 0 auto" id="lookImage_id" onclick="PF('showImageDlg_wid').show()" update=":issue2form:imageDetail">
+                                                    <f:setPropertyActionListener value="#{contractImages_var}" target="#{issuePersonalBond2.targetImageInfo}"/>
+                                                </p:commandLink>
+                                            </h:panelGrid>
+                                        </p:panel>
+                                    </p:dataGrid>
+                                </p:tab>
+                                <p:tab title="公司资料" >
+                                    <p:dataGrid paginator="true" paginatorPosition="bottom" rows="32" columns="8" emptyMessage="公司资料图片为空" value="#{issuePersonalBond2.companyInfo.imageInfoEntitys}" var="companyInfoImages_var" id="companyInfoImages_id" >
+                                         <f:facet name="header">
+                                            <table>
+                                                <tr>
+                                                    <td style="text-align: center; width: 100%;border: none" rowspan="2">
+                                                        <p:outputLabel value="公司资料详情"/>
+                                                    </td>
+                                                    <td style=" width: 20px;border: none">
+                                                        <p:commandLink styleClass="ui-icon ui-icon-arrowthickstop-1-n"  onclick="PF('uploadImageDlg_wid').show()"  immediate="true" id="uploadImage_id"/>
+                                                        <p:tooltip for="uploadImage_id" value="上传资料图片"/>
+                                                    </td>          
+                                                </tr>
+                                            </table>
+                                        </f:facet> 
+                                        <p:panel style="text-align:center">
+                                            <f:facet name="header">
+                                                <table>
+                                                    <tr>
+                                                        <td style="text-align: center; width: 100%;border: none" rowspan="2">
+                                                            <p:outputLabel value="#{contractImages_var.imageName}"/>
+                                                        </td>
+                                                        <td style=" width: 20px;border: none">
+                                                            <p:commandLink styleClass="ui-icon ui-icon-trash"  onclick="PF('deleteImageDlg_wid').show()"  immediate="true" id="uploadImageItem_id"/>
+                                                            <p:tooltip for="uploadImageItem_id" value="删除资料图片"   />
+                                                        </td>          
+                                                    </tr>
+                                                </table>
+                                            </f:facet>   
+                                            <h:panelGrid columns="1" style="width:100%">
+                                                <p:graphicImage  value="#{companyInfoImages_var.imagePath}" style=" margin: 0 auto"  alt="Image Description for #{companyInfoImages_var.imagePath}" width="64" height="64" title="#{companyInfoImages_var.imagePath}"/>
+                                                <p:commandLink styleClass="ui-icon ui-icon-search" immediate="true" style=" margin: 0 auto" id="lookImage_id" onclick="PF('showImageDlg_wid').show()" update=":issue2form:imageDetail">
+                                                    <f:setPropertyActionListener value="#{companyInfoImages_var}" target="#{issuePersonalBond2.targetImageInfo}"/>
+                                                </p:commandLink>
+                                            </h:panelGrid>
+                                        </p:panel>
+                                    </p:dataGrid>
+                                </p:tab>
+                                <p:tab title="考察资料" >
+                                    <p:dataGrid paginator="true" paginatorPosition="bottom" rows="32" columns="8" emptyMessage="合同资料图片为空" value="#{issuePersonalBond2.visitInfo.imageInfoEntitys}"  var="visitImages_var" id="visitImages_id">
+                                        <f:facet name="header">
+                                            <table>
+                                                <tr>
+                                                    <td style="text-align: center; width: 100%;border: none" rowspan="2">
+                                                        <p:outputLabel value="考察资料详情"/>
+                                                    </td>
+                                                    <td style=" width: 20px;border: none">
+                                                        <p:commandLink styleClass="ui-icon ui-icon-arrowthickstop-1-n"  onclick="PF('uploadImageDlg_wid').show()"  immediate="true" id="uploadImage_id"/>
+                                                        <p:tooltip for="uploadImage_id" value="上传资料图片"   />
+                                                    </td>          
+                                                </tr>
+                                            </table>
+                                        </f:facet>   
+                                        <p:panel style="text-align:center">
+                                            <f:facet name="header">
+                                                <table>
+                                                    <tr>
+                                                        <td style="text-align: center; width: 100%;border: none" rowspan="2">
+                                                            <p:outputLabel value="#{contractImages_var.imageName}"/>
+                                                        </td>
+                                                        <td style=" width: 20px;border: none">
+                                                            <p:commandLink styleClass="ui-icon ui-icon-trash"  onclick="PF('deleteImageDlg_wid').show()"  immediate="true" id="uploadImageItem_id"/>
+                                                            <p:tooltip for="uploadImageItem_id" value="删除资料图片"   />
+                                                        </td>          
+                                                    </tr>
+                                                </table>
+                                            </f:facet>   
+                                            <h:panelGrid columns="1" style="width:100%">
+                                                <p:graphicImage value="#{visitImages_var.imagePath}" style=" margin: 0 auto"  alt="Image Description for #{visitImages_var.imagePath}" width="64" height="64" title="#{visitImages_var.imagePath}"/>
+                                                <p:commandLink styleClass="ui-icon ui-icon-search" immediate="true" style=" margin: 0 auto" id="lookImage_id" onclick="PF('showImageDlg_wid').show()" update=":issue2form:imageDetail">
+                                                    <f:setPropertyActionListener value="#{visitImages_var}" target="#{issuePersonalBond2.targetImageInfo}"/>
+                                                </p:commandLink>
+                                            </h:panelGrid>
+                                        </p:panel>
+                                    </p:dataGrid>
+                                </p:tab>
+                            </p:tabView>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding-top:10px;padding-bottom:10px;width: 50%">
+                            <p:commandButton id="front" value="上一步"  style="width:100%;height: 40px" action="issueBond1"/>
+                        </td>
+                        <td style="padding-top:10px;padding-bottom:10px;width:50%">
+                            <p:commandButton id="next" value="下一步" style="width:100%;height: 40px"  action="#{issuePersonalBond2.toNextStep()}"/>
+                        </td>
+                    </tr>
+                </table>
+            </h:form> 
+        </ui:define>
+    </ui:composition>
+</html>
