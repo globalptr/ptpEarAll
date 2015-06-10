@@ -7,7 +7,7 @@
 package com.oakeel.ejb.entityAndEao.backUser;
 
 import com.oakeel.ejb.entityAndEao.backUserSet.BackUserSetEntity;
-import com.oakeel.ejb.entityAndEao.bond.BondEntity;
+import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEntity;
 import com.oakeel.ejb.entityAndEao.ptpProduct.PtpProductEntity;
 import com.oakeel.ejb.entityAndEao.user.UserEntity;
 import java.util.Set;

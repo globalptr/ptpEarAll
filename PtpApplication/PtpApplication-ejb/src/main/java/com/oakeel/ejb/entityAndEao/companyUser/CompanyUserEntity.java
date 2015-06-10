@@ -6,7 +6,7 @@
 
 package com.oakeel.ejb.entityAndEao.companyUser;
 
-import com.oakeel.ejb.entityAndEao.bond.BondEntity;
+import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEntity;
 import com.oakeel.ejb.entityAndEao.imageInfo.ImageInfoEntity;
 import com.oakeel.ejb.entityAndEao.user.UserEntity;
 import com.oakeel.ejb.ptpEnum.CompanyType;
@@ -25,7 +25,7 @@ public class CompanyUserEntity extends UserEntity {
     @OneToOne
     private ImageInfoEntity logImage;//logo
     @OneToMany(mappedBy="companyUserEntity")
-    Set<BondEntity> bondEntitys; 
+    Set<PersonalBondEntity> bondEntitys; 
     private String mainBusiness;//主营业务
     private CompanyType companyType;//公司类型
     /**

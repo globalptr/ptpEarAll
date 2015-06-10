@@ -4,11 +4,10 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.bond;
+package com.oakeel.ejb.entityAndEao.personalBond;
 
 import com.oakeel.ejb.entityAndEao.bondInformation.BondInformationEntity;
 import com.oakeel.ejb.entityAndEao.companyUser.CompanyUserEntity;
-import com.oakeel.ejb.entityAndEao.folder.NewEntity;
 import com.oakeel.ejb.entityAndEao.ptpProduct.PtpProductEntity;
 import com.oakeel.ejb.ptpEnum.BondType;
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ import javax.persistence.OneToMany;
  * @author root
  */
 @Entity
-public class BondEntity extends PtpProductEntity {
+public class PersonalBondEntity extends PtpProductEntity {
     private static final long serialVersionUID = 1L;
  
     //担保公司实体

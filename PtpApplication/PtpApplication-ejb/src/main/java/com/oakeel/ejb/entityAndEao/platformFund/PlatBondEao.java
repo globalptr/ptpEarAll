@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.bond;
+package com.oakeel.ejb.entityAndEao.platformFund;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EaoRoot;
 import com.oakeel.ejb.ptpEnum.BondStage;
@@ -20,11 +20,11 @@ import javax.persistence.criteria.Root;
  * @author root
  */
 @Stateless
-public class BondEao extends EaoRoot<BondEntity> implements BondEaoLocal {
+public class PlatBondEao extends EaoRoot<PlatBondEntity> implements PlatBondEaoLocal {
 
 
     @Override
-    public void passAudit(BondEntity bond) {
+    public void passAudit(PlatBondEntity bond) {
         if(bond!=null) {
             bond.setBondStage(BondStage.审核);
             em.merge(bond);
@@ -32,25 +32,25 @@ public class BondEao extends EaoRoot<BondEntity> implements BondEaoLocal {
     }
 
     @Override
-    public void backToApplication(BondEntity bond) {
+    public void backToApplication(PlatBondEntity bond) {
         bond.setBondStage(BondStage.申请);
         em.merge(bond);
     }
 
     @Override
-    public void logicDeleteBond(BondEntity bond) {
+    public void logicDeleteBond(PlatBondEntity bond) {
         bond.setActive(Boolean.FALSE);
         em.merge(bond);
     }
 
 
     @Override
-    public List<BondEntity> getAllAuditBonds() {
+    public List<PlatBondEntity> getAllAuditBonds() {
         CriteriaBuilder builder=em.getCriteriaBuilder();
-        CriteriaQuery<BondEntity> query=builder.createQuery(BondEntity.class);
-        Root<BondEntity> s=query.from(BondEntity.class);
-        query.select(s).where(builder.and(builder.equal(s.get(BondEntity_.active), Boolean.TRUE),builder.equal(s.get(BondEntity_.bondStage), BondStage.发布)));
-        TypedQuery<BondEntity> q=em.createQuery(query);
+        CriteriaQuery<PlatBondEntity> query=builder.createQuery(PlatBondEntity.class);
+        Root<PlatBondEntity> s=query.from(PlatBondEntity.class);
+        query.select(s).where(builder.and(builder.equal(s.get(PlatBondEntity_.active), Boolean.TRUE),builder.equal(s.get(PlatBondEntity_.bondStage), BondStage.发布)));
+        TypedQuery<PlatBondEntity> q=em.createQuery(query);
         if(!q.getResultList().isEmpty())
             return q.getResultList();
         else
@@ -58,12 +58,12 @@ public class BondEao extends EaoRoot<BondEntity> implements BondEaoLocal {
     }
 
     @Override
-    public List<BondEntity> getAllLogicDeleteBonds() {
+    public List<PlatBondEntity> getAllLogicDeleteBonds() {
         CriteriaBuilder builder=em.getCriteriaBuilder();
-        CriteriaQuery<BondEntity> query=builder.createQuery(BondEntity.class);
-        Root<BondEntity> s=query.from(BondEntity.class);
-        query.select(s).where(builder.equal(s.get(BondEntity_.active), Boolean.FALSE));
-        TypedQuery<BondEntity> q=em.createQuery(query);
+        CriteriaQuery<PlatBondEntity> query=builder.createQuery(PlatBondEntity.class);
+        Root<PlatBondEntity> s=query.from(PlatBondEntity.class);
+        query.select(s).where(builder.equal(s.get(PlatBondEntity_.active), Boolean.FALSE));
+        TypedQuery<PlatBondEntity> q=em.createQuery(query);
         if(!q.getResultList().isEmpty())
             return q.getResultList();
         else

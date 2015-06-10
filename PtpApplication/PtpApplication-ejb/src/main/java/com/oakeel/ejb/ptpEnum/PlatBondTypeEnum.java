@@ -10,6 +10,6 @@ package com.oakeel.ejb.ptpEnum;
  *
  * @author root
  */
-public enum PlatformFundTypeEnum {
+public enum PlatBondTypeEnum {
     聚财宝,季富宝,月月宝,天天宝;
 }

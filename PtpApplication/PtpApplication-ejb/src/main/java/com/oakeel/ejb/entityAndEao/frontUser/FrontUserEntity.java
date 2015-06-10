@@ -6,12 +6,12 @@
 package com.oakeel.ejb.entityAndEao.frontUser;
 
 import com.oakeel.ejb.entityAndEao.bankCard.BankCardEntity;
-import com.oakeel.ejb.entityAndEao.bond.BondEntity;
+import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEntity;
 import com.oakeel.ejb.entityAndEao.frontUserHoldBond.FrontUserHoldBondEntity;
+import com.oakeel.ejb.entityAndEao.platformFund.PlatBondEntity;
 import com.oakeel.ejb.entityAndEao.user.UserEntity;
 import com.oakeel.ejb.ptpEnum.CreditLevelEnum;
 import com.oakeel.ejb.ptpEnum.LiveCaseEnum;
-import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -28,8 +28,10 @@ public class FrontUserEntity extends UserEntity {
     private static final long serialVersionUID = 1L;
     @OneToMany(mappedBy = "holdUser")//与用户控标实体是一对多的关系，主控在控标实体
     private Set<FrontUserHoldBondEntity> frontUserBondEntitys;
-    @OneToMany(targetEntity=BondEntity.class,mappedBy = "issueUser")//与用户发标实体是一对多的关系，主控在发标实体
-    private Set<BondEntity> bondEntitys;
+    @OneToMany(targetEntity=PersonalBondEntity.class,mappedBy = "issueUser")//与用户发标实体是一对多的关系，主控在发标实体
+    private Set<PersonalBondEntity> bondEntitys;
+    @OneToMany(targetEntity=PlatBondEntity.class,mappedBy = "issueUser")
+    private Set<PlatBondEntity> platBondEntitys;
     //////////////////////////////////////////
     @OneToMany//用户与银行卡之间是一对多的关系
     private Set<BankCardEntity> bankCardEntitys;
@@ -157,15 +159,29 @@ public class FrontUserEntity extends UserEntity {
     /**
      * @return the bondEntitys
      */
-    public Set<BondEntity> getBondEntitys() {
+    public Set<PersonalBondEntity> getBondEntitys() {
         return bondEntitys;
     }
 
     /**
      * @param bondEntitys the bondEntitys to set
      */
-    public void setBondEntitys(Set<BondEntity> bondEntitys) {
+    public void setBondEntitys(Set<PersonalBondEntity> bondEntitys) {
         this.bondEntitys = bondEntitys;
+    }
+
+    /**
+     * @return the platBondEntitys
+     */
+    public Set<PlatBondEntity> getPlatBondEntitys() {
+        return platBondEntitys;
+    }
+
+    /**
+     * @param platBondEntitys the platBondEntitys to set
+     */
+    public void setPlatBondEntitys(Set<PlatBondEntity> platBondEntitys) {
+        this.platBondEntitys = platBondEntitys;
     }
 
 }

@@ -5,7 +5,7 @@
  */
 package com.oakeel.ejb.transaction;
 
-import com.oakeel.ejb.entityAndEao.bond.BondEntity;
+import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEntity;
 import com.oakeel.ejb.entityAndEao.companyUser.CompanyUserEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import com.oakeel.ejb.entityAndEao.operation.OperationEntity;
@@ -196,7 +196,7 @@ public class InitEjb implements InitEjbLocal, Serializable {
 
     @Override
     public void test() {
-        BondEntity bond=new BondEntity();
+        PersonalBondEntity bond=new PersonalBondEntity();
         em.persist(bond);
 //        CompanyUserEntity com = new CompanyUserEntity();
 //        com.setName("登科担保");
