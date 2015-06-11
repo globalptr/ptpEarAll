@@ -12,7 +12,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>issuePersonalBond</from-outcome>
-            <to-view-id>/bond/issuePersonalBond1.xhtml</to-view-id>
+            <to-view-id>/personalBond/issuePersonalBond1.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -22,7 +22,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>issuePersonalBond4</from-outcome>
-            <to-view-id>/bond/issuePersonalBond4.xhtml</to-view-id>
+            <to-view-id>/personalBond/issuePersonalBond4.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -63,7 +63,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>personalBondManage</from-outcome>
-            <to-view-id>/bond/personalBondManage.xhtml</to-view-id>
+            <to-view-id>/personalBond/personalBondManage.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -78,7 +78,12 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>personalBondTrash</from-outcome>
-            <to-view-id>/bond/personalBondTrash.xhtml</to-view-id>
+            <to-view-id>/personalBond/personalBondTrash.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>personalBondTest</from-outcome>
+            <to-view-id>/personalBond/personalBondTest.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>

@@ -9,7 +9,7 @@ package com.oakeel.ptpPageViewBean;
 import com.oakeel.PtpSessionBean;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEaoLocal;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
-import com.oakeel.ejb.entityAndEao.platformFund.PlatBondEntity;
+import com.oakeel.ejb.entityAndEao.platBond.PlatBondEntity;
 import com.oakeel.ejb.entityAndEao.sysSet.SysSetEaoLocal;
 import com.oakeel.ejb.entityAndEao.sysSet.SysSetEntity;
 import com.oakeel.ejb.ptpEnum.PlatBondTypeEnum;

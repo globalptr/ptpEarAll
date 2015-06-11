@@ -6,8 +6,8 @@
 
 package com.oakeel.ptpPageViewBean;
 
-import com.oakeel.ejb.entityAndEao.platformFund.PlatBondEaoLocal;
-import com.oakeel.ejb.entityAndEao.platformFund.PlatBondEntity;
+import com.oakeel.ejb.entityAndEao.platBond.PlatBondEaoLocal;
+import com.oakeel.ejb.entityAndEao.platBond.PlatBondEntity;
 import com.oakeel.ejb.ptpEnum.SysInfo;
 import java.util.List;
 import javax.annotation.PostConstruct;

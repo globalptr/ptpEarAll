@@ -7,7 +7,7 @@
 package com.oakeel.ptpPageViewBean;
 
 import com.oakeel.PtpSessionBean;
-import com.oakeel.ejb.entityAndEao.platformFund.PlatBondEntity;
+import com.oakeel.ejb.entityAndEao.platBond.PlatBondEntity;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;

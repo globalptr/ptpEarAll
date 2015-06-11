@@ -106,9 +106,9 @@
                     </tr>
                     <tr>
                         <td colspan="12">
-                            <p:dataTable rowIndexVar="row" value="#{frontUserAccount.frontUser.frontUserBondEntitys}" var="frontUserBond_var">
+                            <p:dataTable rowIndexVar="row" value="#{frontUserAccount.frontUser.frontUserHoldPlatBondEntitys}" var="frontUserBond_var">
                                 <f:facet name="header">
-                                    投资记录
+                                    平台标投资记录
                                 </f:facet>  
                                 <p:column  headerText="序号" style="width:30px">
                                     <h:outputText value="#{row + 1}"/> 
@@ -117,7 +117,41 @@
                                     <p:rowToggler/>
                                 </p:column>
                                 <p:column headerText="标号">
-                                    #{frontUserBond_var.ptpProductEntity.bondNumber}
+                                    #{frontUserBond_var.platBondEntity.bondNumber}
+                                </p:column>>
+                                <p:column headerText="发标人">
+                                    #{frontUserBond_var.holdUser.name}
+                                </p:column>
+                                <p:column headerText="购买份数">
+                                    #{frontUserBond_var.allBondNumber}
+                                </p:column>
+                                <p:rowExpansion>
+                                    <p:dataTable value="#{frontUserBond_var.bondIncomeProportionEntitys}" var="bondIncomes_var">
+                                        <p:column headerText="copies">
+                                            #{bondIncomes_var.copies}
+                                        </p:column> 
+                                        <p:column headerText="Numproportion">
+                                            #{bondIncomes_var.Numproportion}
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:rowExpansion>
+                            </p:dataTable>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="12">
+                            <p:dataTable rowIndexVar="row" value="#{frontUserAccount.frontUser.frontUserHoldPersonalBondEntitys}" var="frontUserBond_var">
+                                <f:facet name="header">
+                                    个人标投资记录
+                                </f:facet>  
+                                <p:column  headerText="序号" style="width:30px">
+                                    <h:outputText value="#{row + 1}"/> 
+                                </p:column>
+                                <p:column style="width:16px">
+                                    <p:rowToggler/>
+                                </p:column>
+                                <p:column headerText="标号">
+                                    #{frontUserBond_var.personalBondEntity.bondNumber}
                                 </p:column>>
                                 <p:column headerText="发标人">
                                     #{frontUserBond_var.holdUser.name}
