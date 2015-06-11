@@ -52,6 +52,18 @@ public class FrontUserEao extends EaoRoot<FrontUserEntity> implements FrontUserE
         TypedQuery<FrontUserEntity> q=em.createQuery(query);
         return q.getResultList();
     }
+    @Override
+    public List<FrontUserEntity> getAllActiveUsers() {
+        CriteriaBuilder builder=em.getCriteriaBuilder();
+        CriteriaQuery<FrontUserEntity> query=builder.createQuery(FrontUserEntity.class);
+        Root<FrontUserEntity> s=query.from(FrontUserEntity.class);
+        query.select(s).where(builder.equal(s.get(FrontUserEntity_.locked), Boolean.FALSE));
+        TypedQuery<FrontUserEntity> q=em.createQuery(query);
+        if(!q.getResultList().isEmpty())
+            return q.getResultList();
+        else
+            return null;
+    }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }

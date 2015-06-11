@@ -7,7 +7,7 @@
 package com.oakeel.ejb.transaction.platformFund;
 
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
-import com.oakeel.ejb.entityAndEao.platformFund.PlatBondEntity;
+import com.oakeel.ejb.entityAndEao.platBond.PlatBondEntity;
 import com.oakeel.ejb.ptpEnum.BondStage;
 import java.util.logging.Level;
 import java.util.logging.Logger;

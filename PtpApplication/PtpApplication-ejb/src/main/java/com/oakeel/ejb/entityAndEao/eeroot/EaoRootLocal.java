@@ -19,4 +19,5 @@ public interface EaoRootLocal<T> {
     public void updateEntity(T t);
     public void removeEntity(T t);
     public T findEntityById(String uuid);
+    public T reflushEntity(T t);
 }

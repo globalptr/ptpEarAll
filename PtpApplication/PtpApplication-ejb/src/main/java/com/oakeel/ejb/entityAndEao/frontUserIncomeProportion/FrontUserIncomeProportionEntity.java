@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.ptpProductIncomeProportion;
+package com.oakeel.ejb.entityAndEao.frontUserIncomeProportion;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import java.math.BigDecimal;
@@ -15,7 +15,7 @@ import javax.persistence.Entity;
  * @author root
  */
 @Entity
-public class PtpProductIncomeProportionEntity extends EntityRoot {
+public class FrontUserIncomeProportionEntity extends EntityRoot {
     private static final long serialVersionUID = 1L;
     
     private int copiesNum;//份数

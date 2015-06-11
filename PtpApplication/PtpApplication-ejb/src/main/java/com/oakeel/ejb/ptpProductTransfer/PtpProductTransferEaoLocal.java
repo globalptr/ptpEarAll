@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.frontUserHoldBond;
+package com.oakeel.ejb.ptpProductTransfer;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EaoRootLocal;
 import javax.ejb.Local;
@@ -14,6 +14,6 @@ import javax.ejb.Local;
  * @author root
  */
 @Local
-public interface FrontUserHoldBondEaoLocal extends EaoRootLocal<FrontUserHoldBondEntity> {
+public interface PtpProductTransferEaoLocal   extends EaoRootLocal<PtpProductTransferEntity>{
     
 }

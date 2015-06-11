@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.platformFund;
+package com.oakeel.ejb.entityAndEao.platBond;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EaoRoot;
 import com.oakeel.ejb.ptpEnum.BondStage;

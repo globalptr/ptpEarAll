@@ -69,4 +69,11 @@ public class EaoRoot<T> implements EaoRootLocal<T> {
     public T findEntityById(String uuid) {
         return em.find(clazz, uuid);
     }
+
+    @Override
+    public T reflushEntity(T t) {
+        T x=em.merge(t);
+        em.refresh(x);
+        return x;
+    }
 }

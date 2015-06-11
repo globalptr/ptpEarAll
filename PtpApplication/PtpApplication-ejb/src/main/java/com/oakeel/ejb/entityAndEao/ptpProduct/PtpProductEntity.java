@@ -11,14 +11,16 @@ import com.oakeel.ejb.entityAndEao.bondState.BondStateEntity;
 import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import com.oakeel.ejb.entityAndEao.expense.ExpenseEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
-import com.oakeel.ejb.entityAndEao.frontUserHoldBond.FrontUserHoldBondEntity;
+import com.oakeel.ejb.entityAndEao.frontUserHoldPersonalBond.FrontUserHoldPersonalBondEntity;
 import com.oakeel.ejb.ptpEnum.BondStage;
 import com.oakeel.ejb.ptpEnum.RepayModelEnum;
 import com.oakeel.ejb.ptpEnum.SplitUnit;
+import com.oakeel.ejb.ptpProductTransfer.PtpProductTransferEntity;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -89,9 +91,9 @@ public class PtpProductEntity extends EntityRoot {
     private BondStateEntity bondStateEntity=new BondStateEntity();
     @OneToMany(cascade = {CascadeType.PERSIST})//与支出明细是一对多的关系
     private List<ExpenseEntity> expenseEntitys=new ArrayList<>();//支出明细
-    @OneToMany(mappedBy="ptpProductEntity")
-    Set<FrontUserHoldBondEntity> frontUserHoldBondEntitys;//投标人
     private Boolean active=true;//是否激活
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<PtpProductTransferEntity> ptpProductTransferEntitys=new LinkedHashSet<>();//转让记录
     /**
      * @return the bondStateEntity
      */
@@ -359,5 +361,20 @@ public class PtpProductEntity extends EntityRoot {
     public void setIssueDate(Date issueDate) {
         this.issueDate = issueDate;
     }
+
+    /**
+     * @return the ptpProductTransferEntitys
+     */
+    public Set<PtpProductTransferEntity> getPtpProductTransferEntitys() {
+        return ptpProductTransferEntitys;
+    }
+
+    /**
+     * @param ptpProductTransferEntitys the ptpProductTransferEntitys to set
+     */
+    public void setPtpProductTransferEntitys(Set<PtpProductTransferEntity> ptpProductTransferEntitys) {
+        this.ptpProductTransferEntitys = ptpProductTransferEntitys;
+    }
+
 
 }

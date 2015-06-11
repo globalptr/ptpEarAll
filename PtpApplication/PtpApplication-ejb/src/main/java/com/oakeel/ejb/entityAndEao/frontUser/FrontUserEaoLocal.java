@@ -19,4 +19,5 @@ public interface FrontUserEaoLocal extends EaoRootLocal<FrontUserEntity> {
     public List<FrontUserEntity> getUserByName(String name);
     public List<FrontUserEntity> getUserByTelephone(String telephone);
     public List<FrontUserEntity> getUserByEmail(String email);
+    public List<FrontUserEntity> getAllActiveUsers();
 }

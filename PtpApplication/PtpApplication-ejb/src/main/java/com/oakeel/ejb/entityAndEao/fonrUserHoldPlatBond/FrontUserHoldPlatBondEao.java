@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.ptpProductIncomeProportion;
+package com.oakeel.ejb.entityAndEao.fonrUserHoldPlatBond;
 
+import com.oakeel.ejb.entityAndEao.eeroot.EaoRoot;
 import javax.ejb.Stateless;
 
 /**
@@ -13,9 +14,8 @@ import javax.ejb.Stateless;
  * @author root
  */
 @Stateless
-public class PtpProductIncomeProportionEao implements PtpProductIncomeProportionEaoLocal {
+public class FrontUserHoldPlatBondEao  extends EaoRoot<FrontUserHoldPlatBondEntity> implements FrontUserHoldPlatBondEaoLocal {
 
-    
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }

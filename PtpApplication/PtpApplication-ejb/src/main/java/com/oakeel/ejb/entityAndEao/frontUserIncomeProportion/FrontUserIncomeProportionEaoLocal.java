@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.ptpProductIncomeProportion;
+package com.oakeel.ejb.entityAndEao.frontUserIncomeProportion;
 
 import javax.ejb.Local;
 
@@ -13,6 +13,6 @@ import javax.ejb.Local;
  * @author root
  */
 @Local
-public interface PtpProductIncomeProportionEaoLocal {
+public interface FrontUserIncomeProportionEaoLocal {
     
 }

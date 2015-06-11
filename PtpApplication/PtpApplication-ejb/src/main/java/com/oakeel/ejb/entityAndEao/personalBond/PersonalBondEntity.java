@@ -8,10 +8,12 @@ package com.oakeel.ejb.entityAndEao.personalBond;
 
 import com.oakeel.ejb.entityAndEao.bondInformation.BondInformationEntity;
 import com.oakeel.ejb.entityAndEao.companyUser.CompanyUserEntity;
+import com.oakeel.ejb.entityAndEao.frontUserHoldPersonalBond.FrontUserHoldPersonalBondEntity;
 import com.oakeel.ejb.entityAndEao.ptpProduct.PtpProductEntity;
 import com.oakeel.ejb.ptpEnum.BondType;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,6 +40,8 @@ public class PersonalBondEntity extends PtpProductEntity {
     private BondType bondType;//标类型
     @OneToMany(cascade = {CascadeType.ALL})//标的资料，一对多
     private List<BondInformationEntity> bondInformationEntiys=new ArrayList<>();
+    @OneToMany(targetEntity = FrontUserHoldPersonalBondEntity.class,mappedBy="personalBondEntity")
+    private Set<FrontUserHoldPersonalBondEntity> frontUserHoldPersonalBondEntitys;//控标实体
 
     
 
@@ -126,6 +130,21 @@ public class PersonalBondEntity extends PtpProductEntity {
     public void setBondInformationEntiys(List<BondInformationEntity> bondInformationEntiys) {
         this.bondInformationEntiys = bondInformationEntiys;
     }
+
+    /**
+     * @return the frontUserHoldPersonalBondEntitys
+     */
+    public Set<FrontUserHoldPersonalBondEntity> getFrontUserHoldPersonalBondEntitys() {
+        return frontUserHoldPersonalBondEntitys;
+    }
+
+    /**
+     * @param frontUserHoldPersonalBondEntitys the frontUserHoldPersonalBondEntitys to set
+     */
+    public void setFrontUserHoldPersonalBondEntitys(Set<FrontUserHoldPersonalBondEntity> frontUserHoldPersonalBondEntitys) {
+        this.frontUserHoldPersonalBondEntitys = frontUserHoldPersonalBondEntitys;
+    }
+
 
     
 }

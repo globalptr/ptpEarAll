@@ -6,12 +6,14 @@
 package com.oakeel.ejb.entityAndEao.frontUser;
 
 import com.oakeel.ejb.entityAndEao.bankCard.BankCardEntity;
+import com.oakeel.ejb.entityAndEao.fonrUserHoldPlatBond.FrontUserHoldPlatBondEntity;
+import com.oakeel.ejb.entityAndEao.frontUserHoldPersonalBond.FrontUserHoldPersonalBondEntity;
 import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEntity;
-import com.oakeel.ejb.entityAndEao.frontUserHoldBond.FrontUserHoldBondEntity;
-import com.oakeel.ejb.entityAndEao.platformFund.PlatBondEntity;
+import com.oakeel.ejb.entityAndEao.platBond.PlatBondEntity;
 import com.oakeel.ejb.entityAndEao.user.UserEntity;
 import com.oakeel.ejb.ptpEnum.CreditLevelEnum;
 import com.oakeel.ejb.ptpEnum.LiveCaseEnum;
+import com.oakeel.ejb.ptpProductTransfer.PtpProductTransferEntity;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -27,11 +29,17 @@ public class FrontUserEntity extends UserEntity {
 
     private static final long serialVersionUID = 1L;
     @OneToMany(mappedBy = "holdUser")//与用户控标实体是一对多的关系，主控在控标实体
-    private Set<FrontUserHoldBondEntity> frontUserBondEntitys;
-    @OneToMany(targetEntity=PersonalBondEntity.class,mappedBy = "issueUser")//与用户发标实体是一对多的关系，主控在发标实体
+    private Set<FrontUserHoldPersonalBondEntity> frontUserHoldPersonalBondEntitys;
+    @OneToMany(mappedBy = "holdUser")//与用户控标实体是一对多的关系，主控在控标实体
+    private Set<FrontUserHoldPlatBondEntity> frontUserHoldPlatBondEntitys;
+    @OneToMany(mappedBy = "issueUser")//与用户发标实体是一对多的关系，主控在发标实体
     private Set<PersonalBondEntity> bondEntitys;
     @OneToMany(targetEntity=PlatBondEntity.class,mappedBy = "issueUser")
     private Set<PlatBondEntity> platBondEntitys;
+    @OneToMany(targetEntity=PtpProductTransferEntity.class,mappedBy="fromUser")
+    private Set<PtpProductTransferEntity> transferOutProducts;//转让出去的产品
+    @OneToMany(targetEntity=PtpProductTransferEntity.class,mappedBy="toUser")
+    private Set<PtpProductTransferEntity> transferInProducts;//转让进来的产品
     //////////////////////////////////////////
     @OneToMany//用户与银行卡之间是一对多的关系
     private Set<BankCardEntity> bankCardEntitys;
@@ -129,20 +137,6 @@ public class FrontUserEntity extends UserEntity {
     }
 
     /**
-     * @return the frontUserBondEntitys
-     */
-    public Set<FrontUserHoldBondEntity> getFrontUserBondEntitys() {
-        return frontUserBondEntitys;
-    }
-
-    /**
-     * @param frontUserBondEntitys the frontUserBondEntitys to set
-     */
-    public void setFrontUserBondEntitys(Set<FrontUserHoldBondEntity> frontUserBondEntitys) {
-        this.frontUserBondEntitys = frontUserBondEntitys;
-    }
-
-    /**
      * @return the bankCardEntitys
      */
     public Set<BankCardEntity> getBankCardEntitys() {
@@ -182,6 +176,63 @@ public class FrontUserEntity extends UserEntity {
      */
     public void setPlatBondEntitys(Set<PlatBondEntity> platBondEntitys) {
         this.platBondEntitys = platBondEntitys;
+    }
+
+    /**
+     * @return the transferOutProducts
+     */
+    public Set<PtpProductTransferEntity> getTransferOutProducts() {
+        return transferOutProducts;
+    }
+
+    /**
+     * @param transferOutProducts the transferOutProducts to set
+     */
+    public void setTransferOutProducts(Set<PtpProductTransferEntity> transferOutProducts) {
+        this.transferOutProducts = transferOutProducts;
+    }
+
+    /**
+     * @return the transferInProducts
+     */
+    public Set<PtpProductTransferEntity> getTransferInProducts() {
+        return transferInProducts;
+    }
+
+    /**
+     * @param transferInProducts the transferInProducts to set
+     */
+    public void setTransferInProducts(Set<PtpProductTransferEntity> transferInProducts) {
+        this.transferInProducts = transferInProducts;
+    }
+
+
+    /**
+     * @return the frontUserHoldPlatBondEntitys
+     */
+    public Set<FrontUserHoldPlatBondEntity> getFrontUserHoldPlatBondEntitys() {
+        return frontUserHoldPlatBondEntitys;
+    }
+
+    /**
+     * @param frontUserHoldPlatBondEntitys the frontUserHoldPlatBondEntitys to set
+     */
+    public void setFrontUserHoldPlatBondEntitys(Set<FrontUserHoldPlatBondEntity> frontUserHoldPlatBondEntitys) {
+        this.frontUserHoldPlatBondEntitys = frontUserHoldPlatBondEntitys;
+    }
+
+    /**
+     * @return the frontUserHoldPersonalBondEntitys
+     */
+    public Set<FrontUserHoldPersonalBondEntity> getFrontUserHoldPersonalBondEntitys() {
+        return frontUserHoldPersonalBondEntitys;
+    }
+
+    /**
+     * @param frontUserHoldPersonalBondEntitys the frontUserHoldPersonalBondEntitys to set
+     */
+    public void setFrontUserHoldPersonalBondEntitys(Set<FrontUserHoldPersonalBondEntity> frontUserHoldPersonalBondEntitys) {
+        this.frontUserHoldPersonalBondEntitys = frontUserHoldPersonalBondEntitys;
     }
 
 }

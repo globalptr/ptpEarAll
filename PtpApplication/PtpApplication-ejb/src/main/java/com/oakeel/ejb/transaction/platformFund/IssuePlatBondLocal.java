@@ -5,7 +5,7 @@
  */
 package com.oakeel.ejb.transaction.platformFund;
 
-import com.oakeel.ejb.entityAndEao.platformFund.PlatBondEntity;
+import com.oakeel.ejb.entityAndEao.platBond.PlatBondEntity;
 import javax.ejb.Local;
 import javax.ejb.Remove;
 
