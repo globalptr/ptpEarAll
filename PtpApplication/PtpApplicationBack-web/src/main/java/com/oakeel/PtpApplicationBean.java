@@ -9,6 +9,7 @@ package com.oakeel;
 import com.oakeel.ejb.ptpEnum.SysInfo;
 import com.oakeel.ejb.transaction.InitEjbLocal;
 import com.oakeel.ejb.transaction.TestLocal;
+import java.math.BigDecimal;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
@@ -33,6 +34,8 @@ public class PtpApplicationBean {
     InitEjbLocal initEjbLocal;
     @EJB
     TestLocal test;
+    
+    private BigDecimal percentRate=new BigDecimal("100");
     
     @PersistenceContext(unitName = "ptpEjbPu")
     EntityManager em;
@@ -81,5 +84,19 @@ public class PtpApplicationBean {
         initEjbLocal.initSet();
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(SysInfo.提示.toString(),  "系统参数初始化完毕!") );
+    }
+
+    /**
+     * @return the percentRate
+     */
+    public BigDecimal getPercentRate() {
+        return percentRate;
+    }
+
+    /**
+     * @param percentRate the percentRate to set
+     */
+    public void setPercentRate(BigDecimal percentRate) {
+        this.percentRate = percentRate;
     }
 }

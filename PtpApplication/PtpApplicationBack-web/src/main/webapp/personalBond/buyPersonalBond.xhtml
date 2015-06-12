@@ -36,7 +36,7 @@
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <p:dataTable filterEvent="keydown"  rowIndexVar="row" id="personalBondTable_id" var="bonds_var" widgetVar="bonds_wid" value="#{personalBondTest.bondEntitys}"  emptyMessage="没有可供购买的标" filteredValue="#{personalBondTest.bondFilter}">
+                            <p:dataTable filterEvent="keydown"  rowIndexVar="row" id="personalBondTable_id" var="bonds_var" widgetVar="bonds_wid" value="#{buyPersonalBond.bondEntitys}"  emptyMessage="没有可供购买的标" filteredValue="#{buyPersonalBond.bondFilter}">
                                 <f:facet name="header">
                                     审批融资标
                                 </f:facet>
@@ -55,7 +55,7 @@
                                     <h:outputText value="#{bonds_var.issueAdmin}"/>
                                 </p:column>
                                 <p:column headerText="年利率"  footerText="包含模式" filterBy="#{bonds_var.yearRate}">
-                                    <h:outputText value="#{bonds_var.yearRate}" converter="BigDecimalConverter"/>
+                                    <h:outputText value="#{bonds_var.yearRate}"  converter="PercentSignConverter"/>
                                 </p:column>
                                 <p:column headerText="基本金"  filterBy="#{bonds_var.baseAmount}" footerText="包含模式" >
                                     <h:outputText value="#{bonds_var.baseAmount}" />
@@ -78,7 +78,7 @@
                                     <f:facet name="filter">
                                         <p:selectOneMenu onchange="PF('bonds_wid').filter()">
                                             <f:selectItem itemLabel="选择类型" itemValue="#{null}" noSelectionOption="true" />
-                                            <f:selectItems   value="#{personalBondTest.bondTypes}"/>
+                                            <f:selectItems   value="#{buyPersonalBond.bondTypes}"/>
                                         </p:selectOneMenu>
                                     </f:facet>
                                     <h:outputText value="#{bonds_var.bondType}" />
@@ -87,7 +87,7 @@
                                     <f:facet name="filter">
                                         <p:selectOneMenu onchange="PF('bonds_wid').filter()">
                                             <f:selectItem itemLabel="选择类型" itemValue="#{null}" noSelectionOption="true" />
-                                            <f:selectItems   value="#{personalBondTest.splitUnits}"/>
+                                            <f:selectItems   value="#{buyPersonalBond.splitUnits}"/>
                                         </p:selectOneMenu>
                                     </f:facet>
                                     <h:outputText value="#{bonds_var.repayCycle}" />
@@ -99,7 +99,7 @@
                                     <f:facet name="filter">
                                         <p:selectOneMenu onchange="PF('bonds_wid').filter()">
                                             <f:selectItem itemLabel="选择类型" itemValue="#{null}" noSelectionOption="true" />
-                                            <f:selectItems value="#{personalBondTest.repayModelEnums}"/>
+                                            <f:selectItems value="#{buyPersonalBond.repayModelEnums}"/>
                                         </p:selectOneMenu>
                                     </f:facet>
                                     <h:outputText value="#{bonds_var.repayModelEnum}" />
@@ -116,14 +116,14 @@
                                     <f:facet name="filter">
                                         <p:selectOneMenu onchange="PF('bonds_wid').filter()">
                                             <f:selectItem itemLabel="选择类型" itemValue="#{null}" noSelectionOption="true" />
-                                            <f:selectItems   value="#{personalBondTest.bondStages}"/>
+                                            <f:selectItems   value="#{buyPersonalBond.bondStages}"/>
                                         </p:selectOneMenu>
                                     </f:facet>
                                     <h:outputText value="#{bonds_var.bondStage}" />
                                 </p:column>
                                 <p:column style="width:20px">
                                     <p:commandLink id="restore_id"  styleClass="ui-icon ui-icon-cart" immediate="true"  update=":form:buyBond_id">
-                                        <f:setPropertyActionListener value="#{bonds_var}" target="#{personalBondTest.targetBond}"/>
+                                        <f:setPropertyActionListener value="#{bonds_var}" target="#{buyPersonalBond.targetBond}"/>
                                     </p:commandLink>
                                     <p:tooltip for="restore_id" value="购买"/>
                                 </p:column>
@@ -140,7 +140,7 @@
                             购买标的标号:
                         </td>
                         <td style="padding-top: 20px;width:150px">
-                            <p:outputLabel id="buyBond_id" style="width:100%" value="#{personalBondTest.targetBond==null?'没有选择的标':personalBondTest.targetBond.bondNumber}"/>
+                            <p:outputLabel id="buyBond_id" style="width:100%" value="#{buyPersonalBond.targetBond==null?'没有选择的标':buyPersonalBond.targetBond.bondNumber}"/>
                         </td>
                         <td>
                             
@@ -151,7 +151,7 @@
                             购买用户:
                         </td>
                         <td style="padding-top: 20px;width:150px;">
-                            <p:autoComplete  style="width:100%;" value="#{personalBondTest.targetUserEntity}"  forceSelection="true"  var="selectUser_var" itemLabel="#{selectUser_var.name}" converter="userConverter" itemValue="#{selectUser_var}" completeMethod="#{personalBondTest.findFrontUser}"/>
+                            <p:autoComplete  style="width:100%;" value="#{buyPersonalBond.targetUserEntity}"  forceSelection="true"  var="selectUser_var" itemLabel="#{selectUser_var.name}" converter="userConverter" itemValue="#{selectUser_var}" completeMethod="#{buyPersonalBond.findFrontUser}"/>
                         </td>
                         <td>
                         </td>
@@ -161,14 +161,14 @@
                             购买份数:
                         </td>
                         <td style="padding-top: 20px;width:150px;">
-                            <p:inputText style="width:100%;" maxlength="4" size="10"/>
+                            <p:inputText style="width:100%;" value="#{buyPersonalBond.buyNum}"/>
                         </td>
                         <td>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <p:commandButton value="购买" style="width:100%;height:30px;" actionListener="#{personalBondTest.buyTest()}"/>
+                            <p:commandButton value="购买" style="width:100%;height:30px;" actionListener="#{buyPersonalBond.buyTest()}"/>
                         </td>
                     </tr>
                 </table>

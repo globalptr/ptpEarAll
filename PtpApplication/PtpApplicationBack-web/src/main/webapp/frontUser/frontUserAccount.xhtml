@@ -90,6 +90,33 @@
                         </td>
                     </tr>
                     <tr>
+                        <td class="ui-steps-item ui-state-default ui-state-disabled" colspan="12" style="height:40px;font-size: 18px;padding-left: 12px">
+                            用户账户信息
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="width:90px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                            可用余额:
+                        </td>
+                        <td>
+                            <h:outputLabel value="#{frontUserAccount.frontUser.frontUserAccountEntity.availableBalance}" converter="BigDecimalConverter"/>
+                            
+                        </td>
+                        <td style="width:90px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                            冻结金额:
+                        </td>
+                        <td>
+                            <h:outputLabel value="#{frontUserAccount.frontUser.frontUserAccountEntity.freezeBalance}" converter="BigDecimalConverter"/>
+                        </td>
+                        <td style="width:90px;padding-top: 10px;padding-bottom: 10px;text-align: right;">
+                            不可提现金额:
+                        </td>
+                        <td>
+                            <h:outputLabel value="#{frontUserAccount.frontUser.frontUserAccountEntity.notMentionBalance}" converter="BigDecimalConverter"/>
+                        </td>
+                    </tr>
+                    <tr>
                         <td colspan="12">
                             <p:dataTable value="#{frontUserAccount.frontUser.bankCardEntitys}" var="cards_var">
                                 <f:facet name="header">
@@ -126,7 +153,7 @@
                                     #{frontUserBond_var.allBondNumber}
                                 </p:column>
                                 <p:rowExpansion>
-                                    <p:dataTable value="#{frontUserBond_var.bondIncomeProportionEntitys}" var="bondIncomes_var">
+                                    <p:dataTable value="#{frontUserBond_var.frontUserIncomeProportionEntitys}" var="bondIncomes_var">
                                         <p:column headerText="copies">
                                             #{bondIncomes_var.copies}
                                         </p:column> 
@@ -147,34 +174,30 @@
                                 <p:column  headerText="序号" style="width:30px">
                                     <h:outputText value="#{row + 1}"/> 
                                 </p:column>
-                                <p:column style="width:16px">
-                                    <p:rowToggler/>
-                                </p:column>
                                 <p:column headerText="标号">
                                     #{frontUserBond_var.personalBondEntity.bondNumber}
-                                </p:column>>
+                                </p:column>
+                                <p:column headerText="发行份数">
+                                    #{frontUserBond_var.personalBondEntity.issueCopiesNum}
+                                </p:column>
                                 <p:column headerText="发标人">
                                     #{frontUserBond_var.holdUser.name}
                                 </p:column>
                                 <p:column headerText="购买份数">
                                     #{frontUserBond_var.allBondNumber}
                                 </p:column>
-                                <p:rowExpansion>
-                                    <p:dataTable value="#{frontUserBond_var.bondIncomeProportionEntitys}" var="bondIncomes_var">
-                                        <p:column headerText="copies">
-                                            #{bondIncomes_var.copies}
-                                        </p:column> 
-                                        <p:column headerText="Numproportion">
-                                            #{bondIncomes_var.Numproportion}
-                                        </p:column>
-                                    </p:dataTable>
-                                </p:rowExpansion>
+                                <p:column style="width:20px">
+                                    <p:commandLink  id="look_id"  styleClass="ui-icon ui-icon-search" action="#{frontUserAccount.toPersonalBondIncomeDetails()}" immediate="true">
+                                        <f:setPropertyActionListener value="#{frontUserBond_var}" target="#{frontUserAccount.targetHoldPersonalBond}"/>
+                                    </p:commandLink>
+                                    <p:tooltip for="look_id" value="查看收益详情"/>
+                                </p:column>
                             </p:dataTable>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="12">
-                            <p:dataTable rowIndexVar="row" value="#{frontUserAccount.frontUser.bondEntitys}" var="ptpProducts_var">
+                            <p:dataTable rowIndexVar="row" value="#{frontUserAccount.frontUser.issueBondEntitys}" var="ptpProducts_var">
                                 <f:facet name="header">
                                     融资记录
                                 </f:facet>
@@ -231,18 +254,6 @@
                             <p:dataTable rowIndexVar="row" >
                                 <f:facet name="header">
                                     资金变动记录
-                                </f:facet>
-                                <p:column  headerText="序号" style="width:30px">
-                                    <h:outputText value="#{row + 1}"/> 
-                                </p:column>
-                            </p:dataTable>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="12">
-                            <p:dataTable rowIndexVar="row">
-                                <f:facet name="header" >
-                                    债权转让记录
                                 </f:facet>
                                 <p:column  headerText="序号" style="width:30px">
                                     <h:outputText value="#{row + 1}"/> 

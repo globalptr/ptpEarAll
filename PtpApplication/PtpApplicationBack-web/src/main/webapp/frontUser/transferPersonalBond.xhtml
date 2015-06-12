@@ -1,0 +1,467 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="../main.xhtml" >
+
+        <ui:define name="center">
+            <h:form >
+                <table  style="width:100%">
+                    <tr>
+                        <td >
+                            转让标号：
+                        </td>
+                        <td>
+                            #{transferPersonalBond.srcPersonalBondEntity.bondNumber}
+                        </td>
+                        <td >
+                            转让方持标数：
+                        </td>
+                        <td>
+                            #{transferPersonalBond.srcFrontUserIncomeItem.copiesNum}
+                        </td>
+                        <td >
+                            转让数：
+                        </td>
+                        <td>
+                            <p:inputText id="transferNum_id" value="#{transferPersonalBond.transferNum}" />
+                        </td>
+                        <td >
+                            标原始年利率：
+                        </td>
+                        <td>
+                            <h:outputLabel value="#{transferPersonalBond.srcPersonalBondEntity.yearRate}" converter="PercentSignConverter"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                            原收益系数：
+                        </td>
+                        <td>
+                            <p:outputLabel  value="#{transferPersonalBond.srcFrontUserIncomeItem.proportion}"/>
+                        </td>
+                        <td >
+                            原收益率：
+                        </td>
+                        <td>
+                            <p:outputLabel  value="#{transferPersonalBond.srcPersonalBondEntity.yearRate.multiply(transferPersonalBond.srcFrontUserIncomeItem.proportion)}"/>
+                        </td>
+                        <td >
+                            转让收益年利率：
+                        </td>
+                        <td>
+                            <p:inputText id="transferIncome_id" value="#{transferPersonalBond.transferRate}"  converter="PercentSignConverter">
+                                <f:ajax event="blur" execute="transferIncome_id" render="transferIncome_id"/>
+                            </p:inputText>
+                        </td>
+                        <td >
+                            开始时间：
+                        </td>
+                        <td>
+                            <p:calendar/>
+                        </td>
+                        <td >
+                            
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="8">
+                            <p:commandButton value="计算" style="width:100%;height: 40px">
+                                <f:ajax event="click" execute="transferIncome_id transferNum_id" listener="#{transferPersonalBond.caculateTransfer()}" render="sellerFix_id sellerChange_id buyerChange_id"/>
+                            </p:commandButton>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="8">
+                            <table style="width:100%">
+                                <tr>
+                                    <td class="ui-steps-item ui-state-default ui-state-disabled" style="height:40px;font-size: 18px;padding-left: 12px;text-align: center;width:50%">
+                                        转让方(#{transferPersonalBond.srcHoldPersonalBond.holdUser.name})收益固定部分
+                                    </td>
+                                    <td class="ui-steps-item ui-state-default ui-state-disabled" style="height:40px;font-size: 18px;padding-left: 12px;text-align: center;width:50%">
+                                        转让方(#{transferPersonalBond.srcHoldPersonalBond.holdUser.name})收益变动部分
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td  style="width:50%; vertical-align: top">
+                                        <p:dataTable id="sellerFix_id" paginatorPosition="bottom" paginator="true" rows="10" rowIndexVar="row" value="#{transferPersonalBond.sellerIncomeFixParts.expenseEntitys}" var="transfer_var">
+                                            <p:column  headerText="序号" style="width:30px">
+                                                <h:outputText value="#{row + 1}"/> 
+                                            </p:column>
+                                            <p:column headerText="期数" style="width:30px">
+                                                #{transfer_var.periodNum}
+                                            </p:column>
+                                            <p:column headerText="本金">
+                                                #{transfer_var.principal}
+                                            </p:column>
+                                            <p:column headerText="利息">
+                                                #{transfer_var.interest}
+                                            </p:column>
+                                            <p:column headerText="年利率%" style="width:50px">
+                                                <h:outputLabel value="#{transferPersonalBond.srcPersonalBondEntity.yearRate}" converter="PercentSignConverter" />
+                                            </p:column>
+                                            <p:column headerText="收益系数" style="width:30px">
+                                                #{transferPersonalBond.sellerIncomeFixParts.proportion}
+                                            </p:column>
+                                            <p:column headerText="份数" style="width:30px">
+                                                #{transferPersonalBond.sellerIncomeFixParts.copiesNum}
+                                            </p:column>
+                                            <p:column headerText="应得本金" >
+                                                #{transfer_var.principal.multiply(transferPersonalBond.sellerIncomeFixParts.proportion)}
+                                            </p:column>
+                                            <p:column headerText="应得利息" >
+                                                #{transfer_var.interest.multiply(transferPersonalBond.sellerIncomeFixParts.proportion)}
+                                            </p:column>
+                                        </p:dataTable>
+                                    </td>
+                                    <td  style="width:50%;vertical-align: top">
+                                        <p:dataTable id="sellerChange_id" paginatorPosition="bottom" paginator="true" rows="10" rowIndexVar="row" value="#{transferPersonalBond.sellerIncomeChangeParts.expenseEntitys}" var="transfer_var">
+                                            <p:column  headerText="序号" style="width:30px">
+                                                <h:outputText value="#{row + 1}"/> 
+                                            </p:column>
+                                            <p:column headerText="期数" style="width:30px">
+                                                #{transfer_var.periodNum}
+                                            </p:column>
+                                            <p:column headerText="本金">
+                                                #{transfer_var.principal}
+                                            </p:column>
+                                            <p:column headerText="利息">
+                                                #{transfer_var.interest}
+                                            </p:column>
+                                            <p:column headerText="年利率%" style="width:30px">
+                                                <h:outputLabel value="#{transferPersonalBond.srcPersonalBondEntity.yearRate}"  converter="PercentSignConverter"/>
+                                            </p:column>
+                                            <p:column headerText="收益系数" style="width:30px">
+                                                #{transferPersonalBond.sellerIncomeChangeParts.proportion}
+                                            </p:column>
+                                            <p:column headerText="份数" style="width:30px">
+                                                #{transferPersonalBond.sellerIncomeChangeParts.copiesNum}
+                                            </p:column>
+                                            <p:column headerText="应得本金" >
+                                                #{transfer_var.principal.multiply(transferPersonalBond.sellerIncomeChangeParts.proportion)}
+                                            </p:column>
+                                            <p:column headerText="应得利息" >
+                                                #{transfer_var.interest.multiply(transferPersonalBond.sellerIncomeChangeParts.proportion)}
+                                            </p:column>
+                                        </p:dataTable>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <p:fieldset legend="交易期收益变动情况" toggleable="true">
+                                            <table style="width:100%">
+                                                <tr>
+                                                    <td>
+                                                        期数
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        本期本金总额
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        本期利息总额
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        年利率
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        原收益系数
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        原应得本金
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        原应得利息
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        调整日期
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        本期过去天数
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        本期剩余天数
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                     <td>
+                                                        过去时间段应得本金
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        过去时间段应得利息
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        过去小计
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        剩余时间段应得本金
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        剩余时间段应得利息
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        未来小计
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        （过去+未来）总计
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        本期标总收益
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        调整后收益
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </p:fieldset>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="ui-steps-item ui-state-default ui-state-disabled" style="height:40px;font-size: 18px;padding-left: 12px;text-align: center;width:50%">
+                                        购买方<p:autoComplete  value="#{transferPersonalBond.buyer}"  forceSelection="true"  var="selectUser_var" itemLabel="#{selectUser_var.name}" converter="userConverter" itemValue="#{selectUser_var}" completeMethod="#{transferPersonalBond.findUser}"/>收益变动部分
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"  style="vertical-align: top">
+                                        <p:dataTable id="buyerChange_id" paginatorPosition="bottom" paginator="true" rows="10" rowIndexVar="row" value="#{transferPersonalBond.buyerIncomeChangeParts.expenseEntitys}" var="transfer_var">
+                                            <p:column  headerText="序号" style="width:30px">
+                                                <h:outputText value="#{row + 1}"/> 
+                                            </p:column>
+                                            <p:column headerText="期数" style="width:30px">
+                                                #{transfer_var.periodNum}
+                                            </p:column>
+                                            <p:column headerText="本金">
+                                                #{transfer_var.principal}
+                                            </p:column>
+                                            <p:column headerText="利息">
+                                                #{transfer_var.interest}
+                                            </p:column>
+                                            <p:column headerText="年利率%" style="width:30px">
+                                                <h:outputLabel value="#{transferPersonalBond.srcPersonalBondEntity.yearRate}"  converter="PercentSignConverter"/>
+                                            </p:column>
+                                            <p:column headerText="收益系数" style="width:30px">
+                                                #{transferPersonalBond.buyerIncomeChangeParts.proportion}
+                                            </p:column>
+                                            <p:column headerText="份数" style="width:30px">
+                                                #{transferPersonalBond.buyerIncomeChangeParts.copiesNum}
+                                            </p:column>
+                                            <p:column headerText="应得本金" >
+                                                #{transfer_var.principal.multiply(transferPersonalBond.buyerIncomeChangeParts.proportion)}
+                                            </p:column>
+                                            <p:column headerText="应得利息" >
+                                                #{transfer_var.interest.multiply(transferPersonalBond.buyerIncomeChangeParts.proportion)}
+                                            </p:column>
+                                        </p:dataTable>
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td colspan="2">
+                                        <p:fieldset legend="交易期收益变动情况" toggleable="true">
+                                            <table style="width:100%">
+                                                <tr>
+                                                    <td>
+                                                        期数
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        本期本金总额
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        本期利息总额
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        年利率
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        原收益系数
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        原应得本金
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        原应得利息
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        调整日期
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        本期过去天数
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        本期剩余天数
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                     <td>
+                                                        过去时间段应得本金
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        过去时间段应得利息
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        过去小计
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        剩余时间段应得本金
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        剩余时间段应得利息
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        未来小计
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        （过去+未来）总计
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        本期标总收益
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                    <td>
+                                                        调整后收益
+                                                    </td>
+                                                    <td>
+                                                        xxx
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </p:fieldset>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="8">
+                            <p:commandButton value="执行转让" style="width:100%;height: 40px"/>
+                        </td>
+                    </tr>
+                </table>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>

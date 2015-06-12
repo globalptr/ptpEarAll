@@ -59,7 +59,6 @@ public class IssuePersonalBond4 implements Serializable{
     @Inject private PtpSessionBean ptpSessionBean;
     private List<ExpenseEntity> expenseEntitys;
     private List<BondInformationEntity> bondInformationEntitys;
-    private BigDecimal allAmount;
     private BondInformationEntity contractInfo ;
     private BondInformationEntity companyInfo;
     private BondInformationEntity visitInfo;
@@ -157,7 +156,7 @@ public class IssuePersonalBond4 implements Serializable{
     {
         if(ptpSessionBean.getOperationEnum()==OperationEnum.新增)
         {
-            return "issueBond3";
+            return "issuePersonalBond3";
         }
         else if(ptpSessionBean.getOperationEnum()==OperationEnum.查询)
         {
@@ -513,21 +512,6 @@ public class IssuePersonalBond4 implements Serializable{
      */
     public void setBondInformationEntitys(List<BondInformationEntity> bondInformationEntitys) {
         this.bondInformationEntitys = bondInformationEntitys;
-    }
-
-
-    /**
-     * @return the allAmount
-     */
-    public BigDecimal getAllAmount() {
-        return allAmount;
-    }
-
-    /**
-     * @param allAmount the allAmount to set
-     */
-    public void setAllAmount(BigDecimal allAmount) {
-        this.allAmount = allAmount;
     }
 
     /**

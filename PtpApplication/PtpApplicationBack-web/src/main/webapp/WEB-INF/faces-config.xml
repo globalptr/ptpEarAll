@@ -7,7 +7,7 @@
         <from-view-id>/*</from-view-id>
         <navigation-case>
             <from-outcome>personalBondMain</from-outcome>
-            <to-view-id>/bond/personalBondMain.xhtml</to-view-id>
+            <to-view-id>/personalBond/personalBondMain.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
@@ -82,8 +82,8 @@
             <redirect/>
         </navigation-case>
         <navigation-case>
-            <from-outcome>personalBondTest</from-outcome>
-            <to-view-id>/personalBond/personalBondTest.xhtml</to-view-id>
+            <from-outcome>buyPersonalBond</from-outcome>
+            <to-view-id>/personalBond/buyPersonalBond.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>
@@ -110,6 +110,21 @@
             <from-action>frontUserAccount</from-action>
             <to-view-id>/frontUser/frontUserAccount.xhtml</to-view-id>
             <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/frontUser/frontUserAccount.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>frontUserPersonalBondIncomeDetail</from-outcome>
+            <to-view-id>/frontUser/frontUserPersonalBondIncomeDetail.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/frontUser/frontUserPersonalBondIncomeDetail.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>transferPersonalBond</from-outcome>
+            <to-view-id>/frontUser/transferPersonalBond.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 </faces-config>

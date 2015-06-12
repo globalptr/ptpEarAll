@@ -7,8 +7,10 @@
 package com.oakeel.ptpPageViewBean;
 
 import com.oakeel.PtpSessionBean;
-import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEntity;
+import com.oakeel.ejb.entityAndEao.fonrUserHoldPlatBond.FrontUserHoldPlatBondEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
+import com.oakeel.ejb.entityAndEao.frontUserHoldPersonalBond.FrontUserHoldPersonalBondEntity;
+import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEntity;
 import com.oakeel.ejb.ptpEnum.OperationEnum;
 import com.oakeel.ejb.ptpEnum.SysInfo;
 import javax.annotation.PostConstruct;
@@ -27,6 +29,8 @@ import javax.inject.Inject;
 public class FrontUserAccount {
 
     @Inject private PtpSessionBean ptpSessionBean;
+    private FrontUserHoldPersonalBondEntity targetHoldPersonalBond;
+    private FrontUserHoldPlatBondEntity targetHoldPlatBond;
     
     private FrontUserEntity frontUser;
     private PersonalBondEntity targetBond;
@@ -39,9 +43,17 @@ public class FrontUserAccount {
     public void init()
     {
         frontUser=ptpSessionBean.getFrontUserEntity();
-        System.out.println(frontUser.getBondEntitys().size());
+        System.out.println(frontUser.getIssueBondEntitys().size());
     }
-
+    public String toPersonalBondIncomeDetails()
+    {
+        if(targetHoldPersonalBond!=null)
+        {
+            ptpSessionBean.setSelectHoldPersonalBond(targetHoldPersonalBond);
+            return "frontUserPersonalBondIncomeDetail";
+        }
+        return null;
+    }
     public String bondDetail()
     {
         if(getTargetBond()!=null)
@@ -97,6 +109,34 @@ public class FrontUserAccount {
      */
     public void setTargetBond(PersonalBondEntity targetBond) {
         this.targetBond = targetBond;
+    }
+
+    /**
+     * @return the targetHoldPersonalBond
+     */
+    public FrontUserHoldPersonalBondEntity getTargetHoldPersonalBond() {
+        return targetHoldPersonalBond;
+    }
+
+    /**
+     * @param targetHoldPersonalBond the targetHoldPersonalBond to set
+     */
+    public void setTargetHoldPersonalBond(FrontUserHoldPersonalBondEntity targetHoldPersonalBond) {
+        this.targetHoldPersonalBond = targetHoldPersonalBond;
+    }
+
+    /**
+     * @return the targetHoldPlatBond
+     */
+    public FrontUserHoldPlatBondEntity getTargetHoldPlatBond() {
+        return targetHoldPlatBond;
+    }
+
+    /**
+     * @param targetHoldPlatBond the targetHoldPlatBond to set
+     */
+    public void setTargetHoldPlatBond(FrontUserHoldPlatBondEntity targetHoldPlatBond) {
+        this.targetHoldPlatBond = targetHoldPlatBond;
     }
 
     

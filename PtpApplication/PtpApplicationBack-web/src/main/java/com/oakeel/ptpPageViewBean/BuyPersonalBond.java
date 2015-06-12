@@ -8,16 +8,19 @@ package com.oakeel.ptpPageViewBean;
 
 import com.oakeel.ejb.entityAndEao.backUser.BackUserEaoLocal;
 import com.oakeel.ejb.entityAndEao.backUser.BackUserEntity;
+import com.oakeel.ejb.entityAndEao.expense.ExpenseEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEaoLocal;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import com.oakeel.ejb.entityAndEao.frontUserHoldPersonalBond.FrontUserHoldPersonalBondEaoLocal;
 import com.oakeel.ejb.entityAndEao.frontUserHoldPersonalBond.FrontUserHoldPersonalBondEntity;
+import com.oakeel.ejb.entityAndEao.frontUserIncomeProportion.FrontUserIncomeProportionEntity;
 import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEaoLocal;
 import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEntity;
 import com.oakeel.ejb.ptpEnum.BondStage;
 import com.oakeel.ejb.ptpEnum.BondType;
 import com.oakeel.ejb.ptpEnum.RepayModelEnum;
 import com.oakeel.ejb.ptpEnum.SplitUnit;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -30,7 +33,7 @@ import javax.faces.bean.ViewScoped;
  */
 @ManagedBean
 @ViewScoped
-public class PersonalBondTest {
+public class BuyPersonalBond {
 
     /**
      * Creates a new instance of PersonalBondTest
@@ -51,7 +54,7 @@ public class PersonalBondTest {
     private RepayModelEnum[] repayModelEnums;
     private BondStage[] bondStages;
     
-    public PersonalBondTest() {
+    public BuyPersonalBond() {
         bondTypes=BondType.values();
         splitUnits=SplitUnit.values();
         repayModelEnums=RepayModelEnum.values();
@@ -66,15 +69,25 @@ public class PersonalBondTest {
     public void buyTest()
     {
         //用户购买标 建立用户收益 
-        FrontUserHoldPersonalBondEntity frontUserHoldBondEntity=new FrontUserHoldPersonalBondEntity();
+        FrontUserHoldPersonalBondEntity frontUserHoldBondEntity=new FrontUserHoldPersonalBondEntity();//创建控标实体
         frontUserHoldBondEntity.setAllBondNumber(buyNum);
         frontUserHoldBondEntity.setHoldUser(targetUserEntity);
         frontUserHoldBondEntity.setPersonalBondEntity(targetBond);
-        frontUserHoldPersonalBondEaoLocal.SaveHolePersonalBond(frontUserHoldBondEntity);
+        BigDecimal buyNumBig=new BigDecimal(buyNum);
+        BigDecimal issueNumBig=new BigDecimal(targetBond.getIssueCopiesNum());
+        BigDecimal incomeProportion=buyNumBig.divide(issueNumBig);//计算收益比例
+        FrontUserIncomeProportionEntity income=new FrontUserIncomeProportionEntity();//创建收益比例实体
+        income.setProportion(incomeProportion);//设置收益比例
+        income.setCopiesNum(buyNum);//设置收益比例对应的份数
+        List<ExpenseEntity> expenseEntitys=targetBond.getExpenseEntitys();//得到目标标的支出列表
+        income.setExpenseEntitys(expenseEntitys);//因为购买的是原始标，所以将支出列表设置为购买用户的收益列表
+        frontUserHoldBondEntity.getFrontUserIncomeProportionEntitys().add(income);
+        
+        frontUserHoldPersonalBondEaoLocal.SaveHolePersonalBond(frontUserHoldBondEntity);//持久化控标实体
         targetUserEntity=frontUserEaoLocal.reflushEntity(targetUserEntity);
         targetBond=personalBondEaoLocal.reflushEntity(targetBond);
-        System.out.println("user hold数:"+targetUserEntity.getFrontUserHoldPersonalBondEntitys().size());
-        System.out.println("product hold :"+targetBond.getFrontUserHoldPersonalBondEntitys().size());
+        System.out.println("用户拥有的控标实体数:"+targetUserEntity.getFrontUserHoldPersonalBondEntitys().size());
+        System.out.println("个人标拥有的控标实体数:"+targetBond.getFrontUserHoldPersonalBondEntitys().size());
     }
 
     public List<FrontUserEntity> findFrontUser(String target)

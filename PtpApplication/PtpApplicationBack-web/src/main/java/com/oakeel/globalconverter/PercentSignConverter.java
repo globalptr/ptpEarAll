@@ -24,12 +24,16 @@ public class PercentSignConverter implements Converter{
         if (value != null && value.length() >= 1) {
             value = value.replaceAll("%", "");
         }
-        return new BigDecimal(value);
+        BigDecimal percent=new BigDecimal(value);
+        percent=percent.divide(new BigDecimal(100));
+        return percent;
     }
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        return value.toString()+"%";
+        BigDecimal percent=(BigDecimal)value;
+        percent=percent.multiply(new BigDecimal(100));
+        return percent.toString()+"%";
     }
     
 }

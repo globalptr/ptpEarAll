@@ -11,6 +11,8 @@ import com.oakeel.ejb.entityAndEao.backUser.BackUserEntity;
 import com.oakeel.ejb.entityAndEao.backUserSet.BackUserSetEaoLocal;
 import com.oakeel.ejb.entityAndEao.backUserSet.BackUserSetEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
+import com.oakeel.ejb.entityAndEao.frontUserHoldPersonalBond.FrontUserHoldPersonalBondEntity;
+import com.oakeel.ejb.entityAndEao.frontUserIncomeProportion.FrontUserIncomeProportionEntity;
 import com.oakeel.ejb.ptpEnum.AccountModeEnum;
 import com.oakeel.ejb.ptpEnum.OperationEnum;
 import com.oakeel.ejb.transaction.bond.IssueBondLocal;
@@ -43,6 +45,9 @@ public class PtpSessionBean implements Serializable{
     private BackUserSetEaoLocal backUserSetEaoLocal;
     private AccountModeEnum logType;
     private OperationEnum operationEnum;
+    //个人标收益详情和个人标债权转让所用
+    private FrontUserHoldPersonalBondEntity selectHoldPersonalBond=null;
+    private FrontUserIncomeProportionEntity selectFrontUserIncomeItem=null;
     
     //对于一个登录用户的session数据，统一使用此bean
     /**
@@ -181,5 +186,33 @@ public class PtpSessionBean implements Serializable{
      */
     public void setIssuePlatBondLocal(IssuePlatBondLocal issuePlatBondLocal) {
         this.issuePlatBondLocal = issuePlatBondLocal;
+    }
+
+    /**
+     * @return the selectHoldPersonalBond
+     */
+    public FrontUserHoldPersonalBondEntity getSelectHoldPersonalBond() {
+        return selectHoldPersonalBond;
+    }
+
+    /**
+     * @param selectHoldPersonalBond the selectHoldPersonalBond to set
+     */
+    public void setSelectHoldPersonalBond(FrontUserHoldPersonalBondEntity selectHoldPersonalBond) {
+        this.selectHoldPersonalBond = selectHoldPersonalBond;
+    }
+
+    /**
+     * @return the selectFrontUserIncomeItem
+     */
+    public FrontUserIncomeProportionEntity getSelectFrontUserIncomeItem() {
+        return selectFrontUserIncomeItem;
+    }
+
+    /**
+     * @param selectFrontUserIncomeItem the selectFrontUserIncomeItem to set
+     */
+    public void setSelectFrontUserIncomeItem(FrontUserIncomeProportionEntity selectFrontUserIncomeItem) {
+        this.selectFrontUserIncomeItem = selectFrontUserIncomeItem;
     }
 }

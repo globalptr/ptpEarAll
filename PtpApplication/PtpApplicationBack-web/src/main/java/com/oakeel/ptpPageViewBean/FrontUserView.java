@@ -12,7 +12,6 @@ import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import com.oakeel.ejb.ptpEnum.CreditLevelEnum;
 import com.oakeel.ejb.ptpEnum.LiveCaseEnum;
 import com.oakeel.ejb.ptpEnum.SexEnum;
-import com.oakeel.ejb.transaction.TestLocal;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -49,7 +48,7 @@ public class FrontUserView {
         
         for(FrontUserEntity item:frontUserEntitys)
         {
-            System.out.println(item.getBondEntitys().size());
+            System.out.println(item.getIssueBondEntitys().size());
         }
     }
     public void deleteFrontUser()
