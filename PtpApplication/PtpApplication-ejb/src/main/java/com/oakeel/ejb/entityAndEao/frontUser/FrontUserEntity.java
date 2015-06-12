@@ -7,6 +7,7 @@ package com.oakeel.ejb.entityAndEao.frontUser;
 
 import com.oakeel.ejb.entityAndEao.bankCard.BankCardEntity;
 import com.oakeel.ejb.entityAndEao.fonrUserHoldPlatBond.FrontUserHoldPlatBondEntity;
+import com.oakeel.ejb.entityAndEao.frontUserAccount.FrontUserAccountEntity;
 import com.oakeel.ejb.entityAndEao.frontUserHoldPersonalBond.FrontUserHoldPersonalBondEntity;
 import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEntity;
 import com.oakeel.ejb.entityAndEao.platBond.PlatBondEntity;
@@ -15,10 +16,12 @@ import com.oakeel.ejb.ptpEnum.CreditLevelEnum;
 import com.oakeel.ejb.ptpEnum.LiveCaseEnum;
 import com.oakeel.ejb.ptpProductTransfer.PtpProductTransferEntity;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -33,7 +36,7 @@ public class FrontUserEntity extends UserEntity {
     @OneToMany(mappedBy = "holdUser")//与用户控标实体是一对多的关系，主控在控标实体
     private Set<FrontUserHoldPlatBondEntity> frontUserHoldPlatBondEntitys;
     @OneToMany(mappedBy = "issueUser")//与用户发标实体是一对多的关系，主控在发标实体
-    private Set<PersonalBondEntity> bondEntitys;
+    private Set<PersonalBondEntity> issueBondEntitys;//
     @OneToMany(targetEntity=PlatBondEntity.class,mappedBy = "issueUser")
     private Set<PlatBondEntity> platBondEntitys;
     @OneToMany(targetEntity=PtpProductTransferEntity.class,mappedBy="fromUser")
@@ -52,6 +55,8 @@ public class FrontUserEntity extends UserEntity {
     @Enumerated(EnumType.STRING)
     private LiveCaseEnum liveCaseEnum=LiveCaseEnum.普通商品房;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private FrontUserAccountEntity frontUserAccountEntity=new FrontUserAccountEntity();
     /**
      * @return the income_start
      */
@@ -151,20 +156,6 @@ public class FrontUserEntity extends UserEntity {
     }
 
     /**
-     * @return the bondEntitys
-     */
-    public Set<PersonalBondEntity> getBondEntitys() {
-        return bondEntitys;
-    }
-
-    /**
-     * @param bondEntitys the bondEntitys to set
-     */
-    public void setBondEntitys(Set<PersonalBondEntity> bondEntitys) {
-        this.bondEntitys = bondEntitys;
-    }
-
-    /**
      * @return the platBondEntitys
      */
     public Set<PlatBondEntity> getPlatBondEntitys() {
@@ -233,6 +224,34 @@ public class FrontUserEntity extends UserEntity {
      */
     public void setFrontUserHoldPersonalBondEntitys(Set<FrontUserHoldPersonalBondEntity> frontUserHoldPersonalBondEntitys) {
         this.frontUserHoldPersonalBondEntitys = frontUserHoldPersonalBondEntitys;
+    }
+
+    /**
+     * @return the issueBondEntitys
+     */
+    public Set<PersonalBondEntity> getIssueBondEntitys() {
+        return issueBondEntitys;
+    }
+
+    /**
+     * @param issueBondEntitys the issueBondEntitys to set
+     */
+    public void setIssueBondEntitys(Set<PersonalBondEntity> issueBondEntitys) {
+        this.issueBondEntitys = issueBondEntitys;
+    }
+
+    /**
+     * @return the frontUserAccountEntity
+     */
+    public FrontUserAccountEntity getFrontUserAccountEntity() {
+        return frontUserAccountEntity;
+    }
+
+    /**
+     * @param frontUserAccountEntity the frontUserAccountEntity to set
+     */
+    public void setFrontUserAccountEntity(FrontUserAccountEntity frontUserAccountEntity) {
+        this.frontUserAccountEntity = frontUserAccountEntity;
     }
 
 }

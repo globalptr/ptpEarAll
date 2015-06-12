@@ -115,6 +115,7 @@ public class IssueBond implements IssueBondLocal {
             newBond.setYearRate(bond3.getYearRate());//年利率
             newBond.setBaseAmount(bond3.getBaseAmount());//基准金
             newBond.setIssueCopiesNum(bond3.getIssueCopiesNum());//份数
+            newBond.setAllAmount(bond3.getIssueCopiesNum()*bond3.getBaseAmount());//总金额
             newBond.setRepayModelEnum(bond3.getRepayModelEnum());//还款模型
             newBond.setRepayCycle(bond3.getRepayCycle());//还款周期
             newBond.setRepayCycleNumber(bond3.getRepayCycleNumber());//还款次数

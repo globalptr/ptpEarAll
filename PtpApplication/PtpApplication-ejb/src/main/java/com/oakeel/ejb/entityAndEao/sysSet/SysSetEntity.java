@@ -18,11 +18,11 @@ import javax.persistence.Entity;
 public class SysSetEntity extends EntityRoot {
     private static final long serialVersionUID = 1L;
     private int defaultBaseAmount=50;
-    private BigDecimal defaultYearRate=new BigDecimal("21.8");
-    private BigDecimal yearRate=new BigDecimal("25.2");
-    private BigDecimal quarterRate=new BigDecimal("23.9");
-    private BigDecimal monthRate=new BigDecimal("22.6");
-    private BigDecimal dayRate=new BigDecimal("18.7");
+    private BigDecimal defaultYearRate=new BigDecimal("0.218");
+    private BigDecimal yearRate=new BigDecimal("0.252");
+    private BigDecimal quarterRate=new BigDecimal("0.239");
+    private BigDecimal monthRate=new BigDecimal("0.226");
+    private BigDecimal dayRate=new BigDecimal("0.187");
     
 
     /**

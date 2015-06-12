@@ -9,6 +9,7 @@ package com.oakeel.ejb.entityAndEao.expense;
 import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import java.math.BigDecimal;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,15 +22,21 @@ import javax.persistence.TemporalType;
 public class ExpenseEntity extends EntityRoot {
     private static final long serialVersionUID = 1L;
 
-    private BigDecimal principal;//本金
-    private BigDecimal interest;//利息
+    @Column(precision=12,scale=2) //精度为12位，小数点位数为2位
+    private BigDecimal principal=BigDecimal.ZERO;//本金
+    @Column(precision=12,scale=2) //精度为12位，小数点位数为2位
+    private BigDecimal interest=BigDecimal.ZERO;//利息
         
-    private BigDecimal payable;//应付
-    private BigDecimal actualPayable;//实付
+    @Column(precision=12,scale=2) //精度为12位，小数点位数为2位
+    private BigDecimal payable=BigDecimal.ZERO;//应付
+    @Column(precision=12,scale=2) //精度为12位，小数点位数为2位
+    private BigDecimal actualPayable=BigDecimal.ZERO;//实付
     @Temporal(TemporalType.TIMESTAMP)
     private Date settlementTime;//结算时间
-    private BigDecimal beforeBalance;//期初余额
-    private BigDecimal afterBalance;//期末余额
+    @Column(precision=12,scale=2) //精度为12位，小数点位数为2位
+    private BigDecimal beforeBalance=BigDecimal.ZERO;//期初余额
+    @Column(precision=12,scale=2) //精度为12位，小数点位数为2位
+    private BigDecimal afterBalance=BigDecimal.ZERO;//期末余额
     private int periodNum;//还款期数
 
     /**

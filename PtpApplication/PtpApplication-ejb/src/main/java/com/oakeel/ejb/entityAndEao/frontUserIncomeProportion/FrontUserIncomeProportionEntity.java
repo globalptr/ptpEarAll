@@ -7,8 +7,11 @@
 package com.oakeel.ejb.entityAndEao.frontUserIncomeProportion;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
+import com.oakeel.ejb.entityAndEao.expense.ExpenseEntity;
 import java.math.BigDecimal;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -19,6 +22,10 @@ public class FrontUserIncomeProportionEntity extends EntityRoot {
     private static final long serialVersionUID = 1L;
     
     private int copiesNum;//份数
+
+    @OneToMany
+    private List<ExpenseEntity> expenseEntitys;
+    
     private BigDecimal proportion;//收益比例
 
     /**
@@ -48,4 +55,20 @@ public class FrontUserIncomeProportionEntity extends EntityRoot {
     public void setProportion(BigDecimal proportion) {
         this.proportion = proportion;
     }
+
+    /**
+     * @return the expenseEntitys
+     */
+    public List<ExpenseEntity> getExpenseEntitys() {
+        return expenseEntitys;
+    }
+
+    /**
+     * @param expenseEntitys the expenseEntitys to set
+     */
+    public void setExpenseEntitys(List<ExpenseEntity> expenseEntitys) {
+        this.expenseEntitys = expenseEntitys;
+    }
+
+
 }

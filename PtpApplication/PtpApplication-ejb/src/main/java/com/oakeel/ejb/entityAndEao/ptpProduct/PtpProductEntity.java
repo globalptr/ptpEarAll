@@ -11,7 +11,6 @@ import com.oakeel.ejb.entityAndEao.bondState.BondStateEntity;
 import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import com.oakeel.ejb.entityAndEao.expense.ExpenseEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
-import com.oakeel.ejb.entityAndEao.frontUserHoldPersonalBond.FrontUserHoldPersonalBondEntity;
 import com.oakeel.ejb.ptpEnum.BondStage;
 import com.oakeel.ejb.ptpEnum.RepayModelEnum;
 import com.oakeel.ejb.ptpEnum.SplitUnit;
@@ -74,11 +73,13 @@ public class PtpProductEntity extends EntityRoot {
     private String name;//名字
     @Column(length = 100)
     private String Details;//详情  
+    @Column(precision=12,scale=4) //精度为12位，小数点位数为4位
     private BigDecimal yearRate=new BigDecimal("0");//年利率
     @Column(length = 50)
     private String bondNumber;//标号
     private int baseAmount;//基准金额
     private int IssueCopiesNum;//发行份数
+    private int allAmount;//总金额
     private int transactionCopiesNum;//成交份数
     private int remainCopiesNum;//剩余份数
     @Enumerated(EnumType.STRING)
@@ -374,6 +375,20 @@ public class PtpProductEntity extends EntityRoot {
      */
     public void setPtpProductTransferEntitys(Set<PtpProductTransferEntity> ptpProductTransferEntitys) {
         this.ptpProductTransferEntitys = ptpProductTransferEntitys;
+    }
+
+    /**
+     * @return the allAmount
+     */
+    public int getAllAmount() {
+        return allAmount;
+    }
+
+    /**
+     * @param allAmount the allAmount to set
+     */
+    public void setAllAmount(int allAmount) {
+        this.allAmount = allAmount;
     }
 
 

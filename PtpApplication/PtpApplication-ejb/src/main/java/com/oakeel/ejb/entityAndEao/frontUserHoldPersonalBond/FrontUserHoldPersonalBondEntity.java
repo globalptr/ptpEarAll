@@ -9,7 +9,9 @@ import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import com.oakeel.ejb.entityAndEao.frontUserIncomeProportion.FrontUserIncomeProportionEntity;
 import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEntity;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -27,8 +29,8 @@ public class FrontUserHoldPersonalBondEntity extends EntityRoot {
     @ManyToOne
     private PersonalBondEntity personalBondEntity;
     private int allBondNumber;//所有持标数
-    @OneToMany
-    private List<FrontUserIncomeProportionEntity> bondIncomeProportionEntitys; 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<FrontUserIncomeProportionEntity> frontUserIncomeProportionEntitys=new ArrayList<>(); 
 
 
 
@@ -46,19 +48,6 @@ public class FrontUserHoldPersonalBondEntity extends EntityRoot {
         this.allBondNumber = allBondNumber;
     }
 
-    /**
-     * @return the bondIncomeProportionEntitys
-     */
-    public List<FrontUserIncomeProportionEntity> getBondIncomeProportionEntitys() {
-        return bondIncomeProportionEntitys;
-    }
-
-    /**
-     * @param bondIncomeProportionEntitys the bondIncomeProportionEntitys to set
-     */
-    public void setBondIncomeProportionEntitys(List<FrontUserIncomeProportionEntity> bondIncomeProportionEntitys) {
-        this.bondIncomeProportionEntitys = bondIncomeProportionEntitys;
-    }
 
 
     /**
@@ -88,5 +77,20 @@ public class FrontUserHoldPersonalBondEntity extends EntityRoot {
     public void setPersonalBondEntity(PersonalBondEntity personalBondEntity) {
         this.personalBondEntity = personalBondEntity;
     }
+
+    /**
+     * @return the frontUserIncomeProportionEntitys
+     */
+    public List<FrontUserIncomeProportionEntity> getFrontUserIncomeProportionEntitys() {
+        return frontUserIncomeProportionEntitys;
+    }
+
+    /**
+     * @param frontUserIncomeProportionEntitys the frontUserIncomeProportionEntitys to set
+     */
+    public void setFrontUserIncomeProportionEntitys(List<FrontUserIncomeProportionEntity> frontUserIncomeProportionEntitys) {
+        this.frontUserIncomeProportionEntitys = frontUserIncomeProportionEntitys;
+    }
+
 
 }

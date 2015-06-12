@@ -30,6 +30,7 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
     @Override
     public List<ExpenseEntity> caculateRepayModel(RepayModelEnum repayModel, SplitUnit splitUnit, BigDecimal totalLoan, BigDecimal yearRate, int repayPeriod, Date startDate) {
         repayItemList=new ArrayList<>();
+        yearRate=yearRate.multiply(new BigDecimal(100));//进来利率要乘100
         if (repayModel == RepayModelEnum.定额本息) {
             caculateRepayModel_a(splitUnit, totalLoan, yearRate, repayPeriod, startDate);
         } else if (repayModel == RepayModelEnum.定额本金) {
