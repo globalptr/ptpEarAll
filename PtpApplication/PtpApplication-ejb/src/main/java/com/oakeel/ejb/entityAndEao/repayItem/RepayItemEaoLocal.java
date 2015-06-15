@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.expense;
+package com.oakeel.ejb.entityAndEao.repayItem;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EaoRootLocal;
 import javax.ejb.Local;
@@ -14,6 +14,6 @@ import javax.ejb.Local;
  * @author root
  */
 @Local
-public interface ExpenseEaoLocal extends EaoRootLocal<ExpenseEntity>{
+public interface RepayItemEaoLocal extends EaoRootLocal<RepayItemEntity>{
     
 }

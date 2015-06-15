@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.expense;
+package com.oakeel.ejb.entityAndEao.repayItem;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EaoRoot;
 import javax.ejb.Stateless;
@@ -14,7 +14,7 @@ import javax.ejb.Stateless;
  * @author root
  */
 @Stateless
-public class ExpenseEao extends EaoRoot<ExpenseEntity> implements ExpenseEaoLocal {
+public class RepayItemEao extends EaoRoot<RepayItemEntity> implements RepayItemEaoLocal {
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

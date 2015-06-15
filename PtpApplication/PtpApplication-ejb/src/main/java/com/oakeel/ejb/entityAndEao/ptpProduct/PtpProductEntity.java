@@ -9,7 +9,7 @@ package com.oakeel.ejb.entityAndEao.ptpProduct;
 import com.oakeel.ejb.entityAndEao.backUser.BackUserEntity;
 import com.oakeel.ejb.entityAndEao.bondState.BondStateEntity;
 import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
-import com.oakeel.ejb.entityAndEao.expense.ExpenseEntity;
+import com.oakeel.ejb.entityAndEao.repayItem.RepayItemEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import com.oakeel.ejb.ptpEnum.BondStage;
 import com.oakeel.ejb.ptpEnum.RepayModelEnum;
@@ -91,7 +91,7 @@ public class PtpProductEntity extends EntityRoot {
     @OneToOne(cascade = {CascadeType.ALL})//标的状态
     private BondStateEntity bondStateEntity=new BondStateEntity();
     @OneToMany(cascade = {CascadeType.PERSIST})//与支出明细是一对多的关系
-    private List<ExpenseEntity> expenseEntitys=new ArrayList<>();//支出明细
+    private List<RepayItemEntity> expenseEntitys=new ArrayList<>();//支出明细
     private Boolean active=true;//是否激活
     @OneToMany(cascade = CascadeType.ALL)
     private Set<PtpProductTransferEntity> ptpProductTransferEntitys=new LinkedHashSet<>();//转让记录
@@ -184,14 +184,14 @@ public class PtpProductEntity extends EntityRoot {
     /**
      * @return the expenseEntitys
      */
-    public List<ExpenseEntity> getExpenseEntitys() {
+    public List<RepayItemEntity> getExpenseEntitys() {
         return expenseEntitys;
     }
 
     /**
      * @param expenseEntitys the expenseEntitys to set
      */
-    public void setExpenseEntitys(List<ExpenseEntity> expenseEntitys) {
+    public void setExpenseEntitys(List<RepayItemEntity> expenseEntitys) {
         this.expenseEntitys = expenseEntitys;
     }
 

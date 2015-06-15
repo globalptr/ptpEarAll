@@ -6,7 +6,7 @@
 
 package com.oakeel.ejb.transaction.RepayModelCaculate;
 
-import com.oakeel.ejb.entityAndEao.expense.ExpenseEntity;
+import com.oakeel.ejb.entityAndEao.repayItem.RepayItemEntity;
 import com.oakeel.ejb.ptpEnum.RepayModelEnum;
 import com.oakeel.ejb.ptpEnum.SplitUnit;
 import java.math.BigDecimal;
@@ -25,10 +25,10 @@ import javax.ejb.Stateless;
 @Stateless
 public class RepayModelCaculate implements RepayModelCaculateLocal {
 
-    List<ExpenseEntity> repayItemList;
+    List<RepayItemEntity> repayItemList;
     //计算还款模型输入还款模型、还款单元、贷款总额、年利率、还款周期、开始时间
     @Override
-    public List<ExpenseEntity> caculateRepayModel(RepayModelEnum repayModel, SplitUnit splitUnit, BigDecimal totalLoan, BigDecimal yearRate, int repayPeriod, Date startDate) {
+    public List<RepayItemEntity> caculateRepayModel(RepayModelEnum repayModel, SplitUnit splitUnit, BigDecimal totalLoan, BigDecimal yearRate, int repayPeriod, Date startDate) {
         repayItemList=new ArrayList<>();
         yearRate=yearRate.multiply(new BigDecimal(100));//进来利率要乘100
         if (repayModel == RepayModelEnum.定额本息) {
@@ -65,7 +65,7 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
             Calendar calender = Calendar.getInstance();
             Date repayDate = startDate;
             for (int i = 0; i < repayPeriod; i++) {
-                ExpenseEntity item = new ExpenseEntity();
+                RepayItemEntity item = new RepayItemEntity();
                 calender.setTime(repayDate);
                 calender.add(Calendar.YEAR, 1);//一个季度三个月
                 repayDate = calender.getTime();
@@ -77,7 +77,7 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
                 item.setBeforeBalance(currentbalance);//计算期初余额
                 currentbalance = currentbalance.subtract(currentprincipal, MathContext.DECIMAL64);
                 item.setAfterBalance(currentbalance);//计算期末余额
-                item.setPayable(currentsubtotal);//每月还款总额
+                item.setSubTatal(currentsubtotal);//每月还款总额
                 item.setPeriodNum(i + 1);
                 repayItemList.add(item);
             }
@@ -104,7 +104,7 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
             Calendar calender = Calendar.getInstance();
             Date repayDate = startDate;
             for (int i = 0; i < repayPeriod; i++) {
-                ExpenseEntity item = new ExpenseEntity();
+                RepayItemEntity item = new RepayItemEntity();
                 calender.setTime(repayDate);
                 calender.add(Calendar.MONTH, 3);//一个季度三个月
                 repayDate = calender.getTime();
@@ -116,7 +116,7 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
                 item.setBeforeBalance(currentbalance);//计算期初余额
                 currentbalance = currentbalance.subtract(currentprincipal, MathContext.DECIMAL64);
                 item.setAfterBalance(currentbalance);//计算期末余额
-                item.setPayable(currentsubtotal);//每月还款总额
+                item.setSubTatal(currentsubtotal);//每月还款总额
                 item.setPeriodNum(i + 1);
                 repayItemList.add(item);
             }
@@ -142,7 +142,7 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
             Calendar calender = Calendar.getInstance();
             Date repayDate = startDate;
             for (int i = 0; i < repayPeriod; i++) {
-                ExpenseEntity item = new ExpenseEntity();
+                RepayItemEntity item = new RepayItemEntity();
                 calender.setTime(repayDate);
                 calender.add(Calendar.MONTH, 1);//加一个月
                 repayDate = calender.getTime();
@@ -154,7 +154,7 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
                 item.setBeforeBalance(currentbalance);//计算期初余额
                 currentbalance = currentbalance.subtract(currentprincipal, MathContext.DECIMAL64);
                 item.setAfterBalance(currentbalance);//计算期末余额
-                item.setPayable(currentsubtotal);//每月还款总额
+                item.setSubTatal(currentsubtotal);//每月还款总额
                 item.setPeriodNum(i + 1);
                 repayItemList.add(item);
             }
@@ -181,7 +181,7 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
             Calendar calender = Calendar.getInstance();
             Date repayDate = startDate;
             for (int i = 0; i < repayPeriod; i++) {
-                ExpenseEntity item = new ExpenseEntity();
+                RepayItemEntity item = new RepayItemEntity();
                 calender.setTime(repayDate);
                 calender.add(Calendar.DATE, 1);//加一天
                 repayDate = calender.getTime();
@@ -193,7 +193,7 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
                 item.setBeforeBalance(currentbalance);//计算期初余额
                 currentbalance = currentbalance.subtract(currentprincipal, MathContext.DECIMAL64);
                 item.setAfterBalance(currentbalance);//计算期末余额
-                item.setPayable(currentsubtotal);//每天还款总额
+                item.setSubTatal(currentsubtotal);//每天还款总额
                 item.setPeriodNum(i + 1);
                 repayItemList.add(item);
             }
@@ -212,7 +212,7 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
         currentprincipal = currentbalance.divide(BigDecimal.valueOf(repayPeriod), MathContext.DECIMAL64);//每个还款周期应还本金
         if (splitUnit == SplitUnit.月) {
             for (int i = 0; i < repayPeriod; i++) {
-                ExpenseEntity item = new ExpenseEntity();
+                RepayItemEntity item = new RepayItemEntity();
                 //得到一个还款月的总天数
                 GregorianCalendar gCalendar = new GregorianCalendar();
                 gCalendar.setTime(startDate);
@@ -228,7 +228,7 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
                 item.setAfterBalance(currentbalance);//期末余额
                 item.setPrincipal(currentprincipal);//设置本金
                 item.setInterest(currentinterest);//设置利息
-                item.setPayable(currentsubtotal);//设置小计
+                item.setSubTatal(currentsubtotal);//设置小计
                 item.setPeriodNum(i + 1);//设置期数
                 item.setSettlementTime(endDate);//设置时间
                 startDate = endDate;
@@ -236,7 +236,7 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
             }
         } else if (splitUnit == SplitUnit.年) {
             for (int i = 0; i < repayPeriod; i++) {
-                ExpenseEntity item = new ExpenseEntity();
+                RepayItemEntity item = new RepayItemEntity();
                 //得到一个还款月的总天数
                 GregorianCalendar gCalendar = new GregorianCalendar();
                 gCalendar.setTime(startDate);
@@ -251,7 +251,7 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
                 item.setAfterBalance(currentbalance);//期末余额
                 item.setPrincipal(currentprincipal);//设置本金
                 item.setInterest(currentinterest);//设置利息
-                item.setPayable(currentsubtotal);//设置小计
+                item.setSubTatal(currentsubtotal);//设置小计
                 item.setPeriodNum(i + 1);//设置期数
                 item.setSettlementTime(endDate);//设置时间
                 startDate = endDate;
@@ -259,7 +259,7 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
             }
         } else if (splitUnit == SplitUnit.季度) {
             for (int i = 0; i < repayPeriod; i++) {
-                ExpenseEntity item = new ExpenseEntity();
+                RepayItemEntity item = new RepayItemEntity();
                 //得到一个还款季度的总天数
                 GregorianCalendar gCalendar = new GregorianCalendar();
                 gCalendar.setTime(startDate);
@@ -275,7 +275,7 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
                 item.setAfterBalance(currentbalance);//期末余额
                 item.setPrincipal(currentprincipal);//设置本金
                 item.setInterest(currentinterest);//设置利息
-                item.setPayable(currentsubtotal);//设置小计
+                item.setSubTatal(currentsubtotal);//设置小计
                 item.setPeriodNum(i + 1);//设置期数
                 item.setSettlementTime(endDate);//设置时间
                 startDate = endDate;
@@ -283,7 +283,7 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
             }
         } else if (splitUnit == SplitUnit.日) {
             for (int i = 0; i < repayPeriod; i++) {
-                ExpenseEntity item = new ExpenseEntity();
+                RepayItemEntity item = new RepayItemEntity();
                 //得到一个还款的总天数
                 GregorianCalendar gCalendar = new GregorianCalendar();
                 gCalendar.setTime(startDate);
@@ -299,7 +299,7 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
                 item.setAfterBalance(currentbalance);//期末余额
                 item.setPrincipal(currentprincipal);//设置本金
                 item.setInterest(currentinterest);//设置利息
-                item.setPayable(currentsubtotal);//设置小计
+                item.setSubTatal(currentsubtotal);//设置小计
                 item.setPeriodNum(i + 1);//设置期数
                 item.setSettlementTime(endDate);//设置时间
                 startDate = endDate;
@@ -317,14 +317,14 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
             gCalendar.setTime(startDate);
             gCalendar.add(Calendar.YEAR, repayPeriod);//加指定的年数
             endDate = gCalendar.getTime();
-            ExpenseEntity item = new ExpenseEntity();
+            RepayItemEntity item = new RepayItemEntity();
             item.setSettlementTime(endDate);
             item.setBeforeBalance(totalLoan);
             item.setAfterBalance(BigDecimal.ZERO);
             item.setPrincipal(totalLoan);
             BigDecimal interest = totalLoan.multiply(yearRate).multiply(BigDecimal.valueOf(repayPeriod));//利息
             item.setInterest(interest);
-            item.setPayable(totalLoan.add(interest));
+            item.setSubTatal(totalLoan.add(interest));
             item.setPeriodNum(1);
             repayItemList.add(item);
         } else if (splitUnit == SplitUnit.季度) {
@@ -332,7 +332,7 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
             gCalendar.setTime(startDate);
             gCalendar.add(Calendar.MONTH, repayPeriod * 3);//加指定的月数
             endDate = gCalendar.getTime();
-            ExpenseEntity item = new ExpenseEntity();
+            RepayItemEntity item = new RepayItemEntity();
             item.setSettlementTime(endDate);
             item.setBeforeBalance(totalLoan);
             item.setAfterBalance(BigDecimal.ZERO);
@@ -341,7 +341,7 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
             BigDecimal quarterlyRate = yearRate.divide(BigDecimal.valueOf(4), MathContext.DECIMAL64);
             BigDecimal interest = totalLoan.multiply(quarterlyRate).multiply(BigDecimal.valueOf(repayPeriod));//利息
             item.setInterest(interest);
-            item.setPayable(totalLoan.add(interest));
+            item.setSubTatal(totalLoan.add(interest));
             item.setPeriodNum(1);
             repayItemList.add(item);
 
@@ -350,7 +350,7 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
             gCalendar.setTime(startDate);
             gCalendar.add(Calendar.MONTH, repayPeriod);//加指定的月
             endDate = gCalendar.getTime();
-            ExpenseEntity item = new ExpenseEntity();
+            RepayItemEntity item = new RepayItemEntity();
             item.setSettlementTime(endDate);
             item.setBeforeBalance(totalLoan);
             item.setAfterBalance(BigDecimal.ZERO);
@@ -359,7 +359,7 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
             BigDecimal monthRate = yearRate.divide(BigDecimal.valueOf(12), MathContext.DECIMAL64);
             BigDecimal interest = totalLoan.multiply(monthRate).multiply(BigDecimal.valueOf(repayPeriod));//利息
             item.setInterest(interest);
-            item.setPayable(totalLoan.add(interest));
+            item.setSubTatal(totalLoan.add(interest));
             item.setPeriodNum(1);
             repayItemList.add(item);
 
@@ -368,7 +368,7 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
             gCalendar.setTime(startDate);
             gCalendar.add(Calendar.DATE, repayPeriod);//加指定的月
             endDate = gCalendar.getTime();
-            ExpenseEntity item = new ExpenseEntity();
+            RepayItemEntity item = new RepayItemEntity();
             item.setSettlementTime(endDate);
             item.setBeforeBalance(totalLoan);
             item.setAfterBalance(BigDecimal.ZERO);
@@ -377,7 +377,7 @@ public class RepayModelCaculate implements RepayModelCaculateLocal {
             BigDecimal dayRate = yearRate.divide(BigDecimal.valueOf(365), MathContext.DECIMAL64);
             BigDecimal interest = totalLoan.multiply(dayRate).multiply(BigDecimal.valueOf(repayPeriod));//利息
             item.setInterest(interest);
-            item.setPayable(totalLoan.add(interest));
+            item.setSubTatal(totalLoan.add(interest));
             item.setPeriodNum(1);
             repayItemList.add(item);
 

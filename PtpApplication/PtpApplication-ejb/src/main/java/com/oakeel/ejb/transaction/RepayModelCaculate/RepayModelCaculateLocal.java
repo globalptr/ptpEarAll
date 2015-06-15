@@ -6,7 +6,7 @@
 
 package com.oakeel.ejb.transaction.RepayModelCaculate;
 
-import com.oakeel.ejb.entityAndEao.expense.ExpenseEntity;
+import com.oakeel.ejb.entityAndEao.repayItem.RepayItemEntity;
 import com.oakeel.ejb.ptpEnum.RepayModelEnum;
 import com.oakeel.ejb.ptpEnum.SplitUnit;
 import java.math.BigDecimal;
@@ -20,5 +20,5 @@ import javax.ejb.Local;
  */
 @Local
 public interface RepayModelCaculateLocal {
-    public  List<ExpenseEntity> caculateRepayModel(RepayModelEnum repayModel, SplitUnit splitUnit, BigDecimal totalLoan, BigDecimal yearRate, int repayPeriod, Date startDate);
+    public  List<RepayItemEntity> caculateRepayModel(RepayModelEnum repayModel, SplitUnit splitUnit, BigDecimal totalLoan, BigDecimal yearRate, int repayPeriod, Date startDate);
 }
