@@ -87,7 +87,7 @@
                                 </tr>
                                 <tr>
                                     <td  style="width:50%; vertical-align: top">
-                                        <p:dataTable id="sellerFix_id" paginatorPosition="bottom" paginator="true" rows="10" rowIndexVar="row" value="#{transferPersonalBond.sellerIncomeFixParts.expenseEntitys}" var="transfer_var">
+                                        <p:dataTable id="sellerFix_id" paginatorPosition="bottom" paginator="true" rows="10" rowIndexVar="row" value="#{transferPersonalBond.sellerIncomeFixParts.repayItems}" var="transfer_var">
                                             <p:column  headerText="序号" style="width:30px">
                                                 <h:outputText value="#{row + 1}"/> 
                                             </p:column>
@@ -118,7 +118,7 @@
                                         </p:dataTable>
                                     </td>
                                     <td  style="width:50%;vertical-align: top">
-                                        <p:dataTable id="sellerChange_id" paginatorPosition="bottom" paginator="true" rows="10" rowIndexVar="row" value="#{transferPersonalBond.sellerIncomeChangeParts.expenseEntitys}" var="transfer_var">
+                                        <p:dataTable id="sellerChange_id" paginatorPosition="bottom" paginator="true" rows="10" rowIndexVar="row" value="#{transferPersonalBond.sellerIncomeChangeParts.repayItems}" var="transfer_var">
                                             <p:column  headerText="序号" style="width:30px">
                                                 <h:outputText value="#{row + 1}"/> 
                                             </p:column>
@@ -288,7 +288,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2"  style="vertical-align: top">
-                                        <p:dataTable id="buyerChange_id" paginatorPosition="bottom" paginator="true" rows="10" rowIndexVar="row" value="#{transferPersonalBond.buyerIncomeChangeParts.expenseEntitys}" var="transfer_var">
+                                        <p:dataTable id="buyerChange_id" paginatorPosition="bottom" paginator="true" rows="10" rowIndexVar="row" value="#{transferPersonalBond.buyerIncomeChangeParts.repayItems}" var="transfer_var">
                                             <p:column  headerText="序号" style="width:30px">
                                                 <h:outputText value="#{row + 1}"/> 
                                             </p:column>
@@ -457,7 +457,7 @@
                     </tr>
                     <tr>
                         <td colspan="8">
-                            <p:commandButton value="执行转让" style="width:100%;height: 40px"/>
+                            <p:commandButton value="执行转让" style="width:100%;height: 40px" action="#{transferPersonalBond.transfer()}"/>
                         </td>
                     </tr>
                 </table>

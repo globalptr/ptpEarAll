@@ -21,7 +21,7 @@
                         <h:outputLabel value="#{fontUserIncomes_var.proportion}" converter="BigDecimalConverter"/>
                     </p:column>
                     <p:rowExpansion>
-                        <p:dataTable   rowIndexVar="row" value="#{fontUserIncomes_var.expenseEntitys}" var="frontUserIncomeDetails_var">
+                        <p:dataTable   rowIndexVar="row" value="#{fontUserIncomes_var.repayItems}" var="frontUserIncomeDetails_var">
                             <p:column  headerText="序号" style="width:30px">
                                 <h:outputText value="#{row + 1}"/> 
                             </p:column>
@@ -35,7 +35,7 @@
                                 <h:outputLabel value="#{frontUserIncomeDetails_var.interest}" converter="BigDecimalConverter"/>
                             </p:column>
                             <p:column   headerText="应付">
-                                <h:outputLabel value="#{frontUserIncomeDetails_var.payable}" converter="BigDecimalConverter"/>
+                                <h:outputLabel value="#{frontUserIncomeDetails_var.subTatal}" converter="BigDecimalConverter"/>
                             </p:column>
                             <p:column   headerText="实付">
                                 <h:outputLabel value="#{frontUserIncomeDetails_var.actualPayable}" converter="BigDecimalConverter"/>

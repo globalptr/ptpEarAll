@@ -8,7 +8,6 @@ package com.oakeel.ptpPageViewBean;
 
 import com.oakeel.ejb.entityAndEao.backUser.BackUserEaoLocal;
 import com.oakeel.ejb.entityAndEao.backUser.BackUserEntity;
-import com.oakeel.ejb.entityAndEao.expense.ExpenseEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEaoLocal;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import com.oakeel.ejb.entityAndEao.frontUserHoldPersonalBond.FrontUserHoldPersonalBondEaoLocal;
@@ -16,11 +15,13 @@ import com.oakeel.ejb.entityAndEao.frontUserHoldPersonalBond.FrontUserHoldPerson
 import com.oakeel.ejb.entityAndEao.frontUserIncomeProportion.FrontUserIncomeProportionEntity;
 import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEaoLocal;
 import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEntity;
+import com.oakeel.ejb.entityAndEao.repayItem.RepayItemEntity;
 import com.oakeel.ejb.ptpEnum.BondStage;
 import com.oakeel.ejb.ptpEnum.BondType;
 import com.oakeel.ejb.ptpEnum.RepayModelEnum;
 import com.oakeel.ejb.ptpEnum.SplitUnit;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -79,8 +80,9 @@ public class BuyPersonalBond {
         FrontUserIncomeProportionEntity income=new FrontUserIncomeProportionEntity();//创建收益比例实体
         income.setProportion(incomeProportion);//设置收益比例
         income.setCopiesNum(buyNum);//设置收益比例对应的份数
-        List<ExpenseEntity> expenseEntitys=targetBond.getExpenseEntitys();//得到目标标的支出列表
-        income.setExpenseEntitys(expenseEntitys);//因为购买的是原始标，所以将支出列表设置为购买用户的收益列表
+        List<RepayItemEntity> expenseEntitys=targetBond.getExpenseEntitys();//得到目标标的支出列表
+        
+        income.setRepayItems(expenseEntitys);//因为购买的是原始标，所以将支出列表设置为购买用户的收益列表
         frontUserHoldBondEntity.getFrontUserIncomeProportionEntitys().add(income);
         
         frontUserHoldPersonalBondEaoLocal.SaveHolePersonalBond(frontUserHoldBondEntity);//持久化控标实体

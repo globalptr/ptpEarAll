@@ -71,17 +71,23 @@ public class TransferPersonalBond {
         sellerIncomeFixParts=new FrontUserIncomeProportionEntity();
         sellerIncomeFixParts.setProportion(srcFrontUserIncomeItem.getProportion());//固定部分收益不动
         sellerIncomeFixParts.setCopiesNum(srcCopiesNum);
-        sellerIncomeFixParts.setExpenseEntitys(srcFrontUserIncomeItem.getExpenseEntitys());
+        sellerIncomeFixParts.setRepayItems(srcFrontUserIncomeItem.getRepayItems());
         
         sellerIncomeChangeParts=new FrontUserIncomeProportionEntity();
         sellerIncomeChangeParts.setProportion(sellerChangeRate);
         sellerIncomeChangeParts.setCopiesNum(transferNum);
-        sellerIncomeChangeParts.setExpenseEntitys(srcFrontUserIncomeItem.getExpenseEntitys());
+        sellerIncomeChangeParts.setRepayItems(srcFrontUserIncomeItem.getRepayItems());
         
         buyerIncomeChangeParts=new FrontUserIncomeProportionEntity();
         buyerIncomeChangeParts.setProportion(buyerRate);
         buyerIncomeChangeParts.setCopiesNum(transferNum);
-        buyerIncomeChangeParts.setExpenseEntitys(srcFrontUserIncomeItem.getExpenseEntitys());
+        buyerIncomeChangeParts.setRepayItems(srcFrontUserIncomeItem.getRepayItems());
+    }
+    public String transfer()
+    {
+        //将卖方原始的FrontUserIncomeProportionEntity删除，添加在债权转让过程中产生的三个FrontUserIncomeProportionEntity
+        //添加买方的由债权转让所产生的两个FrontUserIncomeProportionEntity
+        return null;
     }
     public List<FrontUserEntity> findUser(String target)
     {

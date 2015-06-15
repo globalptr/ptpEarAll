@@ -10,7 +10,7 @@ import com.oakeel.PtpSessionBean;
 import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEaoLocal;
 import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEntity;
 import com.oakeel.ejb.entityAndEao.bondInformation.BondInformationEntity;
-import com.oakeel.ejb.entityAndEao.expense.ExpenseEntity;
+import com.oakeel.ejb.entityAndEao.repayItem.RepayItemEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEaoLocal;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import com.oakeel.ejb.entityAndEao.imageInfo.ImageInfoEntity;
@@ -57,7 +57,7 @@ public class IssuePersonalBond4 implements Serializable{
     private OperationEnum operationEnum;
     @Inject Conversation conversation;
     @Inject private PtpSessionBean ptpSessionBean;
-    private List<ExpenseEntity> expenseEntitys;
+    private List<RepayItemEntity> expenseEntitys;
     private List<BondInformationEntity> bondInformationEntitys;
     private BondInformationEntity contractInfo ;
     private BondInformationEntity companyInfo;
@@ -489,14 +489,14 @@ public class IssuePersonalBond4 implements Serializable{
     /**
      * @return the expenseEntitys
      */
-    public List<ExpenseEntity> getExpenseEntitys() {
+    public List<RepayItemEntity> getExpenseEntitys() {
         return expenseEntitys;
     }
 
     /**
      * @param expenseEntitys the expenseEntitys to set
      */
-    public void setExpenseEntitys(List<ExpenseEntity> expenseEntitys) {
+    public void setExpenseEntitys(List<RepayItemEntity> expenseEntitys) {
         this.expenseEntitys = expenseEntitys;
     }
 

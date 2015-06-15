@@ -8,7 +8,7 @@ package com.oakeel.ptpPageViewBean;
 import com.oakeel.PtpSessionBean;
 import com.oakeel.RepayItem;
 import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEntity;
-import com.oakeel.ejb.entityAndEao.expense.ExpenseEntity;
+import com.oakeel.ejb.entityAndEao.repayItem.RepayItemEntity;
 import com.oakeel.ejb.entityAndEao.sysSet.SysSetEaoLocal;
 import com.oakeel.ejb.entityAndEao.sysSet.SysSetEntity;
 import com.oakeel.ejb.ptpEnum.OperationEnum;
@@ -39,7 +39,7 @@ public class IssuePersonalBond3 implements Serializable {
     SysSetEaoLocal SysSetEaoLocal;
     @EJB
     RepayModelCaculateLocal repayModelCaculateLocal;
-    private List<ExpenseEntity> expenseEntitys;
+    private List<RepayItemEntity> expenseEntitys;
     private List<RepayModelEnum> repayModelList;//还款模型枚举列表
     private PersonalBondEntity bond3;
     @Inject
@@ -175,14 +175,14 @@ public class IssuePersonalBond3 implements Serializable {
     /**
      * @return the expenseEntitys
      */
-    public List<ExpenseEntity> getExpenseEntitys() {
+    public List<RepayItemEntity> getExpenseEntitys() {
         return expenseEntitys;
     }
 
     /**
      * @param expenseEntitys the expenseEntitys to set
      */
-    public void setExpenseEntitys(List<ExpenseEntity> expenseEntitys) {
+    public void setExpenseEntitys(List<RepayItemEntity> expenseEntitys) {
         this.expenseEntitys = expenseEntitys;
     }
 

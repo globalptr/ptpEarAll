@@ -8,7 +8,7 @@ package com.oakeel.ptpPageViewBean;
 
 import com.oakeel.PtpSessionBean;
 import com.oakeel.RepayItem;
-import com.oakeel.ejb.entityAndEao.expense.ExpenseEntity;
+import com.oakeel.ejb.entityAndEao.repayItem.RepayItemEntity;
 import com.oakeel.ejb.entityAndEao.platBond.PlatBondEntity;
 import com.oakeel.ejb.entityAndEao.sysSet.SysSetEaoLocal;
 import com.oakeel.ejb.entityAndEao.sysSet.SysSetEntity;
@@ -37,7 +37,7 @@ public class IssuePlatBond2 {
     SysSetEaoLocal SysSetEaoLocal;
     @EJB
     RepayModelCaculateLocal repayModelCaculateLocal;
-    private List<ExpenseEntity> expenseEntitys;
+    private List<RepayItemEntity> expenseEntitys;
     private RepayModelEnum[] repayModelList;//还款模型枚举列表
     private PlatBondEntity platformFundEntity2;
     @Inject
@@ -97,14 +97,14 @@ public class IssuePlatBond2 {
     /**
      * @return the expenseEntitys
      */
-    public List<ExpenseEntity> getExpenseEntitys() {
+    public List<RepayItemEntity> getExpenseEntitys() {
         return expenseEntitys;
     }
 
     /**
      * @param expenseEntitys the expenseEntitys to set
      */
-    public void setExpenseEntitys(List<ExpenseEntity> expenseEntitys) {
+    public void setExpenseEntitys(List<RepayItemEntity> expenseEntitys) {
         this.expenseEntitys = expenseEntitys;
     }
 
