@@ -25,9 +25,7 @@ public class FrontUserHoldPersonalBondEao extends EaoRoot<FrontUserHoldPersonalB
         FrontUserEntity user=em.merge(holdBond.getHoldUser());
         em.refresh(user);
         PersonalBondEntity bond=em.merge(holdBond.getPersonalBondEntity()) ;
-        System.out.println(holdBond.getPersonalBondEntity().getYearRate());
         em.refresh(bond);
-        System.out.println(bond.getYearRate());
     }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

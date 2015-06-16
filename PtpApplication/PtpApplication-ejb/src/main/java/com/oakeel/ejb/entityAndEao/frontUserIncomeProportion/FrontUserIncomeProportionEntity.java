@@ -6,10 +6,13 @@
 
 package com.oakeel.ejb.entityAndEao.frontUserIncomeProportion;
 
+import com.oakeel.ejb.entityAndEao.check.CheckEntity;
 import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
 import com.oakeel.ejb.entityAndEao.repayItem.RepayItemEntity;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -22,11 +25,13 @@ public class FrontUserIncomeProportionEntity extends EntityRoot {
     private static final long serialVersionUID = 1L;
     
     private int copiesNum;//份数
-
-    @OneToMany
-    private List<RepayItemEntity> repayItems;
+    private BigDecimal incomeYearRate;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<RepayItemEntity> repayItems=new ArrayList<>();//应收账单
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<CheckEntity> checkEntitys=new ArrayList<>();//已经支付了的账单
     
-    private BigDecimal proportion;//收益比例
+    private BigDecimal proportion=BigDecimal.ZERO;//收益比例
 
     /**
      * @return the copiesNum
@@ -70,5 +75,32 @@ public class FrontUserIncomeProportionEntity extends EntityRoot {
         this.repayItems = repayItems;
     }
 
+    /**
+     * @return the checkEntitys
+     */
+    public List<CheckEntity> getCheckEntitys() {
+        return checkEntitys;
+    }
+
+    /**
+     * @param checkEntitys the checkEntitys to set
+     */
+    public void setCheckEntitys(List<CheckEntity> checkEntitys) {
+        this.checkEntitys = checkEntitys;
+    }
+
+    /**
+     * @return the incomeYearRate
+     */
+    public BigDecimal getIncomeYearRate() {
+        return incomeYearRate;
+    }
+
+    /**
+     * @param incomeYearRate the incomeYearRate to set
+     */
+    public void setIncomeYearRate(BigDecimal incomeYearRate) {
+        this.incomeYearRate = incomeYearRate;
+    }
 
 }

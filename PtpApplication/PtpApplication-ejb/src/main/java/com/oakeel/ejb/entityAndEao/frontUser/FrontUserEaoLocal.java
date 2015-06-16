@@ -7,6 +7,8 @@
 package com.oakeel.ejb.entityAndEao.frontUser;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EaoRootLocal;
+import com.oakeel.ejb.entityAndEao.frontUserHoldPersonalBond.FrontUserHoldPersonalBondEntity;
+import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEntity;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -20,4 +22,5 @@ public interface FrontUserEaoLocal extends EaoRootLocal<FrontUserEntity> {
     public List<FrontUserEntity> getUserByTelephone(String telephone);
     public List<FrontUserEntity> getUserByEmail(String email);
     public List<FrontUserEntity> getAllActiveUsers();
+    public FrontUserHoldPersonalBondEntity getHoldPersonalBondEntityByPersonalBond(PersonalBondEntity personalBond,FrontUserEntity user);
 }

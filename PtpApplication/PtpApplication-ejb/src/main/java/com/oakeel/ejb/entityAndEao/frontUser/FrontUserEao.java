@@ -7,7 +7,10 @@
 package com.oakeel.ejb.entityAndEao.frontUser;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EaoRoot;
+import com.oakeel.ejb.entityAndEao.frontUserHoldPersonalBond.FrontUserHoldPersonalBondEntity;
+import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEntity;
 import java.util.List;
+import java.util.Set;
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -64,6 +67,18 @@ public class FrontUserEao extends EaoRoot<FrontUserEntity> implements FrontUserE
         else
             return null;
     }
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    
+    //通过标来找控标实体
+    @Override
+    public FrontUserHoldPersonalBondEntity getHoldPersonalBondEntityByPersonalBond(PersonalBondEntity personalBond,FrontUserEntity user) {
+        Set<FrontUserHoldPersonalBondEntity> holdPersonalBond= user.getFrontUserHoldPersonalBondEntitys();
+        for(FrontUserHoldPersonalBondEntity item:holdPersonalBond)
+        {
+            if(item.getPersonalBondEntity().equals(personalBond))
+            {
+                return item;
+            }
+        }
+        return null;
+    }
 }
