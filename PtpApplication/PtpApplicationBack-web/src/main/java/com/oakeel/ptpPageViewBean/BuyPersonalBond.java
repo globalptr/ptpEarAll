@@ -76,13 +76,26 @@ public class BuyPersonalBond {
         frontUserHoldBondEntity.setPersonalBondEntity(targetBond);
         BigDecimal buyNumBig=new BigDecimal(buyNum);
         BigDecimal issueNumBig=new BigDecimal(targetBond.getIssueCopiesNum());
-        BigDecimal incomeProportion=buyNumBig.divide(issueNumBig);//计算收益比例
+        System.out.println("发行数"+targetBond.getIssueCopiesNum());
+        BigDecimal incomeProportion=buyNumBig.divide(issueNumBig,2, BigDecimal.ROUND_HALF_EVEN);//计算收益比例
         FrontUserIncomeProportionEntity income=new FrontUserIncomeProportionEntity();//创建收益比例实体
         income.setProportion(incomeProportion);//设置收益比例
         income.setCopiesNum(buyNum);//设置收益比例对应的份数
         List<RepayItemEntity> expenseEntitys=targetBond.getExpenseEntitys();//得到目标标的支出列表
-        
-        income.setRepayItems(expenseEntitys);//因为购买的是原始标，所以将支出列表设置为购买用户的收益列表
+        for(RepayItemEntity item:expenseEntitys)
+        {
+            RepayItemEntity temp=new RepayItemEntity();
+            temp.setPeriodNum(item.getPeriodNum());
+            temp.setPrincipal(item.getPrincipal());
+            temp.setSubTatal(item.getSubTatal());
+            temp.setInterest(item.getInterest());
+            temp.setBeforeBalance(item.getBeforeBalance());
+            temp.setAfterBalance(item.getAfterBalance());
+            temp.setSettlementTime(item.getSettlementTime());
+            income.getRepayItems().add(temp);
+        }
+        income.setIncomeYearRate(targetBond.getYearRate());//将标的年利率设置成income的年利率
+        //income.setRepayItems(expenseEntitys);//因为购买的是原始标，所以将支出列表设置为购买用户的收益列表
         frontUserHoldBondEntity.getFrontUserIncomeProportionEntitys().add(income);
         
         frontUserHoldPersonalBondEaoLocal.SaveHolePersonalBond(frontUserHoldBondEntity);//持久化控标实体

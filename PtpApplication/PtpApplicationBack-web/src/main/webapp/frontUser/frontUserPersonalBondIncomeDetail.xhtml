@@ -28,19 +28,16 @@
                             <p:column  headerText="期数"  style="width:30px">
                                 <h:outputLabel value="#{frontUserIncomeDetails_var.periodNum}"/>
                             </p:column>
-                            <p:column   headerText="本金">
+                            <p:column  headerText="本金">
                                 <h:outputLabel value="#{frontUserIncomeDetails_var.principal}" converter="BigDecimalConverter"/>
                             </p:column>
                             <p:column  headerText="利息">
                                 <h:outputLabel value="#{frontUserIncomeDetails_var.interest}" converter="BigDecimalConverter"/>
                             </p:column>
-                            <p:column   headerText="应付">
+                            <p:column  headerText="应付">
                                 <h:outputLabel value="#{frontUserIncomeDetails_var.subTatal}" converter="BigDecimalConverter"/>
                             </p:column>
-                            <p:column   headerText="实付">
-                                <h:outputLabel value="#{frontUserIncomeDetails_var.actualPayable}" converter="BigDecimalConverter"/>
-                            </p:column>
-                            <p:column   headerText="结算时间">
+                            <p:column  headerText="结算时间">
                                 <h:outputLabel value="#{frontUserIncomeDetails_var.settlementTime}" converter="DateConverter"/>
                             </p:column>
                             <p:column style="width:40px" headerText="还本">
