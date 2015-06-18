@@ -9,7 +9,7 @@ package com.oakeel.ejb.entityAndEao.companyUser;
 import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEntity;
 import com.oakeel.ejb.entityAndEao.imageInfo.ImageInfoEntity;
 import com.oakeel.ejb.entityAndEao.user.UserEntity;
-import com.oakeel.ejb.ptpEnum.CompanyType;
+import com.oakeel.ejb.ptpEnum.CompanyTypeEnum;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -27,7 +27,7 @@ public class CompanyUserEntity extends UserEntity {
     @OneToMany(mappedBy="companyUserEntity")
     Set<PersonalBondEntity> bondEntitys; 
     private String mainBusiness;//主营业务
-    private CompanyType companyType;//公司类型
+    private CompanyTypeEnum companyType;//公司类型
     /**
      * @return the mainBusiness
      */
@@ -60,14 +60,14 @@ public class CompanyUserEntity extends UserEntity {
     /**
      * @return the companyType
      */
-    public CompanyType getCompanyType() {
+    public CompanyTypeEnum getCompanyType() {
         return companyType;
     }
 
     /**
      * @param companyType the companyType to set
      */
-    public void setCompanyType(CompanyType companyType) {
+    public void setCompanyType(CompanyTypeEnum companyType) {
         this.companyType = companyType;
     }
 }

@@ -10,7 +10,7 @@ package com.oakeel.ejb.ptpEnum;
  *
  * @author root
  */
-//收益类型
-public enum EarnType {
-    红包,充值,利息,奖励;
+//金融产品类型
+public enum FinancialProductTypeEnum {
+    融资标,聚财宝,季富宝,月月宝,天天宝;
 }

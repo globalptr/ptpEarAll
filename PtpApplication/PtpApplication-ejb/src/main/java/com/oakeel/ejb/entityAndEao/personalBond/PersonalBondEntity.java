@@ -9,8 +9,8 @@ package com.oakeel.ejb.entityAndEao.personalBond;
 import com.oakeel.ejb.entityAndEao.bondInformation.BondInformationEntity;
 import com.oakeel.ejb.entityAndEao.companyUser.CompanyUserEntity;
 import com.oakeel.ejb.entityAndEao.frontUserHoldPersonalBond.FrontUserHoldPersonalBondEntity;
-import com.oakeel.ejb.entityAndEao.ptpProduct.PtpProductEntity;
-import com.oakeel.ejb.ptpEnum.BondType;
+import com.oakeel.ejb.entityAndEao.bond.BondEntity;
+import com.oakeel.ejb.ptpEnum.PersonalBondTypeEnum;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -25,7 +25,7 @@ import javax.persistence.OneToMany;
  * @author root
  */
 @Entity
-public class PersonalBondEntity extends PtpProductEntity {
+public class PersonalBondEntity extends BondEntity {
     private static final long serialVersionUID = 1L;
  
     //担保公司实体
@@ -37,7 +37,7 @@ public class PersonalBondEntity extends PtpProductEntity {
     private String guaranteeCase;//担保情况
     @Column(length = 100)
     private String reverseGuaranteeCase;//反担保情况
-    private BondType bondType;//标类型
+    private PersonalBondTypeEnum bondType;//标类型
     @OneToMany(cascade = {CascadeType.ALL})//标的资料，一对多
     private List<BondInformationEntity> bondInformationEntiys=new ArrayList<>();
     @OneToMany(targetEntity = FrontUserHoldPersonalBondEntity.class,mappedBy="personalBondEntity")
@@ -49,14 +49,14 @@ public class PersonalBondEntity extends PtpProductEntity {
     /**
      * @return the bondType
      */
-    public BondType getBondType() {
+    public PersonalBondTypeEnum getBondType() {
         return bondType;
     }
 
     /**
      * @param bondType the bondType to set
      */
-    public void setBondType(BondType bondType) {
+    public void setBondType(PersonalBondTypeEnum bondType) {
         this.bondType = bondType;
     }
 

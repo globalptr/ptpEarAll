@@ -6,6 +6,8 @@
 
 package com.oakeel.ejb.entityAndEao.frontUserIncomeProportion;
 
+import com.oakeel.ejb.entityAndEao.check.CheckEntity;
+import com.oakeel.ejb.entityAndEao.eeroot.EaoRootLocal;
 import javax.ejb.Local;
 
 /**
@@ -13,6 +15,7 @@ import javax.ejb.Local;
  * @author root
  */
 @Local
-public interface FrontUserIncomeProportionEaoLocal {
-    
+public interface FrontUserIncomeProportionEaoLocal extends EaoRootLocal<FrontUserIncomeProportionEntity>  {
+    public void clearAllRepayItems(FrontUserIncomeProportionEntity frontUserIncomeProportionEntity);
+    public void dealCurrRepayItem(FrontUserIncomeProportionEntity frontUserIncomeProportionEntity,CheckEntity check);//结算当期账单
 }

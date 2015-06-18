@@ -7,7 +7,7 @@
 package com.oakeel.ejb.entityAndEao.platBond;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EaoRoot;
-import com.oakeel.ejb.ptpEnum.BondStage;
+import com.oakeel.ejb.ptpEnum.BondStageEnum;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
@@ -26,14 +26,14 @@ public class PlatBondEao extends EaoRoot<PlatBondEntity> implements PlatBondEaoL
     @Override
     public void passAudit(PlatBondEntity bond) {
         if(bond!=null) {
-            bond.setBondStage(BondStage.审核);
+            bond.setBondStage(BondStageEnum.审核);
             em.merge(bond);
         }
     }
 
     @Override
     public void backToApplication(PlatBondEntity bond) {
-        bond.setBondStage(BondStage.申请);
+        bond.setBondStage(BondStageEnum.申请);
         em.merge(bond);
     }
 
@@ -49,7 +49,7 @@ public class PlatBondEao extends EaoRoot<PlatBondEntity> implements PlatBondEaoL
         CriteriaBuilder builder=em.getCriteriaBuilder();
         CriteriaQuery<PlatBondEntity> query=builder.createQuery(PlatBondEntity.class);
         Root<PlatBondEntity> s=query.from(PlatBondEntity.class);
-        query.select(s).where(builder.and(builder.equal(s.get(PlatBondEntity_.active), Boolean.TRUE),builder.equal(s.get(PlatBondEntity_.bondStage), BondStage.发布)));
+        query.select(s).where(builder.and(builder.equal(s.get(PlatBondEntity_.active), Boolean.TRUE),builder.equal(s.get(PlatBondEntity_.bondStage), BondStageEnum.发布)));
         TypedQuery<PlatBondEntity> q=em.createQuery(query);
         if(!q.getResultList().isEmpty())
             return q.getResultList();

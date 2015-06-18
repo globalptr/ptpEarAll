@@ -8,7 +8,7 @@ package com.oakeel.ejb.transaction.platformFund;
 
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import com.oakeel.ejb.entityAndEao.platBond.PlatBondEntity;
-import com.oakeel.ejb.ptpEnum.BondStage;
+import com.oakeel.ejb.ptpEnum.BondStageEnum;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
@@ -50,7 +50,7 @@ public class IssuePlatBond implements IssuePlatBondLocal {
             newBond.setRepayCycleNumber(platBond2.getRepayCycleNumber());//还款次数
             newBond.setExpenseEntitys(platBond2.getExpenseEntitys());//还款账单
         }
-        newBond.setBondStage(BondStage.发布);
+        newBond.setBondStage(BondStageEnum.发布);
         //——————————————————————————————————————————————————————————————
     }
 

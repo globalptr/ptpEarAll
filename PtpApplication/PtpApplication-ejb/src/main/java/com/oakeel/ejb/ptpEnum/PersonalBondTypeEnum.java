@@ -10,6 +10,6 @@ package com.oakeel.ejb.ptpEnum;
  *
  * @author root
  */
-public enum BondStage {
-    申请,编辑,审核,发布,投标,满标,还款,结标;
+public enum PersonalBondTypeEnum {
+    机构担保标,银行合作标,企业抵押标,个人抵押标,平台理财标;
 }

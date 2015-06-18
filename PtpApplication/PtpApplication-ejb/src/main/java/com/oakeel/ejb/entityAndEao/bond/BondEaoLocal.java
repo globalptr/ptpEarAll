@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.ptpProduct;
+package com.oakeel.ejb.entityAndEao.bond;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EaoRootLocal;
 import com.oakeel.ejb.entityAndEao.permission.PermissionEntity;
@@ -15,6 +15,6 @@ import javax.ejb.Local;
  * @author root
  */
 @Local
-public interface PtpProductEaoLocal  extends EaoRootLocal<PtpProductEntity>{
+public interface BondEaoLocal  extends EaoRootLocal<BondEntity>{
     
 }

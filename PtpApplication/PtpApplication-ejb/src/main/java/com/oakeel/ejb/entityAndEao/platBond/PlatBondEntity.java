@@ -8,7 +8,7 @@ package com.oakeel.ejb.entityAndEao.platBond;
 
 import com.oakeel.ejb.entityAndEao.fonrUserHoldPlatBond.FrontUserHoldPlatBondEntity;
 import com.oakeel.ejb.entityAndEao.frontUserHoldPersonalBond.FrontUserHoldPersonalBondEntity;
-import com.oakeel.ejb.entityAndEao.ptpProduct.PtpProductEntity;
+import com.oakeel.ejb.entityAndEao.bond.BondEntity;
 import com.oakeel.ejb.ptpEnum.PlatBondTypeEnum;
 import java.util.Set;
 import javax.persistence.Entity;
@@ -19,7 +19,7 @@ import javax.persistence.OneToMany;
  * @author root
  */
 @Entity
-public class PlatBondEntity extends PtpProductEntity {
+public class PlatBondEntity extends BondEntity {
     private static final long serialVersionUID = 1L;
     private PlatBondTypeEnum platBondTypeEnum;
     @OneToMany(mappedBy="platBondEntity")

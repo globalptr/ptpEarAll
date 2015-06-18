@@ -15,5 +15,4 @@ import javax.ejb.Local;
  */
 @Local
 public interface BondInformationEaoLocal  extends EaoRootLocal<BondInformationEntity>{
-    
 }

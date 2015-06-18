@@ -16,4 +16,5 @@ import javax.ejb.Local;
 @Local
 public interface FrontUserHoldPersonalBondEaoLocal extends EaoRootLocal<FrontUserHoldPersonalBondEntity> {
     public void SaveHolePersonalBond(FrontUserHoldPersonalBondEntity holdBond);
+    
 }

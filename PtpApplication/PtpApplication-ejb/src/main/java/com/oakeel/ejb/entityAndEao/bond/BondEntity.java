@@ -4,16 +4,17 @@
  * and open the template in the editor.
  */
 
-package com.oakeel.ejb.entityAndEao.ptpProduct;
+package com.oakeel.ejb.entityAndEao.bond;
 
 import com.oakeel.ejb.entityAndEao.backUser.BackUserEntity;
 import com.oakeel.ejb.entityAndEao.bondState.BondStateEntity;
 import com.oakeel.ejb.entityAndEao.eeroot.EntityRoot;
-import com.oakeel.ejb.entityAndEao.repayItem.RepayItemEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
-import com.oakeel.ejb.ptpEnum.BondStage;
+import com.oakeel.ejb.entityAndEao.repayItem.RepayItemEntity;
+import com.oakeel.ejb.ptpEnum.BondNatureEnum;
+import com.oakeel.ejb.ptpEnum.BondStageEnum;
 import com.oakeel.ejb.ptpEnum.RepayModelEnum;
-import com.oakeel.ejb.ptpEnum.SplitUnit;
+import com.oakeel.ejb.ptpEnum.SplitUnitEnum;
 import com.oakeel.ejb.ptpProductTransfer.PtpProductTransferEntity;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -42,9 +43,9 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)  
-public class PtpProductEntity extends EntityRoot {
+public class BondEntity extends EntityRoot {
     private static final long serialVersionUID = 1L;
-    public PtpProductEntity()
+    public BondEntity()
     {
         Random rd = new Random();
         String n="";
@@ -64,7 +65,7 @@ public class PtpProductEntity extends EntityRoot {
     @ManyToOne
     private FrontUserEntity issueUser;//发标用户
     @Enumerated(EnumType.STRING)
-    private BondStage bondStage;//标的阶段
+    private BondStageEnum bondStage;//标的阶段
     @Temporal(TemporalType.DATE)
     private Date startDate;//开始时间
     @Temporal(TemporalType.DATE)
@@ -86,7 +87,7 @@ public class PtpProductEntity extends EntityRoot {
     @Column(length = 50)
     private RepayModelEnum repayModelEnum;//还款模型
     @Enumerated(EnumType.STRING)
-    private SplitUnit repayCycle;//还款周期
+    private SplitUnitEnum repayCycle;//还款周期
     private int repayCycleNumber;//期数
     @OneToOne(cascade = {CascadeType.ALL})//标的状态
     private BondStateEntity bondStateEntity=new BondStateEntity();
@@ -112,28 +113,28 @@ public class PtpProductEntity extends EntityRoot {
     /**
      * @return the bondStage
      */
-    public BondStage getBondStage() {
+    public BondStageEnum getBondStage() {
         return bondStage;
     }
 
     /**
      * @param bondStage the bondStage to set
      */
-    public void setBondStage(BondStage bondStage) {
+    public void setBondStage(BondStageEnum bondStage) {
         this.bondStage = bondStage;
     }
 
     /**
      * @return the repayCycle
      */
-    public SplitUnit getRepayCycle() {
+    public SplitUnitEnum getRepayCycle() {
         return repayCycle;
     }
 
     /**
      * @param repayCycle the repayCycle to set
      */
-    public void setRepayCycle(SplitUnit repayCycle) {
+    public void setRepayCycle(SplitUnitEnum repayCycle) {
         this.repayCycle = repayCycle;
     }
     
@@ -390,6 +391,5 @@ public class PtpProductEntity extends EntityRoot {
     public void setAllAmount(int allAmount) {
         this.allAmount = allAmount;
     }
-
 
 }

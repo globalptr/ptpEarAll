@@ -7,7 +7,7 @@ package com.oakeel.ejb.transaction.bond;
 
 import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
-import com.oakeel.ejb.ptpEnum.BondStage;
+import com.oakeel.ejb.ptpEnum.BondStageEnum;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -121,7 +121,7 @@ public class IssueBond implements IssueBondLocal {
             newBond.setRepayCycleNumber(bond3.getRepayCycleNumber());//还款次数
             newBond.setExpenseEntitys(bond3.getExpenseEntitys());//还款账单
         }
-        newBond.setBondStage(BondStage.发布);
+        newBond.setBondStage(BondStageEnum.发布);
 
         //————————PersonalBondEntity————————————————————————————————————————————
     }

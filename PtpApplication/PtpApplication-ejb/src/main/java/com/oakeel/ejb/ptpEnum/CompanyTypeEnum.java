@@ -10,6 +10,6 @@ package com.oakeel.ejb.ptpEnum;
  *
  * @author root
  */
-public enum CompanyType {
+public enum CompanyTypeEnum {
     担保公司,业务提供商;
 }

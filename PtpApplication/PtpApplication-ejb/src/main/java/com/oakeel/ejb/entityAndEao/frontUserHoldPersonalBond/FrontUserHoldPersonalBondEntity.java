@@ -33,7 +33,6 @@ public class FrontUserHoldPersonalBondEntity extends EntityRoot {
     private List<FrontUserIncomeProportionEntity> frontUserIncomeProportionEntitys=new ArrayList<>(); 
 
 
-
     /**
      * @return the allBondNumber
      */
@@ -91,6 +90,5 @@ public class FrontUserHoldPersonalBondEntity extends EntityRoot {
     public void setFrontUserIncomeProportionEntitys(List<FrontUserIncomeProportionEntity> frontUserIncomeProportionEntitys) {
         this.frontUserIncomeProportionEntitys = frontUserIncomeProportionEntitys;
     }
-
 
 }

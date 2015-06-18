@@ -8,7 +8,7 @@
 package com.oakeel.ejb.entityAndEao.personalBond;
 
 import com.oakeel.ejb.entityAndEao.eeroot.EaoRoot;
-import com.oakeel.ejb.ptpEnum.BondStage;
+import com.oakeel.ejb.ptpEnum.BondStageEnum;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
@@ -27,14 +27,14 @@ public class PersonalBondEao extends EaoRoot<PersonalBondEntity> implements Pers
     @Override
     public void passAudit(PersonalBondEntity bond) {
         if(bond!=null) {
-            bond.setBondStage(BondStage.审核);
+            bond.setBondStage(BondStageEnum.审核);
             em.merge(bond);
         }
     }
 
     @Override
     public void backToApplication(PersonalBondEntity bond) {
-        bond.setBondStage(BondStage.申请);
+        bond.setBondStage(BondStageEnum.申请);
         em.merge(bond);
     }
 
@@ -50,7 +50,7 @@ public class PersonalBondEao extends EaoRoot<PersonalBondEntity> implements Pers
         CriteriaBuilder builder=em.getCriteriaBuilder();
         CriteriaQuery<PersonalBondEntity> query=builder.createQuery(PersonalBondEntity.class);
         Root<PersonalBondEntity> s=query.from(PersonalBondEntity.class);
-        query.select(s).where(builder.and(builder.equal(s.get(PersonalBondEntity_.active), Boolean.TRUE),builder.equal(s.get(PersonalBondEntity_.bondStage), BondStage.发布)));
+        query.select(s).where(builder.and(builder.equal(s.get(PersonalBondEntity_.active), Boolean.TRUE),builder.equal(s.get(PersonalBondEntity_.bondStage), BondStageEnum.发布)));
         TypedQuery<PersonalBondEntity> q=em.createQuery(query);
         if(!q.getResultList().isEmpty())
             return q.getResultList();
