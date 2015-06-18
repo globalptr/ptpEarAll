@@ -115,7 +115,7 @@
                         </p:dataTable>
                     </p:rowExpansion>
                     <p:column headerText="转让" style="width:40px">
-                        <p:commandLink  id="transfer_id"  styleClass="ui-icon ui-icon-search" action="#{frontUserPersonalBondIncomeDetail.toTransferPersonalPage()}" immediate="true">
+                        <p:commandLink  id="transfer_id"  styleClass="ui-icon ui-icon-extlink" action="#{frontUserPersonalBondIncomeDetail.toTransferPersonalPage()}" immediate="true">
                             <f:setPropertyActionListener value="#{fontUserIncomes_var}" target="#{frontUserPersonalBondIncomeDetail.targetIncomeProportion}"/>
                         </p:commandLink>
                         <p:tooltip for="transfer_id" value="债权转让"/>
