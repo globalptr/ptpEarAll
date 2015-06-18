@@ -13,7 +13,7 @@ import com.oakeel.ejb.entityAndEao.platBond.PlatBondEntity;
 import com.oakeel.ejb.entityAndEao.sysSet.SysSetEaoLocal;
 import com.oakeel.ejb.entityAndEao.sysSet.SysSetEntity;
 import com.oakeel.ejb.ptpEnum.RepayModelEnum;
-import com.oakeel.ejb.ptpEnum.SplitUnit;
+import com.oakeel.ejb.ptpEnum.SplitUnitEnum;
 import com.oakeel.ejb.transaction.RepayModelCaculate.RepayModelCaculateLocal;
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -43,12 +43,12 @@ public class IssuePlatBond2 {
     @Inject
     private PtpSessionBean ptpSessionBean;
     private List<RepayItem> repayItemList = new ArrayList<>();//计算得出还款的清单
-    private SplitUnit[] splitUnit;//还款单元（年月日）
+    private SplitUnitEnum[] splitUnit;//还款单元（年月日）
     @PostConstruct
     public void init()
     {
         repayModelList=RepayModelEnum.values();
-        setSplitUnit(SplitUnit.values());
+        setSplitUnit(SplitUnitEnum.values());
         platformFundEntity2=new PlatBondEntity();
         platformFundEntity2.setYearRate(ptpSessionBean.getIssuePlatBondLocal().getPlatBond1().getYearRate());
         List<SysSetEntity> syss = SysSetEaoLocal.getAllEntitys();
@@ -167,14 +167,14 @@ public class IssuePlatBond2 {
     /**
      * @return the splitUnit
      */
-    public SplitUnit[] getSplitUnit() {
+    public SplitUnitEnum[] getSplitUnit() {
         return splitUnit;
     }
 
     /**
      * @param splitUnit the splitUnit to set
      */
-    public void setSplitUnit(SplitUnit[] splitUnit) {
+    public void setSplitUnit(SplitUnitEnum[] splitUnit) {
         this.splitUnit = splitUnit;
     }
     

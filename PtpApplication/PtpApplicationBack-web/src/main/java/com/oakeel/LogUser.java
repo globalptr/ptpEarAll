@@ -6,7 +6,7 @@
 
 package com.oakeel;
 
-import com.oakeel.ejb.ptpEnum.SysInfo;
+import com.oakeel.ejb.ptpEnum.SysInfoEnum;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -44,7 +44,7 @@ public class LogUser {
         }
         catch(AuthenticationException ex)
         {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(SysInfo.提示.toString(),"用户名/手机号/邮箱和密码不匹配")); 
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(SysInfoEnum.提示.toString(),"用户名/手机号/邮箱和密码不匹配")); 
             return null;
         }
     }

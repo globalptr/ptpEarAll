@@ -17,8 +17,8 @@ import com.oakeel.ejb.entityAndEao.imageInfo.ImageInfoEntity;
 import com.oakeel.ejb.ptpEnum.ImageUsedEnum;
 import com.oakeel.ejb.ptpEnum.OperationEnum;
 import com.oakeel.ejb.ptpEnum.RepayModelEnum;
-import com.oakeel.ejb.ptpEnum.SplitUnit;
-import com.oakeel.ejb.ptpEnum.SysInfo;
+import com.oakeel.ejb.ptpEnum.SplitUnitEnum;
+import com.oakeel.ejb.ptpEnum.SysInfoEnum;
 import com.oakeel.ejb.transaction.RepayModelCaculate.RepayModelCaculateLocal;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -80,7 +80,7 @@ public class IssuePersonalBond4 implements Serializable{
     private ImageUsedEnum visitImageUsedEnum=ImageUsedEnum.考察资料;
     private ImageInfoEntity targetImageInfo;
     private RepayModelEnum[] repayModelEnums;
-    private SplitUnit[] splitUnits;
+    private SplitUnitEnum[] splitUnits;
     private String nextText;
     @EJB
     RepayModelCaculateLocal repayModelCaculateLocal;
@@ -98,7 +98,7 @@ public class IssuePersonalBond4 implements Serializable{
         companyUploadFiles=new ArrayList<>();
         visitUploadFiles=new ArrayList<>();
         repayModelEnums=RepayModelEnum.values();
-        splitUnits=SplitUnit.values();
+        splitUnits=SplitUnitEnum.values();
     }
     @PostConstruct
     public void init()
@@ -316,7 +316,7 @@ public class IssuePersonalBond4 implements Serializable{
                         setTargetImageInfo((ImageInfoEntity) it.next());
                         break;
                     } else {
-                        FacesMessage msg = new FacesMessage(SysInfo.警告.toString(), "已到最后一张");
+                        FacesMessage msg = new FacesMessage(SysInfoEnum.警告.toString(), "已到最后一张");
                         FacesContext.getCurrentInstance().addMessage(null, msg);
                     }
                 }
@@ -331,7 +331,7 @@ public class IssuePersonalBond4 implements Serializable{
                         setTargetImageInfo((ImageInfoEntity) it.next());
                         break;
                     } else {
-                        FacesMessage msg = new FacesMessage(SysInfo.警告.toString(), "已到最后一张");
+                        FacesMessage msg = new FacesMessage(SysInfoEnum.警告.toString(), "已到最后一张");
                         FacesContext.getCurrentInstance().addMessage(null, msg);
                     }
                 }
@@ -347,7 +347,7 @@ public class IssuePersonalBond4 implements Serializable{
                         setTargetImageInfo((ImageInfoEntity) it.next());
                         break;
                     } else {
-                        FacesMessage msg = new FacesMessage(SysInfo.警告.toString(), "已到最后一张");
+                        FacesMessage msg = new FacesMessage(SysInfoEnum.警告.toString(), "已到最后一张");
                         FacesContext.getCurrentInstance().addMessage(null, msg);
                     }
                 }
@@ -369,7 +369,7 @@ public class IssuePersonalBond4 implements Serializable{
                     if (it.hasPrevious()) {
                         setTargetImageInfo((ImageInfoEntity) it.previous());
                     } else {
-                        FacesMessage msg = new FacesMessage(SysInfo.警告.toString(), "已到第一张");
+                        FacesMessage msg = new FacesMessage(SysInfoEnum.警告.toString(), "已到第一张");
                         FacesContext.getCurrentInstance().addMessage(null, msg);
                     }
                 }
@@ -386,7 +386,7 @@ public class IssuePersonalBond4 implements Serializable{
                     if (it.hasPrevious()) {
                         setTargetImageInfo((ImageInfoEntity) it.previous());
                     } else {
-                        FacesMessage msg = new FacesMessage(SysInfo.警告.toString(), "已到第一张");
+                        FacesMessage msg = new FacesMessage(SysInfoEnum.警告.toString(), "已到第一张");
                         FacesContext.getCurrentInstance().addMessage(null, msg);
                     }
                 }
@@ -402,7 +402,7 @@ public class IssuePersonalBond4 implements Serializable{
                     if (it.hasPrevious()) {
                         setTargetImageInfo((ImageInfoEntity) it.previous());
                     } else {
-                        FacesMessage msg = new FacesMessage(SysInfo.警告.toString(), "已到第一张");
+                        FacesMessage msg = new FacesMessage(SysInfoEnum.警告.toString(), "已到第一张");
                         FacesContext.getCurrentInstance().addMessage(null, msg);
                     }
                 }
@@ -784,14 +784,14 @@ public class IssuePersonalBond4 implements Serializable{
     /**
      * @return the splitUnits
      */
-    public SplitUnit[] getSplitUnits() {
+    public SplitUnitEnum[] getSplitUnits() {
         return splitUnits;
     }
 
     /**
      * @param splitUnits the splitUnits to set
      */
-    public void setSplitUnits(SplitUnit[] splitUnits) {
+    public void setSplitUnits(SplitUnitEnum[] splitUnits) {
         this.splitUnits = splitUnits;
     }
 

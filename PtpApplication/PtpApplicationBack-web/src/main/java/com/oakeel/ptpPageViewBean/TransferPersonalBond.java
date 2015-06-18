@@ -11,11 +11,12 @@ import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEaoLocal;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import com.oakeel.ejb.entityAndEao.frontUserHoldPersonalBond.FrontUserHoldPersonalBondEaoLocal;
 import com.oakeel.ejb.entityAndEao.frontUserHoldPersonalBond.FrontUserHoldPersonalBondEntity;
+import com.oakeel.ejb.entityAndEao.frontUserIncomeProportion.FrontUserIncomeProportionEaoLocal;
 import com.oakeel.ejb.entityAndEao.frontUserIncomeProportion.FrontUserIncomeProportionEntity;
 import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEntity;
 import com.oakeel.ejb.entityAndEao.repayItem.RepayItemEntity;
+import com.oakeel.ejb.ptpEnum.BondNatureEnum;
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -36,6 +37,7 @@ public class TransferPersonalBond {
     /**
      * Creates a new instance of TransferPersonalBond
      */
+    @EJB FrontUserIncomeProportionEaoLocal frontUserIncomeProportionEaoLocal;
     @EJB FrontUserHoldPersonalBondEaoLocal frontUserHoldPersonalEaoLocal;
     @EJB private FrontUserEaoLocal frontUserEaoLocal;
     @Inject private PtpSessionBean ptpSessionBean;
@@ -72,6 +74,7 @@ public class TransferPersonalBond {
 
     public void caculateTransfer()
     {
+        
         BigDecimal one=new BigDecimal(1);
         int srcCopiesNum=srcFrontUserIncomeItem.getCopiesNum();
         int bondCopiesNum=srcPersonalBondEntity.getIssueCopiesNum();
@@ -80,7 +83,7 @@ public class TransferPersonalBond {
         BigDecimal buyerCopiesBig=new BigDecimal(transferNum);
         BigDecimal bondCopiesNumBig=new BigDecimal(bondCopiesNum);
         BigDecimal sellerCopiesProportion=sellerCopiesBig.divide(bondCopiesNumBig);
-        BigDecimal buyerCopiesProportion=buyerCopiesBig.divide(bondCopiesNumBig);
+        BigDecimal buyerCopiesProportion=buyerCopiesBig.divide(bondCopiesNumBig,2, BigDecimal.ROUND_HALF_EVEN);
         
         //原始收益系数*转让利率/原利率 等于买方收益系数
         //原始收益系数*（原利率-转让利率）/原利率 等于卖方变动部分的收益系数
@@ -97,16 +100,28 @@ public class TransferPersonalBond {
         BigDecimal currBuyerRate=afterRatio.multiply(buyerCopiesProportion).multiply(transferRate);
         BigDecimal currSellerRate=srcFrontUserIncomeItem.getProportion().subtract(currBuyerRate);//原系数-买方系数=卖方新系数
         
+        RepayItemEntity currItem=srcFrontUserIncomeItem.getRepayItems().get(0);//当期账单
+        List<RepayItemEntity> surplusItems=srcFrontUserIncomeItem.getRepayItems();//剩余的账单
+        surplusItems.remove(currItem);
+        
         sellerIncomeFixParts=new FrontUserIncomeProportionEntity();
         sellerIncomeFixParts.setProportion(srcFrontUserIncomeItem.getProportion());//固定部分收益不动
         sellerIncomeFixParts.setCopiesNum(sellerCopies);
-        sellerIncomeFixParts.setRepayItems(srcFrontUserIncomeItem.getRepayItems());
+        sellerIncomeFixParts.setRepayItems(surplusItems);
+        sellerIncomeFixParts.setBondNatureEnum(srcFrontUserIncomeItem.getBondNatureEnum());
+        sellerIncomeFixParts.setTransferLevel(srcFrontUserIncomeItem.getTransferLevel()+1);
         srcHoldPersonalBond.getFrontUserIncomeProportionEntitys().add(sellerIncomeFixParts);
         
         sellerIncomeChangeParts=new FrontUserIncomeProportionEntity();
         sellerIncomeChangeParts.setProportion(sellerChangeRate.multiply(srcFrontUserIncomeItem.getProportion()));
         sellerIncomeChangeParts.setCopiesNum(transferNum);
-        sellerIncomeChangeParts.setRepayItems(srcFrontUserIncomeItem.getRepayItems());
+        sellerIncomeChangeParts.setRepayItems(surplusItems);
+        sellerIncomeFixParts.setTransferLevel(srcFrontUserIncomeItem.getTransferLevel()+1);
+        if(srcFrontUserIncomeItem.getBondNatureEnum().equals(BondNatureEnum.原始标))
+            sellerIncomeChangeParts.setBondNatureEnum(BondNatureEnum.原始转让标);
+        else
+            sellerIncomeChangeParts.setBondNatureEnum(srcFrontUserIncomeItem.getBondNatureEnum());
+            
         srcHoldPersonalBond.getFrontUserIncomeProportionEntitys().add(sellerIncomeChangeParts);
         
         //根据选择的日期进行分割
@@ -115,9 +130,11 @@ public class TransferPersonalBond {
         //交易期卖方新利率=---------------------------------------------------------=原系数*过去天数比例+系数*剩余天数比例*卖方剩余年利率比例
         //                                   利息
         //BigDecimal currSellerRate=beforeRatio.multiply(srcFrontUserIncomeItem.getProportion()).add(afterRatio.multiply(sellerCopiesProportion).multiply(sellerChangeRate));
-        currSellerIncomePart.getRepayItems().add(srcFrontUserIncomeItem.getRepayItems().get(0));
-        currSellerIncomePart.setCopiesNum(transferNum);
+      
+        currSellerIncomePart.getRepayItems().add(currItem);
+        currSellerIncomePart.setCopiesNum(srcCopiesNum);
         currSellerIncomePart.setProportion(currSellerRate);
+        currSellerIncomePart.setBondNatureEnum(srcFrontUserIncomeItem.getBondNatureEnum());
         srcHoldPersonalBond.getFrontUserIncomeProportionEntitys().add(currSellerIncomePart);
         frontUserHoldPersonalEaoLocal.updateEntity(srcHoldPersonalBond);
         
@@ -125,32 +142,40 @@ public class TransferPersonalBond {
         buyerIncomeChangeParts=new FrontUserIncomeProportionEntity();
         buyerIncomeChangeParts.setProportion(transferRate.multiply(srcFrontUserIncomeItem.getProportion()));
         buyerIncomeChangeParts.setCopiesNum(transferNum);
-        buyerIncomeChangeParts.setRepayItems(srcFrontUserIncomeItem.getRepayItems());
+        buyerIncomeChangeParts.setRepayItems(surplusItems);
+        buyerIncomeChangeParts.setBondNatureEnum(BondNatureEnum.转让标);
+        buyerIncomeChangeParts.setTransferLevel(srcFrontUserIncomeItem.getTransferLevel()+1);
                
-        currBuyerIncomePart.getRepayItems().add(srcFrontUserIncomeItem.getRepayItems().get(0));
+        currBuyerIncomePart.getRepayItems().add(currItem);
         currBuyerIncomePart.setCopiesNum(transferNum);
         currBuyerIncomePart.setProportion(currBuyerRate);
+        currBuyerIncomePart.setBondNatureEnum(BondNatureEnum.转让标);
+        currBuyerIncomePart.setTransferLevel(srcFrontUserIncomeItem.getTransferLevel()+1);
         if(buyer!=null)
         {
             FrontUserHoldPersonalBondEntity holdBond=frontUserEaoLocal.getHoldPersonalBondEntityByPersonalBond(srcPersonalBondEntity, buyer);
             if(holdBond==null)
             {
                 FrontUserHoldPersonalBondEntity item=new FrontUserHoldPersonalBondEntity();
-                System.out.println("x1");
                 item.setAllBondNumber(transferNum);
-                System.out.println("x2");
                 item.setPersonalBondEntity(srcPersonalBondEntity);
-                System.out.println("x3");
                 item.setHoldUser(buyer);
-                System.out.println("x4");
-                System.out.println("x5");
                 frontUserHoldPersonalEaoLocal.SaveHolePersonalBond(item);
+                item.getFrontUserIncomeProportionEntitys().add(buyerIncomeChangeParts);
                 item.getFrontUserIncomeProportionEntitys().add(currBuyerIncomePart);
                 frontUserHoldPersonalEaoLocal.updateEntity(item);
+                frontUserEaoLocal.reflushEntity(buyer);
+            }
+            else
+            {
+                holdBond.getFrontUserIncomeProportionEntitys().add(buyerIncomeChangeParts);
+                holdBond.getFrontUserIncomeProportionEntitys().add(currBuyerIncomePart);
+                frontUserHoldPersonalEaoLocal.updateEntity(holdBond);
+                frontUserEaoLocal.reflushEntity(buyer);
             }
         }
-        
-        //根据用户与标查找是否有存在的holdBond，如果有，添加新的收益，如果没有，新建一个holdBond添加至用户holdBond列表
+        //分割完毕之后清除原FrontUserIncomeEntity中的未付账单
+        frontUserIncomeProportionEaoLocal.clearAllRepayItems(srcFrontUserIncomeItem);
     }
 //    public RepayItemEntity getRepayItemByDate(FrontUserIncomeProportionEntity income,Date date)
 //    {

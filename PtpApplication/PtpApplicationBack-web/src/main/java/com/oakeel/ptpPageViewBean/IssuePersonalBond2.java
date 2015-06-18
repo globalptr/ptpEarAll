@@ -10,7 +10,7 @@ import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEntity;
 import com.oakeel.ejb.entityAndEao.bondInformation.BondInformationEntity;
 import com.oakeel.ejb.entityAndEao.imageInfo.ImageInfoEntity;
 import com.oakeel.ejb.ptpEnum.ImageUsedEnum;
-import com.oakeel.ejb.ptpEnum.SysInfo;
+import com.oakeel.ejb.ptpEnum.SysInfoEnum;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -140,7 +140,7 @@ public class IssuePersonalBond2 {
                         targetImageInfo = (ImageInfoEntity) it.next();
                         break;
                     } else {
-                        FacesMessage msg = new FacesMessage(SysInfo.警告.toString(), "已到最后一张");
+                        FacesMessage msg = new FacesMessage(SysInfoEnum.警告.toString(), "已到最后一张");
                         FacesContext.getCurrentInstance().addMessage(null, msg);
                     }
                 }
@@ -155,7 +155,7 @@ public class IssuePersonalBond2 {
                         targetImageInfo = (ImageInfoEntity) it.next();
                         break;
                     } else {
-                        FacesMessage msg = new FacesMessage(SysInfo.警告.toString(), "已到最后一张");
+                        FacesMessage msg = new FacesMessage(SysInfoEnum.警告.toString(), "已到最后一张");
                         FacesContext.getCurrentInstance().addMessage(null, msg);
                     }
                 }
@@ -171,7 +171,7 @@ public class IssuePersonalBond2 {
                         targetImageInfo = (ImageInfoEntity) it.next();
                         break;
                     } else {
-                        FacesMessage msg = new FacesMessage(SysInfo.警告.toString(), "已到最后一张");
+                        FacesMessage msg = new FacesMessage(SysInfoEnum.警告.toString(), "已到最后一张");
                         FacesContext.getCurrentInstance().addMessage(null, msg);
                     }
                 }
@@ -193,7 +193,7 @@ public class IssuePersonalBond2 {
                     if (it.hasPrevious()) {
                         targetImageInfo = (ImageInfoEntity) it.previous();
                     } else {
-                        FacesMessage msg = new FacesMessage(SysInfo.警告.toString(), "已到第一张");
+                        FacesMessage msg = new FacesMessage(SysInfoEnum.警告.toString(), "已到第一张");
                         FacesContext.getCurrentInstance().addMessage(null, msg);
                     }
                 }
@@ -210,7 +210,7 @@ public class IssuePersonalBond2 {
                     if (it.hasPrevious()) {
                         targetImageInfo = (ImageInfoEntity) it.previous();
                     } else {
-                        FacesMessage msg = new FacesMessage(SysInfo.警告.toString(), "已到第一张");
+                        FacesMessage msg = new FacesMessage(SysInfoEnum.警告.toString(), "已到第一张");
                         FacesContext.getCurrentInstance().addMessage(null, msg);
                     }
                 }
@@ -226,7 +226,7 @@ public class IssuePersonalBond2 {
                     if (it.hasPrevious()) {
                         targetImageInfo = (ImageInfoEntity) it.previous();
                     } else {
-                        FacesMessage msg = new FacesMessage(SysInfo.警告.toString(), "已到第一张");
+                        FacesMessage msg = new FacesMessage(SysInfoEnum.警告.toString(), "已到第一张");
                         FacesContext.getCurrentInstance().addMessage(null, msg);
                     }
                 }

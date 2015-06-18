@@ -8,7 +8,7 @@ package com.oakeel.ptpPageViewBean;
 
 import com.oakeel.ejb.entityAndEao.organization.OrganizationEaoLocal;
 import com.oakeel.ejb.entityAndEao.organization.OrganizationEntity;
-import com.oakeel.ejb.ptpEnum.SysInfo;
+import com.oakeel.ejb.ptpEnum.SysInfoEnum;
 import com.oakeel.ejb.transaction.InitEjbLocal;
 import java.io.Serializable;
 import java.util.Iterator;
@@ -62,7 +62,7 @@ public class OrganizationBean implements Serializable{
     }
     public void test(NodeSelectEvent event)
     {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(SysInfo.提示.toString(), "选择节点"+event.getTreeNode().toString()));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(SysInfoEnum.提示.toString(), "选择节点"+event.getTreeNode().toString()));
         selectNode=event.getTreeNode();
     }
     //得到组织的所有节点

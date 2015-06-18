@@ -12,7 +12,7 @@ import com.oakeel.ejb.entityAndEao.backUser.BackUserEntity;
 import com.oakeel.ejb.entityAndEao.backUserSet.BackUserSetEntity;
 import com.oakeel.ejb.entityAndEao.user.UserEaoLocal;
 import com.oakeel.ejb.ptpEnum.AccountModeEnum;
-import com.oakeel.ejb.ptpEnum.SysInfo;
+import com.oakeel.ejb.ptpEnum.SysInfoEnum;
 import com.oakeel.globaltool.ValidateCode;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -93,13 +93,13 @@ public class Login implements Serializable {
                 return "main";
             } 
             catch (AuthenticationException ex) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(SysInfo.提示.toString(), "用户名/手机号/邮箱和密码不匹配"));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(SysInfoEnum.提示.toString(), "用户名/手机号/邮箱和密码不匹配"));
                 return null;
             }
         }
         else
         {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(SysInfo.提示.toString(), "验证码输入错误"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(SysInfoEnum.提示.toString(), "验证码输入错误"));
             return null;
         }
     }

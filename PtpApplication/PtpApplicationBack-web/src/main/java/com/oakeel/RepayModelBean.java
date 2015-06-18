@@ -7,7 +7,7 @@
 package com.oakeel;
 
 import com.oakeel.ejb.ptpEnum.RepayModelEnum;
-import com.oakeel.ejb.ptpEnum.SplitUnit;
+import com.oakeel.ejb.ptpEnum.SplitUnitEnum;
 import com.oakeel.globaltool.RepayModelCaculate;
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -34,8 +34,8 @@ import org.primefaces.event.FlowEvent;
 public class RepayModelBean {
     private List<RepayModelEnum> repayModelList;//还款模型枚举列表
     private RepayModelEnum selectRepayModel;//选择的还款模型
-    private List<SplitUnit> splitUnit;//还款单元（年月日）
-    private SplitUnit selectSplitUnit;//选择的还款单元
+    private List<SplitUnitEnum> splitUnit;//还款单元（年月日）
+    private SplitUnitEnum selectSplitUnit;//选择的还款单元
     private List<RepayItem> repayItemList;//计算得出还款的清单
     //贷款总额 年利率 还款周期 还款期数 开始时间 结束时间
     private BigDecimal totalloan;//贷款总额
@@ -51,34 +51,34 @@ public class RepayModelBean {
         request = ( HttpServletRequest ) context.getExternalContext().getRequest();
         String rootPath = request.getRequestURI();
         repayItemList=new ArrayList<>();
-        setSplitUnit(Arrays.asList(SplitUnit.values()));
+        setSplitUnit(Arrays.asList(SplitUnitEnum.values()));
         setRepayModelList(Arrays.asList(RepayModelEnum.values()));
     }
     /**
      * @return the splitUnit
      */
-    public List<SplitUnit> getSplitUnit() {
+    public List<SplitUnitEnum> getSplitUnit() {
         return splitUnit;
     }
 
     /**
      * @param splitUnit the splitUnit to set
      */
-    public void setSplitUnit(List<SplitUnit> splitUnit) {
+    public void setSplitUnit(List<SplitUnitEnum> splitUnit) {
         this.splitUnit = splitUnit;
     }
 
     /**
      * @return the selectSplitUnit
      */
-    public SplitUnit getSelectSplitUnit() {
+    public SplitUnitEnum getSelectSplitUnit() {
         return selectSplitUnit;
     }
 
     /**
      * @param selectSplitUnit the selectSplitUnit to set
      */
-    public void setSelectSplitUnit(SplitUnit selectSplitUnit) {
+    public void setSelectSplitUnit(SplitUnitEnum selectSplitUnit) {
         this.selectSplitUnit = selectSplitUnit;
     }
     public void openBids()

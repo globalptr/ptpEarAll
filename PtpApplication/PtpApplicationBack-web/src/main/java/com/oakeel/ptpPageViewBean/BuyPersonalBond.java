@@ -16,10 +16,11 @@ import com.oakeel.ejb.entityAndEao.frontUserIncomeProportion.FrontUserIncomeProp
 import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEaoLocal;
 import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEntity;
 import com.oakeel.ejb.entityAndEao.repayItem.RepayItemEntity;
-import com.oakeel.ejb.ptpEnum.BondStage;
-import com.oakeel.ejb.ptpEnum.BondType;
+import com.oakeel.ejb.ptpEnum.BondNatureEnum;
+import com.oakeel.ejb.ptpEnum.BondStageEnum;
+import com.oakeel.ejb.ptpEnum.PersonalBondTypeEnum;
 import com.oakeel.ejb.ptpEnum.RepayModelEnum;
-import com.oakeel.ejb.ptpEnum.SplitUnit;
+import com.oakeel.ejb.ptpEnum.SplitUnitEnum;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,16 +51,16 @@ public class BuyPersonalBond {
     private PersonalBondEntity bondFilter;//标筛选
     private FrontUserEntity targetUserEntity;//选择的用户
     private int buyNum;//购买的份数
-    private BondType[] bondTypes;
-    private SplitUnit[] splitUnits;
+    private PersonalBondTypeEnum[] bondTypes;
+    private SplitUnitEnum[] splitUnits;
     private RepayModelEnum[] repayModelEnums;
-    private BondStage[] bondStages;
+    private BondStageEnum[] bondStages;
     
     public BuyPersonalBond() {
-        bondTypes=BondType.values();
-        splitUnits=SplitUnit.values();
+        bondTypes=PersonalBondTypeEnum.values();
+        splitUnits=SplitUnitEnum.values();
         repayModelEnums=RepayModelEnum.values();
-        bondStages=BondStage.values();
+        bondStages=BondStageEnum.values();
     }
     @PostConstruct
     public void init()
@@ -94,6 +95,7 @@ public class BuyPersonalBond {
             temp.setSettlementTime(item.getSettlementTime());
             income.getRepayItems().add(temp);
         }
+        income.setBondNatureEnum(BondNatureEnum.原始标);
         income.setIncomeYearRate(targetBond.getYearRate());//将标的年利率设置成income的年利率
         //income.setRepayItems(expenseEntitys);//因为购买的是原始标，所以将支出列表设置为购买用户的收益列表
         frontUserHoldBondEntity.getFrontUserIncomeProportionEntitys().add(income);
@@ -176,28 +178,28 @@ public class BuyPersonalBond {
     /**
      * @return the bondTypes
      */
-    public BondType[] getBondTypes() {
+    public PersonalBondTypeEnum[] getBondTypes() {
         return bondTypes;
     }
 
     /**
      * @param bondTypes the bondTypes to set
      */
-    public void setBondTypes(BondType[] bondTypes) {
+    public void setBondTypes(PersonalBondTypeEnum[] bondTypes) {
         this.bondTypes = bondTypes;
     }
 
     /**
      * @return the splitUnits
      */
-    public SplitUnit[] getSplitUnits() {
+    public SplitUnitEnum[] getSplitUnits() {
         return splitUnits;
     }
 
     /**
      * @param splitUnits the splitUnits to set
      */
-    public void setSplitUnits(SplitUnit[] splitUnits) {
+    public void setSplitUnits(SplitUnitEnum[] splitUnits) {
         this.splitUnits = splitUnits;
     }
 
@@ -218,14 +220,14 @@ public class BuyPersonalBond {
     /**
      * @return the bondStages
      */
-    public BondStage[] getBondStages() {
+    public BondStageEnum[] getBondStages() {
         return bondStages;
     }
 
     /**
      * @param bondStages the bondStages to set
      */
-    public void setBondStages(BondStage[] bondStages) {
+    public void setBondStages(BondStageEnum[] bondStages) {
         this.bondStages = bondStages;
     }
 

@@ -10,7 +10,7 @@ import com.oakeel.ejb.entityAndEao.organization.OrganizationEaoLocal;
 import com.oakeel.ejb.entityAndEao.organization.OrganizationEntity;
 import com.oakeel.ejb.entityAndEao.user.UserEaoLocal;
 import com.oakeel.ejb.entityAndEao.user.UserEntity;
-import com.oakeel.ejb.ptpEnum.SysInfo;
+import com.oakeel.ejb.ptpEnum.SysInfoEnum;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -66,7 +66,7 @@ public class UserManageBean {
      public void updateUser(RowEditEvent event) {
          UserEntity temp=(UserEntity) event.getObject();
          userEaoLocal.updateEntity(temp);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(SysInfo.提示.toString(), "修改成功！"));
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(SysInfoEnum.提示.toString(), "修改成功！"));
     }
      public void deleteUser()
      {

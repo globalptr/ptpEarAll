@@ -7,7 +7,7 @@
 
         <ui:define name="center">
             <h:form >
-                <p:dataTable  rowIndexVar="row" value="#{frontUserPersonalBondIncomeDetail.srcHoldPersonalBond.frontUserIncomeProportionEntitys}" var="fontUserIncomes_var">
+                <p:dataTable  rowIndexVar="row" value="#{frontUserPersonalBondIncomeDetail.srcHoldPersonalBond.frontUserIncomeProportionEntitys}" var="fontUserIncomes_var" id="fontUserIncomes_id">
                     <p:column style="width:16px">
                         <p:rowToggler/>
                     </p:column>
@@ -20,43 +20,97 @@
                     <p:column headerText="收益比例">
                         <h:outputLabel value="#{fontUserIncomes_var.proportion}" converter="BigDecimalConverter"/>
                     </p:column>
+                    <p:column headerText="标性质">
+                        <h:outputLabel value="#{fontUserIncomes_var.bondNatureEnum}" />
+                    </p:column>
+                    <p:column headerText="转让次数">
+                        <h:outputLabel value="#{fontUserIncomes_var.transferLevel}" />
+                    </p:column>
+                    <p:column headerText="交易时间">
+                        <h:outputLabel value="#{fontUserIncomes_var.tradeDate}" converter="DateConverter"/>
+                    </p:column>
+                    <p:column style="width:40px" headerText="还本">
+                        <p:commandLink  id="payPrincipal_id"  styleClass="ui-icon ui-icon-calculator"  immediate="true">
+                            <f:setPropertyActionListener value="#{fontUserIncomes_var}" target="#{frontUserPersonalBondIncomeDetail.targetIncomeProportion}"/>
+                        </p:commandLink>
+                        <p:tooltip for="payPrincipal_id" value="还本"/>
+                    </p:column>
+                    <p:column style="width:40px" headerText="付息">
+                        <p:commandLink  id="payInterest_id"  styleClass="ui-icon ui-icon-calculator"  immediate="true">
+                            <f:setPropertyActionListener value="#{fontUserIncomes_var}" target="#{frontUserPersonalBondIncomeDetail.targetIncomeProportion}"/>
+                        </p:commandLink>
+                        <p:tooltip for="payInterest_id" value="付息"/>
+                    </p:column>
+                    <p:column style="width:80px" headerText="还本付息" >
+                        <p:commandLink  id="payAll_id"  styleClass="ui-icon ui-icon-calculator"  immediate="true" action="#{frontUserPersonalBondIncomeDetail.repayPrincipalInterest()}" update="fontUserIncomes_id">
+                            <f:setPropertyActionListener value="#{fontUserIncomes_var}" target="#{frontUserPersonalBondIncomeDetail.targetIncomeProportion}"/>
+                        </p:commandLink>
+                        <p:tooltip for="payAll_id" value="还本付息"/>
+                    </p:column>
                     <p:rowExpansion>
                         <p:dataTable   rowIndexVar="row" value="#{fontUserIncomes_var.repayItems}" var="frontUserIncomeDetails_var">
+                            <f:facet name="header">
+                                未还款
+                            </f:facet>   
                             <p:column  headerText="序号" style="width:30px">
                                 <h:outputText value="#{row + 1}"/> 
                             </p:column>
                             <p:column  headerText="期数"  style="width:30px">
                                 <h:outputLabel value="#{frontUserIncomeDetails_var.periodNum}"/>
                             </p:column>
-                            <p:column  headerText="本金">
+                            <p:column  headerText="本金总额">
                                 <h:outputLabel value="#{frontUserIncomeDetails_var.principal}" converter="BigDecimalConverter"/>
                             </p:column>
-                            <p:column  headerText="利息">
+                            <p:column  headerText="利息总额">
                                 <h:outputLabel value="#{frontUserIncomeDetails_var.interest}" converter="BigDecimalConverter"/>
                             </p:column>
-                            <p:column  headerText="应付">
+                            <p:column  headerText="本息小计">
                                 <h:outputLabel value="#{frontUserIncomeDetails_var.subTatal}" converter="BigDecimalConverter"/>
+                            </p:column>
+                            <p:column  headerText="应付本金">
+                                <h:outputLabel value="#{frontUserIncomeDetails_var.principal.multiply(fontUserIncomes_var.proportion)}" converter="BigDecimalConverter"/>
+                            </p:column>
+                            <p:column  headerText="应付利息">
+                                <h:outputLabel value="#{frontUserIncomeDetails_var.interest.multiply(fontUserIncomes_var.proportion)}" converter="BigDecimalConverter"/>
+                            </p:column>
+                            <p:column  headerText="应付本息小计">
+                                <h:outputLabel value="#{frontUserIncomeDetails_var.subTatal.multiply(fontUserIncomes_var.proportion)}" converter="BigDecimalConverter"/>
                             </p:column>
                             <p:column  headerText="结算时间">
                                 <h:outputLabel value="#{frontUserIncomeDetails_var.settlementTime}" converter="DateConverter"/>
                             </p:column>
-                            <p:column style="width:40px" headerText="还本">
-                                <p:commandLink  id="payPrincipal_id"  styleClass="ui-icon ui-icon-calculator"  immediate="true">
-                                    <f:setPropertyActionListener value="#{frontUserBond_var}" target="#{frontUserAccount.targetHoldPersonalBond}"/>
-                                </p:commandLink>
-                                <p:tooltip for="payPrincipal_id" value="还本"/>
+                        </p:dataTable>
+                        
+                        <p:dataTable   rowIndexVar="row" value="#{fontUserIncomes_var.checkEntitys}" var="frontUserIncomeDetailsx_var">
+                            <f:facet name="header">
+                                已还款
+                            </f:facet>   
+                            <p:column  headerText="序号" style="width:30px">
+                                <h:outputText value="#{row + 1}"/> 
                             </p:column>
-                            <p:column style="width:40px" headerText="付息">
-                                <p:commandLink  id="payInterest_id"  styleClass="ui-icon ui-icon-calculator"  immediate="true">
-                                    <f:setPropertyActionListener value="#{frontUserBond_var}" target="#{frontUserAccount.targetHoldPersonalBond}"/>
-                                </p:commandLink>
-                                <p:tooltip for="payInterest_id" value="付息"/>
+                            <p:column  headerText="期数"  style="width:30px">
+                                <h:outputLabel value="#{frontUserIncomeDetailsx_var.periodNum}"/>
                             </p:column>
-                            <p:column style="width:80px" headerText="还本付息" >
-                                <p:commandLink  id="payAll_id"  styleClass="ui-icon ui-icon-calculator"  immediate="true" >
-                                    <f:setPropertyActionListener value="#{frontUserBond_var}" target="#{frontUserAccount.targetHoldPersonalBond}"/>
-                                </p:commandLink>
-                                <p:tooltip for="payAll_id" value="还本付息"/>
+                            <p:column  headerText="本金总额">
+                                <h:outputLabel value="#{frontUserIncomeDetailsx_var.principal}" converter="BigDecimalConverter"/>
+                            </p:column>
+                            <p:column  headerText="利息总额">
+                                <h:outputLabel value="#{frontUserIncomeDetailsx_var.interest}" converter="BigDecimalConverter"/>
+                            </p:column>
+                            <p:column  headerText="本息小计">
+                                <h:outputLabel value="#{frontUserIncomeDetailsx_var.subTatal}" converter="BigDecimalConverter"/>
+                            </p:column>
+                            <p:column  headerText="实付本金">
+                                <h:outputLabel value="#{frontUserIncomeDetailsx_var.actualPrincipal}" converter="BigDecimalConverter"/>
+                            </p:column>
+                            <p:column  headerText="实付利息">
+                                <h:outputLabel value="#{frontUserIncomeDetailsx_var.actualInterest}" converter="BigDecimalConverter"/>
+                            </p:column>
+                            <p:column  headerText="实付本息小计">
+                                <h:outputLabel value="#{frontUserIncomeDetailsx_var.actualSubTatal}" converter="BigDecimalConverter"/>
+                            </p:column>
+                            <p:column  headerText="结算时间">
+                                <h:outputLabel value="#{frontUserIncomeDetailsx_var.settlementTime}" converter="DateConverter"/>
                             </p:column>
                         </p:dataTable>
                     </p:rowExpansion>

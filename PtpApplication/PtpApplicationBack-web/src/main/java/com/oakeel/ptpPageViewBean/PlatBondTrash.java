@@ -8,7 +8,7 @@ package com.oakeel.ptpPageViewBean;
 
 import com.oakeel.ejb.entityAndEao.platBond.PlatBondEaoLocal;
 import com.oakeel.ejb.entityAndEao.platBond.PlatBondEntity;
-import com.oakeel.ejb.ptpEnum.SysInfo;
+import com.oakeel.ejb.ptpEnum.SysInfoEnum;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -43,7 +43,7 @@ public class PlatBondTrash {
             platBondEntitys.remove(targetBond);
             targetBond.setActive(Boolean.TRUE);
             platBondEaoLocal.updateEntity(targetBond);
-            FacesMessage msg = new FacesMessage(SysInfo.提示.toString(), "复原成功");
+            FacesMessage msg = new FacesMessage(SysInfoEnum.提示.toString(), "复原成功");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
     }
@@ -53,7 +53,7 @@ public class PlatBondTrash {
         {
             platBondEntitys.remove(targetBond);
             platBondEaoLocal.removeEntity(targetBond);
-            FacesMessage msg = new FacesMessage(SysInfo.警告.toString(), "删除成功");
+            FacesMessage msg = new FacesMessage(SysInfoEnum.警告.toString(), "删除成功");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
     }

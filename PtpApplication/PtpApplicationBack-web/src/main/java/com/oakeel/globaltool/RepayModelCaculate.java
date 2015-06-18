@@ -7,7 +7,7 @@ package com.oakeel.globaltool;
 
 import com.oakeel.RepayItem;
 import com.oakeel.ejb.ptpEnum.RepayModelEnum;
-import com.oakeel.ejb.ptpEnum.SplitUnit;
+import com.oakeel.ejb.ptpEnum.SplitUnitEnum;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.Calendar;
@@ -23,7 +23,7 @@ public class RepayModelCaculate {
 
 
     //计算还款模型输入还款模型、还款单元、贷款总额、年利率、还款周期、开始时间
-    public static void caculateRepayModel(RepayModelEnum repayModel, SplitUnit splitUnit, BigDecimal totalLoan, BigDecimal yearRate, int repayPeriod, Date startDate, List<RepayItem> repayItemList) {
+    public static void caculateRepayModel(RepayModelEnum repayModel, SplitUnitEnum splitUnit, BigDecimal totalLoan, BigDecimal yearRate, int repayPeriod, Date startDate, List<RepayItem> repayItemList) {
         if (repayModel == RepayModelEnum.定额本息) {
             caculateRepayModel_a(splitUnit, totalLoan, yearRate, repayPeriod, startDate, repayItemList);
         } else if (repayModel == RepayModelEnum.定额本金) {
@@ -35,9 +35,9 @@ public class RepayModelCaculate {
     }
 
     //定额本息
-    private static void caculateRepayModel_a(SplitUnit splitUnit, BigDecimal totalLoan, BigDecimal yearRate, int repayPeriod, Date startDate, List<RepayItem> repayItemList) {
+    private static void caculateRepayModel_a(SplitUnitEnum splitUnit, BigDecimal totalLoan, BigDecimal yearRate, int repayPeriod, Date startDate, List<RepayItem> repayItemList) {
         //[贷款本金×月利率×（1+利率）^还款月数]÷[（1+月利率）^还款月数－1];^是乘方
-        if (splitUnit == SplitUnit.年) {
+        if (splitUnit == SplitUnitEnum.年) {
 
             BigDecimal currentprincipal;//本金
             BigDecimal currentinterest;//利息
@@ -74,7 +74,7 @@ public class RepayModelCaculate {
                 item.setPeriodNum(i + 1);
                 repayItemList.add(item);
             }
-        } else if (splitUnit == SplitUnit.季度) {
+        } else if (splitUnit == SplitUnitEnum.季度) {
 
             BigDecimal currentprincipal;//本金
             BigDecimal currentinterest;//利息
@@ -113,7 +113,7 @@ public class RepayModelCaculate {
                 item.setPeriodNum(i + 1);
                 repayItemList.add(item);
             }
-        } else if (splitUnit == SplitUnit.月) {
+        } else if (splitUnit == SplitUnitEnum.月) {
             BigDecimal currentprincipal;//本金
             BigDecimal currentinterest;//利息
             BigDecimal currentsubtotal;//小计
@@ -151,7 +151,7 @@ public class RepayModelCaculate {
                 item.setPeriodNum(i + 1);
                 repayItemList.add(item);
             }
-        } else if (splitUnit == SplitUnit.日) {
+        } else if (splitUnit == SplitUnitEnum.日) {
 
             BigDecimal currentprincipal;//本金
             BigDecimal currentinterest;//利息
@@ -194,7 +194,7 @@ public class RepayModelCaculate {
     }
 
     //定额本金
-    private static void caculateRepayModel_b(SplitUnit splitUnit, BigDecimal totalLoan, BigDecimal yearRate, int repayPeriod, Date startDate, List<RepayItem> repayItemList) {
+    private static void caculateRepayModel_b(SplitUnitEnum splitUnit, BigDecimal totalLoan, BigDecimal yearRate, int repayPeriod, Date startDate, List<RepayItem> repayItemList) {
         BigDecimal currentprincipal;//本金
         BigDecimal currentinterest;//利息
         BigDecimal currentsubtotal;//小计
@@ -203,7 +203,7 @@ public class RepayModelCaculate {
         //每月应还利息：an*i/30*dn
         //注：a贷款本金 i贷款月利率 n贷款月数 an第n个月贷款剩余本金
         currentprincipal = currentbalance.divide(BigDecimal.valueOf(repayPeriod), MathContext.DECIMAL64);//每个还款周期应还本金
-        if (splitUnit == SplitUnit.月) {
+        if (splitUnit == SplitUnitEnum.月) {
             for (int i = 0; i < repayPeriod; i++) {
                 RepayItem item = new RepayItem();
                 //得到一个还款月的总天数
@@ -227,7 +227,7 @@ public class RepayModelCaculate {
                 startDate = endDate;
                 repayItemList.add(item);
             }
-        } else if (splitUnit == SplitUnit.年) {
+        } else if (splitUnit == SplitUnitEnum.年) {
             for (int i = 0; i < repayPeriod; i++) {
                 RepayItem item = new RepayItem();
                 //得到一个还款月的总天数
@@ -250,7 +250,7 @@ public class RepayModelCaculate {
                 startDate = endDate;
                 repayItemList.add(item);
             }
-        } else if (splitUnit == SplitUnit.季度) {
+        } else if (splitUnit == SplitUnitEnum.季度) {
             for (int i = 0; i < repayPeriod; i++) {
                 RepayItem item = new RepayItem();
                 //得到一个还款季度的总天数
@@ -274,7 +274,7 @@ public class RepayModelCaculate {
                 startDate = endDate;
                 repayItemList.add(item);
             }
-        } else if (splitUnit == SplitUnit.日) {
+        } else if (splitUnit == SplitUnitEnum.日) {
             for (int i = 0; i < repayPeriod; i++) {
                 RepayItem item = new RepayItem();
                 //得到一个还款的总天数
@@ -302,10 +302,10 @@ public class RepayModelCaculate {
     }
 
     //到期支付
-    private static void caculateRepayModel_c(SplitUnit splitUnit, BigDecimal totalLoan, BigDecimal yearRate, int repayPeriod, Date startDate, List<RepayItem> repayItemList) {
+    private static void caculateRepayModel_c(SplitUnitEnum splitUnit, BigDecimal totalLoan, BigDecimal yearRate, int repayPeriod, Date startDate, List<RepayItem> repayItemList) {
         //根据开始时间、还款周期、还款期数计算一共多少天，根据年利率得到日利率，从而得到一共需要支付的利息
         Date endDate = null;
-        if (splitUnit == SplitUnit.年) {
+        if (splitUnit == SplitUnitEnum.年) {
             GregorianCalendar gCalendar = new GregorianCalendar();
             gCalendar.setTime(startDate);
             gCalendar.add(Calendar.YEAR, repayPeriod);//加指定的年数
@@ -320,7 +320,7 @@ public class RepayModelCaculate {
             item.setSubtotal(totalLoan.add(interest));
             item.setPeriodNum(1);
             repayItemList.add(item);
-        } else if (splitUnit == SplitUnit.季度) {
+        } else if (splitUnit == SplitUnitEnum.季度) {
             GregorianCalendar gCalendar = new GregorianCalendar();
             gCalendar.setTime(startDate);
             gCalendar.add(Calendar.MONTH, repayPeriod * 3);//加指定的月数
@@ -338,7 +338,7 @@ public class RepayModelCaculate {
             item.setPeriodNum(1);
             repayItemList.add(item);
 
-        } else if (splitUnit == SplitUnit.月) {
+        } else if (splitUnit == SplitUnitEnum.月) {
             GregorianCalendar gCalendar = new GregorianCalendar();
             gCalendar.setTime(startDate);
             gCalendar.add(Calendar.MONTH, repayPeriod);//加指定的月
@@ -356,7 +356,7 @@ public class RepayModelCaculate {
             item.setPeriodNum(1);
             repayItemList.add(item);
 
-        } else if (splitUnit == SplitUnit.日) {
+        } else if (splitUnit == SplitUnitEnum.日) {
             GregorianCalendar gCalendar = new GregorianCalendar();
             gCalendar.setTime(startDate);
             gCalendar.add(Calendar.DATE, repayPeriod);//加指定的月

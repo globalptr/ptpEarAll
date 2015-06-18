@@ -12,7 +12,7 @@ import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
 import com.oakeel.ejb.entityAndEao.frontUserHoldPersonalBond.FrontUserHoldPersonalBondEntity;
 import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEntity;
 import com.oakeel.ejb.ptpEnum.OperationEnum;
-import com.oakeel.ejb.ptpEnum.SysInfo;
+import com.oakeel.ejb.ptpEnum.SysInfoEnum;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -32,6 +32,7 @@ public class FrontUserAccount {
     private FrontUserHoldPersonalBondEntity targetHoldPersonalBond;
     private FrontUserHoldPlatBondEntity targetHoldPlatBond;
     
+    
     private FrontUserEntity frontUser;
     private PersonalBondEntity targetBond;
     /**
@@ -43,7 +44,6 @@ public class FrontUserAccount {
     public void init()
     {
         frontUser=ptpSessionBean.getFrontUserEntity();
-        System.out.println(frontUser.getIssueBondEntitys().size());
     }
     public String toPersonalBondIncomeDetails()
     {
@@ -64,7 +64,7 @@ public class FrontUserAccount {
         }
         else
         {
-            FacesMessage msg = new FacesMessage(SysInfo.错误.toString(), "查看的目标融资标为空");
+            FacesMessage msg = new FacesMessage(SysInfoEnum.错误.toString(), "查看的目标融资标为空");
             FacesContext.getCurrentInstance().addMessage(null, msg);
             return null;
         }
@@ -138,6 +138,5 @@ public class FrontUserAccount {
     public void setTargetHoldPlatBond(FrontUserHoldPlatBondEntity targetHoldPlatBond) {
         this.targetHoldPlatBond = targetHoldPlatBond;
     }
-
     
 }

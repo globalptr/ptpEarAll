@@ -13,7 +13,7 @@ import com.oakeel.ejb.entityAndEao.sysSet.SysSetEaoLocal;
 import com.oakeel.ejb.entityAndEao.sysSet.SysSetEntity;
 import com.oakeel.ejb.ptpEnum.OperationEnum;
 import com.oakeel.ejb.ptpEnum.RepayModelEnum;
-import com.oakeel.ejb.ptpEnum.SplitUnit;
+import com.oakeel.ejb.ptpEnum.SplitUnitEnum;
 import com.oakeel.ejb.transaction.RepayModelCaculate.RepayModelCaculateLocal;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -45,11 +45,11 @@ public class IssuePersonalBond3 implements Serializable {
     @Inject
     private PtpSessionBean ptpSessionBean;
     private List<RepayItem> repayItemList = new ArrayList<>();//计算得出还款的清单
-    private List<SplitUnit> splitUnit;//还款单元（年月日）
+    private List<SplitUnitEnum> splitUnit;//还款单元（年月日）
 
     @PostConstruct
     public void init() {
-        setSplitUnit(Arrays.asList(SplitUnit.values()));
+        setSplitUnit(Arrays.asList(SplitUnitEnum.values()));
         setRepayModelList(Arrays.asList(RepayModelEnum.values()));
         List<SysSetEntity> syss = SysSetEaoLocal.getAllEntitys();
 
@@ -161,14 +161,14 @@ public class IssuePersonalBond3 implements Serializable {
     /**
      * @return the splitUnit
      */
-    public List<SplitUnit> getSplitUnit() {
+    public List<SplitUnitEnum> getSplitUnit() {
         return splitUnit;
     }
 
     /**
      * @param splitUnit the splitUnit to set
      */
-    public void setSplitUnit(List<SplitUnit> splitUnit) {
+    public void setSplitUnit(List<SplitUnitEnum> splitUnit) {
         this.splitUnit = splitUnit;
     }
 

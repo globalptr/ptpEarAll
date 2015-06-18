@@ -6,7 +6,7 @@
 
 package com.oakeel;
 
-import com.oakeel.ejb.ptpEnum.SysInfo;
+import com.oakeel.ejb.ptpEnum.SysInfoEnum;
 import com.oakeel.ejb.transaction.InitEjbLocal;
 import com.oakeel.ejb.transaction.TestLocal;
 import java.math.BigDecimal;
@@ -76,14 +76,14 @@ public class PtpApplicationBean {
         initEjbLocal.InitDB();
         initEjbLocal.addUsers();
         FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(SysInfo.提示.toString(),  "数据库初始化完毕!") );
+        context.addMessage(null, new FacesMessage(SysInfoEnum.提示.toString(),  "数据库初始化完毕!") );
     }
     public void initSysSet()
     {
         //initEjbLocal.InitDB();
         initEjbLocal.initSet();
         FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(SysInfo.提示.toString(),  "系统参数初始化完毕!") );
+        context.addMessage(null, new FacesMessage(SysInfoEnum.提示.toString(),  "系统参数初始化完毕!") );
     }
 
     /**

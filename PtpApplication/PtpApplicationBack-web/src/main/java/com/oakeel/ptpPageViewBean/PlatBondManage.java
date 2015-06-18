@@ -10,7 +10,7 @@ import com.oakeel.ejb.entityAndEao.platBond.PlatBondEaoLocal;
 import com.oakeel.ejb.entityAndEao.platBond.PlatBondEntity;
 import com.oakeel.ejb.ptpEnum.PlatBondTypeEnum;
 import com.oakeel.ejb.ptpEnum.RepayModelEnum;
-import com.oakeel.ejb.ptpEnum.SplitUnit;
+import com.oakeel.ejb.ptpEnum.SplitUnitEnum;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -32,7 +32,7 @@ public class PlatBondManage {
     private PlatBondEntity targetBond=null;
     @EJB private PlatBondEaoLocal platBondEaoLocal;
     private PlatBondTypeEnum[] platBondTypeEnums;
-    private SplitUnit[] splitUnits;
+    private SplitUnitEnum[] splitUnits;
     private RepayModelEnum[] repayModelEnums;
     public PlatBondManage() {
     }
@@ -41,7 +41,7 @@ public class PlatBondManage {
     {
         platBondEntitys=platBondEaoLocal.getAllAuditBonds();
         platBondTypeEnums=PlatBondTypeEnum.values();
-        splitUnits=SplitUnit.values();
+        splitUnits=SplitUnitEnum.values();
         repayModelEnums=RepayModelEnum.values();
     }
 
@@ -131,14 +131,14 @@ public class PlatBondManage {
     /**
      * @return the splitUnits
      */
-    public SplitUnit[] getSplitUnits() {
+    public SplitUnitEnum[] getSplitUnits() {
         return splitUnits;
     }
 
     /**
      * @param splitUnits the splitUnits to set
      */
-    public void setSplitUnits(SplitUnit[] splitUnits) {
+    public void setSplitUnits(SplitUnitEnum[] splitUnits) {
         this.splitUnits = splitUnits;
     }
 

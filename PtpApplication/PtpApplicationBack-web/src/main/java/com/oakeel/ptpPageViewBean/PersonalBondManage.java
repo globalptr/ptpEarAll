@@ -13,12 +13,12 @@ import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEaoLocal;
 import com.oakeel.ejb.entityAndEao.personalBond.PersonalBondEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEaoLocal;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
-import com.oakeel.ejb.ptpEnum.BondStage;
-import com.oakeel.ejb.ptpEnum.BondType;
+import com.oakeel.ejb.ptpEnum.BondStageEnum;
+import com.oakeel.ejb.ptpEnum.PersonalBondTypeEnum;
 import com.oakeel.ejb.ptpEnum.OperationEnum;
 import com.oakeel.ejb.ptpEnum.RepayModelEnum;
-import com.oakeel.ejb.ptpEnum.SplitUnit;
-import com.oakeel.ejb.ptpEnum.SysInfo;
+import com.oakeel.ejb.ptpEnum.SplitUnitEnum;
+import com.oakeel.ejb.ptpEnum.SysInfoEnum;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -45,24 +45,24 @@ public class PersonalBondManage {
     private List<PersonalBondEntity> bondEntitys;
     private List<PersonalBondEntity> bondEntitysFilter;
     private List<BackUserEntity> backUserEntitys;
-    private BondType[] bondTypes;
-    private SplitUnit[] splitUnits;
+    private PersonalBondTypeEnum[] bondTypes;
+    private SplitUnitEnum[] splitUnits;
     private RepayModelEnum[] repayModelEnums;
-    private BondStage[] bondStages;
+    private BondStageEnum[] bondStages;
     @EJB
     private BackUserEaoLocal backUserEaoLocal;
     @Inject PtpSessionBean ptpSessionBean;
     private List<FrontUserEntity> frontUserEntitys;
     @EJB FrontUserEaoLocal frontUserEaoLocal;
     public PersonalBondManage() {
-        bondTypes=BondType.values();
+        bondTypes=PersonalBondTypeEnum.values();
         repayModelEnums=RepayModelEnum.values();
-        splitUnits=SplitUnit.values();
+        splitUnits=SplitUnitEnum.values();
     }
     @PostConstruct
     public void init()
     {
-        bondStages=BondStage.values();
+        bondStages=BondStageEnum.values();
         bondEntitys=bondEaoLocal.getAllAuditBonds();
         backUserEntitys=backUserEaoLocal.getAllEntitys();
         frontUserEntitys=frontUserEaoLocal.getAllEntitys();
@@ -92,7 +92,7 @@ public class PersonalBondManage {
         }
         else
         {
-            FacesMessage msg = new FacesMessage(SysInfo.错误.toString(), "查看的目标融资标为空");
+            FacesMessage msg = new FacesMessage(SysInfoEnum.错误.toString(), "查看的目标融资标为空");
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
     }
@@ -112,7 +112,7 @@ public class PersonalBondManage {
         }
         else
         {
-            FacesMessage msg = new FacesMessage(SysInfo.错误.toString(), "查看的目标融资标为空");
+            FacesMessage msg = new FacesMessage(SysInfoEnum.错误.toString(), "查看的目标融资标为空");
             FacesContext.getCurrentInstance().addMessage(null, msg);
             return null;
         }
@@ -205,14 +205,14 @@ public class PersonalBondManage {
     /**
      * @return the bondTypes
      */
-    public BondType[] getBondTypes() {
+    public PersonalBondTypeEnum[] getBondTypes() {
         return bondTypes;
     }
 
     /**
      * @param bondTypes the bondTypes to set
      */
-    public void setBondTypes(BondType[] bondTypes) {
+    public void setBondTypes(PersonalBondTypeEnum[] bondTypes) {
         this.bondTypes = bondTypes;
     }
 
@@ -233,28 +233,28 @@ public class PersonalBondManage {
     /**
      * @return the splitUnits
      */
-    public SplitUnit[] getSplitUnits() {
+    public SplitUnitEnum[] getSplitUnits() {
         return splitUnits;
     }
 
     /**
      * @param splitUnits the splitUnits to set
      */
-    public void setSplitUnits(SplitUnit[] splitUnits) {
+    public void setSplitUnits(SplitUnitEnum[] splitUnits) {
         this.splitUnits = splitUnits;
     }
 
     /**
      * @return the bondStages
      */
-    public BondStage[] getBondStages() {
+    public BondStageEnum[] getBondStages() {
         return bondStages;
     }
 
     /**
      * @param bondStages the bondStages to set
      */
-    public void setBondStages(BondStage[] bondStages) {
+    public void setBondStages(BondStageEnum[] bondStages) {
         this.bondStages = bondStages;
     }
     

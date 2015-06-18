@@ -10,7 +10,7 @@ import com.oakeel.ejb.entityAndEao.role.RoleEaoLocal;
 import com.oakeel.ejb.entityAndEao.role.RoleEntity;
 import com.oakeel.ejb.entityAndEao.user.UserEaoLocal;
 import com.oakeel.ejb.entityAndEao.user.UserEntity;
-import com.oakeel.ejb.ptpEnum.SysInfo;
+import com.oakeel.ejb.ptpEnum.SysInfoEnum;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.PostConstruct;
@@ -72,7 +72,7 @@ public class UserToRole {
         {
             selectUserRoles=selectUser.getRoleEntitys();
             FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage(SysInfo.提示.toString(), "选择用户"+selectUser.getName()));
+            context.addMessage(null, new FacesMessage(SysInfoEnum.提示.toString(), "选择用户"+selectUser.getName()));
         }
     }
     //一键为用户赋值（角色）
@@ -120,7 +120,7 @@ public class UserToRole {
         else
         {
             FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage(SysInfo.错误.toString(), "没有选择操作的用户"));
+            context.addMessage(null, new FacesMessage(SysInfoEnum.错误.toString(), "没有选择操作的用户"));
         }
         
     }

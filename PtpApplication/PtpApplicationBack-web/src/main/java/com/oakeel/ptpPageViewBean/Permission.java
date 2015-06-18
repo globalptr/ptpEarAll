@@ -15,7 +15,7 @@ import com.oakeel.ejb.ptpEnum.ResourceTypeEnum;
 import com.oakeel.ejb.entityAndEao.role.RoleEaoLocal;
 import com.oakeel.ejb.entityAndEao.role.RoleEntity;
 import com.oakeel.ejb.entityAndEao.user.UserEaoLocal;
-import com.oakeel.ejb.ptpEnum.SysInfo;
+import com.oakeel.ejb.ptpEnum.SysInfoEnum;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.PostConstruct;
@@ -102,7 +102,7 @@ public class Permission {
         if (selectRole != null) {
             setPermissions(selectRole.getPermissions());
             FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage(SysInfo.提示.toString(), "选择角色：" + selectRole.getName()));
+            context.addMessage(null, new FacesMessage(SysInfoEnum.提示.toString(), "选择角色：" + selectRole.getName()));
         }
         return null;
     }
@@ -167,7 +167,7 @@ public class Permission {
             permissions.add(permission);
         } else {
             FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage(SysInfo.错误.toString(), "没有选择操作的角色"));
+            context.addMessage(null, new FacesMessage(SysInfoEnum.错误.toString(), "没有选择操作的角色"));
         }
     }
     //删除角色

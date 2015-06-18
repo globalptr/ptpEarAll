@@ -13,7 +13,7 @@ import com.oakeel.ejb.entityAndEao.companyUser.CompanyUserEaoLocal;
 import com.oakeel.ejb.entityAndEao.companyUser.CompanyUserEntity;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEaoLocal;
 import com.oakeel.ejb.entityAndEao.frontUser.FrontUserEntity;
-import com.oakeel.ejb.ptpEnum.BondType;
+import com.oakeel.ejb.ptpEnum.PersonalBondTypeEnum;
 import com.oakeel.ejb.ptpEnum.RepayModelEnum;
 import java.io.Serializable;
 import java.util.List;
@@ -35,7 +35,7 @@ public class IssuePersonalBond1 implements Serializable{
     CompanyUserEaoLocal companyUserEaoLocal;
     @EJB
     FrontUserEaoLocal frontUserEaoLocal;
-    private BondType[] bondTypes;
+    private PersonalBondTypeEnum[] bondTypes;
     private PersonalBondEntity bond1;
     private List<CompanyUserEntity> companyUserEntitys;
     private RepayModelEnum[] repayModelArray;//还款模型枚举列表
@@ -61,7 +61,7 @@ public class IssuePersonalBond1 implements Serializable{
         }
         companyUserEntitys=companyUserEaoLocal.getAllEntitys();
         repayModelArray=RepayModelEnum.values();
-        setBondTypes(BondType.values());
+        setBondTypes(PersonalBondTypeEnum.values());
         setIssueAdmin(ptpSessionBean.getLogUser());
     }
     public String nextStep()
@@ -167,14 +167,14 @@ public class IssuePersonalBond1 implements Serializable{
     /**
      * @return the bondTypes
      */
-    public BondType[] getBondTypes() {
+    public PersonalBondTypeEnum[] getBondTypes() {
         return bondTypes;
     }
 
     /**
      * @param bondTypes the bondTypes to set
      */
-    public void setBondTypes(BondType[] bondTypes) {
+    public void setBondTypes(PersonalBondTypeEnum[] bondTypes) {
         this.bondTypes = bondTypes;
     }
 
